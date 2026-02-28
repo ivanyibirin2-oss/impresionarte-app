@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impresionarte_ve â GestiÃ³n de Vallas</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293B;height:100vh;overflow:hidden}
+
+/* âââ LOGIN âââ */
+#loginOverlay{position:fixed;inset:0;background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.4s ease}
+#loginOverlay.hidden{opacity:0;pointer-events:none}
+.loginCard{background:#fff;border-radius:24px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 24px 80px rgba(99,102,241,0.3)}
+.loginLogo{text-align:center;margin-bottom:32px}
+.loginLogo h1{font-size:28px;font-weight:800;color:#312E81;letter-spacing:-0.5px}
+.loginLogo p{color:#64748B;font-size:14px;margin-top:4px}
+.loginLogo .logoIcon{font-size:48px;margin-bottom:8px}
+.loginField{margin-bottom:20px}
+.loginField label{display:block;font-size:13px;font-weight:600;color:#312E81;margin-bottom:6px}
+.loginField input{width:100%;padding:12px 16px;border:1.5px solid #E2E8F0;border-radius:12px;font-size:15px;color:#1E293B;background:#fff;outline:none;transition:border-color 0.2s}
+.loginField input:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,0.15)}
+.loginBtn{width:100%;padding:14px;background:#6366F1;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.1s}
+.loginBtn:hover{background:#4F46E5}
+.loginBtn:active{transform:scale(0.98)}
+.loginError{color:#9F1239;font-size:13px;text-align:center;margin-top:12px;display:none;background:#FFE4E6;padding:8px 12px;border-radius:8px}
+.loginHint{font-size:12px;color:#94A3B8;text-align:center;margin-top:16px}
+
+/* âââ APP SHELL âââ */
+#app{display:flex;height:100vh;opacity:0;transition:opacity 0.4s ease}
+#app.visible{opacity:1}
+
+/* âââ SIDEBAR âââ */
+#sidebar{width:280px;min-width:280px;background:linear-gradient(180deg,#6366F1 0%,#7C3AED 100%);color:#fff;display:flex;flex-direction:column;overflow:hidden;transition:width 0.25s ease,min-width 0.25s ease;position:relative;z-index:100}
+#sidebar.collapsed{width:0;min-width:0}
+.sidebarHeader{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.15)}
+.sidebarLogo{font-size:20px;font-weight:800;letter-spacing:-0.3px}
+.sidebarTagline{font-size:11px;opacity:0.75;margin-top:2px}
+.userBadge{margin-top:12px;background:rgba(255,255,255,0.15);border-radius:10px;padding:10px 12px;display:flex;align-items:center;gap:8px}
+.userAvatar{width:32px;height:32px;background:rgba(255,255,255,0.25);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.userName{font-size:13px;font-weight:600}
+.userRole{font-size:10px;background:rgba(255,255,255,0.2);padding:2px 7px;border-radius:20px;margin-top:2px;display:inline-block}
+
+.navSection{padding:16px 12px;flex:1;overflow-y:auto}
+.navLabel{font-size:10px;font-weight:700;opacity:0.5;letter-spacing:1px;text-transform:uppercase;padding:0 8px;margin-bottom:8px}
+.navItem{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background 0.2s,transform 0.1s;font-size:14px;font-weight:500;color:rgba(255,255,255,0.85);margin-bottom:2px}
+.navItem:hover{background:rgba(255,255,255,0.12)}
+.navItem.active{background:rgba(255,255,255,0.22);color:#fff;font-weight:700}
+.navItem .navIcon{font-size:18px;width:22px;text-align:center}
+
+.filterSection{padding:12px 12px 8px}
+.filterLabel{font-size:10px;font-weight:700;opacity:0.5;letter-spacing:1px;text-transform:uppercase;padding:0 4px;margin-bottom:8px}
+.filterPills{display:flex;flex-wrap:wrap;gap:6px;padding:0 4px}
+.filterPill{padding:5px 12px;border-radius:20px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;border:1.5px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.7);background:transparent}
+.filterPill.active{background:#fff;color:#6366F1;border-color:#fff}
+.filterPill:hover{background:rgba(255,255,255,0.15);color:#fff}
+
+.statsSection{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.15)}
+.statCard{background:rgba(255,255,255,0.12);border-radius:12px;padding:12px;margin-bottom:8px}
+.statLabel{font-size:11px;opacity:0.7;margin-bottom:4px}
+.statValue{font-size:22px;font-weight:800}
+.statSub{font-size:11px;opacity:0.6;margin-top:2px}
+.statsGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.miniStat{background:rgba(255,255,255,0.1);border-radius:10px;padding:10px;text-align:center}
+.miniStatVal{font-size:18px;font-weight:800}
+.miniStatLabel{font-size:10px;opacity:0.65;margin-top:2px}
+
+.sidebarFooter{padding:12px 16px;border-top:1px solid rgba(255,255,255,0.15)}
+.logoutBtn{width:100%;padding:10px;background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s}
+.logoutBtn:hover{background:rgba(255,255,255,0.25)}
+
+/* âââ HAMBURGER âââ */
+#hamburger{display:none;position:fixed;top:12px;left:12px;z-index:200;background:#6366F1;color:#fff;border:none;border-radius:10px;width:42px;height:42px;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(99,102,241,0.4)}
+
+/* âââ MAIN CONTENT âââ */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
+
+/* âââ MAP VIEW âââ */
+#mapView{flex:1;display:flex;position:relative;overflow:hidden}
+#map{flex:1;z-index:1}
+#map.hidden{display:none}
+
+/* âââ ABOUT VIEW âââ */
+#aboutView{flex:1;overflow-y:auto;padding:32px;display:none}
+#aboutView.visible{display:block}
+.aboutHero{background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);border-radius:20px;padding:60px 40px;text-align:center;color:#fff;margin-bottom:32px}
+.aboutHero h1{font-size:42px;font-weight:900;letter-spacing:-1px;margin-bottom:8px}
+.aboutHero p{font-size:18px;opacity:0.88}
+.aboutCard{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(99,102,241,0.10);margin-bottom:24px}
+.aboutCard h2{font-size:20px;font-weight:700;color:#312E81;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.aboutCard p{color:#1E293B;line-height:1.7;font-size:15px}
+.servicesGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:24px}
+.serviceCard{background:#fff;border-radius:16px;padding:24px;box-shadow:0 2px 16px rgba(99,102,241,0.10)}
+.serviceCard .sIcon{font-size:32px;margin-bottom:10px}
+.serviceCard h3{font-size:16px;font-weight:700;color:#312E81;margin-bottom:8px}
+.serviceCard p{font-size:13px;color:#64748B;line-height:1.6}
+.objetivosCard{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 16px rgba(99,102,241,0.10);margin-bottom:24px}
+.objetivosCard h2{font-size:20px;font-weight:700;color:#312E81;margin-bottom:16px}
+.objetivoItem{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid #F1F5F9}
+.objetivoItem:last-child{border-bottom:none}
+.objetivoItem span:first-child{font-size:22px}
+.objetivoItem p{color:#1E293B;font-size:14px;line-height:1.5}
+.statsAboutGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px}
+.statAboutCard{background:#fff;border-radius:16px;padding:24px;text-align:center;box-shadow:0 2px 16px rgba(99,102,241,0.10)}
+.statAboutCard .statIcon{font-size:28px;margin-bottom:8px}
+.statAboutCard .statNum{font-size:28px;font-weight:800;color:#6366F1}
+.statAboutCard .statTxt{font-size:13px;color:#64748B;margin-top:4px}
+.contactFooter{background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);border-radius:16px;padding:28px;color:#fff;text-align:center}
+.contactFooter h3{font-size:18px;font-weight:700;margin-bottom:16px}
+.contactItems{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.contactItem{background:rgba(255,255,255,0.15);padding:10px 20px;border-radius:10px;font-size:14px}
+
+/* âââ DETAIL PANEL âââ */
+#detailPanel{position:absolute;top:0;right:0;width:380px;height:100%;background:#fff;box-shadow:-4px 0 24px rgba(99,102,241,0.15);z-index:50;transform:translateX(100%);transition:transform 0.25s ease;overflow-y:auto;display:flex;flex-direction:column}
+#detailPanel.open{transform:translateX(0)}
+.panelBack{display:flex;align-items:center;gap:8px;padding:16px 20px 0;cursor:pointer;color:#6366F1;font-size:14px;font-weight:600;transition:opacity 0.2s}
+.panelBack:hover{opacity:0.75}
+.panelCloseX{position:absolute;top:14px;right:16px;background:#F1F5F9;border:none;border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#64748B;font-size:18px;transition:background 0.2s}
+.panelCloseX:hover{background:#E2E8F0}
+.panelImg{width:100%;height:200px;object-fit:cover;margin-top:12px}
+.panelImgPlaceholder{width:100%;height:200px;background:linear-gradient(135deg,#E0E7FF,#C7D2FE);display:flex;align-items:center;justify-content:center;font-size:48px;margin-top:12px}
+.panelContent{padding:20px}
+.panelId{font-size:11px;font-weight:700;color:#6366F1;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.panelName{font-size:20px;font-weight:800;color:#312E81;margin-bottom:4px}
+.panelLocation{font-size:13px;color:#64748B;margin-bottom:16px;display:flex;align-items:center;gap:4px}
+.statusBadge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:700;margin-bottom:16px}
+.statusBadge.available{background:#D1FAE5;color:#065F46}
+.statusBadge.available::before{content:'';width:8px;height:8px;border-radius:50%;background:#10B981;flex-shrink:0}
+.statusBadge.occupied{background:#FFE4E6;color:#9F1239}
+.statusBadge.occupied::before{content:'';width:8px;height:8px;border-radius:50%;background:#F43F5E;flex-shrink:0}
+.infoGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.infoItem{background:#F8FAFC;border-radius:10px;padding:10px 12px}
+.infoItem label{font-size:10px;font-weight:700;color:#6366F1;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:3px}
+.infoItem span{font-size:14px;font-weight:600;color:#1E293B}
+.descBlock{background:#F8FAFC;border-radius:10px;padding:12px;margin-bottom:16px}
+.descBlock label{font-size:10px;font-weight:700;color:#6366F1;text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:4px}
+.descBlock p{font-size:13px;color:#64748B;line-height:1.6}
+.panelActions{padding:0 20px 20px;display:flex;gap:8px;flex-wrap:wrap}
+.panelActions button{flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s}
+.btnEdit{background:#6366F1;color:#fff}
+.btnEdit:hover{background:#4F46E5}
+.btnDelete{background:#FFE4E6;color:#9F1239}
+.btnDelete:hover{background:#FECDD3}
+
+/* âââ MODAL âââ */
+#modalOverlay{position:fixed;inset:0;background:rgba(30,41,59,0.5);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
+#modalOverlay.open{display:flex}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(99,102,241,0.2)}
+.modalHeader{padding:24px 24px 0;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1;padding-bottom:16px;border-bottom:1px solid #F1F5F9}
+.modalHeader h2{font-size:20px;font-weight:800;color:#312E81}
+.modalClose{background:#F1F5F9;border:none;border-radius:8px;width:32px;height:32px;cursor:pointer;color:#64748B;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background 0.2s}
+.modalClose:hover{background:#E2E8F0}
+.modalBody{padding:24px}
+.formRow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.formGroup{margin-bottom:16px}
+.formGroup label{display:block;font-size:13px;font-weight:600;color:#312E81;margin-bottom:6px}
+.formGroup input,.formGroup select,.formGroup textarea{width:100%;padding:10px 14px;border:1.5px solid #E2E8F0;border-radius:10px;font-size:14px;color:#1E293B;background:#fff;outline:none;transition:border-color 0.2s;font-family:inherit}
+.formGroup input:focus,.formGroup select:focus,.formGroup textarea:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,0.12)}
+.formGroup textarea{resize:vertical;min-height:80px}
+
+/* âââ PHOTO UPLOAD âââ */
+.photoUploadZone{border:2px dashed #6366F1;border-radius:12px;background:#F5F3FF;padding:32px 20px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.photoUploadZone:hover,.photoUploadZone.dragover{background:#EEF2FF;border-color:#4F46E5}
+.photoUploadZone .uploadIcon{font-size:36px;margin-bottom:8px}
+.photoUploadZone p{color:#6366F1;font-size:14px;font-weight:600}
+.photoUploadZone small{color:#94A3B8;font-size:12px;display:block;margin-top:4px}
+.photoUploadZone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.photoPreviewWrap{position:relative;display:inline-block}
+.photoPreview{width:100%;height:160px;object-fit:cover;border-radius:10px;border:2px solid #E2E8F0}
+.photoRemoveBtn{position:absolute;top:6px;right:6px;background:#9F1239;color:#fff;border:none;border-radius:6px;width:26px;height:26px;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700}
+.urlToggle{color:#6366F1;font-size:12px;cursor:pointer;text-decoration:underline;margin-top:8px;display:inline-block}
+.urlInput{display:none;margin-top:8px}
+.urlInput.visible{display:block}
+.photoError{color:#9F1239;font-size:12px;margin-top:6px;background:#FFE4E6;padding:6px 10px;border-radius:6px;display:none}
+.photoError.visible{display:block}
+
+.modalFooter{padding:16px 24px 24px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid #F1F5F9}
+.btnCancel{padding:10px 20px;background:#F1F5F9;color:#64748B;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;transition:background 0.2s}
+.btnCancel:hover{background:#E2E8F0}
+.btnSave{padding:10px 24px;background:#6366F1;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s}
+.btnSave:hover{background:#4F46E5}
+
+/* âââ ADD BUTTON âââ */
+#addBtn{position:absolute;bottom:24px;right:24px;z-index:40;background:#6366F1;color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:28px;cursor:pointer;box-shadow:0 8px 24px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center}
+#addBtn:hover{background:#4F46E5;transform:scale(1.08)}
+#addBtn.hidden{display:none}
+
+/* âââ TOAST âââ */
+#toastContainer{position:fixed;top:20px;right:20px;z-index:9000;display:flex;flex-direction:column;gap:8px}
+.toast{background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(30,41,59,0.15);display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#1E293B;transform:translateX(120%);transition:transform 0.3s ease;min-width:280px;border-left:4px solid #6366F1}
+.toast.show{transform:translateX(0)}
+.toast.success{border-left-color:#10B981}
+.toast.error{border-left-color:#F43F5E}
+.toast.info{border-left-color:#6366F1}
+.toastIcon{font-size:18px}
+
+/* âââ RESPONSIVE âââ */
+@media (max-width:768px){
+  #hamburger{display:flex}
+  #sidebar{position:fixed;top:0;left:0;height:100%;z-index:150;transform:translateX(-100%);width:280px;min-width:280px;transition:transform 0.25s ease}
+  #sidebar.mobile-open{transform:translateX(0)}
+  #sidebar.collapsed{transform:translateX(-100%);width:280px;min-width:280px}
+  #detailPanel{width:100%}
+  .formRow{grid-template-columns:1fr}
+  .statsGrid{grid-template-columns:1fr 1fr}
+}
+
+/* âââ MAP MARKERS âââ */
+.custom-marker{border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer}
+</style>
+</head>
+<body>
+<!-- LOGIN OVERLAY -->
+<div id="loginOverlay">
+  <div class="loginCard">
+    <div class="loginLogo">
+      <div class="logoIcon">ðºï¸</div>
+      <h1>Impresionarte_ve</h1>
+      <p>Sistema de GestiÃ³n de Vallas</p>
+    </div>
+    <div class="loginField">
+      <label for="loginUser">Usuario</label>
+      <input type="text" id="loginUser" placeholder="Ingresa tu usuario" autocomplete="username">
+    </div>
+    <div class="loginField">
+      <label for="loginPass">ContraseÃ±a</label>
+      <input type="password" id="loginPass" placeholder="Ingresa tu contraseÃ±a" autocomplete="current-password">
+    </div>
+    <button class="loginBtn" id="loginBtn">Ingresar al Sistema</button>
+    <div class="loginError" id="loginError">Usuario o contraseÃ±a incorrectos</div>
+    <p class="loginHint">Acceso restringido al personal autorizado</p>
+  </div>
+</div>
+
+<!-- HAMBURGER -->
+<button id="hamburger" onclick="toggleSidebar()">â°</button>
+
+<!-- TOAST CONTAINER -->
+<div id="toastContainer"></div>
+
+<!-- APP SHELL -->
+<div id="app">
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="sidebarHeader">
+      <div class="sidebarLogo">ðºï¸ Impresionarte_ve</div>
+      <div class="sidebarTagline">GestiÃ³n de Vallas Publicitarias</div>
+      <div class="userBadge" id="userBadge">
+        <div class="userAvatar" id="userAvatar">A</div>
+        <div>
+          <div class="userName" id="userNameDisplay">Admin</div>
+          <span class="userRole" id="userRoleDisplay">Administrador</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="navSection">
+      <div class="navLabel">NavegaciÃ³n</div>
+      <div class="navItem active" id="navMap" onclick="showView('map')">
+        <span class="navIcon">ðºï¸</span> Mapa de Vallas
+      </div>
+      <div class="navItem" id="navAbout" onclick="showView('about')">
+        <span class="navIcon">â¹ï¸</span> Sobre Nosotros
+      </div>
+    </div>
+
+    <div class="filterSection" id="filterSection">
+      <div class="filterLabel">Filtros</div>
+      <div class="filterPills" id="filterPills">
+        <div class="filterPill active" onclick="setFilter('all',this)">Todas</div>
+        <div class="filterPill" onclick="setFilter('available',this)">Disponibles</div>
+        <div class="filterPill" onclick="setFilter('occupied',this)">Ocupadas</div>
+        <div class="filterPill" onclick="setFilter('Caracas',this)">Caracas</div>
+        <div class="filterPill" onclick="setFilter('Valencia',this)">Valencia</div>
+        <div class="filterPill" onclick="setFilter('Maracaibo',this)">Maracaibo</div>
+        <div class="filterPill" onclick="setFilter('Barquisimeto',this)">Barquisimeto</div>
+      </div>
+    </div>
+
+    <div class="statsSection" id="statsSection">
+      <div class="statsGrid">
+        <div class="miniStat">
+          <div class="miniStatVal" id="statTotal">0</div>
+          <div class="miniStatLabel">Total Vallas</div>
+        </div>
+        <div class="miniStat">
+          <div class="miniStatVal" id="statAvail">0</div>
+          <div class="miniStatLabel">Disponibles</div>
+        </div>
+        <div class="miniStat">
+          <div class="miniStatVal" id="statOccupied">0</div>
+          <div class="miniStatLabel">Ocupadas</div>
+        </div>
+        <div class="miniStat">
+          <div class="miniStatVal" id="statRevenue">$0</div>
+          <div class="miniStatLabel">Ingresos/mes</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebarFooter">
+      <button class="logoutBtn" onclick="logout()">ð Cerrar SesiÃ³n</button>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main">
+    <!-- MAP VIEW -->
+    <div id="mapView">
+      <div id="map"></div>
+      <!-- ADD BUTTON -->
+      <button id="addBtn" title="AÃ±adir valla" onclick="openModal()">+</button>
+
+      <!-- DETAIL PANEL -->
+      <div id="detailPanel">
+        <button class="panelBack" onclick="closePanel()">â Volver al mapa</button>
+        <button class="panelCloseX" onclick="closePanel()">â</button>
+        <div id="panelImgArea"></div>
+        <div class="panelContent">
+          <div class="panelId" id="panelId"></div>
+          <div class="panelName" id="panelName"></div>
+          <div class="panelLocation" id="panelLocation"></div>
+          <div class="statusBadge" id="panelStatus"></div>
+          <div class="infoGrid" id="panelInfoGrid"></div>
+          <div class="descBlock">
+            <label>DescripciÃ³n</label>
+            <p id="panelDesc"></p>
+          </div>
+        </div>
+        <div class="panelActions" id="panelActions"></div>
+      </div>
+    </div>
+
+    <!-- ABOUT VIEW -->
+    <div id="aboutView">
+      <div class="aboutHero">
+        <div style="font-size:48px;margin-bottom:12px">ðºï¸</div>
+        <h1>Impresionarte_ve</h1>
+        <p>Tu mensaje en los mejores espacios de Venezuela</p>
+      </div>
+
+      <div class="aboutCard">
+        <h2>ð¥ QuiÃ©nes Somos</h2>
+        <p>Impresionarte_ve es una empresa venezolana lÃ­der en publicidad exterior, especializada en el diseÃ±o, producciÃ³n e instalaciÃ³n de vallas publicitarias de alto impacto en las principales ciudades del paÃ­s. Con aÃ±os de experiencia en el mercado, hemos ayudado a cientos de marcas a conectar con su audiencia de forma directa, visible y memorable. Nuestra red de vallas estratÃ©gicamente ubicadas en Caracas, Valencia, Maracaibo y Barquisimeto garantiza la mÃ¡xima visibilidad para tu marca.</p>
+      </div>
+
+      <div class="servicesGrid">
+        <div class="serviceCard">
+          <div class="sIcon">ðºï¸</div>
+          <h3>GestiÃ³n de Espacios</h3>
+          <p>Administramos una red de vallas publicitarias en ubicaciones premium a lo largo de Venezuela, garantizando la mejor visibilidad para cada cliente.</p>
+        </div>
+        <div class="serviceCard">
+          <div class="sIcon">ð¨</div>
+          <h3>DiseÃ±o y ProducciÃ³n</h3>
+          <p>Contamos con un equipo creativo que transforma tu mensaje en piezas visuales de alto impacto, desde el concepto hasta la instalaciÃ³n final.</p>
+        </div>
+        <div class="serviceCard">
+          <div class="sIcon">ð</div>
+          <h3>MediciÃ³n de Impacto</h3>
+          <p>Ofrecemos reportes de visibilidad y mÃ©tricas de impacto para que nuestros clientes puedan medir el retorno de su inversiÃ³n publicitaria.</p>
+        </div>
+        <div class="serviceCard">
+          <div class="sIcon">ð¤</div>
+          <h3>AsesorÃ­a EstratÃ©gica</h3>
+          <p>Nuestro equipo de expertos te ayuda a elegir las ubicaciones ideales segÃºn tu pÃºblico objetivo, presupuesto y objetivos de campaÃ±a.</p>
+        </div>
+      </div>
+
+      <div class="objetivosCard">
+        <h2>ð¯ Nuestros Objetivos</h2>
+        <div class="objetivoItem">
+          <span>ð¯</span>
+          <p>Ser la red de publicidad exterior mÃ¡s confiable y de mayor cobertura en Venezuela</p>
+        </div>
+        <div class="objetivoItem">
+          <span>ð</span>
+          <p>Innovar constantemente en formatos y tecnologÃ­as de visualizaciÃ³n publicitaria</p>
+        </div>
+        <div class="objetivoItem">
+          <span>ð¼</span>
+          <p>Generar valor real para nuestros clientes a travÃ©s de soluciones publicitarias estratÃ©gicas y medibles</p>
+        </div>
+      </div>
+
+      <div class="statsAboutGrid">
+        <div class="statAboutCard">
+          <div class="statIcon">ð</div>
+          <div class="statNum">8+</div>
+          <div class="statTxt">Ubicaciones activas</div>
+        </div>
+        <div class="statAboutCard">
+          <div class="statIcon">ðï¸</div>
+          <div class="statNum">4</div>
+          <div class="statTxt">Ciudades</div>
+        </div>
+        <div class="statAboutCard">
+          <div class="statIcon">â</div>
+          <div class="statNum">100%</div>
+          <div class="statTxt">Estructuras certificadas</div>
+        </div>
+        <div class="statAboutCard">
+          <div class="statIcon">ð</div>
+          <div class="statNum">Flex</div>
+          <div class="statTxt">Contratos flexibles</div>
+        </div>
+      </div>
+
+      <div class="contactFooter">
+        <h3>ð ContÃ¡ctanos</h3>
+        <div class="contactItems">
+          <div class="contactItem">ð§ contacto@impresionarte.ve</div>
+          <div class="contactItem">ð± +58 412-000-0000</div>
+          <div class="contactItem">ð www.impresionarte.ve</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- MODAL -->
+<div id="modalOverlay">
+  <div class="modal">
+    <div class="modalHeader">
+      <h2 id="modalTitle">AÃ±adir Valla</h2>
+      <button class="modalClose" onclick="closeModal()">â</button>
+    </div>
+    <div class="modalBody">
+      <div class="formRow">
+        <div class="formGroup">
+          <label>ID de Valla *</label>
+          <input type="text" id="fId" placeholder="Ej: VL-009">
+        </div>
+        <div class="formGroup">
+          <label>Ciudad *</label>
+          <select id="fCity">
+            <option value="">Selecciona...</option>
+            <option value="Caracas">Caracas</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Maracaibo">Maracaibo</option>
+            <option value="Barquisimeto">Barquisimeto</option>
+            <option value="Otra">Otra</option>
+          </select>
+        </div>
+      </div>
+      <div class="formGroup">
+        <label>Nombre de la Valla *</label>
+        <input type="text" id="fName" placeholder="Ej: Valla Av. Principal - Caracas">
+      </div>
+      <div class="formGroup">
+        <label>DirecciÃ³n / UbicaciÃ³n *</label>
+        <input type="text" id="fLocation" placeholder="Ej: Av. Principal con Calle 5, Caracas">
+      </div>
+      <div class="formRow">
+        <div class="formGroup">
+          <label>Latitud *</label>
+          <input type="number" id="fLat" placeholder="Ej: 10.4961" step="0.0001">
+        </div>
+        <div class="formGroup">
+          <label>Longitud *</label>
+          <input type="number" id="fLng" placeholder="Ej: -66.8541" step="0.0001">
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="formGroup">
+          <label>Dimensiones</label>
+          <input type="text" id="fDimensions" placeholder="Ej: 12m x 4m">
+        </div>
+        <div class="formGroup">
+          <label>Precio/mes (USD)</label>
+          <input type="number" id="fPrice" placeholder="Ej: 2500">
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="formGroup">
+          <label>Estado</label>
+          <select id="fStatus">
+            <option value="available">Disponible</option>
+            <option value="occupied">Ocupada</option>
+          </select>
+        </div>
+        <div class="formGroup">
+          <label>Caras</label>
+          <select id="fFaces">
+            <option value="1">1 cara</option>
+            <option value="2">2 caras</option>
+          </select>
+        </div>
+      </div>
+      <div class="formRow">
+        <div class="formGroup">
+          <label>Cliente actual</label>
+          <input type="text" id="fClient" placeholder="Nombre del cliente">
+        </div>
+        <div class="formGroup">
+          <label>Fin de contrato</label>
+          <input type="date" id="fContract">
+        </div>
+      </div>
+      <div class="formGroup">
+        <label>Iluminada</label>
+        <select id="fIllum">
+          <option value="1">SÃ­</option>
+          <option value="0">No</option>
+        </select>
+      </div>
+
+      <!-- PHOTO UPLOAD -->
+      <div class="formGroup">
+        <label>Foto de la Valla</label>
+        <div id="photoUploadZone" class="photoUploadZone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <div class="uploadIcon">ð·</div>
+          <p>Arrastra tu foto aquÃ­ o haz clic para seleccionar</p>
+          <small>JPG, PNG, WEBP â MÃ¡ximo 5MB</small>
+          <input type="file" id="photoFileInput" accept="image/jpeg,image/png,image/webp" onchange="handleFileSelect(event)">
+        </div>
+        <div id="photoPreviewContainer" style="display:none;margin-top:8px">
+          <div class="photoPreviewWrap">
+            <img id="photoPreview" class="photoPreview" src="" alt="Preview">
+            <button class="photoRemoveBtn" onclick="removePhoto()" title="Quitar foto">â</button>
+          </div>
+        </div>
+        <div id="photoError" class="photoError"></div>
+        <span class="urlToggle" onclick="toggleUrlInput()">O usa una URL</span>
+        <div class="urlInput" id="urlInputContainer">
+          <input type="text" id="fPhotoUrl" placeholder="https://ejemplo.com/foto.jpg">
+        </div>
+      </div>
+
+      <div class="formGroup">
+        <label>DescripciÃ³n</label>
+        <textarea id="fDesc" rows="3" placeholder="DescripciÃ³n detallada de la valla..."></textarea>
+      </div>
+    </div>
+    <div class="modalFooter">
+      <button class="btnCancel" onclick="closeModal()">Cancelar</button>
+      <button class="btnSave" onclick="saveBillboard()">Guardar Valla</button>
+    </div>
+  </div>
+</div>
+<script>
+const BILLBOARD_DATA = [{"id":"VL-001","name":"Valla Autopista Francisco Fajardo - Altamira","city":"Caracas","status":"occupied","price_per_month":2500,"latitude":10.4961,"longitude":-66.8541,"location_name":"Autopista Francisco Fajardo, frente a Altamira, Caracas","dimensions":"12m x 4m","client_name":"Banesco Banco Universal","contract_end_date":"2026-06-30","photo_url":"https://images.unsplash.com/photo-1617704548623-340376564e68?w=800","description":"Valla de alto impacto en la principal autopista de Caracas. MÃ¡xima visibilidad con mÃ¡s de 200,000 impactos diarios. Estructura doble cara con iluminaciÃ³n LED.","illuminated":1,"face_count":2},{"id":"VL-002","name":"Valla Distribuidor La AraÃ±a","city":"Caracas","status":"available","price_per_month":1800,"latitude":10.4305,"longitude":-66.9752,"location_name":"Distribuidor La AraÃ±a, entrada sur de Caracas","dimensions":"14m x 5m","client_name":null,"contract_end_date":null,"photo_url":"https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800","description":"Estructura metÃ¡lica tipo monopolo en el Distribuidor La AraÃ±a. Punto estratÃ©gico de entrada a Caracas desde Los Teques y el sur. Visibilidad 360Â°. TrÃ¡fico estimado: 65,000 vehÃ­culos/dÃ­a.","illuminated":0,"face_count":1},{"id":"VL-003","name":"Valla Centro Comercial Sambil","city":"Caracas","status":"occupied","price_per_month":3200,"latitude":10.4888,"longitude":-66.8563,"location_name":"Av. Libertador, frente al C.C. Sambil Caracas, Chacao","dimensions":"10m x 3.5m","client_name":"Empresas Polar","contract_end_date":"2026-09-15","photo_url":"https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800","description":"Valla iluminada frente al Centro Comercial Sambil en la Av. Libertador. Zona de alto trÃ¡fico peatonal y vehicular. Municipio Chacao, Ã¡rea de alta actividad comercial.","illuminated":1,"face_count":2},{"id":"VL-004","name":"Valla Cota Mil - Las Mercedes","city":"Caracas","status":"available","price_per_month":2200,"latitude":10.4823,"longitude":-66.8682,"location_name":"Av. BoyacÃ¡ (Cota Mil), altura de Las Mercedes, Caracas","dimensions":"12m x 4m","client_name":null,"contract_end_date":null,"photo_url":"https://images.unsplash.com/photo-1586024486500-9e58be4b3a1c?w=800","description":"Valla doble cara sobre la Av. BoyacÃ¡ (Cota Mil) a la altura de Las Mercedes. Excelente visibilidad en ambos sentidos de la autopista. Zona residencial y comercial de alto poder adquisitivo.","illuminated":1,"face_count":1},{"id":"VL-005","name":"Valla Plaza Venezuela","city":"Caracas","status":"occupied","price_per_month":2800,"latitude":10.4969,"longitude":-66.8921,"location_name":"Plaza Venezuela, cruce Av. Casanova con Av. Abraham Lincoln, Caracas","dimensions":"16m x 6m","client_name":"Movistar Venezuela","contract_end_date":"2026-04-30","photo_url":"https://images.unsplash.com/photo-1533750349088-cd871a92f312?w=800","description":"Mega valla iluminada en Plaza Venezuela, uno de los puntos de mayor confluencia vehicular y peatonal de Caracas. Visible desde mÃºltiples vÃ­as. TrÃ¡fico estimado: 120,000 vehÃ­culos/dÃ­a.","illuminated":1,"face_count":2},{"id":"VL-006","name":"Valla Av. BolÃ­var - Valencia Centro","city":"Valencia","status":"occupied","price_per_month":2100,"latitude":10.1626,"longitude":-68.0076,"location_name":"Avenida BolÃ­var, Valencia Centro, Carabobo","dimensions":"10m x 3.5m","client_name":"Empresas Polar","contract_end_date":"2025-09-30","photo_url":"https://images.unsplash.com/photo-1617704548623-340376564e68?w=800","description":"Valla de gran formato en la principal avenida de Valencia. Zona comercial y empresarial de alta densidad. Segundo mercado publicitario del paÃ­s.","illuminated":1,"face_count":2},{"id":"VL-007","name":"Valla Puente Rafael Urdaneta","city":"Maracaibo","status":"available","price_per_month":1500,"latitude":10.6508,"longitude":-71.6106,"location_name":"Acceso al Puente Rafael Urdaneta, Maracaibo, Zulia","dimensions":"14m x 5m","client_name":null,"contract_end_date":null,"photo_url":"https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800","description":"Valla gigante en el acceso al emblemÃ¡tico Puente sobre el Lago de Maracaibo. Visibilidad desde ambas vÃ­as de acceso. Una de las ubicaciones mÃ¡s reconocidas del occidente del paÃ­s.","illuminated":0,"face_count":1},{"id":"VL-008","name":"Valla Av. Libertador - Barquisimeto","city":"Barquisimeto","status":"occupied","price_per_month":1600,"latitude":10.0647,"longitude":-69.3574,"location_name":"Avenida Libertador, Barquisimeto, Lara","dimensions":"12m x 4m","client_name":"Movistar Venezuela","contract_end_date":"2025-12-31","photo_url":"https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800","description":"Valla estratÃ©gica en la arteria principal de Barquisimeto, la Ciudad Musical. Alto flujo vehicular en zona comercial consolidada. Cobertura en el mercado centro-occidental venezolano.","illuminated":1,"face_count":1}];
+</script>
+
+<script>
+// âââ CREDENTIALS âââ
+const USERS = {
+  admin: { password: 'Impresionarte2024!', role: 'admin', displayName: 'Administrador' },
+  viewer: { password: 'viewer123', role: 'viewer', displayName: 'Visitante' }
+};
+
+// âââ STATE âââ
+let currentUser = null;
+let billboards = BILLBOARD_DATA;
+let map = null;
+let markers = {};
+let currentFilter = 'all';
+let editingId = null;
+let currentPhotoBase64 = null;
+
+// âââ INIT âââ
+document.addEventListener('DOMContentLoaded', () => {
+  // Check stored session
+  const stored = sessionStorage.getItem('impr_user');
+  if (stored) {
+    try {
+      currentUser = JSON.parse(stored);
+      showApp();
+    } catch(e) { showLogin(); }
+  } else {
+    showLogin();
+  }
+
+  // Enter key login
+  document.getElementById('loginPass').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('loginUser').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('loginBtn').addEventListener('click', doLogin);
+});
+
+// âââ LOGIN âââ
+function showLogin() {
+  document.getElementById('loginOverlay').classList.remove('hidden');
+  document.getElementById('app').classList.remove('visible');
+}
+
+function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+
+  if (USERS[user] && USERS[user].password === pass) {
+    currentUser = { username: user, role: USERS[user].role, displayName: USERS[user].displayName };
+    sessionStorage.setItem('impr_user', JSON.stringify(currentUser));
+    document.getElementById('loginOverlay').classList.add('hidden');
+    showApp();
+  } else {
+    errEl.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('impr_user');
+  currentUser = null;
+  if (map) { map.remove(); map = null; markers = {}; }
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginOverlay').classList.remove('hidden');
+  document.getElementById('app').classList.remove('visible');
+}
+
+function showApp() {
+  // Update user badge
+  document.getElementById('userAvatar').textContent = currentUser.username[0].toUpperCase();
+  document.getElementById('userNameDisplay').textContent = currentUser.displayName;
+  document.getElementById('userRoleDisplay').textContent = currentUser.role === 'admin' ? 'Administrador' : 'Visitante (Solo lectura)';
+
+  // Role-based: hide add button for viewer
+  const addBtn = document.getElementById('addBtn');
+  if (currentUser.role !== 'admin') {
+    addBtn.classList.add('hidden');
+  } else {
+    addBtn.classList.remove('hidden');
+  }
+
+  document.getElementById('app').classList.add('visible');
+  setTimeout(() => initMap(), 100);
+  updateStats();
+}
+
+// âââ VIEW SWITCHING âââ
+function showView(view) {
+  const mapView = document.getElementById('mapView');
+  const aboutView = document.getElementById('aboutView');
+  const navMap = document.getElementById('navMap');
+  const navAbout = document.getElementById('navAbout');
+  const filterSection = document.getElementById('filterSection');
+
+  navMap.classList.remove('active');
+  navAbout.classList.remove('active');
+
+  if (view === 'map') {
+    mapView.style.display = 'flex';
+    aboutView.classList.remove('visible');
+    navMap.classList.add('active');
+    filterSection.style.display = 'block';
+    if (!map) initMap();
+    else map.invalidateSize();
+  } else {
+    mapView.style.display = 'none';
+    aboutView.classList.add('visible');
+    navAbout.classList.add('active');
+    filterSection.style.display = 'none';
+  }
+
+  // Close sidebar on mobile after navigation
+  if (window.innerWidth <= 768) {
+    document.getElementById('sidebar').classList.remove('mobile-open');
+  }
+}
+
+// âââ SIDEBAR TOGGLE âââ
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('mobile-open');
+}
+
+// âââ MAP INIT âââ
+function initMap() {
+  if (map) return;
+  map = L.map('map', { zoomControl: true }).setView([8.0, -66.5], 6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Â© OpenStreetMap contributors',
+    maxZoom: 18
+  }).addTo(map);
+  renderMarkers();
+}
+
+function renderMarkers() {
+  // Clear existing
+  Object.values(markers).forEach(m => m.remove());
+  markers = {};
+
+  const filtered = filterBillboards();
+  filtered.forEach(b => {
+    const color = b.status === 'available' ? '#10B981' : '#F43F5E';
+    const icon = L.divIcon({
+      html: `<div style="width:16px;height:16px;background:${color};border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      className: ''
+    });
+    const marker = L.marker([b.latitude, b.longitude], { icon })
+      .addTo(map)
+      .on('click', () => openPanel(b.id));
+    markers[b.id] = marker;
+  });
+}
+
+// âââ FILTER âââ
+function filterBillboards() {
+  if (currentFilter === 'all') return billboards;
+  if (currentFilter === 'available') return billboards.filter(b => b.status === 'available');
+  if (currentFilter === 'occupied') return billboards.filter(b => b.status === 'occupied');
+  return billboards.filter(b => b.city === currentFilter);
+}
+
+function setFilter(filter, el) {
+  currentFilter = filter;
+  document.querySelectorAll('.filterPill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  renderMarkers();
+}
+
+// âââ STATS âââ
+function updateStats() {
+  const total = billboards.length;
+  const avail = billboards.filter(b => b.status === 'available').length;
+  const occ = billboards.filter(b => b.status === 'occupied').length;
+  const revenue = billboards.filter(b => b.status === 'occupied').reduce((s, b) => s + (b.price_per_month || 0), 0);
+
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statAvail').textContent = avail;
+  document.getElementById('statOccupied').textContent = occ;
+  document.getElementById('statRevenue').textContent = '$' + revenue.toLocaleString();
+}
+
+// âââ DETAIL PANEL âââ
+function openPanel(id) {
+  const b = billboards.find(x => x.id === id);
+  if (!b) return;
+  editingId = id;
+
+  // Image
+  const imgArea = document.getElementById('panelImgArea');
+  if (b.photo_url && b.photo_url.trim()) {
+    if (b.photo_url.startsWith('data:')) {
+      imgArea.innerHTML = `<img src="${b.photo_url}" class="panelImg" alt="Foto valla">`;
+    } else {
+      imgArea.innerHTML = `<img src="${b.photo_url}" class="panelImg" alt="Foto valla" onerror="this.parentNode.innerHTML='<div class=panelImgPlaceholder>ðºï¸</div>'">`;
+    }
+  } else {
+    imgArea.innerHTML = '<div class="panelImgPlaceholder">ðºï¸</div>';
+  }
+
+  document.getElementById('panelId').textContent = b.id;
+  document.getElementById('panelName').textContent = b.name;
+  document.getElementById('panelLocation').innerHTML = 'ð ' + b.location_name;
+
+  const statusEl = document.getElementById('panelStatus');
+  statusEl.className = 'statusBadge ' + b.status;
+  statusEl.textContent = b.status === 'available' ? 'Disponible' : 'Ocupada';
+
+  document.getElementById('panelInfoGrid').innerHTML = `
+    <div class="infoItem"><label>Dimensiones</label><span>${b.dimensions || 'â'}</span></div>
+    <div class="infoItem"><label>Precio/mes</label><span>$${(b.price_per_month || 0).toLocaleString()}</span></div>
+    <div class="infoItem"><label>Caras</label><span>${b.face_count || 1}</span></div>
+    <div class="infoItem"><label>Iluminada</label><span>${b.illuminated ? 'â SÃ­' : 'â No'}</span></div>
+    <div class="infoItem"><label>Ciudad</label><span>${b.city || 'â'}</span></div>
+    <div class="infoItem"><label>Cliente</label><span>${b.client_name || 'â'}</span></div>
+    ${b.contract_end_date ? `<div class="infoItem" style="grid-column:1/-1"><label>Fin de Contrato</label><span>${b.contract_end_date}</span></div>` : ''}
+  `;
+
+  document.getElementById('panelDesc').textContent = b.description || 'â';
+
+  // Actions - only admin
+  const actionsEl = document.getElementById('panelActions');
+  if (currentUser && currentUser.role === 'admin') {
+    actionsEl.innerHTML = `
+      <button class="panelActions btnEdit" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#6366F1;color:#fff;transition:all 0.2s" onclick="openModal('${b.id}')">âï¸ Editar</button>
+      <button class="panelActions btnDelete" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FFE4E6;color:#9F1239;transition:all 0.2s" onclick="deleteBillboard('${b.id}')">ðï¸ Eliminar</button>
+    `;
+  } else {
+    actionsEl.innerHTML = '';
+  }
+
+  document.getElementById('detailPanel').classList.add('open');
+}
+
+function closePanel() {
+  document.getElementById('detailPanel').classList.remove('open');
+  editingId = null;
+  if (map) map.setView([8.0, -66.5], 6);
+}
+
+// âââ MODAL âââ
+function openModal(id) {
+  resetPhotoUpload();
+  if (id) {
+    const b = billboards.find(x => x.id === id);
+    if (!b) return;
+    editingId = id;
+    document.getElementById('modalTitle').textContent = 'Editar Valla';
+    document.getElementById('fId').value = b.id;
+    document.getElementById('fId').disabled = true;
+    document.getElementById('fName').value = b.name || '';
+    document.getElementById('fLocation').value = b.location_name || '';
+    document.getElementById('fLat').value = b.latitude || '';
+    document.getElementById('fLng').value = b.longitude || '';
+    document.getElementById('fCity').value = b.city || '';
+    document.getElementById('fStatus').value = b.status || 'available';
+    document.getElementById('fDimensions').value = b.dimensions || '';
+    document.getElementById('fPrice').value = b.price_per_month || '';
+    document.getElementById('fClient').value = b.client_name || '';
+    document.getElementById('fContract').value = b.contract_end_date || '';
+    document.getElementById('fIllum').value = b.illuminated !== undefined ? b.illuminated : 1;
+    document.getElementById('fFaces').value = b.face_count || 1;
+    document.getElementById('fDesc').value = b.description || '';
+
+    // Set photo
+    if (b.photo_url) {
+      if (b.photo_url.startsWith('data:')) {
+        currentPhotoBase64 = b.photo_url;
+        showPreview(b.photo_url);
+      } else {
+        document.getElementById('fPhotoUrl').value = b.photo_url;
+        document.getElementById('urlInputContainer').classList.add('visible');
+      }
+    }
+  } else {
+    editingId = null;
+    document.getElementById('modalTitle').textContent = 'AÃ±adir Valla';
+    document.getElementById('fId').disabled = false;
+    document.getElementById('fId').value = '';
+    document.getElementById('fName').value = '';
+    document.getElementById('fLocation').value = '';
+    document.getElementById('fLat').value = '';
+    document.getElementById('fLng').value = '';
+    document.getElementById('fCity').value = '';
+    document.getElementById('fStatus').value = 'available';
+    document.getElementById('fDimensions').value = '';
+    document.getElementById('fPrice').value = '';
+    document.getElementById('fClient').value = '';
+    document.getElementById('fContract').value = '';
+    document.getElementById('fIllum').value = '1';
+    document.getElementById('fFaces').value = '1';
+    document.getElementById('fDesc').value = '';
+  }
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  editingId = null;
+}
+
+function saveBillboard() {
+  const id = document.getElementById('fId').value.trim();
+  const name = document.getElementById('fName').value.trim();
+  const location = document.getElementById('fLocation').value.trim();
+  const lat = parseFloat(document.getElementById('fLat').value);
+  const lng = parseFloat(document.getElementById('fLng').value);
+  const city = document.getElementById('fCity').value;
+
+  if (!id || !name || !location || isNaN(lat) || isNaN(lng) || !city) {
+    showToast('Por favor completa todos los campos obligatorios (*)', 'error');
+    return;
+  }
+
+  const photoUrl = currentPhotoBase64 || document.getElementById('fPhotoUrl').value.trim();
+
+  const b = {
+    id, name,
+    location_name: location,
+    latitude: lat,
+    longitude: lng,
+    city,
+    status: document.getElementById('fStatus').value,
+    dimensions: document.getElementById('fDimensions').value.trim(),
+    price_per_month: parseFloat(document.getElementById('fPrice').value) || 0,
+    client_name: document.getElementById('fClient').value.trim() || null,
+    contract_end_date: document.getElementById('fContract').value || null,
+    illuminated: parseInt(document.getElementById('fIllum').value),
+    face_count: parseInt(document.getElementById('fFaces').value),
+    description: document.getElementById('fDesc').value.trim(),
+    photo_url: photoUrl
+  };
+
+  const existing = billboards.findIndex(x => x.id === id);
+  if (existing >= 0) {
+    billboards[existing] = b;
+    showToast('Valla actualizada exitosamente â', 'success');
+  } else {
+    billboards.push(b);
+    showToast('Valla aÃ±adida exitosamente â', 'success');
+  }
+
+  closeModal();
+  renderMarkers();
+  updateStats();
+  if (editingId === id) openPanel(id);
+}
+
+function deleteBillboard(id) {
+  if (!confirm('Â¿EstÃ¡s seguro de que deseas eliminar esta valla?')) return;
+  billboards = billboards.filter(b => b.id !== id);
+  closePanel();
+  renderMarkers();
+  updateStats();
+  showToast('Valla eliminada', 'info');
+}
+
+// âââ PHOTO UPLOAD âââ
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('photoUploadZone').classList.add('dragover');
+}
+function handleDragLeave(e) {
+  document.getElementById('photoUploadZone').classList.remove('dragover');
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('photoUploadZone').classList.remove('dragover');
+  const file = e.dataTransfer.files[0];
+  if (file) processFile(file);
+}
+function handleFileSelect(e) {
+  const file = e.target.files[0];
+  if (file) processFile(file);
+}
+function processFile(file) {
+  const errEl = document.getElementById('photoError');
+  errEl.classList.remove('visible');
+
+  const allowed = ['image/jpeg', 'image/png', 'image/webp'];
+  if (!allowed.includes(file.type)) {
+    errEl.textContent = 'Formato no soportado. Usa JPG, PNG o WEBP.';
+    errEl.classList.add('visible');
+    return;
+  }
+  if (file.size > 5 * 1024 * 1024) {
+    errEl.textContent = 'La foto es muy grande. MÃ¡ximo 5MB.';
+    errEl.classList.add('visible');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    currentPhotoBase64 = e.target.result;
+    showPreview(e.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+function showPreview(src) {
+  document.getElementById('photoUploadZone').style.display = 'none';
+  document.getElementById('photoPreviewContainer').style.display = 'block';
+  document.getElementById('photoPreview').src = src;
+}
+function removePhoto() {
+  currentPhotoBase64 = null;
+  document.getElementById('photoUploadZone').style.display = 'flex';
+  document.getElementById('photoPreviewContainer').style.display = 'none';
+  document.getElementById('photoPreview').src = '';
+  document.getElementById('photoFileInput').value = '';
+}
+function resetPhotoUpload() {
+  currentPhotoBase64 = null;
+  document.getElementById('photoUploadZone').style.display = 'flex';
+  document.getElementById('photoPreviewContainer').style.display = 'none';
+  document.getElementById('photoPreview').src = '';
+  document.getElementById('photoFileInput').value = '';
+  document.getElementById('fPhotoUrl').value = '';
+  document.getElementById('urlInputContainer').classList.remove('visible');
+  document.getElementById('photoError').classList.remove('visible');
+  document.getElementById('photoUploadZone').style.display = '';
+}
+function toggleUrlInput() {
+  document.getElementById('urlInputContainer').classList.toggle('visible');
+}
+
+// âââ TOAST âââ
+function showToast(msg, type = 'info') {
+  const container = document.getElementById('toastContainer');
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  const icons = { success: 'â', error: 'â', info: 'â¹ï¸' };
+  toast.innerHTML = `<span class="toastIcon">${icons[type] || 'â¹ï¸'}</span><span>${msg}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 350);
+  }, 3000);
+}
+</script>
+</body>
+</html>
