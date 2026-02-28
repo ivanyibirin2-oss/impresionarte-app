@@ -24,317 +24,263 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
 .loginError{color:#ef4444;font-size:.85rem;text-align:center;margin-top:10px;display:none}
 #app{display:none;min-height:100vh}
 .layout{display:flex;min-height:100vh}
-.sidebar{width:240px;background:linear-gradient(180deg,#6366F1 0%,#7C3AED 100%);color:#fff;display:flex;flex-direction:column;padding:24px 16px;position:fixed;top:0;bottom:0;left:0;overflow-y:auto;z-index:50}
-.sidebarBrand{text-align:center;padding:16px 0 24px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:16px}
-.sidebarBrand h2{font-size:1.2rem;font-weight:800;letter-spacing:.5px}
-.sidebarBrand p{font-size:.7rem;color:rgba(255,255,255,.6);margin-top:4px}
-.sidebarNav{display:flex;flex-direction:column;gap:6px}
-.sidebarNav a{color:rgba(255,255,255,.75);text-decoration:none;padding:10px 14px;border-radius:8px;font-size:.9rem;font-weight:500;transition:all .2s;cursor:pointer;display:flex;align-items:center;gap:10px}
-.sidebarNav a:hover{background:rgba(255,255,255,.1);color:#fff}
-.sidebarNav a.active{background:rgba(255,255,255,.2);color:#fff;font-weight:600}
-.sidebarUser{margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.15)}
-.userName{font-size:.85rem;color:rgba(255,255,255,.8);margin-bottom:4px}
-.userRole{font-size:.7rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
-.btnLogout{width:100%;padding:8px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:6px;font-size:.8rem;cursor:pointer;transition:background .2s}
+.sidebar{width:240px;background:linear-gradient(180deg,#6366F1 0%,#7C3AED 100%);color:#fff;display:flex;flex-direction:column;padding:24px 16px;position:fixed;height:100vh;z-index:100}
+.sidebarHeader{text-align:center;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,.2);margin-bottom:20px}
+.sidebarHeader h2{font-size:1.1rem;font-weight:700}
+.sidebarHeader p{font-size:.75rem;opacity:.8;margin-top:4px}
+.navMenu{flex:1;display:flex;flex-direction:column;gap:8px}
+.navItem{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:10px;cursor:pointer;transition:all .2s;font-size:.9rem;font-weight:500}
+.navItem:hover{background:rgba(255,255,255,.15)}
+.navItem.active{background:rgba(255,255,255,.25)}
+.navItem svg{width:20px;height:20px;opacity:.9}
+.sidebarFooter{padding-top:20px;border-top:1px solid rgba(255,255,255,.2);margin-top:auto}
+.userInfo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.userAvatar{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+.userDetails{flex:1}
+.userName{font-size:.85rem;font-weight:600}
+.userRole{font-size:.7rem;opacity:.8}
+.btnLogout{width:100%;padding:8px;background:rgba(255,255,255,.15);color:#fff;border:none;border-radius:8px;font-size:.8rem;cursor:pointer;transition:background .2s}
 .btnLogout:hover{background:rgba(255,255,255,.25)}
-.main{margin-left:240px;flex:1;min-height:100vh}
-.topbar{padding:24px 32px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.pageTitle{font-size:1.5rem;font-weight:700;color:#1e293b}
-.content{padding:24px 32px}
-.statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
-.statCard{background:#fff;border-radius:12px;padding:20px;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.statCard .label{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.statCard .value{font-size:1.8rem;font-weight:700;color:#6366F1}
-.statCard .sub{font-size:.8rem;color:#94a3b8;margin-top:4px}
-.filterBar{display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap;align-items:center}
-.searchBox{flex:1;min-width:260px;position:relative}
-.searchBox input{width:100%;padding:10px 14px 10px 38px;border:1px solid #e2e8f0;border-radius:8px;font-size:.9rem}
-.searchBox svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;color:#94a3b8}
-.filterPills{display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:8px 16px;border-radius:20px;border:1px solid #e2e8f0;background:#fff;font-size:.85rem;cursor:pointer;transition:all .2s}
-.pill:hover{border-color:#cbd5e1}
-.pill.active{background:#6366F1;color:#fff;border-color:#6366F1}
-.btnPrimary{padding:10px 18px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.mainContent{flex:1;margin-left:240px;padding:24px 32px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.header h1{font-size:1.5rem;font-weight:700;color:#1e293b}
+.btnPrimary{display:flex;align-items:center;gap:8px;padding:10px 18px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:#fff;border:none;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer;transition:opacity .2s}
 .btnPrimary:hover{opacity:.9}
-.btnSm{padding:6px 12px;border-radius:6px;font-size:.75rem;border:none;cursor:pointer;margin-right:6px}
-.btnEdit{background:#e0e7ff;color:#4338ca}
-.btnDel{background:#fee2e2;color:#dc2626}
-.billGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.billCard{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s}
-.billCard:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.1)}
-.billCardImg{height:160px;background:#f1f5f9;position:relative;display:flex;align-items:center;justify-content:center}
-.billCardImg img{width:100%;height:100%;object-fit:cover}
-.noPhoto{text-align:center;color:#94a3b8;font-size:.8rem}
-.noPhoto svg{margin-bottom:8px}
-.statusBadge{position:absolute;top:12px;right:12px;padding:4px 10px;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase}
-.statusBadge.available{background:#dcfce7;color:#166534}
-.statusBadge.occupied{background:#fee2e2;color:#dc2626}
-.statusBadge.maintenance{background:#fef3c7;color:#92400e}
-.billCardBody{padding:16px}
-.billCardBody h3{font-size:1rem;font-weight:600;margin-bottom:4px}
-.billCardBody .city{font-size:.8rem;color:#6366F1;font-weight:600;margin-bottom:8px}
-.billCardBody .detail{font-size:.8rem;color:#64748b;margin-bottom:4px}
-.billCardBody .actions{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
-.mapPillBar{display:flex;gap:8px;flex-wrap:wrap;padding:16px 24px;background:#fff;border-bottom:1px solid #e2e8f0}
-.mapPill{padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;border:2px solid #6366F1;background:#fff;color:#6366F1;transition:all .2s}
-.mapPill:hover{background:#eef2ff}
-.mapPill.active{background:#6366F1;color:#fff}
-#map{height:calc(100vh - 120px);width:100%;z-index:1}
-.detailPanel{background:#fff;border-radius:12px;padding:32px;max-width:700px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.detailHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.detailHeader h2{font-size:1.3rem;font-weight:700}
-.detailPhoto{width:100%;height:220px;background:#f1f5f9;border-radius:8px;overflow:hidden;margin-bottom:20px;display:flex;align-items:center;justify-content:center}
-.detailPhoto img{width:100%;height:100%;object-fit:cover}
-.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.detailItem .label{font-size:.75rem;color:#64748b;text-transform:uppercase;margin-bottom:4px}
-.detailItem .value{font-size:1rem;font-weight:600;color:#1e293b}
-.modalOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;align-items:center;justify-content:center}
-.modalOverlay.active{display:flex}
-.modal{background:#fff;border-radius:12px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.2)}
-.modalHeader{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;border-bottom:1px solid #e2e8f0}
-.modalHeader h2{font-size:1.1rem}
-.modalClose{background:none;border:none;font-size:1.3rem;cursor:pointer;color:#64748b}
+.btnPrimary:disabled{opacity:.5;cursor:not-allowed}
+.statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px}
+.statCard{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.statValue{font-size:1.8rem;font-weight:800;color:#6366F1}
+.statLabel{font-size:.8rem;color:#64748b;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.statCard.occupied .statValue{color:#ef4444}
+.statCard.available .statValue{color:#22c55e}
+.statCard.maintenance .statValue{color:#f59e0b}
+.filterSection{background:#fff;border-radius:12px;padding:16px 20px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.filterPills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px}
+.filterPill{padding:8px 16px;background:#f1f5f9;border:none;border-radius:20px;font-size:.85rem;cursor:pointer;transition:all .2s;color:#475569}
+.filterPill:hover{background:#e2e8f0}
+.filterPill.active{background:#6366F1;color:#fff}
+.searchBox{width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem}
+.searchBox:focus{outline:none;border-color:#6366F1}
+.mapSection{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06);margin-bottom:24px}
+.mapSection h3{font-size:1.1rem;margin-bottom:16px;color:#1e293b}
+#map{height:400px;border-radius:10px;z-index:1}
+.catalogSection{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.catalogSection h3{font-size:1.1rem;margin-bottom:16px;color:#1e293b}
+.catalogGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.catalogCard{background:#f8fafc;border-radius:12px;padding:16px;border:1px solid #e2e8f0;transition:all .2s}
+.catalogCard:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.cardImage{width:100%;height:140px;background:#e2e8f0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.8rem;margin-bottom:12px;overflow:hidden}
+.cardImage img{width:100%;height:100%;object-fit:cover}
+.cardTitle{font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:4px}
+.cardLocation{font-size:.85rem;color:#64748b;margin-bottom:8px}
+.cardMeta{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.cardMeta span{font-size:.75rem;padding:4px 10px;background:#fff;border-radius:6px;color:#475569;border:1px solid #e2e8f0}
+.cardStatus{display:inline-block;font-size:.75rem;padding:4px 12px;border-radius:20px;font-weight:600;margin-bottom:12px}
+.status-available{background:#dcfce7;color:#166534}
+.status-occupied{background:#fee2e2;color:#dc2626}
+.status-maintenance{background:#fef3c7;color:#92400e}
+.cardActions{display:flex;gap:8px}
+.cardBtn{flex:1;padding:8px;border:none;border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;transition:opacity .2s}
+.cardBtn-primary{background:#6366F1;color:#fff}
+.cardBtn-secondary{background:#f1f5f9;color:#475569}
+.cardBtn-danger{background:#fee2e2;color:#dc2626}
+.cardBtn:hover{opacity:.8}
+.aboutSection{background:#fff;border-radius:12px;padding:32px;box-shadow:0 2px 8px rgba(0,0,0,.06);max-width:800px}
+.aboutSection h2{font-size:1.5rem;margin-bottom:16px;color:#1e293b}
+.aboutSection p{color:#475569;line-height:1.7;margin-bottom:16px}
+.aboutStats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin:32px 0;padding:24px;background:#f8fafc;border-radius:12px}
+.aboutStat{text-align:center}
+.aboutStatValue{font-size:2rem;font-weight:800;color:#6366F1}
+.aboutStatLabel{font-size:.85rem;color:#64748b;margin-top:4px}
+.contenteditable-hover:hover{border:1px dashed #6366F1;padding:4px;border-radius:4px}
+.modal{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.modal.active{display:flex}
+.modalContent{background:#fff;border-radius:16px;width:100%;max-width:500px;max-height:90vh;overflow-y:auto;margin:20px}
+.modalHeader{padding:20px 24px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
+.modalHeader h3{font-size:1.1rem;color:#1e293b}
+.modalClose{background:none;border:none;font-size:1.5rem;color:#64748b;cursor:pointer}
 .modalBody{padding:24px}
 .formRow{margin-bottom:16px}
-.formRow label{display:block;font-size:.8rem;font-weight:600;color:#475569;margin-bottom:6px}
-.formRow input,.formRow select,.formRow textarea{width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:.9rem;font-family:inherit}
-.formRow input:focus,.formRow select:focus,.formRow textarea:focus{outline:none;border-color:#6366F1}
-.formActions{display:flex;gap:12px;justify-content:flex-end;padding:0 24px 24px}
-.btnSecondary{padding:10px 18px;background:#f1f5f9;color:#475569;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer}
-.btnSecondary:hover{background:#e2e8f0}
-#aboutView{display:none}
-.aboutCard{background:#fff;border-radius:12px;padding:32px;max-width:700px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.aboutCard h1{font-size:1.8rem;color:#6366F1;margin-bottom:8px}
-.aboutCard h3{margin-top:24px;margin-bottom:12px;color:#1e293b}
-.aboutCard p{margin-bottom:12px;line-height:1.7;color:#475569}
-.aboutEditable{border:2px dashed transparent;padding:4px 8px;border-radius:4px;transition:border-color .2s}
-.aboutEditable:hover{border-color:#c7d2fe}
-.aboutEditable:focus{outline:none;border-color:#6366F1;background:#f5f3ff}
-.aboutStats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin:24px 0;padding:20px;background:#f5f3ff;border-radius:12px}
-.aboutStatItem{text-align:center}
-.aboutStatItem .num{font-size:1.5rem;font-weight:700;color:#6366F1}
-.aboutStatItem .lbl{font-size:.75rem;color:#64748b;text-transform:uppercase}
-.toast{position:fixed;bottom:24px;right:24px;padding:14px 20px;border-radius:8px;color:#fff;font-size:.9rem;transform:translateY(100px);opacity:0;transition:all .3s;z-index:2000}
+.formRow label{display:block;font-size:.85rem;font-weight:600;color:#475569;margin-bottom:6px}
+.formRow input,.formRow select{width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem}
+.formRow input:focus,.formRow select:focus{outline:none;border-color:#6366F1}
+.formRow textarea{width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;min-height:80px;resize:vertical}
+.formRow textarea:focus{outline:none;border-color:#6366F1}
+.formCheck{display:flex;align-items:center;gap:8px}
+.formCheck input{width:auto}
+.photoUpload{border:2px dashed #cbd5e1;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s}
+.photoUpload:hover{border-color:#6366F1;background:#f8fafc}
+.photoUpload.dragover{border-color:#6366F1;background:#eff6ff}
+.photoPreview{width:100%;max-height:200px;object-fit:cover;border-radius:8px;margin-top:12px}
+.modalFooter{padding:16px 24px;border-top:1px solid #e2e8f0;display:flex;justify-content:flex-end;gap:12px}
+.btnSecondary{padding:10px 18px;background:#f1f5f9;color:#475569;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer}
+.btnDanger{padding:10px 18px;background:#fee2e2;color:#dc2626;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer}
+.toast{position:fixed;bottom:24px;right:24px;padding:14px 20px;background:#1e293b;color:#fff;border-radius:10px;font-size:.9rem;z-index:2000;transform:translateY(100px);opacity:0;transition:all .3s}
 .toast.show{transform:translateY(0);opacity:1}
 .toast.success{background:#22c55e}
 .toast.error{background:#ef4444}
-.toast.info{background:#3b82f6}
-.dropZone{border:2px dashed #cbd5e1;border-radius:8px;padding:20px;text-align:center;color:#94a3b8;cursor:pointer;transition:all .2s}
-.dropZone:hover{border-color:#6366F1;background:#f5f3ff}
-.dropZone.dragover{border-color:#6366F1;background:#eef2ff}
+.detailPanel{position:fixed;top:0;right:0;width:380px;height:100vh;background:#fff;box-shadow:-4px 0 20px rgba(0,0,0,.1);z-index:1001;transform:translateX(100%);transition:transform .3s;overflow-y:auto}
+.detailPanel.active{transform:translateX(0)}
+.detailHeader{padding:24px;border-bottom:1px solid #e2e8f0;display:flex;justify-content:space-between;align-items:center}
+.detailHeader h2{font-size:1.2rem;color:#1e293b}
+.detailClose{background:none;border:none;font-size:1.5rem;color:#64748b;cursor:pointer}
+.detailBody{padding:24px}
+.detailPhoto{width:100%;height:200px;background:#e2e8f0;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#94a3b8;margin-bottom:20px;overflow:hidden}
+.detailPhoto img{width:100%;height:100%;object-fit:cover}
+.detailRow{margin-bottom:16px}
+.detailRow label{display:block;font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.detailRow p{font-size:.95rem;color:#1e293b;font-weight:500}
+.detailRow p.description{color:#475569;line-height:1.6;font-weight:400}
+.mobileMenuBtn{display:none;position:fixed;top:16px;left:16px;z-index:101;padding:10px;background:#6366F1;color:#fff;border:none;border-radius:8px}
+.popup-detail-btn{padding:6px 12px;background:#6366F1;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.8rem}
 @media(max-width:768px){
-.sidebar{position:fixed;left:-260px;top:0;bottom:0;z-index:100;transition:left .3s}
-.sidebar.open{left:0}
-.mobileMenuBtn{display:block;position:fixed;top:16px;left:16px;z-index:101;background:#fff;border:none;padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.1)}
-.main{margin-left:0}
-.billGrid{grid-template-columns:1fr}
-.topbar{padding:24px 16px 0}
-.content{padding:16px}
-}
-@media(min-width:769px){
-.mobileMenuBtn{display:none}
+.sidebar{transform:translateX(-100%);transition:transform .3s}
+.sidebar.open{transform:translateX(0)}
+.mainContent{margin-left:0;padding:16px}
+.mobileMenuBtn{display:block}
+.statsGrid{grid-template-columns:repeat(2,1fr)}
+.detailPanel{width:100%}
 }
 </style>
 </head>
 <body>
-<!-- LOGIN SCREEN -->
+
 <div id="loginScreen">
   <div class="loginCard">
     <div class="loginLogo">
       <h1>Impresionarte_ve</h1>
-      <p>Sistema de Gesti&#xF3;n de Vallas Publicitarias</p>
-      <p style="font-size:.75rem;color:#94a3b8;margin-top:8px;">Acceso restringido al personal autorizado</p>
+      <p>Acceso restringido al personal autorizado</p>
     </div>
     <div class="formGroup">
       <label>Usuario</label>
-      <input type="text" id="loginUser" placeholder="admin o viewer">
+      <input type="text" id="inputUser" placeholder="Ingrese su usuario">
     </div>
     <div class="formGroup">
       <label>Contrase&#xF1;a</label>
-      <input type="password" id="loginPass" placeholder="Contrase&#xF1;a">
+      <input type="password" id="inputPass" placeholder="Ingrese su contrase&#xF1;a">
     </div>
-    <button class="btnLogin" id="btnLogin">Iniciar Sesi&#xF3;n</button>
+    <button class="btnLogin" id="loginBtn">Iniciar Sesi&#xF3;n</button>
     <div class="loginError" id="loginError">Usuario o contrase&#xF1;a incorrectos</div>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
+  <button class="mobileMenuBtn" id="mobileMenuBtn">&#x2630;</button>
   <div class="layout">
-    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-      <div class="sidebarBrand">
+      <div class="sidebarHeader">
         <h2>Impresionarte_ve</h2>
-        <p>Gesti&#xF3;n de Vallas</p>
+        <p>Sistema de Gesti&#xF3;n</p>
       </div>
-      <nav class="sidebarNav">
-        <a id="navCatalog" class="active">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Cat&#xE1;logo
-        </a>
-        <a id="navMap">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="1 6 1 22 8 18 16 22 21 18 21 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
-          Mapa
-        </a>
-        <a id="navAbout">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-          Sobre Nosotros
-        </a>
+      <nav class="navMenu">
+        <div class="navItem active" data-view="dashboard">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span>Dashboard</span>
+        </div>
+        <div class="navItem" data-view="catalog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+          <span>Cat&#xE1;logo</span>
+        </div>
+        <div class="navItem" data-view="about">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          <span>Nosotros</span>
+        </div>
       </nav>
-      <div class="sidebarUser">
-        <div class="userName" id="userName">-</div>
-        <div class="userRole" id="userRole">-</div>
+      <div class="sidebarFooter">
+        <div class="userInfo">
+          <div class="userAvatar" id="userAvatar">U</div>
+          <div class="userDetails">
+            <div class="userName" id="userName">Usuario</div>
+            <div class="userRole" id="userRole">Rol</div>
+          </div>
+        </div>
         <button class="btnLogout" id="btnLogout">Cerrar Sesi&#xF3;n</button>
       </div>
     </aside>
 
-    <!-- MAIN -->
-    <main class="main">
-      <button class="mobileMenuBtn" id="btnMobileMenu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-
-      <!-- CATALOG VIEW -->
-      <div id="catalogView">
-        <div class="topbar">
-          <h1 class="pageTitle">Cat&#xE1;logo de Vallas</h1>
-          <button class="btnPrimary" id="addBtn" style="display:none">+ Nueva Valla</button>
+    <main class="mainContent">
+      <div id="viewDashboard">
+        <div class="header">
+          <h1>Dashboard</h1>
+          <button class="btnPrimary" id="btnNewValla">+ Nueva Valla</button>
         </div>
-        <div class="content">
-          <div class="statsGrid">
-            <div class="statCard">
-              <div class="label">Total Vallas</div>
-              <div class="value" id="statTotal">0</div>
-            </div>
-            <div class="statCard">
-              <div class="label">Disponibles</div>
-              <div class="value" id="statAvailable">0</div>
-              <div class="sub" id="statAvailablePct">0%</div>
-            </div>
-            <div class="statCard">
-              <div class="label">Ocupadas</div>
-              <div class="value" id="statOccupied">0</div>
-              <div class="sub" id="statOccupiedPct">0%</div>
-            </div>
-            <div class="statCard">
-              <div class="label">Ciudades</div>
-              <div class="value" id="statCities">0</div>
-            </div>
-          </div>
-          <div class="filterBar">
-            <div class="searchBox">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" id="searchInput" placeholder="Buscar vallas...">
-            </div>
-            <div class="filterPills">
-              <span class="pill active" id="pillAll" data-filter="all">Todas</span>
-              <span class="pill" id="pillAvailable" data-filter="available">Disponibles</span>
-              <span class="pill" id="pillOccupied" data-filter="occupied">Ocupadas</span>
-              <span class="pill" id="pillMaintenance" data-filter="maintenance">Mantenimiento</span>
-            </div>
-          </div>
-          <div class="billGrid" id="billGrid"></div>
+        <div class="statsGrid">
+          <div class="statCard"><div class="statValue" id="statTotal">0</div><div class="statLabel">Total Vallas</div></div>
+          <div class="statCard available"><div class="statValue" id="statAvailable">0</div><div class="statLabel">Disponibles</div></div>
+          <div class="statCard occupied"><div class="statValue" id="statOccupied">0</div><div class="statLabel">Ocupadas</div></div>
+          <div class="statCard maintenance"><div class="statValue" id="statMaintenance">0</div><div class="statLabel">Mantenimiento</div></div>
         </div>
-      </div>
-
-      <!-- MAP VIEW -->
-      <div id="mapView" style="display:none">
-        <div class="topbar">
-          <h1 class="pageTitle">Mapa de Vallas</h1>
-        </div>
-        <div style="background:#fff">
-          <div class="mapPillBar">
-            <span class="mapPill active" id="mapPillAll" data-type="all">Todas</span>
-            <span class="mapPill" id="mapPillAvailable" data-type="status" data-value="available">Disponibles</span>
-            <span class="mapPill" id="mapPillOccupied" data-type="status" data-value="occupied">Ocupadas</span>
-            <span class="mapPill" id="mapPillMaintenance" data-type="status" data-value="maintenance">Mantenimiento</span>
-            <span class="mapPill" id="mapPillCaracas" data-type="city" data-value="Caracas">Caracas</span>
-            <span class="mapPill" id="mapPillValencia" data-type="city" data-value="Valencia">Valencia</span>
-            <span class="mapPill" id="mapPillMaracaibo" data-type="city" data-value="Maracaibo">Maracaibo</span>
-            <span class="mapPill" id="mapPillBarquisimeto" data-type="city" data-value="Barquisimeto">Barquisimeto</span>
+        <div class="mapSection">
+          <h3>Mapa de Ubicaciones</h3>
+          <div class="filterPills" id="mapFilters">
+            <button class="filterPill active" data-filter="all">Todas</button>
+            <button class="filterPill" data-filter="available">Disponibles</button>
+            <button class="filterPill" data-filter="occupied">Ocupadas</button>
+            <button class="filterPill" data-filter="Caracas">Caracas</button>
+            <button class="filterPill" data-filter="Valencia">Valencia</button>
+            <button class="filterPill" data-filter="Maracaibo">Maracaibo</button>
+            <button class="filterPill" data-filter="Barquisimeto">Barquisimeto</button>
           </div>
           <div id="map"></div>
         </div>
       </div>
 
-      <!-- DETAIL VIEW -->
-      <div id="detailView" style="display:none">
-        <div class="topbar">
-          <h1 class="pageTitle">Detalle de Valla</h1>
+      <div id="viewCatalog" style="display:none">
+        <div class="header">
+          <h1>Cat&#xE1;logo de Vallas</h1>
+          <button class="btnPrimary" id="btnNewValla2">+ Nueva Valla</button>
         </div>
-        <div class="content">
-          <div class="detailPanel" id="detailPanel"></div>
+        <div class="filterSection">
+          <div class="filterPills" id="catalogFilters">
+            <button class="filterPill active" data-filter="all">Todas</button>
+            <button class="filterPill" data-filter="available">Disponibles</button>
+            <button class="filterPill" data-filter="occupied">Ocupadas</button>
+            <button class="filterPill" data-filter="Caracas">Caracas</button>
+            <button class="filterPill" data-filter="Valencia">Valencia</button>
+            <button class="filterPill" data-filter="Maracaibo">Maracaibo</button>
+            <button class="filterPill" data-filter="Barquisimeto">Barquisimeto</button>
+          </div>
+          <input type="text" class="searchBox" id="searchBox" placeholder="Buscar por nombre o ubicaci&#xF3;n...">
+        </div>
+        <div class="catalogSection">
+          <div class="catalogGrid" id="catalogGrid"></div>
         </div>
       </div>
 
-      <!-- ABOUT VIEW -->
-      <div id="aboutView" style="display:none">
-        <div class="topbar">
-          <h1 class="pageTitle">Sobre Nosotros</h1>
-          <button class="btnPrimary" id="btnEditAbout" style="display:none">Editar P&#xE1;gina</button>
-          <button class="btnPrimary" id="btnSaveAbout" style="display:none;background:#22c55e">Guardar Cambios</button>
-        </div>
-        <div class="content">
-          <div class="aboutCard" id="aboutCard">
-            <h1 class="aboutEditable" id="aboutTitle">Impresionarte_ve</h1>
-            <p style="font-size:1.1rem;color:#64748b;margin-bottom:24px;" class="aboutEditable" id="aboutSubtitle">Tu mensaje en los mejores espacios de Venezuela &#x2014; Publicidad Exterior de Alto Impacto</p>
-            
-            <h3>Quienes Somos</h3>
-            <p class="aboutEditable" id="aboutDesc1">Impresionarte_ve es una empresa venezolana con m&#xE1;s de 10 a&#xF1;os de experiencia en el sector de la publicidad exterior. Nos especializamos en ofrecer espacios publicitarios de alto impacto en las principales ciudades del pa&#xED;s.</p>
-            <p class="aboutEditable" id="aboutDesc2">Nuestra red de vallas publicitarias est&#xE1; estrat&#xE9;gicamente ubicada en puntos de alto tr&#xE1;fico vehicular y peatonal, garantizando la m&#xE1;xima visibilidad para tu marca.</p>
-            
-            <div class="aboutStats">
-              <div class="aboutStatItem">
-                <div class="num" id="statVallas">50+</div>
-                <div class="lbl">Vallas</div>
-              </div>
-              <div class="aboutStatItem">
-                <div class="num">4</div>
-                <div class="lbl">Ciudades</div>
-              </div>
-              <div class="aboutStatItem">
-                <div class="num">10+</div>
-                <div class="lbl">A&#xF1;os</div>
-              </div>
-              <div class="aboutStatItem">
-                <div class="num">500+</div>
-                <div class="lbl">Clientes</div>
-              </div>
-            </div>
-            
-            <h3>Nuestros Servicios</h3>
-            <p class="aboutEditable" id="aboutServices">Ofrecemos alquiler de vallas publicitarias en formatos diversos, desde vallas tradicionales hasta espectaculares digitales. Todos nuestros espacios cuentan con iluminaci&#xF3;n LED de &#xFA;ltima generaci&#xF3;n y est&#xE1;n ubicados en zonas estrat&#xE9;gicas.</p>
-            
-            <h3>Contacto</h3>
-            <p class="aboutEditable" id="aboutContact">Email: info@impresionarte.com.ve<br>Tel&#xE9;fono: +58 212-123-4567<br>Direcci&#xF3;n: Caracas, Venezuela</p>
+      <div id="viewAbout" style="display:none">
+        <div class="aboutSection" id="aboutContent">
+          <h2 id="aboutTitle">Sobre Impresionarte_ve</h2>
+          <p id="aboutP1">Somos una empresa venezolana especializada en publicidad exterior, con m&#xE1;s de 15 a&#xF1;os de experiencia en el mercado nacional. Nuestra red de vallas publicitarias estrat&#xE9;gicamente ubicadas en las principales ciudades de Venezuela nos permite ofrecer a nuestros clientes el mejor alcance y visibilidad para sus campa&#xF1;as.</p>
+          <div class="aboutStats">
+            <div class="aboutStat"><div class="aboutStatValue">150+</div><div class="aboutStatLabel">Vallas Activas</div></div>
+            <div class="aboutStat"><div class="aboutStatValue">4</div><div class="aboutStatLabel">Ciudades</div></div>
+            <div class="aboutStat"><div class="aboutStatValue">500+</div><div class="aboutStatLabel">Clientes</div></div>
           </div>
+          <h3 id="aboutMisionTitle">Nuestra Misi&#xF3;n</h3>
+          <p id="aboutP2">Proporcionar soluciones de publicidad exterior de alta calidad que permitan a nuestros clientes comunicar efectivamente su mensaje a su audiencia objetivo, maximizando el retorno de su inversi&#xF3;n publicitaria.</p>
+          <h3 id="aboutVisionTitle">Nuestra Visi&#xF3;n</h3>
+          <p id="aboutP3">Ser la empresa l&#xED;der en publicidad exterior en Venezuela, reconocida por nuestra innovaci&#xF3;n, calidad de servicio y compromiso con el &#xE9;xito de nuestros clientes.</p>
         </div>
       </div>
     </main>
   </div>
 </div>
 
-<!-- MODAL -->
-<div class="modalOverlay" id="modalOverlay">
-  <div class="modal">
+<div class="modal" id="vallaModal">
+  <div class="modalContent">
     <div class="modalHeader">
-      <h2 id="modalTitle">Nueva Valla</h2>
-      <button class="modalClose" id="btnCloseModal">&times;</button>
+      <h3 id="modalTitle">Nueva Valla</h3>
+      <button class="modalClose" id="modalClose">&times;</button>
     </div>
     <div class="modalBody">
-      <input type="hidden" id="mId">
-      <div class="formRow">
-        <label>C&#xF3;digo</label>
-        <input type="text" id="mCode" placeholder="VL-001">
-      </div>
+      <input type="hidden" id="vallaId">
       <div class="formRow">
         <label>Nombre</label>
-        <input type="text" id="mName" placeholder="Valla Av. Principal">
+        <input type="text" id="vallaName" placeholder="Ej: Valla Av. Principal">
       </div>
       <div class="formRow">
         <label>Ciudad</label>
-        <select id="mCity">
-          <option value="">Seleccionar...</option>
+        <select id="vallaCity">
           <option value="Caracas">Caracas</option>
           <option value="Valencia">Valencia</option>
           <option value="Maracaibo">Maracaibo</option>
@@ -342,63 +288,69 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
         </select>
       </div>
       <div class="formRow">
-        <label>Ubicaci&#xF3;n</label>
-        <input type="text" id="mLocation" placeholder="Direcci&#xF3;n exacta">
+        <label>Ubicaci&#xF3;n espec&#xED;fica</label>
+        <input type="text" id="vallaLocation" placeholder="Ej: Av. Francisco de Miranda, Los Ruices">
       </div>
       <div class="formRow">
-        <label>Latitud</label>
-        <input type="number" id="mLat" step="0.0001" placeholder="10.0000">
+        <label>Descripci&#xF3;n</label>
+        <textarea id="vallaDescription" placeholder="Descripci&#xF3;n de la valla..."></textarea>
       </div>
       <div class="formRow">
-        <label>Longitud</label>
-        <input type="number" id="mLng" step="0.0001" placeholder="-66.0000">
-      </div>
-      <div class="formRow">
-        <label>Dimensiones (metros)</label>
-        <input type="text" id="mDims" placeholder="6x4">
+        <label>Dimensiones</label>
+        <input type="text" id="vallaDimensions" placeholder="Ej: 6x4 metros">
       </div>
       <div class="formRow">
         <label>Caras</label>
-        <select id="mFaces">
+        <select id="vallaFaces">
           <option value="1">1 cara</option>
           <option value="2">2 caras</option>
         </select>
       </div>
       <div class="formRow">
         <label>Estado</label>
-        <select id="mStatus">
+        <select id="vallaStatus">
           <option value="available">Disponible</option>
           <option value="occupied">Ocupada</option>
           <option value="maintenance">Mantenimiento</option>
         </select>
       </div>
       <div class="formRow">
-        <label>Iluminaci&#xF3;n</label>
-        <select id="mIlluminated">
-          <option value="1">S&#xED;</option>
-          <option value="0">No</option>
-        </select>
+        <label class="formCheck"><input type="checkbox" id="vallaIlluminated"> Iluminada</label>
       </div>
       <div class="formRow">
-        <label>Foto (URL o arrastra una imagen)</label>
-        <input type="text" id="mPhoto" placeholder="https://ejemplo.com/foto.jpg">
-        <div class="dropZone" id="dropZone">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin-bottom:8px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
-          <div>Arrastra una imagen aqu&#xED; o haz clic para seleccionar</div>
-          <input type="file" id="mPhotoFile" accept="image/*" style="display:none">
+        <label>Coordenadas (lat,lng)</label>
+        <input type="text" id="vallaCoords" placeholder="Ej: 10.4806,-66.9036">
+      </div>
+      <div class="formRow">
+        <label>Fotograf&#xED;a</label>
+        <div class="photoUpload" id="photoUpload">
+          <div>Arrastra una imagen o haz clic para seleccionar</div>
+          <input type="file" id="photoInput" accept="image/*" style="display:none">
         </div>
+        <img class="photoPreview" id="photoPreview" style="display:none">
       </div>
     </div>
-    <div class="formActions">
+    <div class="modalFooter">
+      <button class="btnDanger" id="btnDelete" style="display:none">Eliminar</button>
       <button class="btnSecondary" id="btnCancel">Cancelar</button>
       <button class="btnPrimary" id="btnSave">Guardar</button>
     </div>
   </div>
 </div>
 
+<div class="detailPanel" id="detailPanel">
+  <div class="detailHeader">
+    <h2>Detalle de Valla</h2>
+    <button class="detailClose" id="detailClose">&times;</button>
+  </div>
+  <div class="detailBody" id="detailBody"></div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 <script>
-// USERS CONFIGURATION
+
+// USERS CONFIGURATION - RULE 2
 var USERS = [
   {username:'admin',password:'Impresionarte2024!',role:'admin',name:'Administrador'},
   {username:'viewer',password:'viewer123',role:'viewer',name:'Visualizador'}
@@ -406,670 +358,718 @@ var USERS = [
 
 // DEFAULT BILLBOARDS DATA
 var DEFAULT_BILLBOARDS = [
-  {id:'VL-001',name:'Valla Av. Francisco de Miranda',city:'Caracas',location_name:'Av. Francisco de Miranda, Los Ruices',lat:10.4806,lng:-66.9036,dimensions:'6x4',faces:2,illuminated:true,status:'available',photo:''},
-  {id:'VL-002',name:'Valla Autopista Cacique',city:'Caracas',location_name:'Autopista Cacique, La California',lat:10.4735,lng:-66.8321,dimensions:'8x5',faces:1,illuminated:true,status:'occupied',photo:''},
-  {id:'VL-003',name:'Valla Plaza Venezuela',city:'Caracas',location_name:'Plaza Venezuela',lat:10.4965,lng:-66.8932,dimensions:'6x4',faces:2,illuminated:false,status:'available',photo:''},
-  {id:'VL-004',name:'Valla Av. Bolivar',city:'Caracas',location_name:'Av. Bolivar, Centro',lat:10.5061,lng:-66.9145,dimensions:'5x3',faces:1,illuminated:true,status:'maintenance',photo:''},
-  {id:'VL-005',name:'Valla La Castellana',city:'Caracas',location_name:'Av. Principal La Castellana',lat:10.4932,lng:-66.8623,dimensions:'7x4',faces:2,illuminated:true,status:'available',photo:''},
-  {id:'VL-006',name:'Valla Av. Bolivar Norte',city:'Valencia',location_name:'Av. Bolivar Norte',lat:10.1801,lng:-68.0036,dimensions:'6x4',faces:1,illuminated:true,status:'available',photo:''},
-  {id:'VL-007',name:'Valla Av. Universidad',city:'Maracaibo',location_name:'Av. Universidad, 5 de Julio',lat:10.6520,lng:-71.6332,dimensions:'8x6',faces:2,illuminated:true,status:'occupied',photo:''},
-  {id:'VL-008',name:'Valla Av. Venezuela',city:'Barquisimeto',location_name:'Av. Venezuela, Centro',lat:10.0678,lng:-69.3230,dimensions:'6x4',faces:1,illuminated:false,status:'available',photo:''}
+  {id:'VL-001',name:'Valla Av. Francisco de Miranda',city:'Caracas',location_name:'Av. Francisco de Miranda, Los Ruices',lat:10.4806,lng:-66.9036,dimensions:'6x4',faces:2,illuminated:true,status:'available',photo:'',description:'Valla ubicada en zona de alto trafico'},
+  {id:'VL-002',name:'Valla Autopista Cacique',city:'Caracas',location_name:'Autopista Cacique, La California',lat:10.4735,lng:-66.8321,dimensions:'8x5',faces:1,illuminated:true,status:'occupied',photo:'',description:'Excelente visibilidad desde la autopista'},
+  {id:'VL-003',name:'Valla Plaza Venezuela',city:'Caracas',location_name:'Plaza Venezuela',lat:10.4965,lng:-66.8932,dimensions:'6x4',faces:2,illuminated:false,status:'available',photo:'',description:'Ubicacion centrica en la ciudad'},
+  {id:'VL-004',name:'Valla Av. Bolivar',city:'Caracas',location_name:'Av. Bolivar, Centro',lat:10.5061,lng:-66.9145,dimensions:'5x3',faces:1,illuminated:true,status:'maintenance',photo:'',description:'En mantenimiento programado'},
+  {id:'VL-005',name:'Valla La Castellana',city:'Caracas',location_name:'Av. Principal La Castellana',lat:10.4932,lng:-66.8623,dimensions:'7x4',faces:2,illuminated:true,status:'available',photo:'',description:'Zona residencial de alto nivel'},
+  {id:'VL-006',name:'Valla Av. Bolivar Norte',city:'Valencia',location_name:'Av. Bolivar Norte',lat:10.1801,lng:-68.0036,dimensions:'6x4',faces:1,illuminated:true,status:'available',photo:'',description:'Principal avenida de Valencia'},
+  {id:'VL-007',name:'Valla Av. Universidad',city:'Maracaibo',location_name:'Av. Universidad, 5 de Julio',lat:10.6520,lng:-71.6332,dimensions:'8x6',faces:2,illuminated:true,status:'occupied',photo:'',description:'Zona universitaria y comercial'},
+  {id:'VL-008',name:'Valla Av. Venezuela',city:'Barquisimeto',location_name:'Av. Venezuela, Centro',lat:10.0678,lng:-69.3230,dimensions:'6x4',faces:1,illuminated:false,status:'available',photo:'',description:'Centro de la ciudad de Barquisimeto'}
 ];
 
 // STATE
 var currentUser = null;
 var currentFilter = 'all';
 var currentSearch = '';
-var mapFilter = {type:'all',value:null};
 var map = null;
-var markers = [];
+var mapMarkers = [];
 var BILLBOARDS = [];
-var isEditingAbout = false;
+var currentPhoto = '';
+var editingId = null;
 
-// LOCALSTORAGE KEYS
-var LS_USER = 'imp_user';
-var LS_BILLBOARDS = 'imp_billboards';
-var LS_ABOUT = 'imp_about';
+// STATUS LABELS
+var STATUS_LABELS = {available:'Disponible',occupied:'Ocupada',maintenance:'Mantenimiento'};
+var STATUS_COLORS = {available:'#22c55e',occupied:'#ef4444',maintenance:'#f59e0b'};
+var CITY_COORDS = {Caracas:[10.4806,-66.9036],Valencia:[10.1801,-68.0036],Maracaibo:[10.6520,-71.6332],Barquisimeto:[10.0678,-69.3230]};
 
-// INITIALIZATION
-document.addEventListener('DOMContentLoaded', function() {
-  loadUserSession();
-  loadBillboards();
-  loadAboutContent();
-  setupEventListeners();
-  updateStats();
-  renderCatalog();
-});
-
-// EVENT LISTENERS SETUP
-function setupEventListeners() {
-  // Login
-  document.getElementById('btnLogin').addEventListener('click', doLogin);
-  document.getElementById('loginPass').addEventListener('keypress', function(e) {
-    if(e.key === 'Enter') doLogin();
-  });
-  
-  // Logout
-  document.getElementById('btnLogout').addEventListener('click', doLogout);
-  
-  // Navigation
-  document.getElementById('navCatalog').addEventListener('click', function() { showPage('catalog'); });
-  document.getElementById('navMap').addEventListener('click', function() { showPage('map'); });
-  document.getElementById('navAbout').addEventListener('click', function() { showPage('about'); });
-  
-  // Mobile menu
-  document.getElementById('btnMobileMenu').addEventListener('click', toggleSidebar);
-  
-  // Catalog filters
-  document.getElementById('pillAll').addEventListener('click', function() { setCatalogFilter('all'); });
-  document.getElementById('pillAvailable').addEventListener('click', function() { setCatalogFilter('available'); });
-  document.getElementById('pillOccupied').addEventListener('click', function() { setCatalogFilter('occupied'); });
-  document.getElementById('pillMaintenance').addEventListener('click', function() { setCatalogFilter('maintenance'); });
-  
-  // Search
-  document.getElementById('searchInput').addEventListener('input', function(e) {
-    currentSearch = e.target.value.toLowerCase();
-    renderCatalog();
-  });
-  
-  // Add button
-  document.getElementById('addBtn').addEventListener('click', function() { openModal(); });
-  
-  // Map filters
-  document.getElementById('mapPillAll').addEventListener('click', function() { setMapFilter('all', null); });
-  document.getElementById('mapPillAvailable').addEventListener('click', function() { setMapFilter('status', 'available'); });
-  document.getElementById('mapPillOccupied').addEventListener('click', function() { setMapFilter('status', 'occupied'); });
-  document.getElementById('mapPillMaintenance').addEventListener('click', function() { setMapFilter('status', 'maintenance'); });
-  document.getElementById('mapPillCaracas').addEventListener('click', function() { setMapFilter('city', 'Caracas'); });
-  document.getElementById('mapPillValencia').addEventListener('click', function() { setMapFilter('city', 'Valencia'); });
-  document.getElementById('mapPillMaracaibo').addEventListener('click', function() { setMapFilter('city', 'Maracaibo'); });
-  document.getElementById('mapPillBarquisimeto').addEventListener('click', function() { setMapFilter('city', 'Barquisimeto'); });
-  
-  // Modal
-  document.getElementById('btnCloseModal').addEventListener('click', closeModal);
-  document.getElementById('btnCancel').addEventListener('click', closeModal);
-  document.getElementById('btnSave').addEventListener('click', saveBillboard);
-  document.getElementById('modalOverlay').addEventListener('click', function(e) {
-    if(e.target === this) closeModal();
-  });
-  
-  // Photo upload
-  var dropZone = document.getElementById('dropZone');
-  var fileInput = document.getElementById('mPhotoFile');
-  
-  dropZone.addEventListener('click', function() { fileInput.click(); });
-  
-  dropZone.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    this.classList.add('dragover');
-  });
-  
-  dropZone.addEventListener('dragleave', function() {
-    this.classList.remove('dragover');
-  });
-  
-  dropZone.addEventListener('drop', function(e) {
-    e.preventDefault();
-    this.classList.remove('dragover');
-    var files = e.dataTransfer.files;
-    if(files.length > 0) handlePhotoFile(files[0]);
-  });
-  
-  fileInput.addEventListener('change', function() {
-    if(this.files.length > 0) handlePhotoFile(this.files[0]);
-  });
-  
-  // About page editing
-  document.getElementById('btnEditAbout').addEventListener('click', enableAboutEditing);
-  document.getElementById('btnSaveAbout').addEventListener('click', saveAboutContent);
+// RULE 3 - LOCALSTORAGE PERSISTENCE
+function saveBillboards(){
+  localStorage.setItem('impr_billboards',JSON.stringify(BILLBOARDS));
 }
 
-// USER SESSION MANAGEMENT
-function loadUserSession() {
-  var saved = localStorage.getItem(LS_USER);
-  if(saved) {
-    try {
-      currentUser = JSON.parse(saved);
-      showApp();
-    } catch(e) {
-      localStorage.removeItem(LS_USER);
-    }
-  }
-}
-
-function saveUserSession() {
-  if(currentUser) {
-    localStorage.setItem(LS_USER, JSON.stringify(currentUser));
-  }
-}
-
-function doLogin() {
-  var user = document.getElementById('loginUser').value.trim();
-  var pass = document.getElementById('loginPass').value;
-  var found = USERS.find(function(u) { return u.username === user && u.password === pass; });
-  
-  if(found) {
-    currentUser = found;
-    saveUserSession();
-    document.getElementById('loginError').style.display = 'none';
-    showApp();
-  } else {
-    document.getElementById('loginError').style.display = 'block';
-  }
-}
-
-function doLogout() {
-  currentUser = null;
-  localStorage.removeItem(LS_USER);
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
-}
-
-function showApp() {
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('userName').textContent = currentUser.name;
-  document.getElementById('userRole').textContent = currentUser.role === 'admin' ? 'Administrador' : 'Visualizador';
-  document.getElementById('addBtn').style.display = currentUser.role === 'admin' ? 'block' : 'none';
-  document.getElementById('btnEditAbout').style.display = currentUser.role === 'admin' ? 'block' : 'none';
-  showPage('catalog');
-}
-
-// BILLBOARDS DATA MANAGEMENT
-function loadBillboards() {
-  var saved = localStorage.getItem(LS_BILLBOARDS);
-  if(saved) {
-    try {
-      BILLBOARDS = JSON.parse(saved);
-    } catch(e) {
-      BILLBOARDS = DEFAULT_BILLBOARDS.slice();
-      saveBillboards();
-    }
-  } else {
-    BILLBOARDS = DEFAULT_BILLBOARDS.slice();
+function loadBillboards(){
+  var saved = localStorage.getItem('impr_billboards');
+  if(saved){
+    BILLBOARDS = JSON.parse(saved);
+  }else{
+    BILLBOARDS = JSON.parse(JSON.stringify(DEFAULT_BILLBOARDS));
     saveBillboards();
   }
 }
 
-function saveBillboards() {
-  localStorage.setItem(LS_BILLBOARDS, JSON.stringify(BILLBOARDS));
-}
-
-// NAVIGATION
-function showPage(page) {
-  document.getElementById('catalogView').style.display = 'none';
-  document.getElementById('mapView').style.display = 'none';
-  document.getElementById('detailView').style.display = 'none';
-  document.getElementById('aboutView').style.display = 'none';
-  
-  document.getElementById('navCatalog').classList.remove('active');
-  document.getElementById('navMap').classList.remove('active');
-  document.getElementById('navAbout').classList.remove('active');
-  
-  if(page === 'catalog') {
-    document.getElementById('catalogView').style.display = 'block';
-    document.getElementById('navCatalog').classList.add('active');
-    renderCatalog();
-    updateStats();
-  } else if(page === 'map') {
-    document.getElementById('mapView').style.display = 'block';
-    document.getElementById('navMap').classList.add('active');
-    setTimeout(initMap, 50);
-  } else if(page === 'detail') {
-    document.getElementById('detailView').style.display = 'block';
-  } else if(page === 'about') {
-    document.getElementById('aboutView').style.display = 'block';
-    document.getElementById('navAbout').classList.add('active');
-  }
-  
-  if(window.innerWidth <= 768) {
-    document.getElementById('sidebar').classList.remove('open');
+function saveSession(){
+  if(currentUser){
+    localStorage.setItem('impr_session',JSON.stringify(currentUser));
   }
 }
 
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
+function loadSession(){
+  var saved = localStorage.getItem('impr_session');
+  if(saved){
+    currentUser = JSON.parse(saved);
+    return true;
+  }
+  return false;
 }
 
-// STATS
-function updateStats() {
-  var total = BILLBOARDS.length;
-  var avail = BILLBOARDS.filter(function(b) { return b.status === 'available'; }).length;
-  var occ = BILLBOARDS.filter(function(b) { return b.status === 'occupied'; }).length;
-  var cities = new Set(BILLBOARDS.map(function(b) { return b.city; })).size;
+function clearSession(){
+  localStorage.removeItem('impr_session');
+  currentUser = null;
+}
+
+// RULE 2 - LOGIN FUNCTION
+function doLogin(){
+  var user = document.getElementById('inputUser').value.trim();
+  var pass = document.getElementById('inputPass').value;
+  var found = null;
+  for(var i=0;i<USERS.length;i++){
+    if(USERS[i].username===user && USERS[i].password===pass){
+      found = USERS[i];
+      break;
+    }
+  }
+  if(found){
+    currentUser = found;
+    saveSession();
+    document.getElementById('loginError').style.display='none';
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('app').style.display='block';
+    initApp();
+  }else{
+    document.getElementById('loginError').style.display='block';
+  }
+}
+
+function doLogout(){
+  clearSession();
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('inputUser').value='';
+  document.getElementById('inputPass').value='';
+}
+
+// INITIALIZE APP
+function initApp(){
+  document.getElementById('userName').textContent = currentUser.name;
+  document.getElementById('userRole').textContent = currentUser.role==='admin'?'Administrador':'Visualizador';
+  document.getElementById('userAvatar').textContent = currentUser.name.charAt(0).toUpperCase();
   
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statAvailable').textContent = avail;
-  document.getElementById('statAvailablePct').textContent = total > 0 ? Math.round(avail/total*100) + '%' : '0%';
-  document.getElementById('statOccupied').textContent = occ;
-  document.getElementById('statOccupiedPct').textContent = total > 0 ? Math.round(occ/total*100) + '%' : '0%';
-  document.getElementById('statCities').textContent = cities;
-  document.getElementById('statVallas').textContent = total + '+';
-}
-
-// CATALOG FILTER
-function setCatalogFilter(filter) {
-  currentFilter = filter;
-  document.querySelectorAll('.pill').forEach(function(p) { p.classList.remove('active'); });
-  document.getElementById('pill' + (filter.charAt(0).toUpperCase() + filter.slice(1))).classList.add('active');
+  updateStats();
+  initMap();
   renderCatalog();
-}
-
-// CATALOG RENDERING
-function renderCatalog() {
-  var grid = document.getElementById('billGrid');
-  var filtered = BILLBOARDS.filter(function(b) {
-    var matchFilter = currentFilter === 'all' || b.status === currentFilter;
-    var matchSearch = !currentSearch || 
-      b.name.toLowerCase().indexOf(currentSearch) > -1 || 
-      b.city.toLowerCase().indexOf(currentSearch) > -1 ||
-      b.location_name.toLowerCase().indexOf(currentSearch) > -1;
-    return matchFilter && matchSearch;
-  });
   
-  var sl = {available:'Disponible', occupied:'Ocupada', maintenance:'Mantenimiento'};
+  // RULE 8 - ADMIN EDIT ABOUT
+  if(currentUser.role==='admin'){
+    setupEditableAbout();
+    loadAboutContent();
+  }
   
-  var html = filtered.map(function(b) {
-    var color = getMarkerColor(b.status);
-    var imgHtml = b.photo 
-      ? '<img src="' + b.photo + '" alt="foto">'
-      : '<div class="noPhoto"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><br>Sin foto</div>';
-    
-    var adminBtns = '';
-    if(currentUser && currentUser.role === 'admin') {
-      adminBtns = '<button class="btnSm btnEdit" data-action="edit" data-id="' + b.id + '">Editar</button>' +
-                  '<button class="btnSm btnDel" data-action="delete" data-id="' + b.id + '">Eliminar</button>';
-    }
-    
-    return '<div class="billCard">' +
-      '<div class="billCardImg">' + imgHtml +
-        '<span class="statusBadge ' + b.status + '">' + (sl[b.status] || b.status) + '</span>' +
-      '</div>' +
-      '<div class="billCardBody">' +
-        '<h3>' + b.name + '</h3>' +
-        '<div class="city">' + b.city + '</div>' +
-        '<div class="detail">&#x1F4CD; ' + b.location_name + '</div>' +
-        '<div class="detail">&#x1F4C0; ' + (b.dimensions || '-') + ' m &nbsp; &#x1F4A1; ' + (b.illuminated ? 'Iluminada' : 'Sin luz') + ' &nbsp; &#x1F532; ' + b.faces + ' cara' + (b.faces > 1 ? 's' : '') + '</div>' +
-        '<div class="actions">' +
-          '<button class="btnSm btnPrimary" style="background:' + color + ';color:#fff;margin-right:8px" data-action="view" data-id="' + b.id + '">Ver en el Mapa</button>' +
-          adminBtns +
-        '</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
-  
-  grid.innerHTML = html || '<p style="text-align:center;color:#94a3b8;padding:40px;">No se encontraron vallas</p>';
-  
-  // Add event listeners to buttons
-  grid.querySelectorAll('[data-action]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var action = this.getAttribute('data-action');
-      var id = this.getAttribute('data-id');
-      if(action === 'view') showBillboardOnMap(id);
-      else if(action === 'edit') openModal(id);
-      else if(action === 'delete') deleteBillboard(id);
-    });
-  });
-}
-
-function getMarkerColor(status) {
-  if(status === 'available') return '#22c55e';
-  if(status === 'occupied') return '#ef4444';
-  return '#f59e0b';
-}
-
-function showBillboardOnMap(id) {
-  var b = BILLBOARDS.find(function(x) { return x.id === id; });
-  if(!b) return;
-  showPage('map');
-  setTimeout(function() {
-    if(map) {
-      map.setView([b.lat, b.lng], 16);
-      // Find and open marker popup
-      markers.forEach(function(m) {
-        if(m.billboardId === id) {
-          m.openPopup();
-        }
-      });
-    }
-  }, 300);
+  // Show/hide new valla buttons based on role
+  var canEdit = currentUser.role==='admin';
+  document.getElementById('btnNewValla').style.display = canEdit?'flex':'none';
+  document.getElementById('btnNewValla2').style.display = canEdit?'flex':'none';
 }
 
 // MAP FUNCTIONS
-function setMapFilter(type, value) {
-  mapFilter = {type: type, value: value};
-  
-  // Update pill styles
-  document.querySelectorAll('.mapPill').forEach(function(p) {
-    p.classList.remove('active');
-  });
-  
-  var activeId;
-  if(type === 'all') {
-    activeId = 'mapPillAll';
-  } else if(type === 'status') {
-    activeId = 'mapPill' + (value === 'available' ? 'Available' : value === 'occupied' ? 'Occupied' : 'Maintenance');
-  } else if(type === 'city') {
-    activeId = 'mapPill' + value;
-  }
-  
-  if(activeId) {
-    var el = document.getElementById(activeId);
-    if(el) el.classList.add('active');
-  }
-  
-  updateMarkers();
-}
-
-function initMap() {
-  if(map) {
-    setTimeout(function() { map.invalidateSize(); }, 100);
-    updateMarkers();
-    return;
-  }
-  
-  map = L.map('map').setView([10.5, -66.9], 7);
-  
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap contributors'
+function initMap(){
+  if(map)return;
+  map = L.map('map').setView([10.5,-66.9],6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+    attribution:'&copy; OpenStreetMap contributors'
   }).addTo(map);
-  
-  updateMarkers();
+  renderMapMarkers();
 }
 
-function updateMarkers() {
-  if(!map) return;
-  
+function renderMapMarkers(){
   // Clear existing markers
-  markers.forEach(function(m) { map.removeLayer(m); });
-  markers = [];
+  for(var i=0;i<mapMarkers.length;i++){
+    map.removeLayer(mapMarkers[i]);
+  }
+  mapMarkers = [];
   
-  // Filter billboards
-  var filtered = BILLBOARDS.filter(function(b) {
-    if(mapFilter.type === 'all') return true;
-    if(mapFilter.type === 'status') return b.status === mapFilter.value;
-    if(mapFilter.type === 'city') return b.city === mapFilter.value;
-    return true;
-  });
-  
-  // Add markers
-  var sl = {available:'Disponible', occupied:'Ocupada', maintenance:'Mantenimiento'};
-  
-  filtered.forEach(function(b) {
-    var color = getMarkerColor(b.status);
-    var iconHtml = '<div style="background:' + color + ';width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>';
-    
-    var icon = L.divIcon({
-      html: iconHtml,
-      className: 'custom-marker',
-      iconSize: [22, 22],
-      iconAnchor: [11, 11]
-    });
-    
-    var popupHtml = '<div style="min-width:200px;">' +
-      '<h4 style="margin:0 0 8px;font-size:1rem;color:#1e293b;">' + b.name + '</h4>' +
-      '<p style="margin:0 0 8px;font-size:.85rem;color:#64748b;">&#x1F4CD; ' + b.location_name + '</p>' +
-      '<p style="margin:0 0 8px;font-size:.8rem;"><span style="display:inline-block;padding:2px 8px;border-radius:12px;background:' + 
-      (b.status === 'available' ? '#dcfce7;color:#166534' : b.status === 'occupied' ? '#fee2e2;color:#dc2626' : '#fef3c7;color:#92400e') + 
-      ';">' + (sl[b.status] || b.status) + '</span></p>' +
-      '<button onclick="window.showDetailFromMap('' + b.id + '')" style="padding:6px 12px;background:#6366F1;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:.8rem;">Ver detalle</button>' +
-      '</div>';
-    
-    var marker = L.marker([b.lat, b.lng], {icon: icon}).addTo(map);
-    marker.bindPopup(popupHtml);
-    marker.billboardId = b.id;
-    markers.push(marker);
-  });
-  
-  // Fit bounds if we have markers
-  if(markers.length > 0) {
-    var group = new L.featureGroup(markers);
-    map.fitBounds(group.getBounds().pad(0.1));
+  for(var j=0;j<BILLBOARDS.length;j++){
+    addSingleMarker(BILLBOARDS[j]);
   }
 }
 
-// Global function for popup button
-window.showDetailFromMap = function(id) {
-  showDetail(id);
-};
-
-function showDetail(id) {
-  var b = BILLBOARDS.find(function(x) { return x.id === id; });
-  if(!b) return;
-  
-  var sl = {available:'Disponible', occupied:'Ocupada', maintenance:'Mantenimiento'};
-  var imgHtml = b.photo 
-    ? '<img src="' + b.photo + '" alt="foto">'
-    : '<div style="text-align:center;color:#94a3b8;"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" style="margin-bottom:12px"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg><br>Sin foto disponible</div>';
-  
-  var html = '<div class="detailHeader">' +
-    '<h2>' + b.name + '</h2>' +
-    '<span style="padding:4px 12px;border-radius:20px;font-size:.8rem;font-weight:600;background:' + 
-    (b.status === 'available' ? '#dcfce7;color:#166534' : b.status === 'occupied' ? '#fee2e2;color:#dc2626' : '#fef3c7;color:#92400e') + 
-    ';">' + (sl[b.status] || b.status) + '</span>' +
-    '</div>' +
-    '<div class="detailPhoto">' + imgHtml + '</div>' +
-    '<div class="detailGrid">' +
-    '<div class="detailItem"><div class="label">C&#xF3;digo</div><div class="value">' + b.id + '</div></div>' +
-    '<div class="detailItem"><div class="label">Ciudad</div><div class="value">' + b.city + '</div></div>' +
-    '<div class="detailItem"><div class="label">Ubicaci&#xF3;n</div><div class="value">' + b.location_name + '</div></div>' +
-    '<div class="detailItem"><div class="label">Dimensiones</div><div class="value">' + (b.dimensions || '-') + ' m</div></div>' +
-    '<div class="detailItem"><div class="label">Caras</div><div class="value">' + b.faces + '</div></div>' +
-    '<div class="detailItem"><div class="label">Iluminaci&#xF3;n</div><div class="value">' + (b.illuminated ? 'S&#xED;' : 'No') + '</div></div>' +
-    '</div>' +
-    '<div style="text-align:center;margin-top:20px">' +
-    '<button class="btnPrimary" id="btnViewOnMap">Ver en mapa</button>' +
-    '</div>';
-  
-  document.getElementById('detailPanel').innerHTML = html;
-  document.getElementById('btnViewOnMap').addEventListener('click', function() {
-    showPage('map');
-    setTimeout(function() {
-      if(map) map.setView([b.lat, b.lng], 16);
-    }, 300);
+// RULE 5 - ADD SINGLE MARKER
+function addSingleMarker(b){
+  var color = b.status==='available'?'#22c55e':b.status==='occupied'?'#ef4444':'#f59e0b';
+  var icon = L.divIcon({
+    className:'custom-marker',
+    html:'<div style="width:24px;height:24px;background:'+color+';border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.3);"></div>',
+    iconSize:[24,24],
+    iconAnchor:[12,12]
   });
   
-  showPage('detail');
+  // RULE 6 - POPUP BUTTONS with data attributes
+  var popupContent = document.createElement('div');
+  popupContent.innerHTML = '<h4 style="margin:0 0 8px;font-size:1rem;">'+b.name+'</h4>'+
+    '<p style="margin:0 0 8px;font-size:.85rem;color:#64748b;">'+b.location_name+'</p>'+
+    '<p style="margin:0 0 12px;font-size:.8rem;"><span style="padding:2px 8px;border-radius:12px;background:'+(b.status==='available'?'#dcfce7;color:#166534':b.status==='occupied'?'#fee2e2;color:#dc2626':'#fef3c7;color:#92400e')+';">'+STATUS_LABELS[b.status]+'</span></p>';
+  
+  var btn = document.createElement('button');
+  btn.textContent = 'Ver detalle';
+  btn.className = 'popup-detail-btn';
+  btn.setAttribute('data-id',b.id);
+  popupContent.appendChild(btn);
+  
+  var marker = L.marker([b.lat,b.lng],{icon:icon}).addTo(map);
+  marker.bindPopup(popupContent);
+  marker.billboardId = b.id;
+  marker.billboardStatus = b.status;
+  marker.billboardCity = b.city;
+  mapMarkers.push(marker);
+}
+
+// RULE 4 - MAP FILTERS
+function filterMarkers(type){
+  for(var i=0;i<mapMarkers.length;i++){
+    var m = mapMarkers[i];
+    var visible = false;
+    if(type==='all'){
+      visible = true;
+    }else if(type==='available' || type==='occupied' || type==='maintenance'){
+      visible = m.billboardStatus===type;
+    }else{
+      visible = m.billboardCity===type;
+    }
+    if(visible){
+      m.setOpacity(1);
+      m.setZIndexOffset(0);
+    }else{
+      m.setOpacity(0);
+      m.setZIndexOffset(-9999);
+    }
+  }
+}
+
+// STATS
+function updateStats(){
+  var total = BILLBOARDS.length;
+  var avail = 0, occ = 0, maint = 0;
+  for(var i=0;i<BILLBOARDS.length;i++){
+    if(BILLBOARDS[i].status==='available')avail++;
+    else if(BILLBOARDS[i].status==='occupied')occ++;
+    else if(BILLBOARDS[i].status==='maintenance')maint++;
+  }
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statAvailable').textContent = avail;
+  document.getElementById('statOccupied').textContent = occ;
+  document.getElementById('statMaintenance').textContent = maint;
+}
+
+// CATALOG
+function renderCatalog(){
+  var grid = document.getElementById('catalogGrid');
+  grid.innerHTML = '';
+  
+  var filtered = [];
+  for(var i=0;i<BILLBOARDS.length;i++){
+    var b = BILLBOARDS[i];
+    var matchFilter = currentFilter==='all' || b.status===currentFilter || b.city===currentFilter;
+    var matchSearch = !currentSearch || b.name.toLowerCase().indexOf(currentSearch)>-1 || b.location_name.toLowerCase().indexOf(currentSearch)>-1;
+    if(matchFilter && matchSearch){
+      filtered.push(b);
+    }
+  }
+  
+  for(var j=0;j<filtered.length;j++){
+    var bb = filtered[j];
+    var card = document.createElement('div');
+    card.className = 'catalogCard';
+    
+    var imgDiv = document.createElement('div');
+    imgDiv.className = 'cardImage';
+    if(bb.photo){
+      imgDiv.innerHTML = '<img src="'+bb.photo+'" alt="">';
+    }else{
+      imgDiv.textContent = 'Sin foto';
+    }
+    card.appendChild(imgDiv);
+    
+    var title = document.createElement('div');
+    title.className = 'cardTitle';
+    title.textContent = bb.name;
+    card.appendChild(title);
+    
+    var loc = document.createElement('div');
+    loc.className = 'cardLocation';
+    loc.textContent = bb.location_name;
+    card.appendChild(loc);
+    
+    var meta = document.createElement('div');
+    meta.className = 'cardMeta';
+    meta.innerHTML = '<span>'+bb.dimensions+'</span><span>'+bb.faces+' cara'+(bb.faces>1?'s':'')+'</span><span>'+(bb.illuminated?'Iluminada':'No iluminada')+'</span>';
+    card.appendChild(meta);
+    
+    var status = document.createElement('span');
+    status.className = 'cardStatus status-'+bb.status;
+    status.textContent = STATUS_LABELS[bb.status];
+    card.appendChild(status);
+    
+    // RULE 9 - CATALOG CARDS with data attributes
+    var actions = document.createElement('div');
+    actions.className = 'cardActions';
+    
+    var btnDetail = document.createElement('button');
+    btnDetail.className = 'cardBtn cardBtn-primary';
+    btnDetail.textContent = 'Ver detalle';
+    btnDetail.setAttribute('data-action','detail');
+    btnDetail.setAttribute('data-id',bb.id);
+    actions.appendChild(btnDetail);
+    
+    if(currentUser && currentUser.role==='admin'){
+      var btnEdit = document.createElement('button');
+      btnEdit.className = 'cardBtn cardBtn-secondary';
+      btnEdit.textContent = 'Editar';
+      btnEdit.setAttribute('data-action','edit');
+      btnEdit.setAttribute('data-id',bb.id);
+      actions.appendChild(btnEdit);
+      
+      var btnDelete = document.createElement('button');
+      btnDelete.className = 'cardBtn cardBtn-danger';
+      btnDelete.textContent = 'Eliminar';
+      btnDelete.setAttribute('data-action','delete');
+      btnDelete.setAttribute('data-id',bb.id);
+      actions.appendChild(btnDelete);
+    }
+    
+    card.appendChild(actions);
+    grid.appendChild(card);
+  }
 }
 
 // MODAL FUNCTIONS
-function openModal(id) {
-  if(currentUser && currentUser.role !== 'admin') {
-    showToast('Solo administradores pueden editar', 'error');
-    return;
-  }
+function openModal(isEdit,id){
+  editingId = isEdit?id:null;
+  document.getElementById('modalTitle').textContent = isEdit?'Editar Valla':'Nueva Valla';
+  document.getElementById('btnDelete').style.display = isEdit?'block':'none';
   
-  document.getElementById('modalOverlay').classList.add('active');
-  
-  if(id) {
-    var b = BILLBOARDS.find(function(x) { return x.id === id; });
-    if(b) {
-      document.getElementById('modalTitle').textContent = 'Editar Valla';
-      document.getElementById('mId').value = b.id;
-      document.getElementById('mCode').value = b.id;
-      document.getElementById('mName').value = b.name;
-      document.getElementById('mCity').value = b.city;
-      document.getElementById('mLocation').value = b.location_name;
-      document.getElementById('mLat').value = b.lat;
-      document.getElementById('mLng').value = b.lng;
-      document.getElementById('mDims').value = b.dimensions;
-      document.getElementById('mFaces').value = b.faces;
-      document.getElementById('mStatus').value = b.status;
-      document.getElementById('mIlluminated').value = b.illuminated ? '1' : '0';
-      document.getElementById('mPhoto').value = b.photo;
+  if(isEdit && id){
+    var b = findBillboard(id);
+    if(b){
+      document.getElementById('vallaId').value = b.id;
+      document.getElementById('vallaName').value = b.name;
+      document.getElementById('vallaCity').value = b.city;
+      document.getElementById('vallaLocation').value = b.location_name;
+      document.getElementById('vallaDescription').value = b.description||'';
+      document.getElementById('vallaDimensions').value = b.dimensions;
+      document.getElementById('vallaFaces').value = b.faces;
+      document.getElementById('vallaStatus').value = b.status;
+      document.getElementById('vallaIlluminated').checked = b.illuminated;
+      document.getElementById('vallaCoords').value = b.lat+','+b.lng;
+      currentPhoto = b.photo||'';
+      updatePhotoPreview();
     }
-  } else {
-    document.getElementById('modalTitle').textContent = 'Nueva Valla';
-    document.getElementById('mId').value = '';
-    document.getElementById('mCode').value = '';
-    document.getElementById('mName').value = '';
-    document.getElementById('mCity').value = '';
-    document.getElementById('mLocation').value = '';
-    document.getElementById('mLat').value = '';
-    document.getElementById('mLng').value = '';
-    document.getElementById('mDims').value = '';
-    document.getElementById('mFaces').value = '1';
-    document.getElementById('mStatus').value = 'available';
-    document.getElementById('mIlluminated').value = '1';
-    document.getElementById('mPhoto').value = '';
-    document.getElementById('mPhotoFile').value = '';
+  }else{
+    document.getElementById('vallaId').value = '';
+    document.getElementById('vallaName').value = '';
+    document.getElementById('vallaCity').value = 'Caracas';
+    document.getElementById('vallaLocation').value = '';
+    document.getElementById('vallaDescription').value = '';
+    document.getElementById('vallaDimensions').value = '6x4';
+    document.getElementById('vallaFaces').value = '1';
+    document.getElementById('vallaStatus').value = 'available';
+    document.getElementById('vallaIlluminated').checked = false;
+    document.getElementById('vallaCoords').value = '';
+    currentPhoto = '';
+    updatePhotoPreview();
   }
+  
+  document.getElementById('vallaModal').classList.add('active');
 }
 
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('active');
+function closeModal(){
+  document.getElementById('vallaModal').classList.remove('active');
+  editingId = null;
 }
 
-function handlePhotoFile(file) {
-  if(!file || !file.type.startsWith('image/')) {
-    showToast('Por favor selecciona una imagen v&#xE1;lida', 'error');
+function saveModal(){
+  var name = document.getElementById('vallaName').value.trim();
+  var city = document.getElementById('vallaCity').value;
+  var location = document.getElementById('vallaLocation').value.trim();
+  var description = document.getElementById('vallaDescription').value.trim();
+  var dimensions = document.getElementById('vallaDimensions').value.trim();
+  var faces = parseInt(document.getElementById('vallaFaces').value);
+  var status = document.getElementById('vallaStatus').value;
+  var illuminated = document.getElementById('vallaIlluminated').checked;
+  var coords = document.getElementById('vallaCoords').value.trim();
+  
+  if(!name || !location){
+    showToast('Nombre y ubicacion son requeridos','error');
     return;
   }
   
+  var latlng = coords?coords.split(','):CITY_COORDS[city];
+  var lat = parseFloat(latlng[0])||CITY_COORDS[city][0];
+  var lng = parseFloat(latlng[1])||CITY_COORDS[city][1];
+  
+  if(editingId){
+    var b = findBillboard(editingId);
+    if(b){
+      b.name = name;
+      b.city = city;
+      b.location_name = location;
+      b.description = description;
+      b.dimensions = dimensions;
+      b.faces = faces;
+      b.status = status;
+      b.illuminated = illuminated;
+      b.lat = lat;
+      b.lng = lng;
+      b.photo = currentPhoto;
+    }
+    showToast('Valla actualizada','success');
+  }else{
+    var newId = 'VL-'+(BILLBOARDS.length+1).toString().padStart(3,'0');
+    var newB = {
+      id:newId,name:name,city:city,location_name:location,description:description,
+      lat:lat,lng:lng,dimensions:dimensions,faces:faces,illuminated:illuminated,
+      status:status,photo:currentPhoto
+    };
+    BILLBOARDS.push(newB);
+    // RULE 5 - Add single marker instead of re-rendering all
+    addSingleMarker(newB);
+    showToast('Valla creada','success');
+  }
+  
+  saveBillboards();
+  updateStats();
+  renderCatalog();
+  closeModal();
+}
+
+function deleteValla(){
+  if(!editingId)return;
+  if(!confirm('Esta seguro de eliminar esta valla?'))return;
+  
+  for(var i=0;i<BILLBOARDS.length;i++){
+    if(BILLBOARDS[i].id===editingId){
+      BILLBOARDS.splice(i,1);
+      break;
+    }
+  }
+  
+  // Remove marker
+  for(var j=0;j<mapMarkers.length;j++){
+    if(mapMarkers[j].billboardId===editingId){
+      map.removeLayer(mapMarkers[j]);
+      mapMarkers.splice(j,1);
+      break;
+    }
+  }
+  
+  saveBillboards();
+  updateStats();
+  renderCatalog();
+  closeModal();
+  showToast('Valla eliminada','success');
+}
+
+function findBillboard(id){
+  for(var i=0;i<BILLBOARDS.length;i++){
+    if(BILLBOARDS[i].id===id)return BILLBOARDS[i];
+  }
+  return null;
+}
+
+// DETAIL PANEL
+function showDetail(id){
+  var b = findBillboard(id);
+  if(!b)return;
+  
+  var body = document.getElementById('detailBody');
+  body.innerHTML = '';
+  
+  var photoDiv = document.createElement('div');
+  photoDiv.className = 'detailPhoto';
+  if(b.photo){
+    photoDiv.innerHTML = '<img src="'+b.photo+'" alt="">';
+  }else{
+    photoDiv.textContent = 'Sin foto disponible';
+  }
+  body.appendChild(photoDiv);
+  
+  var rows = [
+    {label:'ID',value:b.id},
+    {label:'Nombre',value:b.name},
+    {label:'Ciudad',value:b.city},
+    {label:'Ubicacion',value:b.location_name},
+    {label:'Descripcion',value:b.description||'Sin descripcion',isDesc:true},
+    {label:'Dimensiones',value:b.dimensions},
+    {label:'Caras',value:b.faces},
+    {label:'Iluminacion',value:b.illuminated?'Si':'No'},
+    {label:'Estado',value:STATUS_LABELS[b.status]}
+  ];
+  
+  for(var i=0;i<rows.length;i++){
+    var row = document.createElement('div');
+    row.className = 'detailRow';
+    var label = document.createElement('label');
+    label.textContent = rows[i].label;
+    row.appendChild(label);
+    var p = document.createElement('p');
+    p.textContent = rows[i].value;
+    if(rows[i].isDesc)p.className = 'description';
+    row.appendChild(p);
+    body.appendChild(row);
+  }
+  
+  document.getElementById('detailPanel').classList.add('active');
+}
+
+function closeDetail(){
+  document.getElementById('detailPanel').classList.remove('active');
+}
+
+// PHOTO UPLOAD
+function updatePhotoPreview(){
+  var preview = document.getElementById('photoPreview');
+  if(currentPhoto){
+    preview.src = currentPhoto;
+    preview.style.display = 'block';
+  }else{
+    preview.style.display = 'none';
+  }
+}
+
+function handlePhotoSelect(e){
+  var file = e.target.files[0];
+  if(!file)return;
   var reader = new FileReader();
-  reader.onload = function(e) {
-    document.getElementById('mPhoto').value = e.target.result;
-    showToast('Imagen cargada correctamente', 'success');
+  reader.onload = function(evt){
+    currentPhoto = evt.target.result;
+    updatePhotoPreview();
   };
   reader.readAsDataURL(file);
 }
 
-function saveBillboard() {
-  var id = document.getElementById('mId').value;
-  var code = document.getElementById('mCode').value.trim();
-  var name = document.getElementById('mName').value.trim();
-  var city = document.getElementById('mCity').value;
-  var location = document.getElementById('mLocation').value.trim();
-  var lat = parseFloat(document.getElementById('mLat').value);
-  var lng = parseFloat(document.getElementById('mLng').value);
-  var dims = document.getElementById('mDims').value.trim();
-  var faces = parseInt(document.getElementById('mFaces').value) || 1;
-  var status = document.getElementById('mStatus').value;
-  var illuminated = document.getElementById('mIlluminated').value === '1';
-  var photo = document.getElementById('mPhoto').value.trim();
-  
-  if(!code || !name || !city || !location) {
-    showToast('Completa todos los campos obligatorios', 'error');
-    return;
-  }
-  
-  var data = {
-    id: id || code,
-    name: name,
-    city: city,
-    location_name: location,
-    lat: isNaN(lat) ? 0 : lat,
-    lng: isNaN(lng) ? 0 : lng,
-    dimensions: dims,
-    faces: faces,
-    illuminated: illuminated,
-    status: status,
-    photo: photo
-  };
-  
-  if(id) {
-    var idx = BILLBOARDS.findIndex(function(x) { return x.id === id; });
-    if(idx > -1) {
-      BILLBOARDS[idx] = data;
-      showToast('Valla actualizada', 'success');
+function handlePhotoDrop(e){
+  e.preventDefault();
+  e.stopPropagation();
+  document.getElementById('photoUpload').classList.remove('dragover');
+  var files = e.dataTransfer.files;
+  if(files.length>0){
+    var file = files[0];
+    if(file.type.indexOf('image/')===0){
+      var reader = new FileReader();
+      reader.onload = function(evt){
+        currentPhoto = evt.target.result;
+        updatePhotoPreview();
+      };
+      reader.readAsDataURL(file);
     }
-  } else {
-    if(BILLBOARDS.find(function(x) { return x.id === code; })) {
-      showToast('Ya existe una valla con ese c&#xF3;digo', 'error');
-      return;
-    }
-    BILLBOARDS.push(data);
-    showToast('Valla creada', 'success');
   }
-  
-  saveBillboards();
-  closeModal();
-  renderCatalog();
-  updateStats();
-  updateMarkers();
-}
-
-function deleteBillboard(id) {
-  if(currentUser && currentUser.role !== 'admin') {
-    showToast('Solo administradores pueden eliminar', 'error');
-    return;
-  }
-  if(!confirm('&#xBFE;Eliminar valla ' + id + '?')) return;
-  
-  var idx = BILLBOARDS.findIndex(function(x) { return x.id === id; });
-  if(idx > -1) {
-    BILLBOARDS.splice(idx, 1);
-    saveBillboards();
-    renderCatalog();
-    updateStats();
-    updateMarkers();
-    showToast('Valla eliminada', 'success');
-  }
-}
-
-// ABOUT PAGE EDITING
-function loadAboutContent() {
-  var saved = localStorage.getItem(LS_ABOUT);
-  if(saved) {
-    try {
-      var content = JSON.parse(saved);
-      if(content.title) document.getElementById('aboutTitle').textContent = content.title;
-      if(content.subtitle) document.getElementById('aboutSubtitle').textContent = content.subtitle;
-      if(content.desc1) document.getElementById('aboutDesc1').textContent = content.desc1;
-      if(content.desc2) document.getElementById('aboutDesc2').textContent = content.desc2;
-      if(content.services) document.getElementById('aboutServices').textContent = content.services;
-      if(content.contact) document.getElementById('aboutContact').innerHTML = content.contact;
-    } catch(e) {}
-  }
-}
-
-function saveAboutContent() {
-  var content = {
-    title: document.getElementById('aboutTitle').textContent,
-    subtitle: document.getElementById('aboutSubtitle').textContent,
-    desc1: document.getElementById('aboutDesc1').textContent,
-    desc2: document.getElementById('aboutDesc2').textContent,
-    services: document.getElementById('aboutServices').textContent,
-    contact: document.getElementById('aboutContact').innerHTML
-  };
-  localStorage.setItem(LS_ABOUT, JSON.stringify(content));
-  
-  // Disable editing
-  isEditingAbout = false;
-  document.querySelectorAll('.aboutEditable').forEach(function(el) {
-    el.contentEditable = 'false';
-    el.classList.remove('editing');
-  });
-  document.getElementById('btnEditAbout').style.display = 'block';
-  document.getElementById('btnSaveAbout').style.display = 'none';
-  
-  showToast('Cambios guardados', 'success');
-}
-
-function enableAboutEditing() {
-  if(!currentUser || currentUser.role !== 'admin') return;
-  
-  isEditingAbout = true;
-  document.querySelectorAll('.aboutEditable').forEach(function(el) {
-    el.contentEditable = 'true';
-    el.classList.add('editing');
-  });
-  document.getElementById('btnEditAbout').style.display = 'none';
-  document.getElementById('btnSaveAbout').style.display = 'block';
-  
-  showToast('Modo edici&#xF3;n activado. Haz clic en el texto para editar.', 'info');
 }
 
 // TOAST
-function showToast(msg, type) {
+function showToast(msg,type){
   var t = document.getElementById('toast');
   t.textContent = msg;
-  t.className = 'toast ' + (type || 'info');
-  setTimeout(function() { t.classList.add('show'); }, 10);
-  setTimeout(function() { t.classList.remove('show'); }, 3000);
+  t.className = 'toast '+(type||'');
+  setTimeout(function(){t.classList.add('show');},10);
+  setTimeout(function(){t.classList.remove('show');},3000);
 }
+
+// NAVIGATION
+function showView(viewName){
+  document.getElementById('viewDashboard').style.display = viewName==='dashboard'?'block':'none';
+  document.getElementById('viewCatalog').style.display = viewName==='catalog'?'block':'none';
+  document.getElementById('viewAbout').style.display = viewName==='about'?'block':'none';
+  
+  var items = document.querySelectorAll('.navItem');
+  for(var i=0;i<items.length;i++){
+    items[i].classList.remove('active');
+    if(items[i].getAttribute('data-view')===viewName){
+      items[i].classList.add('active');
+    }
+  }
+  
+  if(viewName==='dashboard' && map){
+    setTimeout(function(){map.invalidateSize();},100);
+  }
+}
+
+// RULE 7 - ADMIN EDIT ABOUT
+function setupEditableAbout(){
+  var elements = document.querySelectorAll('#aboutContent h2, #aboutContent h3, #aboutContent p');
+  for(var i=0;i<elements.length;i++){
+    elements[i].contentEditable = true;
+    elements[i].classList.add('contenteditable-hover');
+    elements[i].addEventListener('blur',saveAboutContent);
+  }
+}
+
+function saveAboutContent(){
+  var content = {};
+  content.title = document.getElementById('aboutTitle').innerHTML;
+  content.p1 = document.getElementById('aboutP1').innerHTML;
+  content.p2 = document.getElementById('aboutP2').innerHTML;
+  content.p3 = document.getElementById('aboutP3').innerHTML;
+  content.misionTitle = document.getElementById('aboutMisionTitle').innerHTML;
+  content.visionTitle = document.getElementById('aboutVisionTitle').innerHTML;
+  localStorage.setItem('impr_about',JSON.stringify(content));
+  showToast('Contenido guardado','success');
+}
+
+function loadAboutContent(){
+  var saved = localStorage.getItem('impr_about');
+  if(saved){
+    var content = JSON.parse(saved);
+    if(content.title)document.getElementById('aboutTitle').innerHTML = content.title;
+    if(content.p1)document.getElementById('aboutP1').innerHTML = content.p1;
+    if(content.p2)document.getElementById('aboutP2').innerHTML = content.p2;
+    if(content.p3)document.getElementById('aboutP3').innerHTML = content.p3;
+    if(content.misionTitle)document.getElementById('aboutMisionTitle').innerHTML = content.misionTitle;
+    if(content.visionTitle)document.getElementById('aboutVisionTitle').innerHTML = content.visionTitle;
+  }
+}
+
+// EVENT LISTENERS - RULE 1: No inline onclick, use addEventListener
+// RULE 6: Single delegated listener for popup buttons
+// RULE 9: Single delegated listener for catalog cards
+
+document.addEventListener('DOMContentLoaded',function(){
+  // Load data
+  loadBillboards();
+  
+  // Check for existing session
+  if(loadSession()){
+    document.getElementById('loginScreen').style.display='none';
+    document.getElementById('app').style.display='block';
+    initApp();
+  }
+  
+  // Login
+  document.getElementById('loginBtn').addEventListener('click',doLogin);
+  document.getElementById('inputPass').addEventListener('keypress',function(e){
+    if(e.key==='Enter')doLogin();
+  });
+  
+  // Logout
+  document.getElementById('btnLogout').addEventListener('click',doLogout);
+  
+  // Navigation
+  var navItems = document.querySelectorAll('.navItem');
+  for(var i=0;i<navItems.length;i++){
+    navItems[i].addEventListener('click',function(){
+      showView(this.getAttribute('data-view'));
+    });
+  }
+  
+  // Mobile menu
+  document.getElementById('mobileMenuBtn').addEventListener('click',function(){
+    document.getElementById('sidebar').classList.toggle('open');
+  });
+  
+  // New valla buttons
+  document.getElementById('btnNewValla').addEventListener('click',function(){
+    openModal(false);
+  });
+  document.getElementById('btnNewValla2').addEventListener('click',function(){
+    openModal(false);
+  });
+  
+  // Modal
+  document.getElementById('modalClose').addEventListener('click',closeModal);
+  document.getElementById('btnCancel').addEventListener('click',closeModal);
+  document.getElementById('btnSave').addEventListener('click',saveModal);
+  document.getElementById('btnDelete').addEventListener('click',deleteValla);
+  
+  // Photo upload
+  document.getElementById('photoUpload').addEventListener('click',function(){
+    document.getElementById('photoInput').click();
+  });
+  document.getElementById('photoInput').addEventListener('change',handlePhotoSelect);
+  document.getElementById('photoUpload').addEventListener('dragover',function(e){
+    e.preventDefault();
+    this.classList.add('dragover');
+  });
+  document.getElementById('photoUpload').addEventListener('dragleave',function(){
+    this.classList.remove('dragover');
+  });
+  document.getElementById('photoUpload').addEventListener('drop',handlePhotoDrop);
+  
+  // Detail panel
+  document.getElementById('detailClose').addEventListener('click',closeDetail);
+  
+  // RULE 4 - Map filter pills
+  var mapFilterBtns = document.querySelectorAll('#mapFilters .filterPill');
+  for(var mf=0;mf<mapFilterBtns.length;mf++){
+    mapFilterBtns[mf].addEventListener('click',function(){
+      for(var j=0;j<mapFilterBtns.length;j++){
+        mapFilterBtns[j].classList.remove('active');
+      }
+      this.classList.add('active');
+      filterMarkers(this.getAttribute('data-filter'));
+    });
+  }
+  
+  // Catalog filters
+  var catFilterBtns = document.querySelectorAll('#catalogFilters .filterPill');
+  for(var cf=0;cf<catFilterBtns.length;cf++){
+    catFilterBtns[cf].addEventListener('click',function(){
+      for(var k=0;k<catFilterBtns.length;k++){
+        catFilterBtns[k].classList.remove('active');
+      }
+      this.classList.add('active');
+      currentFilter = this.getAttribute('data-filter');
+      renderCatalog();
+    });
+  }
+  
+  // Search
+  document.getElementById('searchBox').addEventListener('input',function(){
+    currentSearch = this.value.toLowerCase();
+    renderCatalog();
+  });
+  
+  // RULE 6 - Single delegated listener for popup detail buttons
+  document.addEventListener('click',function(e){
+    if(e.target.classList.contains('popup-detail-btn')){
+      var id = e.target.getAttribute('data-id');
+      if(id)showDetail(id);
+    }
+  });
+  
+  // RULE 9 - Single delegated listener for catalog card actions
+  document.addEventListener('click',function(e){
+    var btn = e.target.closest('[data-action]');
+    if(!btn)return;
+    var action = btn.getAttribute('data-action');
+    var id = btn.getAttribute('data-id');
+    if(!id)return;
+    
+    if(action==='detail'){
+      showDetail(id);
+    }else if(action==='edit'){
+      openModal(true,id);
+    }else if(action==='delete'){
+      if(confirm('Esta seguro de eliminar esta valla?')){
+        for(var d=0;d<BILLBOARDS.length;d++){
+          if(BILLBOARDS[d].id===id){
+            BILLBOARDS.splice(d,1);
+            break;
+          }
+        }
+        // Remove marker
+        for(var m=0;m<mapMarkers.length;m++){
+          if(mapMarkers[m].billboardId===id){
+            map.removeLayer(mapMarkers[m]);
+            mapMarkers.splice(m,1);
+            break;
+          }
+        }
+        saveBillboards();
+        updateStats();
+        renderCatalog();
+        showToast('Valla eliminada','success');
+      }
+    }
+  });
+});
 </script>
 </body>
 </html>
