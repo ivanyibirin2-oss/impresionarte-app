@@ -2,15 +2,17 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impresionarte_ve â GestiÃ³n de Vallas</title>
+<title>Impresionarte_ve âÂÂ GestiÃ³n de Vallas</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293B;height:100vh;overflow:hidden}
 
-/* âââ LOGIN âââ */
+/* âÂÂâÂÂâÂÂ LOGIN âÂÂâÂÂâÂÂ */
 #loginOverlay{position:fixed;inset:0;background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.4s ease}
 #loginOverlay.hidden{opacity:0;pointer-events:none}
 .loginCard{background:#fff;border-radius:24px;padding:48px 40px;width:100%;max-width:420px;box-shadow:0 24px 80px rgba(99,102,241,0.3)}
@@ -28,11 +30,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .loginError{color:#9F1239;font-size:13px;text-align:center;margin-top:12px;display:none;background:#FFE4E6;padding:8px 12px;border-radius:8px}
 .loginHint{font-size:12px;color:#94A3B8;text-align:center;margin-top:16px}
 
-/* âââ APP SHELL âââ */
+/* âÂÂâÂÂâÂÂ APP SHELL âÂÂâÂÂâÂÂ */
 #app{display:flex;height:100vh;opacity:0;transition:opacity 0.4s ease}
 #app.visible{opacity:1}
 
-/* âââ SIDEBAR âââ */
+/* âÂÂâÂÂâÂÂ SIDEBAR âÂÂâÂÂâÂÂ */
 #sidebar{width:280px;min-width:280px;background:linear-gradient(180deg,#6366F1 0%,#7C3AED 100%);color:#fff;display:flex;flex-direction:column;overflow:hidden;transition:width 0.25s ease,min-width 0.25s ease;position:relative;z-index:100}
 #sidebar.collapsed{width:0;min-width:0}
 .sidebarHeader{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,0.15)}
@@ -71,18 +73,18 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .logoutBtn{width:100%;padding:10px;background:rgba(255,255,255,0.15);color:#fff;border:1.5px solid rgba(255,255,255,0.3);border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s}
 .logoutBtn:hover{background:rgba(255,255,255,0.25)}
 
-/* âââ HAMBURGER âââ */
+/* âÂÂâÂÂâÂÂ HAMBURGER âÂÂâÂÂâÂÂ */
 #hamburger{display:none;position:fixed;top:12px;left:12px;z-index:200;background:#6366F1;color:#fff;border:none;border-radius:10px;width:42px;height:42px;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(99,102,241,0.4)}
 
-/* âââ MAIN CONTENT âââ */
+/* âÂÂâÂÂâÂÂ MAIN CONTENT âÂÂâÂÂâÂÂ */
 #main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative}
 
-/* âââ MAP VIEW âââ */
+/* âÂÂâÂÂâÂÂ MAP VIEW âÂÂâÂÂâÂÂ */
 #mapView{flex:1;display:flex;position:relative;overflow:hidden}
 #map{flex:1;z-index:1}
 #map.hidden{display:none}
 
-/* âââ ABOUT VIEW âââ */
+/* âÂÂâÂÂâÂÂ ABOUT VIEW âÂÂâÂÂâÂÂ */
 #aboutView{flex:1;overflow-y:auto;padding:32px;display:none}
 #aboutView.visible{display:block}
 .aboutHero{background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);border-radius:20px;padding:60px 40px;text-align:center;color:#fff;margin-bottom:32px}
@@ -112,7 +114,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .contactItems{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
 .contactItem{background:rgba(255,255,255,0.15);padding:10px 20px;border-radius:10px;font-size:14px}
 
-/* âââ DETAIL PANEL âââ */
+/* âÂÂâÂÂâÂÂ DETAIL PANEL âÂÂâÂÂâÂÂ */
 #detailPanel{position:absolute;top:0;right:0;width:380px;height:100%;background:#fff;box-shadow:-4px 0 24px rgba(99,102,241,0.15);z-index:50;transform:translateX(100%);transition:transform 0.25s ease;overflow-y:auto;display:flex;flex-direction:column}
 #detailPanel.open{transform:translateX(0)}
 .panelBack{display:flex;align-items:center;gap:8px;padding:16px 20px 0;cursor:pointer;color:#6366F1;font-size:14px;font-weight:600;transition:opacity 0.2s}
@@ -144,7 +146,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .btnDelete{background:#FFE4E6;color:#9F1239}
 .btnDelete:hover{background:#FECDD3}
 
-/* âââ MODAL âââ */
+/* âÂÂâÂÂâÂÂ MODAL âÂÂâÂÂâÂÂ */
 #modalOverlay{position:fixed;inset:0;background:rgba(30,41,59,0.5);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(2px)}
 #modalOverlay.open{display:flex}
 .modal{background:#fff;border-radius:20px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(99,102,241,0.2)}
@@ -160,7 +162,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .formGroup input:focus,.formGroup select:focus,.formGroup textarea:focus{border-color:#6366F1;box-shadow:0 0 0 3px rgba(99,102,241,0.12)}
 .formGroup textarea{resize:vertical;min-height:80px}
 
-/* âââ PHOTO UPLOAD âââ */
+/* âÂÂâÂÂâÂÂ PHOTO UPLOAD âÂÂâÂÂâÂÂ */
 .photoUploadZone{border:2px dashed #6366F1;border-radius:12px;background:#F5F3FF;padding:32px 20px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
 .photoUploadZone:hover,.photoUploadZone.dragover{background:#EEF2FF;border-color:#4F46E5}
 .photoUploadZone .uploadIcon{font-size:36px;margin-bottom:8px}
@@ -182,12 +184,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .btnSave{padding:10px 24px;background:#6366F1;color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;transition:background 0.2s}
 .btnSave:hover{background:#4F46E5}
 
-/* âââ ADD BUTTON âââ */
+/* âÂÂâÂÂâÂÂ ADD BUTTON âÂÂâÂÂâÂÂ */
 #addBtn{position:absolute;bottom:24px;right:24px;z-index:40;background:#6366F1;color:#fff;border:none;border-radius:50%;width:56px;height:56px;font-size:28px;cursor:pointer;box-shadow:0 8px 24px rgba(99,102,241,0.45);transition:all 0.2s;display:flex;align-items:center;justify-content:center}
 #addBtn:hover{background:#4F46E5;transform:scale(1.08)}
 #addBtn.hidden{display:none}
 
-/* âââ TOAST âââ */
+/* âÂÂâÂÂâÂÂ TOAST âÂÂâÂÂâÂÂ */
 #toastContainer{position:fixed;top:20px;right:20px;z-index:9000;display:flex;flex-direction:column;gap:8px}
 .toast{background:#fff;border-radius:12px;padding:14px 18px;box-shadow:0 8px 32px rgba(30,41,59,0.15);display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#1E293B;transform:translateX(120%);transition:transform 0.3s ease;min-width:280px;border-left:4px solid #6366F1}
 .toast.show{transform:translateX(0)}
@@ -196,7 +198,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 .toast.info{border-left-color:#6366F1}
 .toastIcon{font-size:18px}
 
-/* âââ RESPONSIVE âââ */
+/* âÂÂâÂÂâÂÂ RESPONSIVE âÂÂâÂÂâÂÂ */
 @media (max-width:768px){
   #hamburger{display:flex}
   #sidebar{position:fixed;top:0;left:0;height:100%;z-index:150;transform:translateX(-100%);width:280px;min-width:280px;transition:transform 0.25s ease}
@@ -207,7 +209,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
   .statsGrid{grid-template-columns:1fr 1fr}
 }
 
-/* âââ MAP MARKERS âââ */
+/* âÂÂâÂÂâÂÂ MAP MARKERS âÂÂâÂÂâÂÂ */
 .custom-marker{border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3);cursor:pointer}
 </style>
 </head>
@@ -216,9 +218,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 <div id="loginOverlay">
   <div class="loginCard">
     <div class="loginLogo">
-      <div class="logoIcon">ðºï¸</div>
+      <div class="logoIcon">ð¢ÂÂÂºÃ¯Â¸Â</div>
       <h1>Impresionarte_ve</h1>
-      <p>Sistema de GestiÃ³n de Vallas</p>
+      <p>Bienvenido â Sistema de GestiÃ³n de Vallas</p>
     </div>
     <div class="loginField">
       <label for="loginUser">Usuario</label>
@@ -228,14 +230,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
       <label for="loginPass">ContraseÃ±a</label>
       <input type="password" id="loginPass" placeholder="Ingresa tu contraseÃ±a" autocomplete="current-password">
     </div>
-    <button class="loginBtn" id="loginBtn">Ingresar al Sistema</button>
-    <div class="loginError" id="loginError">Usuario o contraseÃ±a incorrectos</div>
+    <button class="loginBtn" id="loginBtn">Iniciar SesiÃ³n</button>
+    <div class="loginError" id="loginError">Credenciales incorrectas. Intenta de nuevo.</div>
     <p class="loginHint">Acceso restringido al personal autorizado</p>
   </div>
 </div>
 
 <!-- HAMBURGER -->
-<button id="hamburger" onclick="toggleSidebar()">â°</button>
+<button id="hamburger" onclick="toggleSidebar()">âÂÂ°</button>
 
 <!-- TOAST CONTAINER -->
 <div id="toastContainer"></div>
@@ -250,7 +252,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
       <div class="userBadge" id="userBadge">
         <div class="userAvatar" id="userAvatar">A</div>
         <div>
-          <div class="userName" id="userNameDisplay">Admin</div>
+          <div class="userName" id="userNameDisplay">Administrador</div>
           <span class="userRole" id="userRoleDisplay">Administrador</span>
         </div>
       </div>
@@ -268,6 +270,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 
     <div class="filterSection" id="filterSection">
       <div class="filterLabel">Filtros</div>
+            <div class="searchBar" style="padding:0 12px 8px;">
+        <input type="text" id="searchInput" 
+          placeholder="Buscar valla por nombre o ciudad..." 
+          style="width:100%;padding:8px 12px;border:1.5px solid rgba(255,255,255,0.3);border-radius:10px;font-size:13px;background:rgba(255,255,255,0.15);color:#fff;outline:none;"
+          oninput="applySearch(this.value)"
+          autocomplete="off">
+      </div>
       <div class="filterPills" id="filterPills">
         <div class="filterPill active" onclick="setFilter('all',this)">Todas</div>
         <div class="filterPill" onclick="setFilter('available',this)">Disponibles</div>
@@ -295,13 +304,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
         </div>
         <div class="miniStat">
           <div class="miniStatVal" id="statRevenue">$0</div>
-          <div class="miniStatLabel">Ingresos/mes</div>
+          <div class="miniStatLabel">Ingresos Mensuales</div>
         </div>
       </div>
     </div>
 
     <div class="sidebarFooter">
-      <button class="logoutBtn" onclick="logout()">ð Cerrar SesiÃ³n</button>
+      <button class="logoutBtn" onclick="logout()">ðª Cerrar SesiÃ³n</button>
     </div>
   </div>
 
@@ -315,8 +324,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 
       <!-- DETAIL PANEL -->
       <div id="detailPanel">
-        <button class="panelBack" onclick="closePanel()">â Volver al mapa</button>
-        <button class="panelCloseX" onclick="closePanel()">â</button>
+        <button class="panelBack" onclick="closePanel()">âÂÂ Volver al mapa</button>
+        <button class="panelCloseX" onclick="closePanel()">âÂÂ</button>
         <div id="panelImgArea"></div>
         <div class="panelContent">
           <div class="panelId" id="panelId"></div>
@@ -336,13 +345,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
     <!-- ABOUT VIEW -->
     <div id="aboutView">
       <div class="aboutHero">
-        <div style="font-size:48px;margin-bottom:12px">ðºï¸</div>
+        <div style="font-size:48px;margin-bottom:12px">ð¢</div>
         <h1>Impresionarte_ve</h1>
         <p>Tu mensaje en los mejores espacios de Venezuela</p>
       </div>
 
       <div class="aboutCard">
-        <h2>ð¥ QuiÃ©nes Somos</h2>
+        <h2>ð¢ QuiÃ©nes Somos</h2>
         <p>Impresionarte_ve es una empresa venezolana lÃ­der en publicidad exterior, especializada en el diseÃ±o, producciÃ³n e instalaciÃ³n de vallas publicitarias de alto impacto en las principales ciudades del paÃ­s. Con aÃ±os de experiencia en el mercado, hemos ayudado a cientos de marcas a conectar con su audiencia de forma directa, visible y memorable. Nuestra red de vallas estratÃ©gicamente ubicadas en Caracas, Valencia, Maracaibo y Barquisimeto garantiza la mÃ¡xima visibilidad para tu marca.</p>
       </div>
 
@@ -370,50 +379,50 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
       </div>
 
       <div class="objetivosCard">
-        <h2>ð¯ Nuestros Objetivos</h2>
+        <h2>ð¢ÂÂÂ¯ Nuestros Objetivos</h2>
         <div class="objetivoItem">
-          <span>ð¯</span>
+          <span>ð¢ÂÂÂ¯</span>
           <p>Ser la red de publicidad exterior mÃ¡s confiable y de mayor cobertura en Venezuela</p>
         </div>
         <div class="objetivoItem">
-          <span>ð</span>
+          <span>ð¢ÂÂÂ</span>
           <p>Innovar constantemente en formatos y tecnologÃ­as de visualizaciÃ³n publicitaria</p>
         </div>
         <div class="objetivoItem">
-          <span>ð¼</span>
+          <span>ð¢ÂÂÂ¼</span>
           <p>Generar valor real para nuestros clientes a travÃ©s de soluciones publicitarias estratÃ©gicas y medibles</p>
         </div>
       </div>
 
       <div class="statsAboutGrid">
         <div class="statAboutCard">
-          <div class="statIcon">ð</div>
+          <div class="statIcon">ð¢ÂÂÂ</div>
           <div class="statNum">8+</div>
-          <div class="statTxt">Ubicaciones activas</div>
+          <div class="statTxt">UbicaciÃ³nes activas</div>
         </div>
         <div class="statAboutCard">
-          <div class="statIcon">ðï¸</div>
+          <div class="statIcon">ð¢ÂÂÂÃ¯Â¸Â</div>
           <div class="statNum">4</div>
           <div class="statTxt">Ciudades</div>
         </div>
         <div class="statAboutCard">
-          <div class="statIcon">â</div>
+          <div class="statIcon">âÂÂ</div>
           <div class="statNum">100%</div>
           <div class="statTxt">Estructuras certificadas</div>
         </div>
         <div class="statAboutCard">
-          <div class="statIcon">ð</div>
+          <div class="statIcon">ð¢ÂÂÂ</div>
           <div class="statNum">Flex</div>
           <div class="statTxt">Contratos flexibles</div>
         </div>
       </div>
 
       <div class="contactFooter">
-        <h3>ð ContÃ¡ctanos</h3>
+        <h3>ð¢ÂÂÂ ContÃ¡ctanos</h3>
         <div class="contactItems">
-          <div class="contactItem">ð§ contacto@impresionarte.ve</div>
-          <div class="contactItem">ð± +58 412-000-0000</div>
-          <div class="contactItem">ð www.impresionarte.ve</div>
+          <div class="contactItem">ð¢ÂÂÂ§ contacto@impresionarte.ve</div>
+          <div class="contactItem">ð¢ÂÂÂ± +58 412-000-0000</div>
+          <div class="contactItem">ð¢ÂÂÂ www.impresionarte.ve</div>
         </div>
       </div>
     </div>
@@ -423,8 +432,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 <div id="modalOverlay">
   <div class="modal">
     <div class="modalHeader">
-      <h2 id="modalTitle">AÃ±adir Valla</h2>
-      <button class="modalClose" onclick="closeModal()">â</button>
+      <h2 id="modalTitle">Nueva Valla</h2>
+      <button class="modalClose" onclick="closeModal()">âÂÂ</button>
     </div>
     <div class="modalBody">
       <div class="formRow">
@@ -465,7 +474,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
       <div class="formRow">
         <div class="formGroup">
           <label>Dimensiones</label>
-          <input type="text" id="fDimensions" placeholder="Ej: 12m x 4m">
+          <input type="text" id="fDimensioness" placeholder="Ej: 12m x 4m">
         </div>
         <div class="formGroup">
           <label>Precio/mes (USD)</label>
@@ -508,17 +517,17 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1E293
 
       <!-- PHOTO UPLOAD -->
       <div class="formGroup">
-        <label>Foto de la Valla</label>
+        <label>Foto de la valla</label>
         <div id="photoUploadZone" class="photoUploadZone" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
           <div class="uploadIcon">ð·</div>
           <p>Arrastra tu foto aquÃ­ o haz clic para seleccionar</p>
-          <small>JPG, PNG, WEBP â MÃ¡ximo 5MB</small>
+          <small>JPG, PNG, WEBP âÂÂ MÃ¡ximo 5MB</small>
           <input type="file" id="photoFileInput" accept="image/jpeg,image/png,image/webp" onchange="handleFileSelect(event)">
         </div>
         <div id="photoPreviewContainer" style="display:none;margin-top:8px">
           <div class="photoPreviewWrap">
             <img id="photoPreview" class="photoPreview" src="" alt="Preview">
-            <button class="photoRemoveBtn" onclick="removePhoto()" title="Quitar foto">â</button>
+            <button class="photoRemoveBtn" onclick="removePhoto()" title="Quitar foto">âÂÂ</button>
           </div>
         </div>
         <div id="photoError" class="photoError"></div>
@@ -544,13 +553,13 @@ const BILLBOARD_DATA = [{"id":"VL-001","name":"Valla Autopista Francisco Fajardo
 </script>
 
 <script>
-// âââ CREDENTIALS âââ
+// âÂÂâÂÂâÂÂ CREDENTIALS âÂÂâÂÂâÂÂ
 const USERS = {
   admin: { password: 'Impresionarte2024!', role: 'admin', displayName: 'Administrador' },
-  viewer: { password: 'viewer123', role: 'viewer', displayName: 'Visitante' }
+  visualizador: { password: 'viewer123', role: 'visualizador', displayName: 'Visualizador' }
 };
 
-// âââ STATE âââ
+// âÂÂâÂÂâÂÂ STATE âÂÂâÂÂâÂÂ
 let currentUser = null;
 let billboards = BILLBOARD_DATA;
 let map = null;
@@ -559,7 +568,7 @@ let currentFilter = 'all';
 let editingId = null;
 let currentPhotoBase64 = null;
 
-// âââ INIT âââ
+// âÂÂâÂÂâÂÂ INIT âÂÂâÂÂâÂÂ
 document.addEventListener('DOMContentLoaded', () => {
   // Check stored session
   const stored = sessionStorage.getItem('impr_user');
@@ -582,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginBtn').addEventListener('click', doLogin);
 });
 
-// âââ LOGIN âââ
+// âÂÂâÂÂâÂÂ LOGIN âÂÂâÂÂâÂÂ
 function showLogin() {
   document.getElementById('loginOverlay').classList.remove('hidden');
   document.getElementById('app').classList.remove('visible');
@@ -619,9 +628,9 @@ function showApp() {
   // Update user badge
   document.getElementById('userAvatar').textContent = currentUser.username[0].toUpperCase();
   document.getElementById('userNameDisplay').textContent = currentUser.displayName;
-  document.getElementById('userRoleDisplay').textContent = currentUser.role === 'admin' ? 'Administrador' : 'Visitante (Solo lectura)';
+  document.getElementById('userRoleDisplay').textContent = currentUser.role === 'admin' ? 'Administrador' : 'Visualizador';
 
-  // Role-based: hide add button for viewer
+  // Role-based: hide add button for visualizador
   const addBtn = document.getElementById('addBtn');
   if (currentUser.role !== 'admin') {
     addBtn.classList.add('hidden');
@@ -634,7 +643,7 @@ function showApp() {
   updateStats();
 }
 
-// âââ VIEW SWITCHING âââ
+// âÂÂâÂÂâÂÂ VIEW SWITCHING âÂÂâÂÂâÂÂ
 function showView(view) {
   const mapView = document.getElementById('mapView');
   const aboutView = document.getElementById('aboutView');
@@ -665,13 +674,13 @@ function showView(view) {
   }
 }
 
-// âââ SIDEBAR TOGGLE âââ
+// âÂÂâÂÂâÂÂ SIDEBAR TOGGLE âÂÂâÂÂâÂÂ
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
   sidebar.classList.toggle('mobile-open');
 }
 
-// âââ MAP INIT âââ
+// âÂÂâÂÂâÂÂ MAP INIT âÂÂâÂÂâÂÂ
 function initMap() {
   if (map) return;
   map = L.map('map', { zoomControl: true }).setView([8.0, -66.5], 6);
@@ -703,13 +712,30 @@ function renderMarkers() {
   });
 }
 
-// âââ FILTER âââ
+// âÂÂâÂÂâÂÂ FILTER âÂÂâÂÂâÂÂ
 function filterBillboards() {
-  if (currentFilter === 'all') return billboards;
-  if (currentFilter === 'available') return billboards.filter(b => b.status === 'available');
-  if (currentFilter === 'occupied') return billboards.filter(b => b.status === 'occupied');
-  return billboards.filter(b => b.city === currentFilter);
+  let result = billboards;
+  if (currentFilter === 'available') result = result.filter(b => b.status === 'available');
+  else if (currentFilter === 'occupied') result = result.filter(b => b.status === 'occupied');
+  else if (currentFilter !== 'all') result = result.filter(b => b.city === currentFilter);
+  if (searchQuery) {
+    result = result.filter(b =>
+      (b.name && b.name.toLowerCase().includes(searchQuery)) ||
+      (b.city && b.city.toLowerCase().includes(searchQuery)) ||
+      (b.location && b.location.toLowerCase().includes(searchQuery)) ||
+      (b.id && b.id.toLowerCase().includes(searchQuery))
+    );
+  }
+  return result;
 }
+
+// âââ SEARCH âââ
+let searchQuery = '';
+function applySearch(q) {
+  searchQuery = q.trim().toLowerCase();
+  renderMarkers();
+}
+
 
 function setFilter(filter, el) {
   currentFilter = filter;
@@ -718,7 +744,7 @@ function setFilter(filter, el) {
   renderMarkers();
 }
 
-// âââ STATS âââ
+// âÂÂâÂÂâÂÂ STATS âÂÂâÂÂâÂÂ
 function updateStats() {
   const total = billboards.length;
   const avail = billboards.filter(b => b.status === 'available').length;
@@ -731,7 +757,7 @@ function updateStats() {
   document.getElementById('statRevenue').textContent = '$' + revenue.toLocaleString();
 }
 
-// âââ DETAIL PANEL âââ
+// âÂÂâÂÂâÂÂ DETAIL PANEL âÂÂâÂÂâÂÂ
 function openPanel(id) {
   const b = billboards.find(x => x.id === id);
   if (!b) return;
@@ -743,15 +769,15 @@ function openPanel(id) {
     if (b.photo_url.startsWith('data:')) {
       imgArea.innerHTML = `<img src="${b.photo_url}" class="panelImg" alt="Foto valla">`;
     } else {
-      imgArea.innerHTML = `<img src="${b.photo_url}" class="panelImg" alt="Foto valla" onerror="this.parentNode.innerHTML='<div class=panelImgPlaceholder>ðºï¸</div>'">`;
+      imgArea.innerHTML = `<img src="${b.photo_url}" class="panelImg" alt="Foto valla" onerror="this.parentNode.innerHTML='<div class=panelImgPlaceholder>ð¢ÂÂÂºÃ¯Â¸Â</div>'">`;
     }
   } else {
-    imgArea.innerHTML = '<div class="panelImgPlaceholder">ðºï¸</div>';
+    imgArea.innerHTML = '<div class="panelImgPlaceholder">ð¢ÂÂÂºÃ¯Â¸Â</div>';
   }
 
   document.getElementById('panelId').textContent = b.id;
   document.getElementById('panelName').textContent = b.name;
-  document.getElementById('panelLocation').innerHTML = 'ð ' + b.location_name;
+  document.getElementById('panelLocation').innerHTML = 'ð¢ÂÂÂ ' + b.location_name;
 
   const statusEl = document.getElementById('panelStatus');
   statusEl.className = 'statusBadge ' + b.status;
@@ -761,20 +787,21 @@ function openPanel(id) {
     <div class="infoItem"><label>Dimensiones</label><span>${b.dimensions || 'â'}</span></div>
     <div class="infoItem"><label>Precio/mes</label><span>$${(b.price_per_month || 0).toLocaleString()}</span></div>
     <div class="infoItem"><label>Caras</label><span>${b.face_count || 1}</span></div>
-    <div class="infoItem"><label>Iluminada</label><span>${b.illuminated ? 'â SÃ­' : 'â No'}</span></div>
+    <div class="infoItem"><label>Iluminada</label><span>${b.illuminated ? 'SÃ­' : 'No'}</span></div>
     <div class="infoItem"><label>Ciudad</label><span>${b.city || 'â'}</span></div>
     <div class="infoItem"><label>Cliente</label><span>${b.client_name || 'â'}</span></div>
-    ${b.contract_end_date ? `<div class="infoItem" style="grid-column:1/-1"><label>Fin de Contrato</label><span>${b.contract_end_date}</span></div>` : ''}
+    ${b.contract_end_date ? `<div class="infoItem" style="grid-column:1/-1"><label>Fin de contrato</label><span>${b.contract_end_date}</span></div>` : ''}
+    <div class="infoItem" style="grid-column:1/-1"><label>Coordenadas</label><span>${typeof b.lat !== 'undefined' ? b.lat.toFixed(4) + ', ' + (b.lng || b.lon || 0).toFixed(4) : 'â'}</span></div>
   `;
 
-  document.getElementById('panelDesc').textContent = b.description || 'â';
+  document.getElementById('panelDesc').textContent = b.description || 'âÂÂ';
 
   // Actions - only admin
   const actionsEl = document.getElementById('panelActions');
   if (currentUser && currentUser.role === 'admin') {
     actionsEl.innerHTML = `
-      <button class="panelActions btnEdit" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#6366F1;color:#fff;transition:all 0.2s" onclick="openModal('${b.id}')">âï¸ Editar</button>
-      <button class="panelActions btnDelete" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FFE4E6;color:#9F1239;transition:all 0.2s" onclick="deleteBillboard('${b.id}')">ðï¸ Eliminar</button>
+      <button class="panelActions btnEdit" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#6366F1;color:#fff;transition:all 0.2s" onclick="openModal('${b.id}')">âÂÂÃ¯Â¸Â Editar</button>
+      <button class="panelActions btnDelete" style="flex:1;padding:10px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:none;background:#FFE4E6;color:#9F1239;transition:all 0.2s" onclick="deleteBillboard('${b.id}')">ð¢ÂÂÂÃ¯Â¸Â Eliminar</button>
     `;
   } else {
     actionsEl.innerHTML = '';
@@ -789,7 +816,7 @@ function closePanel() {
   if (map) map.setView([8.0, -66.5], 6);
 }
 
-// âââ MODAL âââ
+// âÂÂâÂÂâÂÂ MODAL âÂÂâÂÂâÂÂ
 function openModal(id) {
   resetPhotoUpload();
   if (id) {
@@ -805,7 +832,7 @@ function openModal(id) {
     document.getElementById('fLng').value = b.longitude || '';
     document.getElementById('fCity').value = b.city || '';
     document.getElementById('fStatus').value = b.status || 'available';
-    document.getElementById('fDimensions').value = b.dimensions || '';
+    document.getElementById('fDimensioness').value = b.dimensions || '';
     document.getElementById('fPrice').value = b.price_per_month || '';
     document.getElementById('fClient').value = b.client_name || '';
     document.getElementById('fContract').value = b.contract_end_date || '';
@@ -825,7 +852,7 @@ function openModal(id) {
     }
   } else {
     editingId = null;
-    document.getElementById('modalTitle').textContent = 'AÃ±adir Valla';
+    document.getElementById('modalTitle').textContent = 'Nueva Valla';
     document.getElementById('fId').disabled = false;
     document.getElementById('fId').value = '';
     document.getElementById('fName').value = '';
@@ -834,7 +861,7 @@ function openModal(id) {
     document.getElementById('fLng').value = '';
     document.getElementById('fCity').value = '';
     document.getElementById('fStatus').value = 'available';
-    document.getElementById('fDimensions').value = '';
+    document.getElementById('fDimensioness').value = '';
     document.getElementById('fPrice').value = '';
     document.getElementById('fClient').value = '';
     document.getElementById('fContract').value = '';
@@ -872,7 +899,7 @@ function saveBillboard() {
     longitude: lng,
     city,
     status: document.getElementById('fStatus').value,
-    dimensions: document.getElementById('fDimensions').value.trim(),
+    dimensions: document.getElementById('fDimensioness').value.trim(),
     price_per_month: parseFloat(document.getElementById('fPrice').value) || 0,
     client_name: document.getElementById('fClient').value.trim() || null,
     contract_end_date: document.getElementById('fContract').value || null,
@@ -885,10 +912,10 @@ function saveBillboard() {
   const existing = billboards.findIndex(x => x.id === id);
   if (existing >= 0) {
     billboards[existing] = b;
-    showToast('Valla actualizada exitosamente â', 'success');
+    showToast('Valla actualizada exitosamente âÂÂ', 'success');
   } else {
     billboards.push(b);
-    showToast('Valla aÃ±adida exitosamente â', 'success');
+    showToast('Valla aÃ±adida exitosamente âÂÂ', 'success');
   }
 
   closeModal();
@@ -898,15 +925,12 @@ function saveBillboard() {
 }
 
 function deleteBillboard(id) {
-  if (!confirm('Â¿EstÃ¡s seguro de que deseas eliminar esta valla?')) return;
+  if (!confirm('Â¿EstÃ¡s seguro de que deseas eliminar esta valla?rn;
   billboards = billboards.filter(b => b.id !== id);
   closePanel();
   renderMarkers();
   updateStats();
-  showToast('Valla eliminada', 'info');
-}
-
-// âââ PHOTO UPLOAD âââ
+  showToast('Valla eliminadaÂâÂÂâÂÂ PHOTO UPLOAD âÂÂâÂÂâÂÂ
 function handleDragOver(e) {
   e.preventDefault();
   document.getElementById('photoUploadZone').classList.add('dragover');
@@ -935,8 +959,7 @@ function processFile(file) {
     return;
   }
   if (file.size > 5 * 1024 * 1024) {
-    errEl.textContent = 'La foto es muy grande. MÃ¡ximo 5MB.';
-    errEl.classList.add('visible');
+    errEl.textContent = 'La foto es muy grande. MÃ¡ximo 5MB.sList.add('visible');
     return;
   }
 
@@ -974,13 +997,13 @@ function toggleUrlInput() {
   document.getElementById('urlInputContainer').classList.toggle('visible');
 }
 
-// âââ TOAST âââ
+// âÂÂâÂÂâÂÂ TOAST âÂÂâÂÂâÂÂ
 function showToast(msg, type = 'info') {
   const container = document.getElementById('toastContainer');
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
-  const icons = { success: 'â', error: 'â', info: 'â¹ï¸' };
-  toast.innerHTML = `<span class="toastIcon">${icons[type] || 'â¹ï¸'}</span><span>${msg}</span>`;
+  const icons = { success: 'âÂÂ', error: 'âÂÂ', info: 'âÂÂ¹Ã¯Â¸Â' };
+  toast.innerHTML = `<span class="toastIcon">${icons[type] || 'âÂÂ¹Ã¯Â¸Â'}</span><span>${msg}</span>`;
   container.appendChild(toast);
   setTimeout(() => toast.classList.add('show'), 10);
   setTimeout(() => {
