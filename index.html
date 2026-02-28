@@ -162,10 +162,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
     </div>
     <button class="btnLogin" onclick="doLogin()">Iniciar Sesi&#xF3;n</button>
     <div class="loginError" id="loginError">Usuario o contrase&#xF1;a incorrectos</div>
-    <p style="text-align:center;margin-top:16px;font-size:.8rem;color:#64748b">
-      <strong>admin</strong> / Impresionarte2024!<br>
-      <strong>viewer</strong> / viewer123
-    </p>
+    <p style="text-align:center;margin-top:16px;font-size:.75rem;color:#94a3b8;font-style:italic;">Acceso restringido al personal autorizado</p>
   </div>
 </div>
 
@@ -264,6 +261,15 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
           <h1 class="pageTitle">Mapa de Vallas</h1>
         </div>
         <div class="content">
+          <div class="mapFilterBar" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:0 4px;">
+            <span class="mapPill active" onclick="setMapFilter('all')" id="mapPillAll" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#6366F1;color:#fff;border:2px solid #6366F1;">Todas</span>
+            <span class="mapPill" onclick="setMapFilter('available')" id="mapPillAvailable" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:#6366F1;border:2px solid #6366F1;">Disponibles</span>
+            <span class="mapPill" onclick="setMapFilter('occupied')" id="mapPillOccupied" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:#6366F1;border:2px solid #6366F1;">Ocupadas</span>
+            <span class="mapPill" onclick="setMapFilter('city','Caracas')" id="mapPillCaracas" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:#6366F1;border:2px solid #6366F1;">Caracas</span>
+            <span class="mapPill" onclick="setMapFilter('city','Valencia')" id="mapPillValencia" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:#6366F1;border:2px solid #6366F1;">Valencia</span>
+            <span class="mapPill" onclick="setMapFilter('city','Maracaibo')" id="mapPillMaracaibo" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:#6366F1;border:2px solid #6366F1;">Maracaibo</span>
+            <span class="mapPill" onclick="setMapFilter('city','Barquisimeto')" id="mapPillBarquisimeto" style="padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;background:#fff;color:#6366F1;border:2px solid #6366F1;">Barquisimeto</span>
+          </div>
           <div id="map"></div>
         </div>
       </div>
@@ -285,14 +291,56 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
         </div>
         <div class="content">
           <div class="aboutCard">
-            <h2>Impresionarte_ve</h2>
-            <p>Somos una empresa venezolana especializada en la gesti&#xF3;n y alquiler de vallas publicitarias de alta visibilidad en las principales ciudades del pa&#xED;s.</p>
-            <p>Nuestro objetivo es conectar marcas con su audiencia a trav&#xE9;s de espacios publicitarios estrat&#xE9;gicamente ubicados para maximizar el impacto de sus campa&#xF1;as.</p>
-            <p>Con cobertura en Caracas, Valencia, Maracaibo y Barquisimeto, ofrecemos soluciones publicitarias adaptadas a las necesidades de cada cliente.</p>
-            <h3 style="margin-top:24px;margin-bottom:12px">Contacto</h3>
-            <p>&#x2709; contacto@impresionarte.com.ve</p>
-            <p>&#x260e; +58 212-555-0123</p>
-            <p>&#x1F4CD; Caracas, Venezuela</p>
+            <h1 style="font-size:1.8rem;color:#6366F1;margin-bottom:8px;">Impresionarte_ve</h1>
+            <p style="font-size:1.1rem;color:#64748b;margin-bottom:24px;">Tu mensaje en los mejores espacios de Venezuela &#x2014; Publicidad Exterior de Alto Impacto</p>
+            
+            <h3 style="margin-top:24px;margin-bottom:12px;color:#1e293b;">Quienes Somos</h3>
+            <p style="line-height:1.7;margin-bottom:16px;">Impresionarte_ve es una empresa venezolana con m&#xE1;s de 10 a&#xF1;os de experiencia en el sector de la publicidad exterior. Nos especializamos en el dise&#xF1;o, producci&#xF3;n, instalaci&#xF3;n y gesti&#xF3;n estrat&#xE9;gica de vallas publicitarias en las principales arterias viales, autopistas y centros comerciales del pa&#xED;s. Nuestra red de estructuras cubre las ciudades m&#xE1;s importantes de Venezuela, garantizando m&#xE1;xima visibilidad y alcance para cada campa&#xF1;a.</p>
+            
+            <h3 style="margin-top:24px;margin-bottom:12px;color:#1e293b;">Mision</h3>
+            <p style="line-height:1.7;margin-bottom:16px;">Conectar marcas con millones de venezolanos a trav&#xE9;s de espacios publicitarios estrat&#xE9;gicos, creativos y de alto impacto visual. Trabajamos para que cada valla cuente una historia, genere recordaci&#xF3;n y produzca resultados medibles para nuestros clientes.</p>
+            
+            <h3 style="margin-top:24px;margin-bottom:12px;color:#1e293b;">Vision</h3>
+            <p style="line-height:1.7;margin-bottom:16px;">Ser la red de publicidad exterior m&#xE1;s confiable, innovadora y de mayor cobertura en Venezuela, siendo el aliado estrat&#xE9;gico preferido por las marcas que buscan presencia y posicionamiento en el mercado nacional.</p>
+            
+            <h3 style="margin-top:24px;margin-bottom:12px;color:#1e293b;">Servicios</h3>
+            <ul style="line-height:1.8;margin-bottom:16px;padding-left:20px;">
+              <li>Alquiler de espacios en vallas iluminadas y no iluminadas</li>
+              <li>Instalaci&#xF3;n y mantenimiento certificado de estructuras</li>
+              <li>Dise&#xF1;o gr&#xE1;fico e impresi&#xF3;n de gran formato</li>
+              <li>Vallas digitales LED en ubicaciones premium</li>
+              <li>Asesor&#xED;a en estrategia de comunicaci&#xF3;n exterior</li>
+              <li>Planes de medios personalizados seg&#xFA;n presupuesto y objetivos</li>
+              <li>Reportes de impacto y auditor&#xED;a de visibilidad</li>
+              <li>Contratos flexibles: semanales, mensuales y anuales</li>
+            </ul>
+            
+            <h3 style="margin-top:24px;margin-bottom:12px;color:#1e293b;">Nuestros N&#xFA;meros</h3>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin-bottom:24px;">
+              <div style="background:#fff;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+                <div style="font-size:1.8rem;font-weight:800;color:#6366F1;">8+</div>
+                <div style="font-size:.8rem;color:#64748b;margin-top:4px;">Vallas Activas</div>
+              </div>
+              <div style="background:#fff;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+                <div style="font-size:1.8rem;font-weight:800;color:#6366F1;">4</div>
+                <div style="font-size:.8rem;color:#64748b;margin-top:4px;">Ciudades</div>
+              </div>
+              <div style="background:#fff;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+                <div style="font-size:1.8rem;font-weight:800;color:#6366F1;">10+</div>
+                <div style="font-size:.8rem;color:#64748b;margin-top:4px;">A&#xF1;os de Experiencia</div>
+              </div>
+              <div style="background:#fff;padding:20px;border-radius:12px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.08);">
+                <div style="font-size:1.8rem;font-weight:800;color:#6366F1;">100%</div>
+                <div style="font-size:.8rem;color:#64748b;margin-top:4px;">Estructuras Certificadas</div>
+              </div>
+            </div>
+            
+            <h3 style="margin-top:24px;margin-bottom:12px;color:#1e293b;">Contacto</h3>
+            <p style="line-height:1.8;">&#x260e; Tel&#xE9;fono: +58 412-000-0000</p>
+            <p style="line-height:1.8;">&#x1F4F1; WhatsApp: +58 412-000-0000</p>
+            <p style="line-height:1.8;">&#x2709; Email: contacto@impresionarte.ve</p>
+            <p style="line-height:1.8;">&#x1F4CD; Direcci&#xF3;n: Caracas, Venezuela</p>
+            <p style="line-height:1.8;">&#x1F551; Horario: Lunes a Viernes, 8:00 am &#x2013; 5:00 pm</p>
           </div>
         </div>
       </div>
@@ -395,6 +443,7 @@ var currentUser = null;
 var currentFilter = 'all';
 var map = null;
 var markers = [];
+var mapFilter = { type: 'all', value: null };
 
 // LOGIN
 function doLogin() {
@@ -564,6 +613,22 @@ function showDetail(id) {
 }
 
 // MAP
+function setMapFilter(type, value) {
+  mapFilter = { type: type, value: value };
+  // Update pill styles
+  document.querySelectorAll('.mapPill').forEach(function(p){
+    p.style.background = '#fff';
+    p.style.color = '#6366F1';
+  });
+  var activePillId = type === 'all' ? 'mapPillAll' : type === 'status' ? 'mapPill' + (value==='available'?'Available':value==='occupied'?'Occupied':'Maintenance') : 'mapPill' + value;
+  var activePill = document.getElementById(activePillId);
+  if(activePill) {
+    activePill.style.background = '#6366F1';
+    activePill.style.color = '#fff';
+  }
+  updateMarkers();
+}
+
 function initMap() {
   if(map) {
     setTimeout(function(){map.invalidateSize();},100);
