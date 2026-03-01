@@ -231,7 +231,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
           <span>ImpresIAnarte IA</span>
         </div>
-      </nav>
+              <div class="navItem" id="nav-ia" onclick="showPage('ia')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="3"/></svg>
+          ImpresIAnarte IA
+        </div>
+</nav>
       <div class="sidebarFooter">
         <div class="userInfo">
           <div class="userAvatar" id="userAvatar">U</div>
@@ -582,7 +586,71 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
   </div>
 </div>
       <div id="page-ia" class="page"><div style="background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);border-radius:16px;padding:32px;margin-bottom:24px;color:#fff"><h2 style="font-size:1.6rem;font-weight:800;margin-bottom:8px">&#x2728; ImpresIAnarte IA</h2><p style="opacity:.85;font-size:.95rem">Genera im&#xE1;genes profesionales de vallas con IA.</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" id="iaLayout"><div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)"><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Descripci&#xF3;n</label><textarea id="iaPrompt" rows="4" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical;outline:none;margin-bottom:12px" placeholder="Ej: Valla Toyota en Caracas, fondo oscuro, slogan Maneja tu sue&#xF1;o..."></textarea><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Sugerencias</label><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px"><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Restaurante venezolano, colores c&#xE1;lidos, ambiente familiar'">&#x1F37D; Restaurante</span><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Banco moderno, colores azul y dorado, confianza'">&#x1F3E6; Banco</span><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Concesionaria de autos, fondo oscuro, rojo y negro'">&#x1F697; Autos</span><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Centro comercial, colorido, promoci&#xF3;n de temporada'">&#x1F6CD; Retail</span></div><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Estilo</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px"><div id="is-foto" onclick="selectIAStyle(this)" data-style="fotorrealista" style="border:2px solid #6366F1;background:#eef2ff;border-radius:10px;padding:12px;text-align:center;cursor:pointer"><div style="font-size:1.2rem">&#x1F4F8;</div><div style="font-size:.8rem;font-weight:700">Fotorrealista</div></div><div id="is-graf" onclick="selectIAStyle(this)" data-style="grafico" style="border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#f8f9ff"><div style="font-size:1.2rem">&#x1F3A8;</div><div style="font-size:.8rem;font-weight:700">Gr&#xE1;fico</div></div><div id="is-led" onclick="selectIAStyle(this)" data-style="digital" style="border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#f8f9ff"><div style="font-size:1.2rem">&#x1F4A1;</div><div style="font-size:.8rem;font-weight:700">LED Digital</div></div><div id="is-min" onclick="selectIAStyle(this)" data-style="minimalista" style="border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#f8f9ff"><div style="font-size:1.2rem">&#x26AA;</div><div style="font-size:.8rem;font-weight:700">Minimalista</div></div></div><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Formato</label><select id="iaFormat" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;margin-bottom:20px"><option value="14x5">14x5 m &#x2014; Valla Grande</option><option value="10x3.5">10x3.5 m &#x2014; Est&#xE1;ndar</option><option value="8x3">8x3 m &#x2014; Mediana</option><option value="paleta">Paleta 3x1.5 m</option></select><button onclick="generateAIBillboard()" id="iaBtnGenerate" style="width:100%;padding:14px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer"><span id="iaBtnText">&#x2728; Generar Valla con IA</span></button></div><div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)"><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:16px">Resultado</label><div id="iaResultArea" style="border:2px dashed #c7d2fe;border-radius:12px;min-height:280px;display:flex;align-items:center;justify-content:center;background:#f8f9ff;overflow:hidden;flex-direction:column"><div id="iaPlaceholder" style="text-align:center;color:#a5b4fc;padding:20px"><div style="font-size:3rem;margin-bottom:12px">&#x1F5BC;</div><div style="font-size:.9rem;font-weight:600">Tu valla aparecer&#xE1; aqu&#xED;</div><div style="font-size:.8rem;color:#94a3b8;margin-top:6px">Describe y presiona generar</div></div><div id="iaLoading" style="display:none;text-align:center;color:#6366F1;padding:20px"><div style="width:40px;height:40px;border:4px solid #e0e7ff;border-top-color:#6366F1;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto"></div><div style="font-size:.9rem;font-weight:600;margin-top:16px">Generando tu valla...</div><div style="font-size:.8rem;color:#94a3b8;margin-top:4px">Espera 20-40 segundos</div></div><img id="iaResultImg" src="" style="display:none;width:100%;object-fit:contain;border-radius:10px" alt="Valla generada"></div><div id="iaResultActions" style="display:none;margin-top:14px"><button onclick="downloadAIImage()" style="padding:10px 16px;background:#f0fdf4;color:#16a34a;border:1px solid #86efac;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;margin-right:8px">&#x2B07; Descargar</button><button onclick="addAIToCatalog()" style="padding:10px 16px;background:#e0e7ff;color:#4f46e5;border:1px solid #a5b4fc;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;margin-right:8px">+ Cat&#xE1;logo</button><button onclick="generateAIBillboard()" style="padding:10px 16px;background:#fef9c3;color:#92400e;border:1px solid #fde68a;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer">&#x21BA; Regenerar</button></div></div></div></div>
-    </main>
+          <!-- IA PAGE -->
+      <div id="page-ia" class="page">
+        <div style="background:linear-gradient(135deg,#6366F1,#7C3AED);border-radius:16px;padding:32px;color:#fff;margin-bottom:24px;text-align:center">
+          <h2 style="font-size:1.8rem;font-weight:900;margin-bottom:8px">&#x2728; ImpresIAnarte IA</h2>
+          <p style="opacity:.85;font-size:1rem">Genera dise&#xF1;os profesionales para vallas publicitarias con inteligencia artificial</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start">
+          <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)">
+            <h3 style="font-size:.9rem;font-weight:700;color:#1e293b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Describe tu valla</h3>
+            <textarea id="iaPrompt" placeholder="Ej: Restaurante elegante con comida venezolana, colores c&#xE1;lidos, ambiente familiar..." style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;resize:vertical;min-height:100px;font-family:inherit;transition:border-color .2s" onfocus="this.style.borderColor='#6366F1'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
+            <div style="margin:12px 0">
+              <div style="font-size:.78rem;font-weight:600;color:#64748b;text-transform:uppercase;margin-bottom:8px">Ideas r&#xE1;pidas:</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <span onclick="document.getElementById('iaPrompt').value=this.textContent" style="padding:4px 10px;background:#e0e7ff;color:#4f46e5;border-radius:12px;font-size:.78rem;cursor:pointer">Banco venezolano moderno</span>
+                <span onclick="document.getElementById('iaPrompt').value=this.textContent" style="padding:4px 10px;background:#e0e7ff;color:#4f46e5;border-radius:12px;font-size:.78rem;cursor:pointer">Telef&#xF3;nica 5G Venezuela</span>
+                <span onclick="document.getElementById('iaPrompt').value=this.textContent" style="padding:4px 10px;background:#e0e7ff;color:#4f46e5;border-radius:12px;font-size:.78rem;cursor:pointer">Centro comercial premium Caracas</span>
+                <span onclick="document.getElementById('iaPrompt').value=this.textContent" style="padding:4px 10px;background:#e0e7ff;color:#4f46e5;border-radius:12px;font-size:.78rem;cursor:pointer">Cerveza artesanal venezolana</span>
+              </div>
+            </div>
+            <div style="margin-bottom:12px">
+              <div style="font-size:.78rem;font-weight:600;color:#64748b;text-transform:uppercase;margin-bottom:8px">Estilo:</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="iaStyleGrid">
+                <div class="iaStyleOpt active-style" onclick="selectIAStyle(this,'fotorrealista')" data-style="fotorrealista" style="padding:10px;border:2px solid #6366F1;border-radius:8px;cursor:pointer;background:#eef2ff;text-align:center;font-size:.82rem;font-weight:600;color:#4f46e5">&#x1F4F8; Fotorrealista</div>
+                <div class="iaStyleOpt" onclick="selectIAStyle(this,'grafico')" data-style="grafico" style="padding:10px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;text-align:center;font-size:.82rem;font-weight:600;color:#64748b">&#x1F3A8; Gr&#xE1;fico</div>
+                <div class="iaStyleOpt" onclick="selectIAStyle(this,'digital')" data-style="digital" style="padding:10px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;text-align:center;font-size:.82rem;font-weight:600;color:#64748b">&#x1F4BB; Digital</div>
+                <div class="iaStyleOpt" onclick="selectIAStyle(this,'minimalista')" data-style="minimalista" style="padding:10px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;text-align:center;font-size:.82rem;font-weight:600;color:#64748b">&#x26AA; Minimalista</div>
+              </div>
+            </div>
+            <div style="margin-bottom:16px">
+              <div style="font-size:.78rem;font-weight:600;color:#64748b;text-transform:uppercase;margin-bottom:8px">Formato:</div>
+              <select id="iaFormat" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none">
+                <option value="14x5m">14x5m - Gran formato</option>
+                <option value="12x4m">12x4m - Est&#xE1;ndar</option>
+                <option value="10x3.5m">10x3.5m - Mediana</option>
+                <option value="8x3m">8x3m - Peque&#xF1;a</option>
+              </select>
+            </div>
+            <button onclick="generateAIBillboard()" style="width:100%;padding:14px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">&#x2728; Generar Dise&#xF1;o</button>
+          </div>
+          <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06);min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center" id="iaResultPanel">
+            <div id="iaPlaceholder" style="text-align:center;color:#94a3b8">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5L5 21"/></svg>
+              <p style="margin-top:12px;font-size:.9rem">Tu dise&#xF1;o aparecer&#xE1; aqu&#xED;</p>
+            </div>
+            <div id="iaLoading" style="display:none;text-align:center">
+              <div style="width:48px;height:48px;border:4px solid #e0e7ff;border-top-color:#6366F1;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 16px"></div>
+              <p style="color:#6366F1;font-weight:600">Generando tu dise&#xF1;o...</p>
+              <p style="color:#94a3b8;font-size:.82rem;margin-top:4px">Esto puede tomar 15-30 segundos</p>
+            </div>
+            <div id="iaResult" style="display:none;width:100%">
+              <img id="iaResultImg" src="" alt="Dise&#xF1;o generado" style="width:100%;border-radius:8px;margin-bottom:12px">
+              <div style="display:flex;gap:8px;justify-content:center">
+                <button onclick="downloadAIImage()" style="padding:8px 16px;background:#10b981;color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer">&#x2B07; Descargar</button>
+                <button onclick="generateAIBillboard()" style="padding:8px 16px;background:#6366F1;color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer">&#x1F504; Regenerar</button>
+              </div>
+            </div>
+            <div id="iaError" style="display:none;text-align:center;color:#ef4444">
+              <p style="font-weight:600">Error al generar</p>
+              <p id="iaErrorMsg" style="font-size:.82rem;margin-top:4px;color:#64748b"></p>
+              <button onclick="generateAIBillboard()" style="margin-top:12px;padding:8px 16px;background:#fee2e2;color:#dc2626;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer">Reintentar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
   </div>
 </div>
 
@@ -1490,6 +1558,65 @@ function addAIToCatalog() {
   showToast('Valla IA agregada al catÃ¡logo','success');
   if(typeof showView==='function')showView('catalog');
 }
-</script>
+
+// ===================== IA GENERATOR =====================
+var iaSelectedStyle = 'fotorrealista';
+
+function selectIAStyle(el, style) {
+  iaSelectedStyle = style;
+  document.querySelectorAll('.iaStyleOpt').forEach(function(opt) {
+    opt.style.border = '2px solid #e2e8f0';
+    opt.style.background = '';
+    opt.style.color = '#64748b';
+  });
+  el.style.border = '2px solid #6366F1';
+  el.style.background = '#eef2ff';
+  el.style.color = '#4f46e5';
+}
+
+function generateAIBillboard() {
+  var prompt = (document.getElementById('iaPrompt').value || '').trim();
+  if (!prompt) { showToast('Por favor describe tu valla primero', 'error'); return; }
+  var format = document.getElementById('iaFormat').value;
+  document.getElementById('iaPlaceholder').style.display = 'none';
+  document.getElementById('iaResult').style.display = 'none';
+  document.getElementById('iaError').style.display = 'none';
+  document.getElementById('iaLoading').style.display = 'block';
+  var apiUrl = 'https://api.twin.so/agents/019ca4a9-db22-7f60-85f4-39b479bbfddc/tools/ai_generate';
+  fetch(apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: prompt, style: iaSelectedStyle, format: format })
+  })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(function(data) {
+    document.getElementById('iaLoading').style.display = 'none';
+    var imgUrl = data.image_url || data.url || (data.result && data.result.image_url) || (data.result && data.result.url);
+    if (!imgUrl) throw new Error('No image URL in response');
+    document.getElementById('iaResultImg').src = imgUrl;
+    document.getElementById('iaResult').style.display = 'block';
+    showToast('Diseño generado exitosamente', 'success');
+  })
+  .catch(function(err) {
+    document.getElementById('iaLoading').style.display = 'none';
+    document.getElementById('iaError').style.display = 'block';
+    document.getElementById('iaErrorMsg').textContent = err.message || 'Error de conexión';
+  });
+}
+
+function downloadAIImage() {
+  var img = document.getElementById('iaResultImg');
+  if (!img.src) return;
+  var a = document.createElement('a');
+  a.href = img.src;
+  a.download = 'impresionarte-ia-' + Date.now() + '.png';
+  a.click();
+}</script>
+<style>
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+</style>
 </body>
 </html>
