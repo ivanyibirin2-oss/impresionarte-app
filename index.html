@@ -1614,6 +1614,12 @@ function downloadAIImage() {
   a.href = img.src;
   a.download = 'impresionarte-ia-' + Date.now() + '.png';
   a.click();
+}
+function showPage(page){
+  // Map page names to view names
+  var viewMap = { map: 'dashboard', catalog: 'catalog', about: 'about', ia: 'ai' };
+  var viewName = viewMap[page] || page;
+  if(typeof showView === 'function') showView(viewName);
 }</script>
 <style>
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
