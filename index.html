@@ -1376,68 +1376,6 @@ function useExample(prompt) {
   showToast('Prompt cargado. Presiona Generar para crear la imagen.', 'info');
 }
 
-function generateAIBillboard() {
-  var prompt = document.getElementById('aiPrompt').value.trim();
-  if (!prompt) { showToast('Escribe una descripciÃ³n para tu valla', 'error'); return; }
-  
-  var styleMap = {
-    'fotorrealista': 'photorealistic 8K billboard photograph, professional DSLR quality, golden hour lighting, Canon EOS R5',
-    'grafico': 'professional graphic design billboard, bold vector art, high contrast commercial illustration, Pantone colors',
-    'digital': 'LED digital billboard night photography, neon glowing colors, Times Square style, electric vivid lights',
-    'minimalista': 'minimalist luxury billboard, clean white space, elegant typography, Apple-style premium aesthetic'
-  };
-  
-  var enhancedPrompt = prompt + 
-    ', professional outdoor billboard advertisement mounted on steel structure, ' +
-    'Caracas Venezuela urban highway setting Autopista Francisco Fajardo, ' +
-    'tropical blue sky, vibrant Latin American advertising colors, ' +
-    'bold impactful Spanish typography, ' +
-    styleMap[aiSelectedStyle] + ', ' +
-    'horizontal 16:9 landscape billboard format, ' +
-    'Cannes Lions award-winning art direction, no watermark, masterpiece commercial photography';
-  
-  if (aiFileBase64) {
-    enhancedPrompt += ', incorporating uploaded brand logo colors and style';
-  }
-  
-  aiLastPrompt = enhancedPrompt;
-  
-  document.getElementById('aiEmpty').style.display = 'none';
-  document.getElementById('aiResult').style.display = 'none';
-  document.getElementById('aiLoading').style.display = 'block';
-  document.getElementById('btnGenerate').disabled = true;
-  document.getElementById('btnGenerate').textContent = 'Generando...';
-  
-  // Call the agent's ai_generate tool endpoint
-  fetch('/api/tools/ai_generate', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({prompt: enhancedPrompt, style: aiSelectedStyle})
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    document.getElementById('aiLoading').style.display = 'none';
-    document.getElementById('btnGenerate').disabled = false;
-    document.getElementById('btnGenerate').textContent = 'â¨ Generar Valla con IA';
-    if (data.image_url || data.url) {
-      document.getElementById('aiResultImg').src = data.image_url || data.url;
-      document.getElementById('aiResult').style.display = 'block';
-      document.getElementById('aiPromptUsed').textContent = 'Prompt: ' + prompt;
-      showToast('Valla generada exitosamente', 'success');
-    } else {
-      document.getElementById('aiEmpty').style.display = 'flex';
-      showToast('Error generando imagen: ' + (data.error || 'IntÃ©ntalo de nuevo'), 'error');
-    }
-  })
-  .catch(function(err) {
-    document.getElementById('aiLoading').style.display = 'none';
-    document.getElementById('aiEmpty').style.display = 'flex';
-    document.getElementById('btnGenerate').disabled = false;
-    document.getElementById('btnGenerate').textContent = 'â¨ Generar Valla con IA';
-    showToast('Error de conexiÃ³n. Verifica que la app estÃ© publicada en un servidor.', 'error');
-  });
-}
-
 function regenerateAI() {
   document.getElementById('aiResult').style.display = 'none';
   document.getElementById('aiLoading').style.display = 'block';
