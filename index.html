@@ -6,7 +6,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Impresionarte_ve &mdash; Gesti&#xF3;n de Vallas</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">// ===================== ImpresIAnarte AI =====================
+var iaSelectedStyle = 'fotorrealista';
+var iaLastImageUrl = null;
+var IA_ENDPOINT = 'https://corsproxy.io/?' + encodeURIComponent('https://api.twin.so/agents/019ca4a9-db22-7f60-85f4-39b479bbfddc/tools/ai_generate');
+function selectIAStyle(el) {
+  ['is-foto','is-graf','is-led','is-min'].forEach(function(id){var e=document.getElementById(id);if(e){e.style.borderColor='#e2e8f0';e.style.background='#f8f9ff';}});
+  el.style.borderColor='#6366F1'; el.style.background='#eef2ff';
+  iaSelectedStyle = el.dataset.style;
+}
+async function generateAIBillboard() {
+  var promptEl=document.getElementById('iaPrompt');
+  var prompt=promptEl?promptEl.value.trim():'';
+  if(!prompt){showToast('Escribe una descripción primero','error');return;}
+  var btn=document.getElementById('iaBtnGenerate');
+  var btnText=document.getElementById('iaBtnText');
+  if(btn)btn.disabled=true;
+  if(btnText)btnText.textContent='Generando...';
+  var ph=document.getElementById('iaPlaceholder');
+  var ri=document.getElementById('iaResultImg');
+  var ra=document.getElementById('iaResultActions');
+  var ld=document.getElementById('iaLoading');
+  if(ph)ph.style.display='none';
+  if(ri)ri.style.display='none';
+  if(ra)ra.style.display='none';
+  if(ld)ld.style.display='flex';
+  var fmt=document.getElementById('iaFormat');
+  var format=fmt?fmt.value:'14x5';
+  try{
+    var resp=await fetch(IA_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt,style:iaSelectedStyle,format:format})});
+    var rt=await resp.text();
+    if(!resp.ok)throw new Error('HTTP '+resp.status+': '+rt.substring(0,200));
+    var data;
+    try{data=JSON.parse(rt);}catch(e){throw new Error('Respuesta no JSON: '+rt.substring(0,150));}
+    var url=data.image_url||data.url||data.imageUrl;
+    if(url){
+      iaLastImageUrl=url;
+      if(ri){ri.src=url;ri.style.display='block';}
+      if(ld)ld.style.display='none';
+      if(ra)ra.style.display='block';
+      showToast('¡Valla generada exitosamente!','success');
+    }else{
+      throw new Error(data.error||'Sin imagen. Resp: '+JSON.stringify(data).substring(0,200));
+    }
+  }catch(err){
+    if(ld)ld.style.display='none';
+    if(ph){ph.style.display='block';ph.innerHTML='<div style="font-size:2rem">⚠️</div><div style="font-size:.85rem;font-weight:600;color:#ef4444;margin-top:8px">Error al generar</div><div style="font-size:.75rem;color:#94a3b8;margin-top:6px;word-break:break-all">'+err.message+'</div>';}
+    showToast('Error: '+err.message.substring(0,80),'error');
+    console.error('IA Error:',err);
+  }finally{
+    if(btn)btn.disabled=false;
+    if(btnText)btnText.textContent='✨ Generar Valla con IA';
+  }
+}
+function downloadAIImage(){if(!iaLastImageUrl)return;var a=document.createElement('a');a.href=iaLastImageUrl;a.download='valla-ia-'+Date.now()+'.png';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);}
+function addAIToCatalog(){if(!iaLastImageUrl)return;var fmt=document.getElementById('iaFormat');BILLBOARDS.push({id:'VL-AI-'+String(Date.now()).slice(-4),name:'Valla IA - '+new Date().toLocaleDateString('es-VE'),city:'Caracas',location_name:'Pendiente asignación',lat:10.4914,lng:-66.8720,status:'available',dimensions:fmt?fmt.value:'14x5',illuminated:true,faces:1,photo:iaLastImageUrl});updateStats();renderMapMarkers();renderCatalog();showToast('Valla IA agregada al catálogo','success');showPage('catalog');}
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293b;min-height:100vh}
@@ -581,7 +636,8 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
     </div>
   </div>
 </div>
-</main>
+      <div id="page-ia" class="page"><div style="background:linear-gradient(135deg,#6366F1 0%,#7C3AED 100%);border-radius:16px;padding:32px;margin-bottom:24px;color:#fff"><h2 style="font-size:1.6rem;font-weight:800;margin-bottom:8px">&#x2728; ImpresIAnarte IA</h2><p style="opacity:.85;font-size:.95rem">Genera im&#xE1;genes profesionales de vallas con IA.</p></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:24px" id="iaLayout"><div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)"><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Descripci&#xF3;n</label><textarea id="iaPrompt" rows="4" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;resize:vertical;outline:none;margin-bottom:12px" placeholder="Ej: Valla Toyota en Caracas, fondo oscuro, slogan Maneja tu sue&#xF1;o..."></textarea><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Sugerencias</label><div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px"><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Restaurante venezolano, colores c&#xE1;lidos, ambiente familiar'">&#x1F37D; Restaurante</span><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Banco moderno, colores azul y dorado, confianza'">&#x1F3E6; Banco</span><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Concesionaria de autos, fondo oscuro, rojo y negro'">&#x1F697; Autos</span><span style="padding:5px 11px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer" onclick="document.getElementById('iaPrompt').value='Centro comercial, colorido, promoci&#xF3;n de temporada'">&#x1F6CD; Retail</span></div><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Estilo</label><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px"><div id="is-foto" onclick="selectIAStyle(this)" data-style="fotorrealista" style="border:2px solid #6366F1;background:#eef2ff;border-radius:10px;padding:12px;text-align:center;cursor:pointer"><div style="font-size:1.2rem">&#x1F4F8;</div><div style="font-size:.8rem;font-weight:700">Fotorrealista</div></div><div id="is-graf" onclick="selectIAStyle(this)" data-style="grafico" style="border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#f8f9ff"><div style="font-size:1.2rem">&#x1F3A8;</div><div style="font-size:.8rem;font-weight:700">Gr&#xE1;fico</div></div><div id="is-led" onclick="selectIAStyle(this)" data-style="digital" style="border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#f8f9ff"><div style="font-size:1.2rem">&#x1F4A1;</div><div style="font-size:.8rem;font-weight:700">LED Digital</div></div><div id="is-min" onclick="selectIAStyle(this)" data-style="minimalista" style="border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;background:#f8f9ff"><div style="font-size:1.2rem">&#x26AA;</div><div style="font-size:.8rem;font-weight:700">Minimalista</div></div></div><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:8px">Formato</label><select id="iaFormat" style="width:100%;padding:9px 12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;margin-bottom:20px"><option value="14x5">14x5 m &#x2014; Valla Grande</option><option value="10x3.5">10x3.5 m &#x2014; Est&#xE1;ndar</option><option value="8x3">8x3 m &#x2014; Mediana</option><option value="paleta">Paleta 3x1.5 m</option></select><button onclick="generateAIBillboard()" id="iaBtnGenerate" style="width:100%;padding:14px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer"><span id="iaBtnText">&#x2728; Generar Valla con IA</span></button></div><div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 1px 4px rgba(0,0,0,.06)"><label style="font-size:.8rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:16px">Resultado</label><div id="iaResultArea" style="border:2px dashed #c7d2fe;border-radius:12px;min-height:280px;display:flex;align-items:center;justify-content:center;background:#f8f9ff;overflow:hidden;flex-direction:column"><div id="iaPlaceholder" style="text-align:center;color:#a5b4fc;padding:20px"><div style="font-size:3rem;margin-bottom:12px">&#x1F5BC;</div><div style="font-size:.9rem;font-weight:600">Tu valla aparecer&#xE1; aqu&#xED;</div><div style="font-size:.8rem;color:#94a3b8;margin-top:6px">Describe y presiona generar</div></div><div id="iaLoading" style="display:none;text-align:center;color:#6366F1;padding:20px"><div style="width:40px;height:40px;border:4px solid #e0e7ff;border-top-color:#6366F1;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto"></div><div style="font-size:.9rem;font-weight:600;margin-top:16px">Generando tu valla...</div><div style="font-size:.8rem;color:#94a3b8;margin-top:4px">Espera 20-40 segundos</div></div><img id="iaResultImg" src="" style="display:none;width:100%;object-fit:contain;border-radius:10px" alt="Valla generada"></div><div id="iaResultActions" style="display:none;margin-top:14px"><button onclick="downloadAIImage()" style="padding:10px 16px;background:#f0fdf4;color:#16a34a;border:1px solid #86efac;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;margin-right:8px">&#x2B07; Descargar</button><button onclick="addAIToCatalog()" style="padding:10px 16px;background:#e0e7ff;color:#4f46e5;border:1px solid #a5b4fc;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;margin-right:8px">+ Cat&#xE1;logo</button><button onclick="generateAIBillboard()" style="padding:10px 16px;background:#fef9c3;color:#92400e;border:1px solid #fde68a;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer">&#x21BA; Regenerar</button></div></div></div></div>
+    </main>
   </div>
 </div>
 
