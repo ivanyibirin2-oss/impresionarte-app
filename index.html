@@ -163,6 +163,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @media(max-width:900px){.aiGrid{grid-template-columns:1fr}.exampleGrid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.exampleGrid{grid-template-columns:1fr}}
+
+/* ImpresIAnarte AI Styles */
+.iaChip{padding:6px 12px;background:#e0e7ff;color:#4f46e5;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-block}
+.iaChip:hover{background:#6366F1;color:#fff}
+.iaStyleCard{border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s;background:#f8f9ff}
+.iaStyleCard:hover{border-color:#6366F1;background:#eef2ff}
+.iaStyleCard.active{border-color:#6366F1;background:#eef2ff}
+.iaSpinner{width:40px;height:40px;border:4px solid #e0e7ff;border-top-color:#6366F1;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){#iaLayout{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1337,98 +1347,6 @@ function buildEnhancedPrompt(userPrompt, style, format, hasFileUpload){
   return parts.join('. ');
 }
 
-function generateAIBillboard(){
-  var prompt = (document.getElementById('aiPrompt')||{}).value||'';
-  if(!prompt.trim()){
-    showToast('Escribe una descripciÃÂ³n para tu valla', 'error');
-    return;
-  }
-  var selectedStyle = (document.querySelector('.styleOption.selected')||{getAttribute:function(){return 'fotorrealista';}}).getAttribute('data-style')||'fotorrealista';
-  var formatEl = document.querySelector('input[name="aiFormat"]:checked');
-  var format = formatEl ? formatEl.value : '14x5m';
-  var hasFileUpload = !!(window._aiUploadedFileBase64);
-  var enhancedPrompt = buildEnhancedPrompt(prompt, selectedStyle, format, hasFileUpload);
-
-  // Show loading state
-  var empty = document.getElementById('aiResultEmpty');
-  var loading = document.getElementById('aiResultLoading');
-  var success = document.getElementById('aiResultSuccess');
-  var btn = document.getElementById('btnGenerate');
-  if(empty) empty.style.display='none';
-  if(success) success.style.display='none';
-  if(loading) loading.style.display='block';
-  if(btn){ btn.disabled=true; btn.textContent='Generando...'; }
-
-  // Build Gemini Imagen 3 request
-  var requestBody = {
-    instances: [{ prompt: enhancedPrompt }],
-    parameters: { sampleCount: 1, aspectRatio: '16:9', safetySetting: 'BLOCK_ONLY_HIGH' }
-  };
-
-  // Call Gemini Imagen 3 API
-  fetch('https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=Iays20090218', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(requestBody)
-  })
-  .then(function(r){
-    if(!r.ok){
-      return r.json().then(function(e){
-        throw new Error(e.error && e.error.message ? e.error.message : 'Error HTTP ' + r.status);
-      });
-    }
-    return r.json();
-  })
-  .then(function(data){
-    if(loading) loading.style.display='none';
-    if(btn){ btn.disabled=false; btn.textContent='Ã¢ÂÂ¨ Generar Valla con IA'; }
-    var prediction = data && data.predictions && data.predictions[0];
-    if(prediction && prediction.bytesBase64Encoded){
-      var mimeType = prediction.mimeType || 'image/png';
-      var dataUrl = 'data:' + mimeType + ';base64,' + prediction.bytesBase64Encoded;
-      var img = document.getElementById('aiResultImg');
-      var usedPrompt = document.getElementById('aiUsedPrompt');
-      if(img){ img.src = dataUrl; img.style.display='block'; }
-      if(usedPrompt) usedPrompt.textContent = 'Prompt: ' + prompt;
-      if(success) success.style.display='block';
-      showToast('ÃÂ¡Valla generada con ÃÂ©xito!', 'success');
-    } else {
-      if(empty) empty.style.display='block';
-      showToast('Respuesta inesperada de la API de imÃÂ¡genes', 'error');
-    }
-  })
-  .catch(function(err){
-    if(loading) loading.style.display='none';
-    if(btn){ btn.disabled=false; btn.textContent='Ã¢ÂÂ¨ Generar Valla con IA'; }
-    if(empty) empty.style.display='block';
-    showToast('Error al generar: ' + (err.message||'Intenta de nuevo'), 'error');
-    console.error('ImpresIAnarte error:', err);
-  });
-}
-
-// ImpresIAnarte AI Functions
-var aiSelectedStyle = 'fotorrealista';
-var aiFileBase64 = null;
-var aiLastPrompt = '';
-
-function appendChip(text) {
-  var ta = document.getElementById('aiPrompt');
-  ta.value = ta.value ? ta.value + ', ' + text : text;
-  ta.focus();
-}
-
-function selectStyle(el) {
-  document.querySelectorAll('.styleOpt').forEach(function(o) {
-    o.style.border = '2px solid #e2e8f0';
-    o.style.background = '#fff';
-    o.querySelector('div:last-child').style.color = '#475569';
-  });
-  el.style.border = '2px solid #6366F1';
-  el.style.background = '#eef2ff';
-  el.querySelector('div:last-child').style.color = '#4f46e5';
-  aiSelectedStyle = el.getAttribute('data-style');
-}
-
 function handleAiDrop(e) {
   e.preventDefault();
   var file = e.dataTransfer.files[0];
@@ -1554,6 +1472,128 @@ function downloadAiImage() {
   a.href = img;
   a.download = 'impresianarte_valla.png';
   a.click();
+}
+
+// ===================== IMPRESIÁNARTE AI VARIABLES & FUNCTIONS =====================
+var iaSelectedStyle = 'fotorrealista';
+var iaLastImageUrl = null;
+
+function selectStyle(el) {
+  document.querySelectorAll('.iaStyleCard').forEach(function(c) { c.classList.remove('active'); });
+  el.classList.add('active');
+  iaSelectedStyle = el.dataset.style;
+}
+
+function appendChip(text) {
+  var ta = document.getElementById('aiPrompt');
+  if (ta) {
+    ta.value = text;
+    ta.focus();
+  }
+}
+
+async function generateAIBillboard() {
+  var promptEl = document.getElementById('aiPrompt');
+  var prompt = promptEl ? promptEl.value.trim() : '';
+  if (!prompt) { showToast('Escribe una descripción primero', 'error'); return; }
+  
+  var btn = document.getElementById('iaBtnGenerate');
+  var btnText = document.getElementById('iaBtnText');
+  var btnIcon = document.getElementById('iaBtnIcon');
+  if (btn) btn.disabled = true;
+  if (btnText) btnText.textContent = 'Generando...';
+  if (btnIcon) btnIcon.textContent = '⏳';
+  
+  var placeholder = document.getElementById('iaPlaceholder');
+  var resultImg = document.getElementById('iaResultImg');
+  var resultActions = document.getElementById('iaResultActions');
+  var loading = document.getElementById('iaLoading');
+  
+  if (placeholder) placeholder.style.display = 'none';
+  if (resultImg) resultImg.style.display = 'none';
+  if (resultActions) resultActions.style.display = 'none';
+  if (loading) loading.style.display = 'block';
+  
+  var formatEl = document.getElementById('iaFormat');
+  var format = formatEl ? formatEl.value : '14x5';
+  
+  try {
+    // Call the agent's HTTP endpoint
+    var endpoint = window.IA_ENDPOINT_URL || 'https://api.twin.so/agents/impresionarte_ve/tools/ai_generate';
+    var response = await fetch(endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: prompt, style: iaSelectedStyle, format: format })
+    });
+    
+    if (!response.ok) throw new Error('HTTP ' + response.status);
+    var data = await response.json();
+    
+    if (data.image_url) {
+      iaLastImageUrl = data.image_url;
+      var img = document.getElementById('iaResultImg');
+      if (img) {
+        img.src = data.image_url;
+        img.style.display = 'block';
+      }
+      if (loading) loading.style.display = 'none';
+      if (resultActions) resultActions.style.display = 'flex';
+      showToast('¡Valla generada exitosamente!', 'success');
+    } else {
+      throw new Error(data.error || 'Sin imagen en respuesta');
+    }
+  } catch(err) {
+    if (loading) loading.style.display = 'none';
+    if (placeholder) {
+      placeholder.style.display = 'block';
+      placeholder.innerHTML = '<div style="font-size:2rem">⚠️</div><div style="font-size:.9rem;font-weight:600;color:#ef4444;margin-top:8px">Error al generar imagen</div><div style="font-size:.78rem;color:#94a3b8;margin-top:6px">' + (err.message || 'Error desconocido') + '</div>';
+    }
+    showToast('Error: ' + (err.message || 'Error desconocido'), 'error');
+  } finally {
+    if (btn) btn.disabled = false;
+    if (btnText) btnText.textContent = 'Generar Valla con IA';
+    if (btnIcon) btnIcon.textContent = '✨';
+  }
+}
+
+function downloadAIImage() {
+  if (!iaLastImageUrl) return;
+  var a = document.createElement('a');
+  a.href = iaLastImageUrl;
+  a.download = 'valla-ia-' + Date.now() + '.png';
+  a.target = '_blank';
+  a.click();
+}
+
+function addAIToCatalog() {
+  if (!iaLastImageUrl) return;
+  var newId = 'VL-AI-' + String(Date.now()).slice(-4);
+  var formatEl = document.getElementById('iaFormat');
+  var format = formatEl ? formatEl.value : '14x5';
+  
+  if (typeof BILLBOARDS !== 'undefined') {
+    BILLBOARDS.push({
+      id: newId,
+      name: 'Valla IA - ' + new Date().toLocaleDateString('es-VE'),
+      city: 'Caracas',
+      location_name: 'Pendiente asignación',
+      lat: 10.4914,
+      lng: -66.8720,
+      status: 'available',
+      dimensions: format,
+      price: 0,
+      illuminated: true,
+      faces: 1,
+      client: null,
+      contract_end: null,
+      photo: iaLastImageUrl
+    });
+    if (typeof updateStats === 'function') updateStats();
+    if (typeof renderMapMarkers === 'function') renderMapMarkers();
+    if (typeof renderCatalog === 'function') renderCatalog();
+  }
+  showToast('Valla IA agregada al catálogo', 'success');
+  showView('catalog');
 }
 </script>
 </body>
