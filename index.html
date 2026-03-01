@@ -18,7 +18,7 @@ function selectIAStyle(el) {
 async function generateAIBillboard() {
   var promptEl=document.getElementById('iaPrompt');
   var prompt=promptEl?promptEl.value.trim():'';
-  if(!prompt){showToast('Escribe una descripción primero','error');return;}
+  if(!prompt){showToast('Escribe una descripciÃ³n primero','error');return;}
   var btn=document.getElementById('iaBtnGenerate');
   var btnText=document.getElementById('iaBtnText');
   if(btn)btn.disabled=true;
@@ -45,22 +45,22 @@ async function generateAIBillboard() {
       if(ri){ri.src=url;ri.style.display='block';}
       if(ld)ld.style.display='none';
       if(ra)ra.style.display='block';
-      showToast('¡Valla generada exitosamente!','success');
+      showToast('Â¡Valla generada exitosamente!','success');
     }else{
       throw new Error(data.error||'Sin imagen. Resp: '+JSON.stringify(data).substring(0,200));
     }
   }catch(err){
     if(ld)ld.style.display='none';
-    if(ph){ph.style.display='block';ph.innerHTML='<div style="font-size:2rem">⚠️</div><div style="font-size:.85rem;font-weight:600;color:#ef4444;margin-top:8px">Error al generar</div><div style="font-size:.75rem;color:#94a3b8;margin-top:6px;word-break:break-all">'+err.message+'</div>';}
+    if(ph){ph.style.display='block';ph.innerHTML='<div style="font-size:2rem">â ï¸</div><div style="font-size:.85rem;font-weight:600;color:#ef4444;margin-top:8px">Error al generar</div><div style="font-size:.75rem;color:#94a3b8;margin-top:6px;word-break:break-all">'+err.message+'</div>';}
     showToast('Error: '+err.message.substring(0,80),'error');
     console.error('IA Error:',err);
   }finally{
     if(btn)btn.disabled=false;
-    if(btnText)btnText.textContent='✨ Generar Valla con IA';
+    if(btnText)btnText.textContent='â¨ Generar Valla con IA';
   }
 }
 function downloadAIImage(){if(!iaLastImageUrl)return;var a=document.createElement('a');a.href=iaLastImageUrl;a.download='valla-ia-'+Date.now()+'.png';a.target='_blank';document.body.appendChild(a);a.click();document.body.removeChild(a);}
-function addAIToCatalog(){if(!iaLastImageUrl)return;var fmt=document.getElementById('iaFormat');BILLBOARDS.push({id:'VL-AI-'+String(Date.now()).slice(-4),name:'Valla IA - '+new Date().toLocaleDateString('es-VE'),city:'Caracas',location_name:'Pendiente asignación',lat:10.4914,lng:-66.8720,status:'available',dimensions:fmt?fmt.value:'14x5',illuminated:true,faces:1,photo:iaLastImageUrl});updateStats();renderMapMarkers();renderCatalog();showToast('Valla IA agregada al catálogo','success');showPage('catalog');}
+function addAIToCatalog(){if(!iaLastImageUrl)return;var fmt=document.getElementById('iaFormat');BILLBOARDS.push({id:'VL-AI-'+String(Date.now()).slice(-4),name:'Valla IA - '+new Date().toLocaleDateString('es-VE'),city:'Caracas',location_name:'Pendiente asignaciÃ³n',lat:10.4914,lng:-66.8720,status:'available',dimensions:fmt?fmt.value:'14x5',illuminated:true,faces:1,photo:iaLastImageUrl});updateStats();renderMapMarkers();renderCatalog();showToast('Valla IA agregada al catÃ¡logo','success');showPage('catalog');}
 </script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -385,7 +385,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
         <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Fondo nocturno con luces de ciudad')">Fondo nocturno</span>
         <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Colores vibrantes y llamativos')">Colores vibrantes</span>
         <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Estilo fotorrealista profesional')">Fotorrealista</span>
-        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('DiseÃÂÃÂÃÂÃÂ±o minimalista y elegante')">Minimalista</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('DiseÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o minimalista y elegante')">Minimalista</span>
         <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Autopista Francisco Fajardo Caracas')">Autopista</span>
         <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Letras grandes y llamativas')">Letras grandes</span>
         <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Valla iluminada LED digital')">LED Digital</span>
@@ -400,7 +400,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
         </div>
         <div class="styleOpt" data-style="grafico" onclick="selectStyle(this)" style="border:2px solid #e2e8f0;border-radius:8px;padding:10px;cursor:pointer;text-align:center">
           <div style="font-size:1.2rem">&#x1F3A8;</div>
-          <div style="font-size:.8rem;font-weight:600;color:#475569">DiseÃÂÃÂÃÂÃÂ±o GrÃÂÃÂÃÂÃÂ¡fico</div>
+          <div style="font-size:.8rem;font-weight:600;color:#475569">DiseÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±o GrÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡fico</div>
         </div>
         <div class="styleOpt" data-style="digital" onclick="selectStyle(this)" style="border:2px solid #e2e8f0;border-radius:8px;padding:10px;cursor:pointer;text-align:center">
           <div style="font-size:1.2rem">&#x1F4A1;</div>
@@ -416,7 +416,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
       <label style="font-size:.78rem;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-top:16px;margin-bottom:8px">Logo o Referencia (opcional)</label>
       <div id="aiDropZone" style="border:2px dashed #c7d2fe;border-radius:8px;padding:16px;text-align:center;cursor:pointer;background:#f8f9ff" onclick="document.getElementById('aiFileInput').click()" ondragover="event.preventDefault()" ondrop="handleAiDrop(event)">
         <div style="font-size:1.5rem">&#x1F4C1;</div>
-        <p style="font-size:.82rem;color:#64748b;margin-top:4px">Arrastra tu logo aquÃÂÃÂÃÂÃÂ­ o haz clic</p>
+        <p style="font-size:.82rem;color:#64748b;margin-top:4px">Arrastra tu logo aquÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­ o haz clic</p>
         <p style="font-size:.72rem;color:#94a3b8">JPG, PNG, SVG</p>
         <img id="aiFilePreview" src="" style="display:none;max-height:80px;margin-top:8px;border-radius:6px">
       </div>
@@ -435,7 +435,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
       <!-- Empty state -->
       <div id="aiEmpty" style="min-height:300px;border:2px dashed #c7d2fe;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f8f9ff;padding:24px;text-align:center">
         <div style="font-size:3rem;margin-bottom:12px">&#x1F5FA;&#xFE0F;</div>
-        <p style="color:#94a3b8;font-size:.9rem">Tu valla generada aparecerÃÂÃÂÃÂÃÂ¡ aquÃÂÃÂÃÂÃÂ­</p>
+        <p style="color:#94a3b8;font-size:.9rem">Tu valla generada aparecerÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡ aquÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­</p>
         <p style="color:#c7d2fe;font-size:.78rem;margin-top:6px">Describe tu valla y presiona Generar</p>
       </div>
 
@@ -459,12 +459,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
 
   <!-- Example prompts -->
   <div style="margin-top:24px">
-    <h3 style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px">&#x1F4A1; Ejemplos de InspiraciÃÂÃÂÃÂÃÂ³n</h3>
+    <h3 style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px">&#x1F4A1; Ejemplos de InspiraciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n</h3>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" id="aiExamples">
-      <div style="background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Cerveza Polar Venezuela, colores dorados y rojos vibrantes, botella de cerveza frÃÂÃÂÃÂÃÂ­a con condensaciÃÂÃÂÃÂÃÂ³n, fondo de montaÃÂÃÂÃÂÃÂ±a venezolana, texto CERVEZA POLAR en grande, slogan La Preferida de Venezuela, estilo fotorrealista')">
+      <div style="background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Cerveza Polar Venezuela, colores dorados y rojos vibrantes, botella de cerveza frÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­a con condensaciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n, fondo de montaÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±a venezolana, texto CERVEZA POLAR en grande, slogan La Preferida de Venezuela, estilo fotorrealista')">
         <div style="font-size:1.5rem">&#x1F37A;</div>
         <div style="font-weight:700;margin-top:6px">Cerveza Polar</div>
-        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Dorados y rojos, estilo venezolano clÃÂÃÂÃÂÃÂ¡sico</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Dorados y rojos, estilo venezolano clÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡sico</div>
         <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
       </div>
       <div style="background:linear-gradient(135deg,#1e40af,#3b82f6);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria corporativa para Banco Mercantil Venezuela, colores azul marino y dorado, familia venezolana feliz, edificios modernos de Caracas de fondo, texto BANCO MERCANTIL Tu Banco de Confianza, estilo profesional fotorrealista')">
@@ -473,28 +473,28 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
         <div style="font-size:.75rem;opacity:.85;margin-top:4px">Azul corporativo, confianza y solidez</div>
         <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
       </div>
-      <div style="background:linear-gradient(135deg,#0f172a,#0ea5e9);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria tecnolÃÂÃÂÃÂÃÂ³gica para Digitel 5G Venezuela, colores cyan neÃÂÃÂÃÂÃÂ³n y negro, velocidad y tecnologÃÂÃÂÃÂÃÂ­a, ondas de seÃÂÃÂÃÂÃÂ±al 5G, ciudad de Caracas de noche con luces, texto DIGITEL 5G La Velocidad que Necesitas, estilo digital LED futurista')">
+      <div style="background:linear-gradient(135deg,#0f172a,#0ea5e9);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria tecnolÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³gica para Digitel 5G Venezuela, colores cyan neÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n y negro, velocidad y tecnologÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­a, ondas de seÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±al 5G, ciudad de Caracas de noche con luces, texto DIGITEL 5G La Velocidad que Necesitas, estilo digital LED futurista')">
         <div style="font-size:1.5rem">&#x1F4F6;</div>
         <div style="font-weight:700;margin-top:6px">Digitel 5G</div>
-        <div style="font-size:.75rem;opacity:.85;margin-top:4px">TecnolÃÂÃÂÃÂÃÂ³gico, cyan y negro, futurista</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">TecnolÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³gico, cyan y negro, futurista</div>
         <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
       </div>
-      <div style="background:linear-gradient(135deg,#7c3aed,#ec4899);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Centro Comercial en Caracas Venezuela, colores morado y rosa vibrantes, familias y jÃÂÃÂÃÂÃÂ³venes comprando, tiendas modernas de fondo, texto GRAN LIQUIDACIÃÂÃÂÃÂÃÂN hasta 70% descuento, estilo colorido y llamativo')">
+      <div style="background:linear-gradient(135deg,#7c3aed,#ec4899);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Centro Comercial en Caracas Venezuela, colores morado y rosa vibrantes, familias y jÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³venes comprando, tiendas modernas de fondo, texto GRAN LIQUIDACIÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂN hasta 70% descuento, estilo colorido y llamativo')">
         <div style="font-size:1.5rem">&#x1F6CD;&#xFE0F;</div>
         <div style="font-weight:700;margin-top:6px">Centro Comercial</div>
-        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Colorido, ofertas, pÃÂÃÂÃÂÃÂºblico familiar</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Colorido, ofertas, pÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂºblico familiar</div>
         <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
       </div>
-      <div style="background:linear-gradient(135deg,#1e293b,#475569);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Toyota Venezuela, SUV Toyota RAV4 en carretera venezolana, colores plateado y negro, montaÃÂÃÂÃÂÃÂ±as venezolanas de fondo, atardecer dorado, texto TOYOTA La Fuerza que te Mueve, estilo fotorrealista premium')">
+      <div style="background:linear-gradient(135deg,#1e293b,#475569);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Toyota Venezuela, SUV Toyota RAV4 en carretera venezolana, colores plateado y negro, montaÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±as venezolanas de fondo, atardecer dorado, texto TOYOTA La Fuerza que te Mueve, estilo fotorrealista premium')">
         <div style="font-size:1.5rem">&#x1F697;</div>
         <div style="font-weight:700;margin-top:6px">Toyota Venezuela</div>
-        <div style="font-size:.75rem;opacity:.85;margin-top:4px">AutomÃÂÃÂÃÂÃÂ³vil, elegancia y potencia</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">AutomÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³vil, elegancia y potencia</div>
         <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
       </div>
-      <div style="background:linear-gradient(135deg,#1d4ed8,#dc2626);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Pepsi Venezuela, colores azul y rojo vibrantes, lata de Pepsi frÃÂÃÂÃÂÃÂ­a salpicando agua, jÃÂÃÂÃÂÃÂ³venes venezolanos divirtiÃÂÃÂÃÂÃÂ©ndose, fiesta y energÃÂÃÂÃÂÃÂ­a, texto PEPSI Elige tu GeneraciÃÂÃÂÃÂÃÂ³n, estilo fotorrealista juvenil')">
+      <div style="background:linear-gradient(135deg,#1d4ed8,#dc2626);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Pepsi Venezuela, colores azul y rojo vibrantes, lata de Pepsi frÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­a salpicando agua, jÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³venes venezolanos divirtiÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©ndose, fiesta y energÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­a, texto PEPSI Elige tu GeneraciÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³n, estilo fotorrealista juvenil')">
         <div style="font-size:1.5rem">&#x1F964;</div>
         <div style="font-weight:700;margin-top:6px">Pepsi Venezuela</div>
-        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Azul y rojo, jÃÂÃÂÃÂÃÂ³venes, energÃÂÃÂÃÂÃÂ­a</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Azul y rojo, jÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ³venes, energÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ­a</div>
         <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
       </div>
     </div>
@@ -1448,7 +1448,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 
-// ===================== ImpresIAnarte AI =====================
+// ===================== ImpresIAnarte AI - ÃNICO BLOQUE =====================
 var iaSelectedStyle = 'fotorrealista';
 var iaLastImageUrl = null;
 var IA_ENDPOINT = 'https://corsproxy.io/?' + encodeURIComponent('https://api.twin.so/agents/019ca4a9-db22-7f60-85f4-39b479bbfddc/tools/ai_generate');
@@ -1463,7 +1463,7 @@ function selectStyle(el) {
   el.style.borderColor='#6366F1'; el.style.background='#eef2ff';
 }
 function appendChip(text) { var ta=document.getElementById('aiPrompt'); if(ta){ta.value=text;ta.focus();} }
-function useExample(p) { var ta=document.getElementById('aiPrompt'); if(ta)ta.value=p; showToast('Prompt cargado','success'); }
+function useExample(prompt) { var ta=document.getElementById('aiPrompt'); if(ta)ta.value=prompt; showToast('Prompt cargado','success'); }
 function handleAiDrop(e) { e.preventDefault(); var f=e.dataTransfer.files[0]; if(f&&f.type.startsWith('image/'))readAiFile(f); }
 function handleAiFile(e) { var f=e.target.files[0]; if(f)readAiFile(f); }
 function readAiFile(file) {
@@ -1472,67 +1472,71 @@ function readAiFile(file) {
   r.readAsDataURL(file);
 }
 async function generateAIBillboard() {
-  var promptEl=document.getElementById('iaPrompt')||document.getElementById('aiPrompt');
-  var prompt=promptEl?promptEl.value.trim():'';
-  if(!prompt){showToast('Escribe una descripciÃ³n primero','error');return;}
-  var btn=document.getElementById('iaBtnGenerate')||document.getElementById('btnGenerate');
-  var btnText=document.getElementById('iaBtnText');
-  if(btn)btn.disabled=true;
-  if(btnText)btnText.textContent='Generando...';
-  var placeholder=document.getElementById('iaPlaceholder')||document.getElementById('aiEmpty');
-  var resultImg=document.getElementById('iaResultImg')||document.getElementById('aiResultImg');
-  var resultActions=document.getElementById('iaResultActions');
-  var loadingEl=document.getElementById('iaLoading')||document.getElementById('aiLoading');
-  var resultEl=document.getElementById('aiResult');
-  if(placeholder)placeholder.style.display='none';
-  if(resultImg)resultImg.style.display='none';
-  if(resultActions)resultActions.style.display='none';
-  if(loadingEl)loadingEl.style.display='flex';
-  if(resultEl)resultEl.style.display='none';
-  var formatEl=document.getElementById('iaFormat');
-  var format=formatEl?formatEl.value:'14x5';
+  var promptEl = document.getElementById('iaPrompt') || document.getElementById('aiPrompt');
+  var prompt = promptEl ? promptEl.value.trim() : '';
+  if (!prompt) { showToast('Escribe una descripciÃ³n primero', 'error'); return; }
+  var btn = document.getElementById('iaBtnGenerate') || document.getElementById('btnGenerate');
+  var btnText = document.getElementById('iaBtnText');
+  if (btn) btn.disabled = true;
+  if (btnText) btnText.textContent = 'Generando...';
+  var placeholder = document.getElementById('iaPlaceholder') || document.getElementById('aiEmpty');
+  var resultImg = document.getElementById('iaResultImg') || document.getElementById('aiResultImg');
+  var resultActions = document.getElementById('iaResultActions');
+  var loadingEl = document.getElementById('iaLoading') || document.getElementById('aiLoading');
+  var resultEl = document.getElementById('aiResult');
+  if (placeholder) placeholder.style.display = 'none';
+  if (resultImg) resultImg.style.display = 'none';
+  if (resultActions) resultActions.style.display = 'none';
+  if (loadingEl) loadingEl.style.display = 'flex';
+  if (resultEl) resultEl.style.display = 'none';
+  var formatEl = document.getElementById('iaFormat');
+  var format = formatEl ? formatEl.value : '14x5';
   try {
-    var resp=await fetch(IA_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt,style:iaSelectedStyle,format:format})});
-    var rt=await resp.text();
-    if(!resp.ok)throw new Error('HTTP '+resp.status+': '+rt.substring(0,200));
+    var resp = await fetch(IA_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt: prompt, style: iaSelectedStyle, format: format })
+    });
+    var responseText = await resp.text();
+    if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + responseText.substring(0, 200));
     var data;
-    try{data=JSON.parse(rt);}catch(e){throw new Error('No JSON: '+rt.substring(0,150));}
-    var imageUrl=data.image_url||data.url||data.imageUrl;
-    if(imageUrl){
-      iaLastImageUrl=imageUrl;
-      if(resultImg){resultImg.src=imageUrl;resultImg.style.display='block';}
-      if(loadingEl)loadingEl.style.display='none';
-      if(resultActions)resultActions.style.display='block';
-      if(resultEl)resultEl.style.display='block';
-      showToast('Â¡Valla generada!','success');
-    }else{
-      throw new Error(data.error||'Sin imagen. Resp: '+JSON.stringify(data).substring(0,200));
+    try { data = JSON.parse(responseText); } catch(e) { throw new Error('Respuesta no JSON: ' + responseText.substring(0, 150)); }
+    var imageUrl = data.image_url || data.url || data.imageUrl;
+    if (imageUrl) {
+      iaLastImageUrl = imageUrl;
+      if (resultImg) { resultImg.src = imageUrl; resultImg.style.display = 'block'; }
+      if (loadingEl) loadingEl.style.display = 'none';
+      if (resultActions) resultActions.style.display = 'block';
+      if (resultEl) resultEl.style.display = 'block';
+      showToast('Â¡Valla generada exitosamente!', 'success');
+    } else {
+      throw new Error(data.error || 'Sin imagen. Respuesta: ' + JSON.stringify(data).substring(0, 200));
     }
-  }catch(err){
-    if(loadingEl)loadingEl.style.display='none';
-    if(placeholder){
-      placeholder.style.display='block';
-      placeholder.innerHTML='<div style="font-size:2rem">â ï¸</div><div style="font-size:.85rem;font-weight:600;color:#ef4444;margin-top:8px">Error al generar</div><div style="font-size:.75rem;color:#94a3b8;margin-top:6px;word-break:break-all">'+err.message+'</div>';
+  } catch(err) {
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (placeholder) {
+      placeholder.style.display = 'block';
+      placeholder.innerHTML = '<div style="font-size:2rem">â ï¸</div><div style="font-size:.85rem;font-weight:600;color:#ef4444;margin-top:8px">Error al generar</div><div style="font-size:.75rem;color:#94a3b8;margin-top:6px;word-break:break-all">' + err.message + '</div>';
     }
-    showToast('Error: '+err.message.substring(0,80),'error');
-    console.error('IA Error:',err);
-  }finally{
-    if(btn)btn.disabled=false;
-    if(btnText)btnText.textContent='â¨ Generar Valla con IA';
+    showToast('Error: ' + err.message.substring(0, 80), 'error');
+    console.error('IA Error:', err);
+  } finally {
+    if (btn) btn.disabled = false;
+    if (btnText) btnText.textContent = 'â¨ Generar Valla con IA';
   }
 }
-function regenerateAI(){generateAIBillboard();}
-function downloadAIImage(){
-  if(!iaLastImageUrl)return;
-  var a=document.createElement('a');a.href=iaLastImageUrl;a.download='valla-ia-'+Date.now()+'.png';a.target='_blank';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+function regenerateAI() { generateAIBillboard(); }
+function downloadAIImage() {
+  if (!iaLastImageUrl) return;
+  var a=document.createElement('a'); a.href=iaLastImageUrl; a.download='valla-ia-'+Date.now()+'.png'; a.target='_blank';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
-function downloadAiImage(){downloadAIImage();}
-function addAIToCatalog(){
-  if(!iaLastImageUrl)return;
+function downloadAiImage() { downloadAIImage(); }
+function addAIToCatalog() {
+  if (!iaLastImageUrl) return;
   var formatEl=document.getElementById('iaFormat');
   var format=formatEl?formatEl.value:'14x5';
-  if(typeof BILLBOARDS!=='undefined'){
+  if (typeof BILLBOARDS !== 'undefined') {
     BILLBOARDS.push({id:'VL-AI-'+String(Date.now()).slice(-4),name:'Valla IA - '+new Date().toLocaleDateString('es-VE'),city:'Caracas',location_name:'Pendiente asignaciÃ³n',lat:10.4914,lng:-66.8720,status:'available',dimensions:format,illuminated:true,faces:1,photo:iaLastImageUrl});
     if(typeof saveBillboards==='function')saveBillboards();
     if(typeof updateStats==='function')updateStats();
