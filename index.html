@@ -288,179 +288,143 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
           <p id="aboutP3">Ser la empresa l&#xED;der en publicidad exterior en Venezuela, reconocida por nuestra innovaci&#xF3;n, calidad de servicio y compromiso con el &#xE9;xito de nuestros clientes.</p>
         </div>
       <div id="viewAi" style="display:none">
-        <!-- Hero Banner -->
-        <div class="aiHero">
-          <div style="font-size:2.5rem;margin-bottom:10px">&#x2728;</div>
-          <h1 style="font-size:2rem;font-weight:800;margin-bottom:8px;letter-spacing:-0.5px">ImpresIAnarte</h1>
-          <p style="font-size:1.05rem;opacity:.9;margin-bottom:12px">Genera vallas publicitarias profesionales con Inteligencia Artificial</p>
-          <span style="background:rgba(255,255,255,.2);padding:4px 14px;border-radius:20px;font-size:.78rem;font-weight:600;letter-spacing:1px">Powered by AI</span>
+  <!-- Hero -->
+  <div style="background:linear-gradient(135deg,#6366F1,#7C3AED,#EC4899);border-radius:16px;padding:36px;text-align:center;margin-bottom:24px;color:#fff">
+    <div style="font-size:2.5rem;margin-bottom:8px">&#x2728;</div>
+    <h1 style="font-size:1.8rem;font-weight:900;margin-bottom:8px">ImpresIAnarte</h1>
+    <p style="opacity:.9;font-size:1rem">Genera vallas publicitarias profesionales con Inteligencia Artificial</p>
+    <span style="background:rgba(255,255,255,.2);padding:4px 14px;border-radius:20px;font-size:.78rem;margin-top:12px;display:inline-block">Powered by Gemini AI &#x2726; Estilo Venezolano</span>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+    <!-- LEFT: Controls -->
+    <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+      <h3 style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px">Describe tu valla publicitaria</h3>
+      
+      <label style="font-size:.78rem;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px">Instrucciones para la IA</label>
+      <textarea id="aiPrompt" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:.9rem;min-height:120px;resize:vertical;outline:none;font-family:inherit" placeholder="Ej: Valla para una marca de cerveza venezolana, colores dorados y rojos, autopista de Caracas, texto CERVEZA NACIONAL en grande..."></textarea>
+      
+      <!-- Chips -->
+      <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px" id="aiChips">
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Estilo moderno y vibrante')">Estilo moderno</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Fondo nocturno con luces de ciudad')">Fondo nocturno</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Colores vibrantes y llamativos')">Colores vibrantes</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Estilo fotorrealista profesional')">Fotorrealista</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('DiseÃ±o minimalista y elegante')">Minimalista</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Autopista Francisco Fajardo Caracas')">Autopista</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Letras grandes y llamativas')">Letras grandes</span>
+        <span style="padding:4px 12px;background:#f1f5f9;border-radius:20px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0" onclick="appendChip('Valla iluminada LED digital')">LED Digital</span>
+      </div>
+
+      <!-- Style selector -->
+      <label style="font-size:.78rem;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-top:16px;margin-bottom:8px">Estilo Visual</label>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="styleSelector">
+        <div class="styleOpt selected" data-style="fotorrealista" onclick="selectStyle(this)" style="border:2px solid #6366F1;background:#eef2ff;border-radius:8px;padding:10px;cursor:pointer;text-align:center">
+          <div style="font-size:1.2rem">&#x1F4F8;</div>
+          <div style="font-size:.8rem;font-weight:600;color:#4f46e5">Fotorrealista</div>
         </div>
-
-        <!-- Two-column layout -->
-        <div class="aiGrid">
-          <!-- LEFT: Input Panel -->
-          <div class="aiCard">
-            <h2 style="font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:20px">Describe tu valla</h2>
-
-            <!-- A) Prompt textarea -->
-            <div style="margin-bottom:18px">
-              <label style="display:block;font-size:.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Instrucciones para la IA</label>
-              <textarea id="aiPrompt" rows="5" placeholder="Ej: Valla publicitaria para una marca de cerveza venezolana, colores dorados y rojos, estilo moderno, ubicada en autopista, texto CERVEZA NACIONAL en grande, fondo nocturno con luces de ciudad..." style="width:100%;min-height:120px;padding:12px;border:2px solid #e2e8f0;border-radius:10px;font-size:.9rem;font-family:inherit;resize:vertical;outline:none;transition:border-color .2s" onfocus="this.style.borderColor='#6366F1'" onblur="this.style.borderColor='#e2e8f0'"></textarea>
-              <!-- Suggestion chips -->
-              <div style="margin-top:10px">
-                <span class="chip" data-chip="Estilo moderno">Estilo moderno</span>
-                <span class="chip" data-chip="Colores vibrantes">Colores vibrantes</span>
-                <span class="chip" data-chip="Fondo nocturno">Fondo nocturno</span>
-                <span class="chip" data-chip="Centro comercial">Centro comercial</span>
-                <span class="chip" data-chip="Autopista">Autopista</span>
-                <span class="chip" data-chip="Minimalista">Minimalista</span>
-                <span class="chip" data-chip="Fotorrealista">Fotorrealista</span>
-                <span class="chip" data-chip="Alta resoluci&#xF3;n">Alta resoluci&#xF3;n</span>
-              </div>
-            </div>
-
-            <!-- B) File upload zone -->
-            <div style="margin-bottom:18px">
-              <label style="display:block;font-size:.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Sube tu logo o arte (opcional)</label>
-              <div id="aiDropZone" style="border:2px dashed #c7d2fe;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#f8f9ff" ondragover="event.preventDefault();this.style.borderColor='#6366F1';this.style.background='#eef2ff'" ondragleave="this.style.borderColor='#c7d2fe';this.style.background='#f8f9ff'" ondrop="handleAiFileDrop(event)">
-                <div id="aiDropContent">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#6366F1" stroke-width="2" style="width:36px;height:36px;margin:0 auto 8px;display:block"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                  <p style="color:#64748b;font-size:.85rem;margin-bottom:4px">Arrastra tu logo, imagen o brief aqu&#xED;</p>
-                  <p style="color:#94a3b8;font-size:.75rem">JPG, PNG, SVG, PDF aceptados</p>
-                </div>
-                <img id="aiFilePreview" src="" alt="" style="display:none;max-height:120px;border-radius:8px;margin:0 auto">
-              </div>
-              <input type="file" id="aiFileInput" accept=".jpg,.jpeg,.png,.svg,.pdf" style="display:none" onchange="handleAiFileSelect(event)">
-            </div>
-
-            <!-- C) Style selector -->
-            <div style="margin-bottom:18px">
-              <label style="display:block;font-size:.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Estilo de la valla</label>
-              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-                <div class="styleOption selected" data-style="fotorrealista">
-                  <div style="font-size:1.3rem;margin-bottom:4px">&#x1F4F8;</div>
-                  <div style="font-size:.82rem;font-weight:600;color:#1e293b">Fotorrealista</div>
-                  <div style="font-size:.72rem;color:#64748b">Calidad fotogr&#xE1;fica real</div>
-                </div>
-                <div class="styleOption" data-style="grafico">
-                  <div style="font-size:1.3rem;margin-bottom:4px">&#x1F3A8;</div>
-                  <div style="font-size:.82rem;font-weight:600;color:#1e293b">Dise&#xF1;o Gr&#xE1;fico</div>
-                  <div style="font-size:.72rem;color:#64748b">Arte vectorial limpio</div>
-                </div>
-                <div class="styleOption" data-style="digital">
-                  <div style="font-size:1.3rem;margin-bottom:4px">&#x1F4BB;</div>
-                  <div style="font-size:.82rem;font-weight:600;color:#1e293b">Digital / LED</div>
-                  <div style="font-size:.72rem;color:#64748b">Pantalla brillante nocturna</div>
-                </div>
-                <div class="styleOption" data-style="minimalista">
-                  <div style="font-size:1.3rem;margin-bottom:4px">&#x2B1C;</div>
-                  <div style="font-size:.82rem;font-weight:600;color:#1e293b">Minimalista</div>
-                  <div style="font-size:.72rem;color:#64748b">Elegante y simple</div>
-                </div>
-              </div>
-            </div>
-
-            <!-- D) Format selector -->
-            <div style="margin-bottom:20px">
-              <label style="display:block;font-size:.78rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Formato de la valla</label>
-              <div style="display:flex;flex-direction:column;gap:8px">
-                <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:border-color .2s;font-size:.85rem;font-weight:500">
-                  <input type="radio" name="aiFormat" value="14x5m" checked style="accent-color:#6366F1"> Valla Grande (14x5m)
-                </label>
-                <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:border-color .2s;font-size:.85rem;font-weight:500">
-                  <input type="radio" name="aiFormat" value="10x3.5m" style="accent-color:#6366F1"> Valla Mediana (10x3.5m)
-                </label>
-                <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:border-color .2s;font-size:.85rem;font-weight:500">
-                  <input type="radio" name="aiFormat" value="8x3m" style="accent-color:#6366F1"> Valla Peque&#xF1;a (8x3m)
-                </label>
-                <label style="display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid #e2e8f0;border-radius:8px;cursor:pointer;transition:border-color .2s;font-size:.85rem;font-weight:500">
-                  <input type="radio" name="aiFormat" value="4x3m" style="accent-color:#6366F1"> Paleta (4x3m)
-                </label>
-              </div>
-            </div>
-
-            <!-- E) Generate button -->
-            <button class="btnGenerate" id="btnGenerate">&#x2728; Generar Valla con IA</button>
-          </div>
-
-          <!-- RIGHT: Results Panel -->
-          <div class="aiCard">
-            <h2 style="font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:20px">Resultado</h2>
-            <!-- Empty state -->
-            <div id="aiResultEmpty" class="resultFrame">
-              <div style="text-align:center">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#c7d2fe" stroke-width="1.5" style="width:60px;height:60px;margin:0 auto 16px;display:block"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-4 0v2"/><circle cx="12" cy="14" r="3"/></svg>
-                <div style="font-size:2rem;margin-bottom:10px">&#x2728;</div>
-                <p style="color:#94a3b8;font-size:.9rem;font-weight:500">Tu valla generada aparecer&#xE1; aqu&#xED;</p>
-                <p style="color:#c7d2fe;font-size:.8rem;margin-top:6px">Describe tu valla y presiona Generar</p>
-              </div>
-            </div>
-            <!-- Loading state -->
-            <div id="aiResultLoading" style="display:none">
-              <div class="shimmer" style="height:300px;border-radius:12px;margin-bottom:16px"></div>
-              <div style="text-align:center;padding:16px">
-                <div style="font-size:1.5rem;margin-bottom:8px;animation:spin 1.5s linear infinite;display:inline-block">&#x2728;</div>
-                <p style="color:#6366F1;font-weight:600;font-size:.95rem">Generando tu valla...</p>
-                <p style="color:#94a3b8;font-size:.8rem;margin-top:4px">Esto puede tomar unos segundos</p>
-              </div>
-            </div>
-            <!-- Result state -->
-            <div id="aiResultSuccess" style="display:none">
-              <img id="aiResultImg" class="resultImg" src="" alt="Valla generada">
-              <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-                <button id="btnDownloadAi" style="flex:1;padding:10px 14px;background:#f1f5f9;color:#1e293b;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .2s" onmouseover="this.style.background='#e2e8f0'" onmouseout="this.style.background='#f1f5f9'">&#x2B07;&#xFE0F; Descargar</button>
-                <button id="btnAddToCatalogAi" style="flex:1;padding:10px 14px;background:#eef2ff;color:#6366F1;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:background .2s" onmouseover="this.style.background='#e0e7ff'" onmouseout="this.style.background='#eef2ff'">&#x1F5FA;&#xFE0F; Agregar al Cat&#xE1;logo</button>
-                <button id="btnRegenerateAi" style="flex:1;padding:10px 14px;background:linear-gradient(135deg,#6366F1,#EC4899);color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .2s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">&#x1F504; Regenerar</button>
-              </div>
-              <p id="aiUsedPrompt" style="color:#94a3b8;font-size:.75rem;margin-top:12px;line-height:1.5"></p>
-            </div>
-          </div>
+        <div class="styleOpt" data-style="grafico" onclick="selectStyle(this)" style="border:2px solid #e2e8f0;border-radius:8px;padding:10px;cursor:pointer;text-align:center">
+          <div style="font-size:1.2rem">&#x1F3A8;</div>
+          <div style="font-size:.8rem;font-weight:600;color:#475569">DiseÃ±o GrÃ¡fico</div>
         </div>
-
-        <!-- Example prompts section -->
-        <div style="margin-top:32px">
-          <h2 style="font-size:1.15rem;font-weight:700;color:#1e293b;margin-bottom:4px">Inspiraci&#xF3;n &mdash; Ejemplos de Vallas</h2>
-          <p style="color:#64748b;font-size:.85rem;margin-bottom:16px">Haz clic en un estilo para usarlo como punto de partida</p>
-          <div class="exampleGrid">
-            <div class="exampleCard" style="background:linear-gradient(135deg,#D4A017,#8B0000)">
-              <div style="font-size:1.4rem;margin-bottom:8px">&#x1F37A;</div>
-              <h3 style="font-size:.95rem;font-weight:700;margin-bottom:6px">Cerveza Polar</h3>
-              <p style="font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.4">Colores dorados, fondo de monta&#xF1;a, estilo venezolano cl&#xE1;sico</p>
-              <button class="btnUseExample" data-prompt="Valla publicitaria para Cerveza Polar Venezuela, colores dorados y blancos, imagen de monta&#xF1;a nevada al fondo, texto POLAR en grande tipograf&#xED;a bold, fondo azul cielo claro, oso polar como mascota, estilo fotorrealista, calidad profesional de publicidad venezolana" style="background:rgba(255,255,255,.25);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Usar este estilo</button>
-            </div>
-            <div class="exampleCard" style="background:linear-gradient(135deg,#1a3a6b,#2563eb)">
-              <div style="font-size:1.4rem;margin-bottom:8px">&#x1F3E6;</div>
-              <h3 style="font-size:.95rem;font-weight:700;margin-bottom:6px">Banco Mercantil</h3>
-              <p style="font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.4">Azul corporativo, familia venezolana, confianza y solidez</p>
-              <button class="btnUseExample" data-prompt="Valla publicitaria para Banco Mercantil Venezuela, colores azul corporativo profundo y dorado, familia venezolana feliz en el fondo, logo del banco prominente, mensaje de confianza y seguridad financiera, estilo profesional corporativo, fondo urbano de Caracas" style="background:rgba(255,255,255,.25);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Usar este estilo</button>
-            </div>
-            <div class="exampleCard" style="background:linear-gradient(135deg,#0891b2,#111827)">
-              <div style="font-size:1.4rem;margin-bottom:8px">&#x1F4F6;</div>
-              <h3 style="font-size:.95rem;font-weight:700;margin-bottom:6px">Digitel 5G</h3>
-              <p style="font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.4">Tecnol&#xF3;gico, velocidad, colores cyan y negro</p>
-              <button class="btnUseExample" data-prompt="Valla publicitaria para Digitel 5G Venezuela, fondo negro espacial con efectos de velocidad cyan y azul el&#xE9;ctrico, texto 5G en gigante con efecto neon glow, j&#xF3;venes venezolanos con smartphones, sensaci&#xF3;n de velocidad y futuro, estilo digital LED futurista nocturno" style="background:rgba(255,255,255,.25);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Usar este estilo</button>
-            </div>
-            <div class="exampleCard" style="background:linear-gradient(135deg,#7c3aed,#ec4899)">
-              <div style="font-size:1.4rem;margin-bottom:8px">&#x1F6CD;&#xFE0F;</div>
-              <h3 style="font-size:.95rem;font-weight:700;margin-bottom:6px">Centro Comercial</h3>
-              <p style="font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.4">Colorido, ofertas, p&#xFA;blico familiar</p>
-              <button class="btnUseExample" data-prompt="Valla publicitaria para centro comercial venezolano, colores vibrantes morado y rosa, familia de compras feliz, banners de ofertas y descuentos, ambiente festivo y moderno, texto OFERTAS ESPECIALES, globos y decoraciones coloridas, estilo dise&#xF1;o gr&#xE1;fico llamativo" style="background:rgba(255,255,255,.25);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Usar este estilo</button>
-            </div>
-            <div class="exampleCard" style="background:linear-gradient(135deg,#1c1c1c,#dc2626)">
-              <div style="font-size:1.4rem;margin-bottom:8px">&#x1F697;</div>
-              <h3 style="font-size:.95rem;font-weight:700;margin-bottom:6px">Toyota Venezuela</h3>
-              <p style="font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.4">Autom&#xF3;vil en carretera, potencia y elegancia</p>
-              <button class="btnUseExample" data-prompt="Valla publicitaria para Toyota Venezuela, Toyota Hilux negro en carretera venezolana de monta&#xF1;a al atardecer, luz dram&#xE1;tica dorada, fondo de paisaje andino venezolano, texto TOYOTA en tipograf&#xED;a elegante blanca, sensaci&#xF3;n de poder y aventura, calidad fotogr&#xE1;fica ultra realista" style="background:rgba(255,255,255,.25);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Usar este estilo</button>
-            </div>
-            <div class="exampleCard" style="background:linear-gradient(135deg,#1d4ed8,#dc2626)">
-              <div style="font-size:1.4rem;margin-bottom:8px">&#x1F964;</div>
-              <h3 style="font-size:.95rem;font-weight:700;margin-bottom:6px">Pepsi Venezuela</h3>
-              <p style="font-size:.78rem;opacity:.9;margin-bottom:14px;line-height:1.4">Colores azul y rojo, j&#xF3;venes, energ&#xED;a</p>
-              <button class="btnUseExample" data-prompt="Valla publicitaria para Pepsi Venezuela, colores azul y rojo vibrantes, j&#xF3;venes venezolanos felices bebiendo Pepsi, ambiente de fiesta en la playa venezolana, logo Pepsi prominente, latas de Pepsi con gotas de agua, sensaci&#xF3;n de frescura y diversi&#xF3;n, estilo fotorrealista brillante" style="background:rgba(255,255,255,.25);color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:.78rem;font-weight:600;cursor:pointer">Usar este estilo</button>
-            </div>
-          </div>
+        <div class="styleOpt" data-style="digital" onclick="selectStyle(this)" style="border:2px solid #e2e8f0;border-radius:8px;padding:10px;cursor:pointer;text-align:center">
+          <div style="font-size:1.2rem">&#x1F4A1;</div>
+          <div style="font-size:.8rem;font-weight:600;color:#475569">Digital LED</div>
+        </div>
+        <div class="styleOpt" data-style="minimalista" onclick="selectStyle(this)" style="border:2px solid #e2e8f0;border-radius:8px;padding:10px;cursor:pointer;text-align:center">
+          <div style="font-size:1.2rem">&#x2B1C;</div>
+          <div style="font-size:.8rem;font-weight:600;color:#475569">Minimalista</div>
         </div>
       </div>
+
+      <!-- File upload -->
+      <label style="font-size:.78rem;font-weight:600;color:#475569;text-transform:uppercase;letter-spacing:.5px;display:block;margin-top:16px;margin-bottom:8px">Logo o Referencia (opcional)</label>
+      <div id="aiDropZone" style="border:2px dashed #c7d2fe;border-radius:8px;padding:16px;text-align:center;cursor:pointer;background:#f8f9ff" onclick="document.getElementById('aiFileInput').click()" ondragover="event.preventDefault()" ondrop="handleAiDrop(event)">
+        <div style="font-size:1.5rem">&#x1F4C1;</div>
+        <p style="font-size:.82rem;color:#64748b;margin-top:4px">Arrastra tu logo aquÃ­ o haz clic</p>
+        <p style="font-size:.72rem;color:#94a3b8">JPG, PNG, SVG</p>
+        <img id="aiFilePreview" src="" style="display:none;max-height:80px;margin-top:8px;border-radius:6px">
+      </div>
+      <input type="file" id="aiFileInput" accept="image/*" style="display:none" onchange="handleAiFile(event)">
+
+      <!-- Generate button -->
+      <button id="btnGenerate" onclick="generateAIBillboard()" style="width:100%;margin-top:20px;padding:14px;background:linear-gradient(135deg,#6366F1,#EC4899);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s">
+        &#x2728; Generar Valla con IA
+      </button>
+    </div>
+
+    <!-- RIGHT: Result -->
+    <div style="background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 12px rgba(0,0,0,.06)">
+      <h3 style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px">Resultado</h3>
+      
+      <!-- Empty state -->
+      <div id="aiEmpty" style="min-height:300px;border:2px dashed #c7d2fe;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f8f9ff;padding:24px;text-align:center">
+        <div style="font-size:3rem;margin-bottom:12px">&#x1F5FA;&#xFE0F;</div>
+        <p style="color:#94a3b8;font-size:.9rem">Tu valla generada aparecerÃ¡ aquÃ­</p>
+        <p style="color:#c7d2fe;font-size:.78rem;margin-top:6px">Describe tu valla y presiona Generar</p>
+      </div>
+
+      <!-- Loading state -->
+      <div id="aiLoading" style="display:none;min-height:300px;border-radius:12px;overflow:hidden">
+        <div style="height:300px;background:linear-gradient(90deg,#f0f0f0 25%,#e8e8e8 50%,#f0f0f0 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:12px"></div>
+        <p style="text-align:center;color:#6366F1;font-size:.9rem;font-weight:600;margin-top:12px">&#x2728; Generando tu valla... puede tomar 15-30 segundos</p>
+      </div>
+
+      <!-- Result state -->
+      <div id="aiResult" style="display:none">
+        <img id="aiResultImg" src="" style="width:100%;border-radius:10px;display:block;box-shadow:0 4px 20px rgba(0,0,0,.1)">
+        <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+          <button onclick="downloadAiImage()" style="flex:1;padding:8px;background:#f0fdf4;color:#16a34a;border:none;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer">&#x2B07; Descargar</button>
+          <button onclick="regenerateAI()" style="flex:1;padding:8px;background:#eef2ff;color:#4f46e5;border:none;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer">&#x1F504; Regenerar</button>
+        </div>
+        <p id="aiPromptUsed" style="font-size:.72rem;color:#94a3b8;margin-top:8px;line-height:1.4"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Example prompts -->
+  <div style="margin-top:24px">
+    <h3 style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px">&#x1F4A1; Ejemplos de InspiraciÃ³n</h3>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px" id="aiExamples">
+      <div style="background:linear-gradient(135deg,#F59E0B,#EF4444);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Cerveza Polar Venezuela, colores dorados y rojos vibrantes, botella de cerveza frÃ­a con condensaciÃ³n, fondo de montaÃ±a venezolana, texto CERVEZA POLAR en grande, slogan La Preferida de Venezuela, estilo fotorrealista')">
+        <div style="font-size:1.5rem">&#x1F37A;</div>
+        <div style="font-weight:700;margin-top:6px">Cerveza Polar</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Dorados y rojos, estilo venezolano clÃ¡sico</div>
+        <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1e40af,#3b82f6);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria corporativa para Banco Mercantil Venezuela, colores azul marino y dorado, familia venezolana feliz, edificios modernos de Caracas de fondo, texto BANCO MERCANTIL Tu Banco de Confianza, estilo profesional fotorrealista')">
+        <div style="font-size:1.5rem">&#x1F3E6;</div>
+        <div style="font-weight:700;margin-top:6px">Banco Mercantil</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Azul corporativo, confianza y solidez</div>
+        <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#0f172a,#0ea5e9);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria tecnolÃ³gica para Digitel 5G Venezuela, colores cyan neÃ³n y negro, velocidad y tecnologÃ­a, ondas de seÃ±al 5G, ciudad de Caracas de noche con luces, texto DIGITEL 5G La Velocidad que Necesitas, estilo digital LED futurista')">
+        <div style="font-size:1.5rem">&#x1F4F6;</div>
+        <div style="font-weight:700;margin-top:6px">Digitel 5G</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">TecnolÃ³gico, cyan y negro, futurista</div>
+        <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#7c3aed,#ec4899);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Centro Comercial en Caracas Venezuela, colores morado y rosa vibrantes, familias y jÃ³venes comprando, tiendas modernas de fondo, texto GRAN LIQUIDACIÃN hasta 70% descuento, estilo colorido y llamativo')">
+        <div style="font-size:1.5rem">&#x1F6CD;&#xFE0F;</div>
+        <div style="font-weight:700;margin-top:6px">Centro Comercial</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Colorido, ofertas, pÃºblico familiar</div>
+        <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1e293b,#475569);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Toyota Venezuela, SUV Toyota RAV4 en carretera venezolana, colores plateado y negro, montaÃ±as venezolanas de fondo, atardecer dorado, texto TOYOTA La Fuerza que te Mueve, estilo fotorrealista premium')">
+        <div style="font-size:1.5rem">&#x1F697;</div>
+        <div style="font-weight:700;margin-top:6px">Toyota Venezuela</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">AutomÃ³vil, elegancia y potencia</div>
+        <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
+      </div>
+      <div style="background:linear-gradient(135deg,#1d4ed8,#dc2626);border-radius:12px;padding:16px;color:#fff;cursor:pointer" onclick="useExample('Valla publicitaria para Pepsi Venezuela, colores azul y rojo vibrantes, lata de Pepsi frÃ­a salpicando agua, jÃ³venes venezolanos divirtiÃ©ndose, fiesta y energÃ­a, texto PEPSI Elige tu GeneraciÃ³n, estilo fotorrealista juvenil')">
+        <div style="font-size:1.5rem">&#x1F964;</div>
+        <div style="font-weight:700;margin-top:6px">Pepsi Venezuela</div>
+        <div style="font-size:.75rem;opacity:.85;margin-top:4px">Azul y rojo, jÃ³venes, energÃ­a</div>
+        <div style="margin-top:10px;font-size:.72rem;background:rgba(255,255,255,.2);padding:4px 8px;border-radius:6px;display:inline-block">Usar este estilo &#x2192;</div>
+      </div>
+    </div>
+  </div>
+</div>
       </div>
     </main>
   </div>
@@ -1376,7 +1340,7 @@ function buildEnhancedPrompt(userPrompt, style, format, hasFileUpload){
 function generateAIBillboard(){
   var prompt = (document.getElementById('aiPrompt')||{}).value||'';
   if(!prompt.trim()){
-    showToast('Escribe una descripciÃ³n para tu valla', 'error');
+    showToast('Escribe una descripciÃÂ³n para tu valla', 'error');
     return;
   }
   var selectedStyle = (document.querySelector('.styleOption.selected')||{getAttribute:function(){return 'fotorrealista';}}).getAttribute('data-style')||'fotorrealista';
@@ -1417,7 +1381,7 @@ function generateAIBillboard(){
   })
   .then(function(data){
     if(loading) loading.style.display='none';
-    if(btn){ btn.disabled=false; btn.textContent='â¨ Generar Valla con IA'; }
+    if(btn){ btn.disabled=false; btn.textContent='Ã¢ÂÂ¨ Generar Valla con IA'; }
     var prediction = data && data.predictions && data.predictions[0];
     if(prediction && prediction.bytesBase64Encoded){
       var mimeType = prediction.mimeType || 'image/png';
@@ -1427,19 +1391,169 @@ function generateAIBillboard(){
       if(img){ img.src = dataUrl; img.style.display='block'; }
       if(usedPrompt) usedPrompt.textContent = 'Prompt: ' + prompt;
       if(success) success.style.display='block';
-      showToast('Â¡Valla generada con Ã©xito!', 'success');
+      showToast('ÃÂ¡Valla generada con ÃÂ©xito!', 'success');
     } else {
       if(empty) empty.style.display='block';
-      showToast('Respuesta inesperada de la API de imÃ¡genes', 'error');
+      showToast('Respuesta inesperada de la API de imÃÂ¡genes', 'error');
     }
   })
   .catch(function(err){
     if(loading) loading.style.display='none';
-    if(btn){ btn.disabled=false; btn.textContent='â¨ Generar Valla con IA'; }
+    if(btn){ btn.disabled=false; btn.textContent='Ã¢ÂÂ¨ Generar Valla con IA'; }
     if(empty) empty.style.display='block';
     showToast('Error al generar: ' + (err.message||'Intenta de nuevo'), 'error');
     console.error('ImpresIAnarte error:', err);
   });
+}
+
+// ImpresIAnarte AI Functions
+var aiSelectedStyle = 'fotorrealista';
+var aiFileBase64 = null;
+var aiLastPrompt = '';
+
+function appendChip(text) {
+  var ta = document.getElementById('aiPrompt');
+  ta.value = ta.value ? ta.value + ', ' + text : text;
+  ta.focus();
+}
+
+function selectStyle(el) {
+  document.querySelectorAll('.styleOpt').forEach(function(o) {
+    o.style.border = '2px solid #e2e8f0';
+    o.style.background = '#fff';
+    o.querySelector('div:last-child').style.color = '#475569';
+  });
+  el.style.border = '2px solid #6366F1';
+  el.style.background = '#eef2ff';
+  el.querySelector('div:last-child').style.color = '#4f46e5';
+  aiSelectedStyle = el.getAttribute('data-style');
+}
+
+function handleAiDrop(e) {
+  e.preventDefault();
+  var file = e.dataTransfer.files[0];
+  if (file && file.type.startsWith('image/')) readAiFile(file);
+}
+
+function handleAiFile(e) {
+  var file = e.target.files[0];
+  if (file) readAiFile(file);
+}
+
+function readAiFile(file) {
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    aiFileBase64 = ev.target.result;
+    var prev = document.getElementById('aiFilePreview');
+    prev.src = aiFileBase64;
+    prev.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+}
+
+function useExample(prompt) {
+  document.getElementById('aiPrompt').value = prompt;
+  showView('ai');
+  document.getElementById('aiPrompt').scrollIntoView({behavior:'smooth'});
+  showToast('Prompt cargado. Presiona Generar para crear la imagen.', 'info');
+}
+
+function generateAIBillboard() {
+  var prompt = document.getElementById('aiPrompt').value.trim();
+  if (!prompt) { showToast('Escribe una descripciÃ³n para tu valla', 'error'); return; }
+  
+  var styleMap = {
+    'fotorrealista': 'photorealistic 8K billboard photograph, professional DSLR quality, golden hour lighting, Canon EOS R5',
+    'grafico': 'professional graphic design billboard, bold vector art, high contrast commercial illustration, Pantone colors',
+    'digital': 'LED digital billboard night photography, neon glowing colors, Times Square style, electric vivid lights',
+    'minimalista': 'minimalist luxury billboard, clean white space, elegant typography, Apple-style premium aesthetic'
+  };
+  
+  var enhancedPrompt = prompt + 
+    ', professional outdoor billboard advertisement mounted on steel structure, ' +
+    'Caracas Venezuela urban highway setting Autopista Francisco Fajardo, ' +
+    'tropical blue sky, vibrant Latin American advertising colors, ' +
+    'bold impactful Spanish typography, ' +
+    styleMap[aiSelectedStyle] + ', ' +
+    'horizontal 16:9 landscape billboard format, ' +
+    'Cannes Lions award-winning art direction, no watermark, masterpiece commercial photography';
+  
+  if (aiFileBase64) {
+    enhancedPrompt += ', incorporating uploaded brand logo colors and style';
+  }
+  
+  aiLastPrompt = enhancedPrompt;
+  
+  document.getElementById('aiEmpty').style.display = 'none';
+  document.getElementById('aiResult').style.display = 'none';
+  document.getElementById('aiLoading').style.display = 'block';
+  document.getElementById('btnGenerate').disabled = true;
+  document.getElementById('btnGenerate').textContent = 'Generando...';
+  
+  // Call the agent's ai_generate tool endpoint
+  fetch('/api/tools/ai_generate', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({prompt: enhancedPrompt, style: aiSelectedStyle})
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    document.getElementById('aiLoading').style.display = 'none';
+    document.getElementById('btnGenerate').disabled = false;
+    document.getElementById('btnGenerate').textContent = 'â¨ Generar Valla con IA';
+    if (data.image_url || data.url) {
+      document.getElementById('aiResultImg').src = data.image_url || data.url;
+      document.getElementById('aiResult').style.display = 'block';
+      document.getElementById('aiPromptUsed').textContent = 'Prompt: ' + prompt;
+      showToast('Valla generada exitosamente', 'success');
+    } else {
+      document.getElementById('aiEmpty').style.display = 'flex';
+      showToast('Error generando imagen: ' + (data.error || 'IntÃ©ntalo de nuevo'), 'error');
+    }
+  })
+  .catch(function(err) {
+    document.getElementById('aiLoading').style.display = 'none';
+    document.getElementById('aiEmpty').style.display = 'flex';
+    document.getElementById('btnGenerate').disabled = false;
+    document.getElementById('btnGenerate').textContent = 'â¨ Generar Valla con IA';
+    showToast('Error de conexiÃ³n. Verifica que la app estÃ© publicada en un servidor.', 'error');
+  });
+}
+
+function regenerateAI() {
+  document.getElementById('aiResult').style.display = 'none';
+  document.getElementById('aiLoading').style.display = 'block';
+  document.getElementById('btnGenerate').disabled = true;
+  
+  fetch('/api/tools/ai_generate', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({prompt: aiLastPrompt, style: aiSelectedStyle})
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    document.getElementById('aiLoading').style.display = 'none';
+    document.getElementById('btnGenerate').disabled = false;
+    if (data.image_url || data.url) {
+      document.getElementById('aiResultImg').src = data.image_url || data.url;
+      document.getElementById('aiResult').style.display = 'block';
+      showToast('Nueva imagen generada', 'success');
+    }
+  })
+  .catch(function() {
+    document.getElementById('aiLoading').style.display = 'none';
+    document.getElementById('aiEmpty').style.display = 'flex';
+    document.getElementById('btnGenerate').disabled = false;
+  });
+}
+
+function downloadAiImage() {
+  var img = document.getElementById('aiResultImg').src;
+  if (!img) return;
+  var a = document.createElement('a');
+  a.href = img;
+  a.download = 'impresianarte_valla.png';
+  a.click();
 }
 </script>
 </body>
