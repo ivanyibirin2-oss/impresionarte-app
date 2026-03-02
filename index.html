@@ -36,7 +36,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
 .navItem{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;transition:background .2s;font-size:.9rem;color:#94a3b8;border:none;background:none;width:100%;text-align:left}
 .navItem:hover{background:rgba(255,255,255,.07);color:white}
 .navItem.active{background:rgba(99,102,241,.2);color:#818cf8;border-right:3px solid #6366F1}
-.navItem .navIcon{font-size:1.1rem;width:20px;text-align:center}
 .sidebarFooter{padding:16px 20px;border-top:1px solid rgba(255,255,255,.1)}
 .userInfo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
 .userAvatar{width:36px;height:36px;background:linear-gradient(135deg,#6366F1,#7C3AED);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:white;font-weight:700;flex-shrink:0}
@@ -61,7 +60,6 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293
 .statCard .statValue{font-size:1.8rem;font-weight:800;color:#1e293b;margin-top:4px}
 .statCard .statSub{font-size:.75rem;color:#64748b;margin-top:2px}
 #mapWrap{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden}
-#mapContainer{position:relative}
 #map{height:420px;width:100%;z-index:1}
 #detailPanel{background:white;border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);animation:fadeIn .2s ease}
 .detailHeader{display:flex;align-items:center;gap:12px;margin-bottom:16px}
@@ -127,58 +125,11 @@ select.mInput{cursor:pointer}
 .toast.success{background:#10b981}
 .toast.error{background:#ef4444}
 .toast.info{background:#6366F1}
-/* IA PAGE */
-.iaPage{display:flex;flex-direction:column;gap:24px}
-.iaHero{background:linear-gradient(135deg,#4c1d95,#6d28d9,#7c3aed);border-radius:16px;padding:40px 32px;text-align:center;color:white}
-.iaHero h1{font-size:2rem;font-weight:800;margin-bottom:8px}
-.iaHero p{font-size:1rem;opacity:.85;max-width:500px;margin:0 auto}
-.iaGrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-.iaFormPanel,.iaResultPanel{background:white;border-radius:16px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.iaFormPanel h3,.iaResultPanel h3{font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px}
-.iaLabel{font-size:.85rem;font-weight:600;color:#374151;margin-bottom:6px;display:block}
-.iaTextarea{width:100%;padding:12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.9rem;min-height:100px;resize:vertical;outline:none;transition:border .2s;font-family:inherit}
-.iaTextarea:focus{border-color:#6366F1}
-.iaChips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
-.iaChip{padding:6px 14px;background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:20px;font-size:.78rem;cursor:pointer;transition:all .2s;color:#374151}
-.iaChip:hover{background:#eef2ff;border-color:#6366F1;color:#6366F1}
-.iaSectionLabel{font-size:.85rem;font-weight:600;color:#374151;margin-bottom:8px}
-.iaStyleGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.iaStyleOpt{border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s}
-.iaStyleOpt:hover{border-color:#6366F1;background:#fafbff}
-.iaStyleOpt.selected{border-color:#6366F1;background:#eef2ff}
-.iaStyleOpt .iaStyleIcon{font-size:1.5rem;margin-bottom:4px}
-.iaStyleOpt .iaStyleName{font-size:.82rem;font-weight:600;color:#374151}
-.iaFormatSelect{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;margin-bottom:16px;outline:none;cursor:pointer}
-.iaFormatSelect:focus{border-color:#6366F1}
-.btnGenerate{width:100%;padding:14px;background:linear-gradient(135deg,#4c1d95,#6d28d9);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s}
-.btnGenerate:hover{opacity:.9}
-.iaPlaceholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:#94a3b8;text-align:center;gap:12px}
-.iaPlaceholder span{font-size:3rem}
-.iaPlaceholder p{font-size:.9rem}
-.iaLoading{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:16px;color:#6366F1;text-align:center}
-.iaSpinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#6366F1;border-radius:50%;animation:spin 1s linear infinite}
-.iaLoading p{font-size:.9rem;font-weight:600;color:#374151}
-.iaResult{display:none;flex-direction:column;gap:12px}
-.iaResultImg{width:100%;border-radius:10px;object-fit:cover;max-height:360px}
-.iaResultActions{display:flex;gap:10px}
-.btnDownload,.btnRegen{flex:1;padding:10px;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:opacity .2s}
-.btnDownload{background:#10b981;color:white}
-.btnRegen{background:#6366F1;color:white}
-.btnDownload:hover,.btnRegen:hover{opacity:.85}
-.iaError{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:200px;gap:12px;text-align:center}
-.iaError p{font-size:.9rem;color:#ef4444;font-weight:500}
-.btnRetry{padding:10px 24px;background:#ef4444;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600}
-/* ABOUT PAGE */
 .aboutPage{max-width:900px;margin:0 auto}
 .aboutAdminBar{display:none;justify-content:flex-end;margin-bottom:12px}
 .btnToggleEdit{padding:9px 18px;background:white;border:1.5px solid #6366F1;color:#6366F1;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s}
 .btnToggleEdit:hover{background:#6366F1;color:white}
 .aboutEditToolbar{display:none;gap:10px;margin-bottom:16px;padding:12px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
-.aboutEditToolbar button{padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;transition:opacity .2s}
-.btnAddText{background:#6366F1;color:white}
-.btnAddImg{background:#7C3AED;color:white}
-.btnSaveAbout{background:#10b981;color:white}
-.btnCancelAbout{background:#f1f5f9;color:#374151;border:1.5px solid #e2e8f0}
 .aboutCard{background:white;border-radius:16px;padding:32px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .aboutCard h2{font-size:1.8rem;font-weight:800;color:#6366F1;margin-bottom:4px}
 .aboutTagline{font-size:1rem;color:#64748b;margin-bottom:24px;font-style:italic}
@@ -188,11 +139,9 @@ select.mInput{cursor:pointer}
 .aboutSection ul{padding-left:20px;margin-top:6px}
 .aboutSection ul li{font-size:.9rem;color:#374151;line-height:1.8}
 .contactInfo{font-size:.9rem;color:#374151;line-height:2}
-/* RESPONSIVE */
 @media(max-width:768px){
   .sidebar{position:fixed;height:100vh}
   .sidebar.collapsed{transform:translateX(-260px)}
-  .iaGrid{grid-template-columns:1fr}
   .detailGrid{grid-template-columns:1fr}
   .modalGrid{grid-template-columns:1fr}
   .statsGrid{grid-template-columns:1fr 1fr}
@@ -204,7 +153,6 @@ select.mInput{cursor:pointer}
 </style>
 </head>
 <body>
-<!-- LOGIN -->
 <div id="loginScreen">
   <div class="loginCard">
     <div class="loginLogo">
@@ -223,29 +171,17 @@ select.mInput{cursor:pointer}
     <p id="loginError">Credenciales incorrectas. Intenta de nuevo.</p>
   </div>
 </div>
-
-<!-- APP -->
 <div id="app">
   <div class="layout">
-    <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebarHeader">
         <h2>Impresionarte_ve</h2>
         <p>Gesti&#243;n de Vallas</p>
       </div>
       <nav class="sidebarNav">
-        <button class="navItem active" id="nav-map" onclick="showPage('map')">
-          <span class="navIcon">[Mapa]</span> Mapa de Vallas
-        </button>
-        <button class="navItem" id="nav-catalog" onclick="showPage('catalog')">
-          <span class="navIcon">[Cat]</span> Cat&#225;logo de Vallas
-        </button>
-        <button class="navItem" id="nav-ia" onclick="showPage('ia')">
-          <span class="navIcon">[IA]</span> ImpresIAnarte IA
-        </button>
-        <button class="navItem" id="nav-about" onclick="showPage('about')">
-          <span class="navIcon">[i]</span> Sobre Nosotros
-        </button>
+        <button class="navItem active" id="nav-map" onclick="showPage('map')">Mapa de Vallas</button>
+        <button class="navItem" id="nav-catalog" onclick="showPage('catalog')">Cat&#225;logo de Vallas</button>
+        <button class="navItem" id="nav-about" onclick="showPage('about')">Sobre Nosotros</button>
       </nav>
       <div class="sidebarFooter">
         <div class="userInfo">
@@ -258,80 +194,45 @@ select.mInput{cursor:pointer}
         <button class="btnLogout" onclick="doLogout()">Cerrar Sesi&#243;n</button>
       </div>
     </aside>
-
-    <!-- MAIN AREA -->
     <div class="mainArea">
-      <!-- TOPBAR -->
       <div class="topbar">
-        <button class="hamburger" onclick="toggleSidebar()">Menu</button>
+        <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
         <span class="topbarTitle" id="topbarTitle">Mapa de Vallas</span>
-        <div id="adminAddBtn">
-          <button class="btnAdd" onclick="openModal()">+ Agregar Valla</button>
-        </div>
+        <div id="adminAddBtn"><button class="btnAdd" onclick="openModal()">+ Agregar Valla</button></div>
       </div>
-
-      <!-- PAGES -->
       <div class="pageArea">
-
-        <!-- MAP PAGE -->
         <div id="page-map" class="page active">
           <div class="statsGrid">
-            <div class="statCard">
-              <div class="statLabel">Total Vallas</div>
-              <div class="statValue" id="statTotal">0</div>
-              <div class="statSub">en el sistema</div>
-            </div>
-            <div class="statCard" style="border-left-color:#10b981">
-              <div class="statLabel">Disponibles</div>
-              <div class="statValue" id="statAvail" style="color:#10b981">0</div>
-              <div class="statSub">listas para arrendar</div>
-            </div>
-            <div class="statCard" style="border-left-color:#ef4444">
-              <div class="statLabel">Ocupadas</div>
-              <div class="statValue" id="statOcc" style="color:#ef4444">0</div>
-              <div class="statSub">con cliente activo</div>
-            </div>
-            <div class="statCard" style="border-left-color:#f59e0b">
-              <div class="statLabel">Ciudades</div>
-              <div class="statValue" id="statCities" style="color:#f59e0b">0</div>
-              <div class="statSub">con presencia</div>
-            </div>
-            <div class="statCard" style="border-left-color:#8b5cf6">
-              <div class="statLabel">Ingresos/Mes</div>
-              <div class="statValue" id="statIncome" style="color:#8b5cf6;font-size:1.2rem">$0</div>
-              <div class="statSub">estimado</div>
-            </div>
+            <div class="statCard"><div class="statLabel">Total Vallas</div><div class="statValue" id="statTotal">0</div><div class="statSub">en el sistema</div></div>
+            <div class="statCard" style="border-left-color:#10b981"><div class="statLabel">Disponibles</div><div class="statValue" id="statAvail" style="color:#10b981">0</div><div class="statSub">listas para arrendar</div></div>
+            <div class="statCard" style="border-left-color:#ef4444"><div class="statLabel">Ocupadas</div><div class="statValue" id="statOcc" style="color:#ef4444">0</div><div class="statSub">con cliente activo</div></div>
+            <div class="statCard" style="border-left-color:#f59e0b"><div class="statLabel">Ciudades</div><div class="statValue" id="statCities" style="color:#f59e0b">0</div><div class="statSub">con presencia</div></div>
+            <div class="statCard" style="border-left-color:#8b5cf6"><div class="statLabel">Ingresos/Mes</div><div class="statValue" id="statIncome" style="color:#8b5cf6;font-size:1.2rem">$0</div><div class="statSub">estimado</div></div>
           </div>
           <div id="detailPanel" style="display:none">
             <div class="detailHeader">
-              <button class="btnBack" onclick="hideDetail()">&lt;</button>
+              <button class="btnBack" onclick="hideDetail()">&#8592; Volver</button>
               <span class="detailTitle" id="detailName">Valla</span>
             </div>
             <div class="detailGrid">
-              <div class="detailField"><label>Ciudad</label><span id="dCity">&#8212;</span></div>
-              <div class="detailField"><label>Direcci&#243;n</label><span id="dAddr">&#8212;</span></div>
-              <div class="detailField"><label>Estado</label><span id="dStatus">&#8212;</span></div>
-              <div class="detailField"><label>Dimensiones</label><span id="dDims">&#8212;</span></div>
-              <div class="detailField"><label>Caras</label><span id="dFaces">&#8212;</span></div>
-              <div class="detailField"><label>Iluminaci&#243;n</label><span id="dIllum">&#8212;</span></div>
-              <div class="detailField"><label>Precio/Mes</label><span id="dPrice">&#8212;</span></div>
-              <div class="detailField"><label>Cliente</label><span id="dClient">&#8212;</span></div>
-              <div class="detailField"><label>Contrato</label><span id="dContract">&#8212;</span></div>
-              <div class="detailField"><label>Coordenadas</label><span id="dCoords">&#8212;</span></div>
+              <div class="detailField"><label>Ciudad</label><span id="dCity">-</span></div>
+              <div class="detailField"><label>Direcci&#243;n</label><span id="dAddr">-</span></div>
+              <div class="detailField"><label>Estado</label><span id="dStatus">-</span></div>
+              <div class="detailField"><label>Dimensiones</label><span id="dDims">-</span></div>
+              <div class="detailField"><label>Caras</label><span id="dFaces">-</span></div>
+              <div class="detailField"><label>Iluminaci&#243;n</label><span id="dIllum">-</span></div>
+              <div class="detailField"><label>Precio/Mes</label><span id="dPrice">-</span></div>
+              <div class="detailField"><label>Cliente</label><span id="dClient">-</span></div>
+              <div class="detailField"><label>Contrato</label><span id="dContract">-</span></div>
+              <div class="detailField"><label>Coordenadas</label><span id="dCoords">-</span></div>
             </div>
             <div class="detailActions" id="adminDetailActions" style="display:none">
-              <button class="btnEdit" onclick="editCurrentDetail()">? Editar</button>
-              <button class="btnDel" onclick="deleteCurrentDetail()">[X] Eliminar</button>
+              <button class="btnEdit" onclick="editCurrentDetail()">Editar</button>
+              <button class="btnDel" onclick="deleteCurrentDetail()">Eliminar</button>
             </div>
           </div>
-          <div id="mapWrap">
-            <div id="mapContainer">
-              <div id="map"></div>
-            </div>
-          </div>
+          <div id="mapWrap"><div id="map"></div></div>
         </div>
-
-        <!-- CATALOG PAGE -->
         <div id="page-catalog" class="page">
           <div class="filterBar">
             <input class="searchBox" id="searchInput" type="text" placeholder="Buscar vallas..." oninput="renderCatalog()">
@@ -342,95 +243,15 @@ select.mInput{cursor:pointer}
           </div>
           <div class="cardsGrid" id="cardsGrid"></div>
         </div>
-
-        <!-- IA PAGE -->
-        <div id="page-ia" class="page">
-          <div class="iaPage">
-            <div class="iaHero">
-              <h1>[IA] ImpresIAnarte IA</h1>
-              <p>Genera dise&#241;os profesionales de vallas publicitarias con inteligencia artificial. Describe tu idea y nuestra IA la convertir&#225; en una imagen lista para producci&#243;n.</p>
-            </div>
-            <div class="iaGrid">
-              <!-- FORM PANEL -->
-              <div class="iaFormPanel">
-                <h3>[*] Configura tu Dise&#241;o</h3>
-                <label class="iaLabel" for="iaPrompt">Describe tu valla</label>
-                <textarea class="iaTextarea" id="iaPrompt" placeholder="Ej: Valla publicitaria para restaurante de comida venezolana con colores c&#225;lidos, imagen de hallacas y texto 'El Sabor de Venezuela'..."></textarea>
-                <div class="iaChips">
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para restaurant de comida criolla venezolana con colores rojo, amarillo y azul, imagen apetitosa y texto elegante'">[>] Restaurante</span>
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla inmobiliaria de lujo para apartamentos en Caracas, fondo azul marino, arquitectura moderna y texto exclusivo'">[>] Inmobiliaria</span>
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla publicitaria para marca de ropa venezolana, fondo blanco limpio, modelo fashion y logo prominente'">[>] Moda</span>
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para campa&#241;a de turismo en Los Roques, colores turquesa y arena, paisaje caribe&#241;o y texto invitador'">[>] Turismo</span>
-                </div>
-                <div class="iaSectionLabel">Estilo Visual</div>
-                <div class="iaStyleGrid">
-                  <div class="iaStyleOpt selected" data-style="fotorrealista" onclick="selectIAStyle(this,'fotorrealista')">
-                    <div class="iaStyleIcon">[foto]</div>
-                    <div class="iaStyleName">Fotorrealista</div>
-                  </div>
-                  <div class="iaStyleOpt" data-style="grafico" onclick="selectIAStyle(this,'grafico')">
-                    <div class="iaStyleIcon">[graf]</div>
-                    <div class="iaStyleName">Gr&#225;fico</div>
-                  </div>
-                  <div class="iaStyleOpt" data-style="digital" onclick="selectIAStyle(this,'digital')">
-                    <div class="iaStyleIcon">[digi]</div>
-                    <div class="iaStyleName">Digital</div>
-                  </div>
-                  <div class="iaStyleOpt" data-style="minimalista" onclick="selectIAStyle(this,'minimalista')">
-                    <div class="iaStyleIcon">?</div>
-                    <div class="iaStyleName">Minimalista</div>
-                  </div>
-                </div>
-                <label class="iaLabel" for="iaFormat">Formato de Valla</label>
-                <select class="iaFormatSelect" id="iaFormat">
-                  <option value="14x5m">14?5 m (Gran Formato)</option>
-                  <option value="12x4m">12?4 m (Est&#225;ndar)</option>
-                  <option value="10x3.5m">10?3.5 m (Mediana)</option>
-                  <option value="8x3m">8?3 m (Peque&#241;a)</option>
-                </select>
-                <button class="btnGenerate" onclick="generateAIBillboard()">[IA] Generar Dise&#241;o</button>
-              </div>
-              <!-- RESULT PANEL -->
-              <div class="iaResultPanel" id="iaResultPanel">
-                <h3>[*] Resultado</h3>
-                <div id="iaPlaceholder" class="iaPlaceholder">
-                  <span>[IA]</span>
-                  <p>Tu dise&#241;o aparecer&#225; aqu&#237;</p>
-                  <p style="font-size:.8rem;color:#c4ccd6">Configura los par&#225;metros y pulsa Generar</p>
-                </div>
-                <div id="iaLoading" class="iaLoading">
-                  <div class="iaSpinner"></div>
-                  <p>Generando tu dise&#241;o con IA...</p>
-                  <p style="font-size:.8rem;color:#94a3b8">Esto puede tomar unos segundos</p>
-                </div>
-                <div id="iaResult" class="iaResult">
-                  <img id="iaResultImg" class="iaResultImg" src="" alt="Dise&#241;o generado">
-                  <div class="iaResultActions">
-                    <button class="btnDownload" onclick="downloadAIImage()">? Descargar</button>
-                    <button class="btnRegen" onclick="generateAIBillboard()">[*] Regenerar</button>
-                  </div>
-                </div>
-                <div id="iaError" class="iaError">
-                  <span style="font-size:2rem">?</span>
-                  <p id="iaErrorMsg">Error al generar la imagen</p>
-                  <button class="btnRetry" onclick="generateAIBillboard()">Reintentar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ABOUT PAGE -->
         <div id="page-about" class="page">
           <div class="aboutPage">
             <div class="aboutAdminBar" id="aboutAdminBar">
-              <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">? Editar P&#225;gina</button>
+              <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">Editar P&#225;gina</button>
             </div>
             <div class="aboutEditToolbar" id="aboutEditToolbar">
-              <button class="aboutEditToolbar btnAddText" onclick="addAboutTextBlock()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#6366F1;color:white">? Agregar Texto</button>
-              <button class="aboutEditToolbar btnAddImg" onclick="addAboutImage()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#7C3AED;color:white">[+] Agregar Imagen</button>
-              <button class="aboutEditToolbar btnSaveAbout" onclick="saveAboutEdit()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#10b981;color:white">[OK] Guardar</button>
-              <button class="aboutEditToolbar btnCancelAbout" onclick="cancelAboutEdit()" style="padding:8px 16px;border:1.5px solid #e2e8f0;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#f1f5f9;color:#374151">? Cancelar</button>
+              <button onclick="addAboutTextBlock()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#6366F1;color:white">+ Agregar Texto</button>
+              <button onclick="saveAboutEdit()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#10b981;color:white">Guardar</button>
+              <button onclick="cancelAboutEdit()" style="padding:8px 16px;border:1.5px solid #e2e8f0;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#f1f5f9;color:#374151">Cancelar</button>
             </div>
             <div id="aboutContent">
               <div class="aboutCard">
@@ -460,7 +281,7 @@ select.mInput{cursor:pointer}
                   <div class="contactInfo">
                     Tel: +58 212-555-0100<br>
                     Email: info@impresionarte.com.ve<br>
-                    Dir: Av. Francisco de Miranda, Caracas, Venezuela
+                    Av. Francisco de Miranda, Caracas, Venezuela
                   </div>
                 </div>
                 <div class="aboutSection">
@@ -471,82 +292,32 @@ select.mInput{cursor:pointer}
             </div>
           </div>
         </div>
-
-      </div><!-- /pageArea -->
-    </div><!-- /mainArea -->
-  </div><!-- /layout -->
-</div><!-- /app -->
-
-<!-- MODAL -->
+      </div>
+    </div>
+  </div>
+</div>
 <div class="modalOverlay" id="modalOverlay">
   <div class="modalBox" onclick="event.stopPropagation()">
     <div class="modalHeader">
       <h3 id="modalTitle">Agregar Valla</h3>
-      <button class="btnCloseModal" onclick="closeModal()">?</button>
+      <button class="btnCloseModal" onclick="closeModal()">X</button>
     </div>
     <div class="modalGrid">
-      <div class="fullWidth">
-        <label class="mLabel">Nombre / C&#243;digo</label>
-        <input class="mInput" id="mName" type="text" placeholder="Ej: VL-009">
-      </div>
-      <div>
-        <label class="mLabel">Ciudad</label>
-        <input class="mInput" id="mCity" type="text" placeholder="Ej: Caracas">
-      </div>
-      <div>
-        <label class="mLabel">Estado</label>
-        <select class="mInput" id="mStatus">
-          <option value="disponible">Disponible</option>
-          <option value="ocupada">Ocupada</option>
-          <option value="mantenimiento">Mantenimiento</option>
-        </select>
-      </div>
-      <div class="fullWidth">
-        <label class="mLabel">Direcci&#243;n</label>
-        <input class="mInput" id="mAddr" type="text" placeholder="Ej: Av. Libertador, frente al CCCT">
-      </div>
-      <div>
-        <label class="mLabel">Latitud</label>
-        <input class="mInput" id="mLat" type="number" step="0.0001" placeholder="Ej: 10.4806">
-      </div>
-      <div>
-        <label class="mLabel">Longitud</label>
-        <input class="mInput" id="mLng" type="number" step="0.0001" placeholder="Ej: -66.9036">
-      </div>
-      <div>
-        <label class="mLabel">Dimensiones</label>
-        <input class="mInput" id="mDims" type="text" placeholder="Ej: 14x5 m">
-      </div>
-      <div>
-        <label class="mLabel">Precio/Mes (USD)</label>
-        <input class="mInput" id="mPrice" type="number" placeholder="Ej: 1500">
-      </div>
-      <div>
-        <label class="mLabel">Caras</label>
-        <select class="mInput" id="mFaces">
-          <option value="1">1 cara</option>
-          <option value="2">2 caras</option>
-        </select>
-      </div>
-      <div>
-        <label class="mLabel">Iluminaci&#243;n</label>
-        <select class="mInput" id="mIllum">
-          <option value="S&#237;">S&#237;</option>
-          <option value="No">No</option>
-        </select>
-      </div>
-      <div>
-        <label class="mLabel">Cliente</label>
-        <input class="mInput" id="mClient" type="text" placeholder="Ej: Movistar Venezuela">
-      </div>
-      <div>
-        <label class="mLabel">Fin de Contrato</label>
-        <input class="mInput" id="mContractEnd" type="date">
-      </div>
+      <div class="fullWidth"><label class="mLabel">Nombre / C&#243;digo</label><input class="mInput" id="mName" type="text" placeholder="Ej: VL-009"></div>
+      <div><label class="mLabel">Ciudad</label><input class="mInput" id="mCity" type="text" placeholder="Ej: Caracas"></div>
+      <div><label class="mLabel">Estado</label><select class="mInput" id="mStatus"><option value="disponible">Disponible</option><option value="ocupada">Ocupada</option><option value="mantenimiento">Mantenimiento</option></select></div>
+      <div class="fullWidth"><label class="mLabel">Direcci&#243;n</label><input class="mInput" id="mAddr" type="text" placeholder="Ej: Av. Libertador, frente al CCCT"></div>
+      <div><label class="mLabel">Latitud</label><input class="mInput" id="mLat" type="number" step="0.0001" placeholder="Ej: 10.4806"></div>
+      <div><label class="mLabel">Longitud</label><input class="mInput" id="mLng" type="number" step="0.0001" placeholder="Ej: -66.9036"></div>
+      <div><label class="mLabel">Dimensiones</label><input class="mInput" id="mDims" type="text" placeholder="Ej: 14x5 m"></div>
+      <div><label class="mLabel">Precio/Mes (USD)</label><input class="mInput" id="mPrice" type="number" placeholder="Ej: 1500"></div>
+      <div><label class="mLabel">Caras</label><select class="mInput" id="mFaces"><option value="1">1 cara</option><option value="2">2 caras</option></select></div>
+      <div><label class="mLabel">Iluminaci&#243;n</label><select class="mInput" id="mIllum"><option value="Si">Si</option><option value="No">No</option></select></div>
+      <div><label class="mLabel">Cliente</label><input class="mInput" id="mClient" type="text" placeholder="Ej: Movistar Venezuela"></div>
+      <div><label class="mLabel">Fin de Contrato</label><input class="mInput" id="mContractEnd" type="date"></div>
       <div class="fullWidth">
         <label class="mLabel">Foto de la Valla</label>
         <div class="dropzone" id="dropzone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)" onclick="document.getElementById('fileInput').click()">
-          <div style="font-size:2rem">[IMG]</div>
           <p>Arrastra una imagen aqu&#237; o haz clic para seleccionar</p>
           <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileInput(event)">
           <img id="dropzonePreview" class="dropzonePreview" style="display:none">
@@ -560,521 +331,48 @@ select.mInput{cursor:pointer}
   </div>
 </div>
 <script>
-// ==================== DATA ====================
-const USERS = [
-  { username: 'admin', password: 'Impresionarte2024!', role: 'admin', display: 'Administrador' },
-  { username: 'viewer', password: 'viewer123', role: 'viewer', display: 'Visualizador' }
+var USERS=[{username:'admin',password:'Impresionarte2024!',role:'admin',display:'Administrador'},{username:'viewer',password:'viewer123',role:'viewer',display:'Visualizador'}];
+var BILLBOARDS=[
+  {id:'VL-001',name:'VL-001 Av. Libertador',city:'Caracas',status:'ocupada',addr:'Av. Libertador, frente al CCCT, Chacao',lat:10.4944,lng:-66.8548,dims:'14x5 m',price:2500,faces:2,illum:'Si',client:'Digitel',contractEnd:'2025-12-31',photo:''},
+  {id:'VL-002',name:'VL-002 Autopista Valencia',city:'Valencia',status:'disponible',addr:'Autopista Valencia-Caracas km 12',lat:10.1621,lng:-67.9990,dims:'12x4 m',price:1800,faces:1,illum:'Si',client:'',contractEnd:'',photo:''},
+  {id:'VL-003',name:'VL-003 Av. 5 de Julio',city:'Maracaibo',status:'ocupada',addr:'Av. 5 de Julio, sector La Lago',lat:10.6483,lng:-71.6124,dims:'14x5 m',price:2200,faces:2,illum:'Si',client:'Movistar',contractEnd:'2025-06-30',photo:''},
+  {id:'VL-004',name:'VL-004 Av. Lara',city:'Barquisimeto',status:'mantenimiento',addr:'Av. Lara, centro comercial Las Trinitarias',lat:10.0678,lng:-69.3467,dims:'10x3.5 m',price:1200,faces:1,illum:'No',client:'',contractEnd:'',photo:''},
+  {id:'VL-005',name:'VL-005 Av. Las Delicias',city:'Maracay',status:'disponible',addr:'Av. Las Delicias, frente al Sambil Maracay',lat:10.2399,lng:-67.5956,dims:'12x4 m',price:1500,faces:1,illum:'Si',client:'',contractEnd:'',photo:''},
+  {id:'VL-006',name:'VL-006 Av. Upata',city:'Ciudad Guayana',status:'ocupada',addr:'Av. Upata, Puerto Ordaz',lat:8.3023,lng:-62.7070,dims:'14x5 m',price:1900,faces:2,illum:'Si',client:'PDVSA',contractEnd:'2026-03-31',photo:''},
+  {id:'VL-007',name:'VL-007 Av. Raul Leoni',city:'Maturin',status:'disponible',addr:'Av. Raul Leoni, sector Los Guaritos',lat:9.7458,lng:-63.1841,dims:'10x3.5 m',price:1100,faces:1,illum:'No',client:'',contractEnd:'',photo:''},
+  {id:'VL-008',name:'VL-008 Av. Intercomunal',city:'Barcelona',status:'mantenimiento',addr:'Av. Intercomunal, frente al IUTBA',lat:10.1339,lng:-64.6930,dims:'12x4 m',price:1400,faces:1,illum:'Si',client:'',contractEnd:'',photo:''}
 ];
-
-let BILLBOARDS = [
-  { id:'VL-001', name:'VL-001 Av. Libertador', city:'Caracas', status:'ocupada', addr:'Av. Libertador, frente al CCCT, Chacao', lat:10.4944, lng:-66.8548, dims:'14x5 m', price:2500, faces:2, illum:'S&#237;', client:'Digitel', contractEnd:'2025-12-31', photo:'' },
-  { id:'VL-002', name:'VL-002 Autopista Valencia', city:'Valencia', status:'disponible', addr:'Autopista Valencia-Caracas km 12', lat:10.1621, lng:-67.9990, dims:'12x4 m', price:1800, faces:1, illum:'S&#237;', client:'', contractEnd:'', photo:'' },
-  { id:'VL-003', name:'VL-003 Av. 5 de Julio', city:'Maracaibo', status:'ocupada', addr:'Av. 5 de Julio, sector La Lago', lat:10.6483, lng:-71.6124, dims:'14x5 m', price:2200, faces:2, illum:'S&#237;', client:'Movistar', contractEnd:'2025-06-30', photo:'' },
-  { id:'VL-004', name:'VL-004 Av. Lara', city:'Barquisimeto', status:'mantenimiento', addr:'Av. Lara, centro comercial Las Trinitarias', lat:10.0678, lng:-69.3467, dims:'10x3.5 m', price:1200, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
-  { id:'VL-005', name:'VL-005 Av. Las Delicias', city:'Maracay', status:'disponible', addr:'Av. Las Delicias, frente al Sambil Maracay', lat:10.2399, lng:-67.5956, dims:'12x4 m', price:1500, faces:1, illum:'S&#237;', client:'', contractEnd:'', photo:'' },
-  { id:'VL-006', name:'VL-006 Av. Upata', city:'Ciudad Guayana', status:'ocupada', addr:'Av. Upata, Puerto Ordaz', lat:8.3023, lng:-62.7070, dims:'14x5 m', price:1900, faces:2, illum:'S&#237;', client:'PDVSA', contractEnd:'2026-03-31', photo:'' },
-  { id:'VL-007', name:'VL-007 Av. Ra&#250;l Leoni', city:'Matur&#237;n', status:'disponible', addr:'Av. Ra&#250;l Leoni, sector Los Guaritos', lat:9.7458, lng:-63.1841, dims:'10x3.5 m', price:1100, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
-  { id:'VL-008', name:'VL-008 Av. Intercomunal', city:'Barcelona', status:'mantenimiento', addr:'Av. Intercomunal, frente al IUTBA', lat:10.1339, lng:-64.6930, dims:'12x4 m', price:1400, faces:1, illum:'S&#237;', client:'', contractEnd:'', photo:'' }
-];
-
-let currentUser = null;
-let leafletMap = null;
-let mapMarkers = [];
-let currentDetailId = null;
-let currentFilter = 'all';
-let modalEditId = null;
-let photoBase64 = '';
-var iaSelectedStyle = 'fotorrealista';
-var aboutEditMode = false;
-var aboutOriginalHTML = '';
-
-// ==================== AUTH ====================
-function doLogin() {
-  var u = document.getElementById('inputUser').value.trim();
-  var p = document.getElementById('inputPass').value;
-  var err = document.getElementById('loginError');
-  var found = USERS.find(function(x){ return x.username === u && x.password === p; });
-  if (!found) {
-    err.style.display = 'block';
-    return;
-  }
-  err.style.display = 'none';
-  currentUser = found;
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('userAvatar').textContent = found.display.charAt(0).toUpperCase();
-  document.getElementById('userName').textContent = found.display;
-  document.getElementById('userRole').textContent = found.role === 'admin' ? 'Administrador' : 'Visualizador';
-  if (found.role === 'admin') {
-    document.getElementById('adminDetailActions').style.display = 'flex';
-    document.getElementById('aboutAdminBar').style.display = 'flex';
-  } else {
-    document.getElementById('adminDetailActions').style.display = 'none';
-    document.getElementById('aboutAdminBar').style.display = 'none';
-  }
-  initMap();
-  updateStats();
-  renderCatalog();
-  showPage('map');
-  showToast('Bienvenido, ' + found.display + '!', 'success');
-}
-
-function doLogout() {
-  currentUser = null;
-  leafletMap = null;
-  mapMarkers = [];
-  currentDetailId = null;
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('inputUser').value = '';
-  document.getElementById('inputPass').value = '';
-  document.getElementById('loginError').style.display = 'none';
-}
-
-// ==================== NAVIGATION ====================
-function showPage(page) {
-  var pages = ['map','catalog','ia','about'];
-  var titles = { map:'Mapa de Vallas', catalog:'Cat&#225;logo de Vallas', ia:'ImpresIAnarte IA', about:'Sobre Nosotros' };
-  pages.forEach(function(pg) {
-    var el = document.getElementById('page-' + pg);
-    var nav = document.getElementById('nav-' + pg);
-    if (el) el.classList.toggle('active', pg === page);
-    if (nav) nav.classList.toggle('active', pg === page);
-  });
-  document.getElementById('topbarTitle').textContent = titles[page] || '';
-  var addBtn = document.getElementById('adminAddBtn');
-  if (page === 'catalog' && currentUser && currentUser.role === 'admin') {
-    addBtn.style.display = 'block';
-  } else {
-    addBtn.style.display = 'none';
-  }
-  if (page === 'map' && leafletMap) {
-    setTimeout(function(){ leafletMap.invalidateSize(); }, 100);
-  }
-}
-
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('collapsed');
-  if (leafletMap) setTimeout(function(){ leafletMap.invalidateSize(); }, 350);
-}
-
-// ==================== MAP ====================
-function initMap() {
-  if (leafletMap) { leafletMap.remove(); leafletMap = null; }
-  leafletMap = L.map('map').setView([9.5, -68.0], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&#169; OpenStreetMap contributors',
-    maxZoom: 19
-  }).addTo(leafletMap);
-  renderMapMarkers();
-}
-
-function getMarkerColor(status) {
-  if (status === 'disponible') return '#10b981';
-  if (status === 'ocupada') return '#ef4444';
-  return '#f59e0b';
-}
-
-function makeIcon(color) {
-  return L.divIcon({
-    html: '<div style="width:18px;height:18px;background:' + color + ';border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',
-    iconSize: [18,18],
-    iconAnchor: [9,9],
-    className: ''
-  });
-}
-
-function renderMapMarkers() {
-  if (!leafletMap) return;
-  mapMarkers.forEach(function(m){ leafletMap.removeLayer(m); });
-  mapMarkers = [];
-  BILLBOARDS.forEach(function(b) {
-    var color = getMarkerColor(b.status);
-    var icon = makeIcon(color);
-    var marker = L.marker([b.lat, b.lng], { icon: icon })
-      .addTo(leafletMap)
-      .bindPopup('<strong>' + b.name + '</strong><br>' + b.city + '<br><em>' + b.status + '</em>');
-    marker.on('click', function(){ showDetail(b.id); });
-    mapMarkers.push(marker);
-  });
-}
-
-// ==================== STATS ====================
-function updateStats() {
-  var total = BILLBOARDS.length;
-  var avail = BILLBOARDS.filter(function(b){ return b.status==='disponible'; }).length;
-  var occ = BILLBOARDS.filter(function(b){ return b.status==='ocupada'; }).length;
-  var cities = new Set(BILLBOARDS.map(function(b){ return b.city; })).size;
-  var income = BILLBOARDS.filter(function(b){ return b.status==='ocupada'; }).reduce(function(s,b){ return s+b.price; },0);
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statAvail').textContent = avail;
-  document.getElementById('statOcc').textContent = occ;
-  document.getElementById('statCities').textContent = cities;
-  document.getElementById('statIncome').textContent = '$' + income.toLocaleString();
-}
-
-// ==================== DETAIL ====================
-function showDetail(id) {
-  var b = BILLBOARDS.find(function(x){ return x.id === id; });
-  if (!b) return;
-  currentDetailId = id;
-  document.getElementById('detailName').textContent = b.name;
-  document.getElementById('dCity').textContent = b.city;
-  document.getElementById('dAddr').textContent = b.addr;
-  document.getElementById('dStatus').textContent = b.status.charAt(0).toUpperCase() + b.status.slice(1);
-  document.getElementById('dDims').textContent = b.dims;
-  document.getElementById('dFaces').textContent = b.faces + ' cara(s)';
-  document.getElementById('dIllum').textContent = b.illum;
-  document.getElementById('dPrice').textContent = '$' + b.price.toLocaleString() + '/mes';
-  document.getElementById('dClient').textContent = b.client || '&#8212;';
-  document.getElementById('dContract').textContent = b.contractEnd || '&#8212;';
-  document.getElementById('dCoords').textContent = b.lat + ', ' + b.lng;
-  document.getElementById('detailPanel').style.display = 'block';
-  document.getElementById('page-map').scrollTop = 0;
-}
-
-function hideDetail() {
-  document.getElementById('detailPanel').style.display = 'none';
-  currentDetailId = null;
-}
-
-function editCurrentDetail() {
-  if (currentDetailId) openModal(currentDetailId);
-}
-
-function deleteCurrentDetail() {
-  if (!currentDetailId) return;
-  if (confirm('&#191;Eliminar esta valla?')) {
-    deleteBillboard(currentDetailId);
-    hideDetail();
-  }
-}
-
-// ==================== CATALOG ====================
-function setFilter(f) {
-  currentFilter = f;
-  ['all','disponible','ocupada','mantenimiento'].forEach(function(k) {
-    var el = document.getElementById('pill-' + k);
-    if (el) el.classList.toggle('active', k === f);
-  });
-  renderCatalog();
-}
-
-function renderCatalog() {
-  var q = (document.getElementById('searchInput').value || '').toLowerCase();
-  var list = BILLBOARDS.filter(function(b) {
-    var matchFilter = currentFilter === 'all' || b.status === currentFilter;
-    var matchSearch = !q || b.name.toLowerCase().includes(q) || b.city.toLowerCase().includes(q) || b.addr.toLowerCase().includes(q);
-    return matchFilter && matchSearch;
-  });
-  var grid = document.getElementById('cardsGrid');
-  if (list.length === 0) {
-    grid.innerHTML = '<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:40px">No se encontraron vallas</p>';
-    return;
-  }
-  var isAdmin = currentUser && currentUser.role === 'admin';
-  grid.innerHTML = list.map(function(b) {
-    var badgeCls = 'badge-' + b.status;
-    var statusLabel = b.status === 'disponible' ? 'Disponible' : b.status === 'ocupada' ? 'Ocupada' : 'Mantenimiento';
-    var photoHtml = b.photo ? '<img src="' + b.photo + '" alt="foto">' : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">[IMG]</div>';
-    var delBtn = isAdmin ? '<button class="btnCardDel" onclick="event.stopPropagation();deleteBillboard(\'' + b.id + '\')">[X]</button>' : '';
-    return '<div class="billCard" onclick="showPage('map');showDetail('' + b.id + '')">'
-      + '<div class="cardPhoto">' + photoHtml + '<span class="cardStatusBadge ' + badgeCls + '">' + statusLabel + '</span></div>'
-      + '<div class="cardBody"><div class="cardName">' + b.name + '</div><div class="cardCity">[*] ' + b.city + '</div>'
-      + '<div class="cardMeta"><span class="cardPrice">$' + b.price.toLocaleString() + '/mes</span><span class="cardDims">' + b.dims + '</span></div></div>'
-      + '<div class="cardFooter"><button class="btnCardView" onclick="event.stopPropagation();showPage('map');showDetail('' + b.id + '')">Ver en Mapa</button>' + delBtn + '</div>'
-      + '</div>';
-  }).join('');
-}
-
-function deleteBillboard(id) {
-  if (!confirm('&#191;Eliminar esta valla?')) return;
-  BILLBOARDS = BILLBOARDS.filter(function(b){ return b.id !== id; });
-  renderMapMarkers();
-  updateStats();
-  renderCatalog();
-  showToast('Valla eliminada', 'info');
-}
-
-// ==================== MODAL ====================
-function openModal(id) {
-  modalEditId = id || null;
-  photoBase64 = '';
-  document.getElementById('dropzonePreview').style.display = 'none';
-  document.getElementById('dropzone').classList.remove('drag');
-  if (id) {
-    var b = BILLBOARDS.find(function(x){ return x.id === id; });
-    if (!b) return;
-    document.getElementById('modalTitle').textContent = 'Editar Valla';
-    document.getElementById('mName').value = b.name;
-    document.getElementById('mCity').value = b.city;
-    document.getElementById('mStatus').value = b.status;
-    document.getElementById('mAddr').value = b.addr;
-    document.getElementById('mLat').value = b.lat;
-    document.getElementById('mLng').value = b.lng;
-    document.getElementById('mDims').value = b.dims;
-    document.getElementById('mPrice').value = b.price;
-    document.getElementById('mFaces').value = b.faces;
-    document.getElementById('mIllum').value = b.illum;
-    document.getElementById('mClient').value = b.client;
-    document.getElementById('mContractEnd').value = b.contractEnd;
-    if (b.photo) {
-      var prev = document.getElementById('dropzonePreview');
-      prev.src = b.photo;
-      prev.style.display = 'block';
-      photoBase64 = b.photo;
-    }
-  } else {
-    document.getElementById('modalTitle').textContent = 'Agregar Valla';
-    ['mName','mCity','mAddr','mDims','mClient','mContractEnd'].forEach(function(id){ document.getElementById(id).value=''; });
-    document.getElementById('mStatus').value = 'disponible';
-    document.getElementById('mLat').value = '';
-    document.getElementById('mLng').value = '';
-    document.getElementById('mPrice').value = '';
-    document.getElementById('mFaces').value = '1';
-    document.getElementById('mIllum').value = 'S&#237;';
-  }
-  document.getElementById('modalOverlay').classList.add('open');
-}
-
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  modalEditId = null;
-}
-
-function saveModal() {
-  var name = document.getElementById('mName').value.trim();
-  var city = document.getElementById('mCity').value.trim();
-  var addr = document.getElementById('mAddr').value.trim();
-  var lat = parseFloat(document.getElementById('mLat').value);
-  var lng = parseFloat(document.getElementById('mLng').value);
-  if (!name || !city) { showToast('Nombre y ciudad son requeridos', 'error'); return; }
-  if (isNaN(lat) || isNaN(lng)) { showToast('Coordenadas inv&#225;lidas', 'error'); return; }
-  var data = {
-    id: modalEditId || name.replace(/s+/g,'-'),
-    name: name,
-    city: city,
-    status: document.getElementById('mStatus').value,
-    addr: addr,
-    lat: lat,
-    lng: lng,
-    dims: document.getElementById('mDims').value.trim(),
-    price: parseFloat(document.getElementById('mPrice').value) || 0,
-    faces: parseInt(document.getElementById('mFaces').value) || 1,
-    illum: document.getElementById('mIllum').value,
-    client: document.getElementById('mClient').value.trim(),
-    contractEnd: document.getElementById('mContractEnd').value,
-    photo: photoBase64
-  };
-  if (modalEditId) {
-    var idx = BILLBOARDS.findIndex(function(b){ return b.id === modalEditId; });
-    if (idx !== -1) BILLBOARDS[idx] = data;
-    showToast('Valla actualizada', 'success');
-  } else {
-    BILLBOARDS.push(data);
-    showToast('Valla agregada', 'success');
-  }
-  closeModal();
-  renderMapMarkers();
-  updateStats();
-  renderCatalog();
-}
-
-// ==================== FILE UPLOAD ====================
-function handleFileInput(e) {
-  if (e.target.files && e.target.files[0]) readPhoto(e.target.files[0]);
-}
-
-function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('dropzone').classList.remove('drag');
-  var file = e.dataTransfer.files[0];
-  if (file) readPhoto(file);
-}
-
-function readPhoto(file) {
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    photoBase64 = ev.target.result;
-    var prev = document.getElementById('dropzonePreview');
-    prev.src = photoBase64;
-    prev.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-}
-
-// ==================== TOAST ====================
-function showToast(msg, type) {
-  var existing = document.querySelector('.toast');
-  if (existing) existing.remove();
-  var t = document.createElement('div');
-  t.className = 'toast ' + (type || 'info');
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(function(){ if (t.parentNode) t.remove(); }, 3000);
-}
-
-// ==================== IA ====================
-function selectIAStyle(el, style) {
-  iaSelectedStyle = style;
-  document.querySelectorAll('.iaStyleOpt').forEach(function(opt){
-    opt.classList.toggle('selected', opt === el);
-  });
-}
-
-function generateAIBillboard() {
-  var prompt = document.getElementById('iaPrompt').value.trim();
-  var format = document.getElementById('iaFormat').value;
-  if (!prompt) { showToast('Por favor describe tu valla primero', 'error'); return; }
-  document.getElementById('iaPlaceholder').style.display = 'none';
-  document.getElementById('iaLoading').style.display = 'flex';
-  document.getElementById('iaResult').style.display = 'none';
-  document.getElementById('iaError').style.display = 'none';
-  fetch('https://api.twin.so/agents/019ca4a9-db22-7f60-85f4-39b479bbfddc/tools/ai_generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: prompt, style: iaSelectedStyle, format: format })
-  })
-  .then(function(res){ return res.json(); })
-  .then(function(data) {
-    document.getElementById('iaLoading').style.display = 'none';
-    if (data && (data.image_url || data.url)) {
-      var url = data.image_url || data.url;
-      document.getElementById('iaResultImg').src = url;
-      document.getElementById('iaResult').style.display = 'flex';
-      showToast('Dise&#241;o generado con &#233;xito', 'success');
-    } else {
-      console.error('AI response:', JSON.stringify(data));
-      document.getElementById('iaErrorMsg').textContent = (data && data.error) ? data.error : 'No se pudo generar la imagen. Intenta de nuevo.';
-      document.getElementById('iaError').style.display = 'flex';
-    }
-  })
-  .catch(function(err) {
-    console.error('AI error:', err);
-    document.getElementById('iaLoading').style.display = 'none';
-    document.getElementById('iaErrorMsg').textContent = 'Error de conexi&#243;n: ' + err.message;
-    document.getElementById('iaError').style.display = 'flex';
-  });
-}
-
-function downloadAIImage() {
-  var img = document.getElementById('iaResultImg');
-  if (!img.src) return;
-  fetch(img.src)
-    .then(function(r){ return r.blob(); })
-    .then(function(blob) {
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'impresionarte-ia-' + Date.now() + '.jpg';
-      a.click();
-      URL.revokeObjectURL(url);
-    })
-    .catch(function(){ showToast('No se pudo descargar', 'error'); });
-}
-
-// ==================== ABOUT EDIT ====================
-function loadAboutContent() {
-  var saved = localStorage.getItem('impresionarte_about_content');
-  if (saved) {
-    document.getElementById('aboutContent').innerHTML = saved;
-  }
-}
-
-function toggleAboutEdit() {
-  if (aboutEditMode) {
-    cancelAboutEdit();
-  } else {
-    enterAboutEditMode();
-  }
-}
-
-function enterAboutEditMode() {
-  aboutEditMode = true;
-  aboutOriginalHTML = document.getElementById('aboutContent').innerHTML;
-  var content = document.getElementById('aboutContent');
-  content.querySelectorAll('p,h2,h3,li').forEach(function(el){
-    el.contentEditable = 'true';
-    el.style.outline = '1.5px dashed #6366F1';
-    el.style.borderRadius = '4px';
-    el.style.minWidth = '20px';
-  });
-  document.getElementById('aboutEditToolbar').style.display = 'flex';
-  document.getElementById('btnToggleEdit').textContent = '[OK] Salir Edici&#243;n';
-}
-
-function saveAboutEdit() {
-  var content = document.getElementById('aboutContent');
-  content.querySelectorAll('[contenteditable]').forEach(function(el){
-    el.removeAttribute('contenteditable');
-    el.style.outline = '';
-    el.style.borderRadius = '';
-    el.style.minWidth = '';
-  });
-  localStorage.setItem('impresionarte_about_content', content.innerHTML);
-  document.getElementById('aboutEditToolbar').style.display = 'none';
-  document.getElementById('btnToggleEdit').textContent = '? Editar P&#225;gina';
-  aboutEditMode = false;
-  showToast('P&#225;gina guardada', 'success');
-}
-
-function cancelAboutEdit() {
-  document.getElementById('aboutContent').innerHTML = aboutOriginalHTML;
-  document.getElementById('aboutEditToolbar').style.display = 'none';
-  document.getElementById('btnToggleEdit').textContent = '? Editar P&#225;gina';
-  aboutEditMode = false;
-}
-
-function addAboutTextBlock() {
-  var section = document.createElement('div');
-  section.className = 'aboutSection';
-  section.innerHTML = '<h3 contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Nueva Secci&#243;n</h3><p contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Escribe aqu&#237; el contenido de esta secci&#243;n...</p>';
-  document.getElementById('aboutContent').querySelector('.aboutCard').appendChild(section);
-}
-
-function addAboutImage() {
-  var input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'image/*';
-  input.onchange = function(e) {
-    var file = e.target.files[0];
-    if (!file) return;
-    var reader = new FileReader();
-    reader.onload = function(ev) {
-      var img = document.createElement('img');
-      img.src = ev.target.result;
-      img.style.maxWidth = '100%';
-      img.style.borderRadius = '8px';
-      img.style.marginTop = '12px';
-      document.getElementById('aboutContent').querySelector('.aboutCard').appendChild(img);
-    };
-    reader.readAsDataURL(file);
-  };
-  input.click();
-}
-
-// ==================== EVENT LISTENERS ====================
-document.addEventListener('DOMContentLoaded', function() {
-  loadAboutContent();
-  var passInput = document.getElementById('inputPass');
-  var userInput = document.getElementById('inputUser');
-  if (passInput) {
-    passInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') doLogin();
-    });
-  }
-  if (userInput) {
-    userInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') { document.getElementById('inputPass').focus(); }
-    });
-  }
-  var overlay = document.getElementById('modalOverlay');
-  if (overlay) {
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) closeModal();
-    });
-  }
-});
+var currentUser=null,leafletMap=null,mapMarkers=[],currentDetailId=null,currentFilter='all',modalEditId=null,photoBase64='',aboutEditMode=false,aboutOriginalHTML='';
+function doLogin(){var u=document.getElementById('inputUser').value.trim(),p=document.getElementById('inputPass').value,err=document.getElementById('loginError'),found=null;for(var i=0;i<USERS.length;i++){if(USERS[i].username===u&&USERS[i].password===p){found=USERS[i];break;}}if(!found){err.style.display='block';return;}err.style.display='none';currentUser=found;document.getElementById('loginScreen').style.display='none';document.getElementById('app').style.display='block';document.getElementById('userAvatar').textContent=found.display.charAt(0);document.getElementById('userName').textContent=found.display;document.getElementById('userRole').textContent=found.role==='admin'?'Administrador':'Visualizador';if(found.role==='admin'){document.getElementById('adminDetailActions').style.display='flex';document.getElementById('aboutAdminBar').style.display='flex';}else{document.getElementById('adminDetailActions').style.display='none';document.getElementById('aboutAdminBar').style.display='none';}initMap();updateStats();renderCatalog();showPage('map');showToast('Bienvenido, '+found.display+'!','success');}
+function doLogout(){currentUser=null;if(leafletMap){leafletMap.remove();leafletMap=null;}mapMarkers=[];currentDetailId=null;document.getElementById('app').style.display='none';document.getElementById('loginScreen').style.display='flex';document.getElementById('inputUser').value='';document.getElementById('inputPass').value='';document.getElementById('loginError').style.display='none';}
+function showPage(page){var pages=['map','catalog','about'];var titles={map:'Mapa de Vallas',catalog:'Cat\u00e1logo de Vallas',about:'Sobre Nosotros'};for(var i=0;i<pages.length;i++){var pg=pages[i];var el=document.getElementById('page-'+pg);var nav=document.getElementById('nav-'+pg);if(el)el.classList.toggle('active',pg===page);if(nav)nav.classList.toggle('active',pg===page);}document.getElementById('topbarTitle').textContent=titles[page]||'';var addBtn=document.getElementById('adminAddBtn');if(page==='catalog'&&currentUser&&currentUser.role==='admin'){addBtn.style.display='block';}else{addBtn.style.display='none';}if(page==='map'&&leafletMap){setTimeout(function(){leafletMap.invalidateSize();},100);}}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('collapsed');if(leafletMap)setTimeout(function(){leafletMap.invalidateSize();},350);}
+function initMap(){if(leafletMap){leafletMap.remove();leafletMap=null;}leafletMap=L.map('map').setView([9.5,-68.0],6);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'\u00a9 OpenStreetMap contributors',maxZoom:19}).addTo(leafletMap);renderMapMarkers();}
+function getMarkerColor(s){return s==='disponible'?'#10b981':s==='ocupada'?'#ef4444':'#f59e0b';}
+function makeIcon(color){return L.divIcon({html:'<div style="width:18px;height:18px;background:'+color+';border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',iconSize:[18,18],iconAnchor:[9,9],className:''});}
+function renderMapMarkers(){if(!leafletMap)return;for(var i=0;i<mapMarkers.length;i++){leafletMap.removeLayer(mapMarkers[i]);}mapMarkers=[];for(var j=0;j<BILLBOARDS.length;j++){(function(b){var marker=L.marker([b.lat,b.lng],{icon:makeIcon(getMarkerColor(b.status))}).addTo(leafletMap).bindPopup('<strong>'+b.name+'</strong><br>'+b.city);marker.on('click',function(){showDetail(b.id);});mapMarkers.push(marker);})(BILLBOARDS[j]);}}
+function updateStats(){var total=BILLBOARDS.length,avail=0,occ=0,income=0,citiesSet={};for(var i=0;i<BILLBOARDS.length;i++){var b=BILLBOARDS[i];if(b.status==='disponible')avail++;if(b.status==='ocupada'){occ++;income+=b.price;}citiesSet[b.city]=1;}document.getElementById('statTotal').textContent=total;document.getElementById('statAvail').textContent=avail;document.getElementById('statOcc').textContent=occ;document.getElementById('statCities').textContent=Object.keys(citiesSet).length;document.getElementById('statIncome').textContent='$'+income.toLocaleString();}
+function showDetail(id){var b=null;for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id===id){b=BILLBOARDS[i];break;}}if(!b)return;currentDetailId=id;document.getElementById('detailName').textContent=b.name;document.getElementById('dCity').textContent=b.city;document.getElementById('dAddr').textContent=b.addr;document.getElementById('dStatus').textContent=b.status==='disponible'?'Disponible':b.status==='ocupada'?'Ocupada':'Mantenimiento';document.getElementById('dDims').textContent=b.dims;document.getElementById('dFaces').textContent=b.faces+' cara(s)';document.getElementById('dIllum').textContent=b.illum;document.getElementById('dPrice').textContent='$'+b.price.toLocaleString()+'/mes';document.getElementById('dClient').textContent=b.client||'-';document.getElementById('dContract').textContent=b.contractEnd||'-';document.getElementById('dCoords').textContent=b.lat+', '+b.lng;document.getElementById('detailPanel').style.display='block';}
+function hideDetail(){document.getElementById('detailPanel').style.display='none';currentDetailId=null;}
+function editCurrentDetail(){if(currentDetailId)openModal(currentDetailId);}
+function deleteCurrentDetail(){if(!currentDetailId)return;if(confirm('Eliminar esta valla?')){deleteBillboard(currentDetailId);hideDetail();}}
+function setFilter(f){currentFilter=f;var keys=['all','disponible','ocupada','mantenimiento'];for(var i=0;i<keys.length;i++){var el=document.getElementById('pill-'+keys[i]);if(el)el.classList.toggle('active',keys[i]===f);}renderCatalog();}
+function renderCatalog(){var q=(document.getElementById('searchInput').value||'').toLowerCase();var list=[];for(var i=0;i<BILLBOARDS.length;i++){var b=BILLBOARDS[i];var mf=currentFilter==='all'||b.status===currentFilter;var ms=!q||b.name.toLowerCase().indexOf(q)!==-1||b.city.toLowerCase().indexOf(q)!==-1;if(mf&&ms)list.push(b);}var grid=document.getElementById('cardsGrid');if(list.length===0){grid.innerHTML='<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:40px">No se encontraron vallas</p>';return;}var isAdmin=currentUser&&currentUser.role==='admin';var html='';for(var j=0;j<list.length;j++){var b=list[j];var sl=b.status==='disponible'?'Disponible':b.status==='ocupada'?'Ocupada':'Mantenimiento';var ph=b.photo?'<img src="'+b.photo+'" alt="foto">':'<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.7);font-size:.9rem">Sin foto</div>';var db=isAdmin?'<button class="btnCardDel" onclick="event.stopPropagation();deleteBillboard(\''+b.id+'\')">Eliminar</button>':'';html+='<div class="billCard" onclick="showPage(\'map\');showDetail(\''+b.id+'\')">';html+='<div class="cardPhoto">'+ph+'<span class="cardStatusBadge badge-'+b.status+'">'+sl+'</span></div>';html+='<div class="cardBody"><div class="cardName">'+b.name+'</div><div class="cardCity">'+b.city+'</div>';html+='<div class="cardMeta"><span class="cardPrice">$'+b.price.toLocaleString()+'/mes</span><span class="cardDims">'+b.dims+'</span></div></div>';html+='<div class="cardFooter"><button class="btnCardView" onclick="event.stopPropagation();showPage(\'map\');showDetail(\''+b.id+'\')">Ver en Mapa</button>'+db+'</div></div>';}grid.innerHTML=html;}
+function deleteBillboard(id){if(!confirm('Eliminar esta valla?'))return;var nl=[];for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id!==id)nl.push(BILLBOARDS[i]);}BILLBOARDS=nl;renderMapMarkers();updateStats();renderCatalog();showToast('Valla eliminada','info');}
+function openModal(id){modalEditId=id||null;photoBase64='';document.getElementById('dropzonePreview').style.display='none';if(id){var b=null;for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id===id){b=BILLBOARDS[i];break;}}if(!b)return;document.getElementById('modalTitle').textContent='Editar Valla';document.getElementById('mName').value=b.name;document.getElementById('mCity').value=b.city;document.getElementById('mStatus').value=b.status;document.getElementById('mAddr').value=b.addr;document.getElementById('mLat').value=b.lat;document.getElementById('mLng').value=b.lng;document.getElementById('mDims').value=b.dims;document.getElementById('mPrice').value=b.price;document.getElementById('mFaces').value=b.faces;document.getElementById('mIllum').value=b.illum;document.getElementById('mClient').value=b.client;document.getElementById('mContractEnd').value=b.contractEnd;if(b.photo){document.getElementById('dropzonePreview').src=b.photo;document.getElementById('dropzonePreview').style.display='block';photoBase64=b.photo;}}else{document.getElementById('modalTitle').textContent='Agregar Valla';var cids=['mName','mCity','mAddr','mDims','mClient','mContractEnd'];for(var k=0;k<cids.length;k++){document.getElementById(cids[k]).value='';}document.getElementById('mStatus').value='disponible';document.getElementById('mLat').value='';document.getElementById('mLng').value='';document.getElementById('mPrice').value='';document.getElementById('mFaces').value='1';document.getElementById('mIllum').value='Si';}document.getElementById('modalOverlay').classList.add('open');}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');modalEditId=null;}
+function saveModal(){var name=document.getElementById('mName').value.trim(),city=document.getElementById('mCity').value.trim(),addr=document.getElementById('mAddr').value.trim(),lat=parseFloat(document.getElementById('mLat').value),lng=parseFloat(document.getElementById('mLng').value);if(!name||!city){showToast('Nombre y ciudad son requeridos','error');return;}if(isNaN(lat)||isNaN(lng)){showToast('Coordenadas inv\u00e1lidas','error');return;}var data={id:modalEditId||('VL-'+Date.now()),name:name,city:city,status:document.getElementById('mStatus').value,addr:addr,lat:lat,lng:lng,dims:document.getElementById('mDims').value.trim(),price:parseFloat(document.getElementById('mPrice').value)||0,faces:parseInt(document.getElementById('mFaces').value)||1,illum:document.getElementById('mIllum').value,client:document.getElementById('mClient').value.trim(),contractEnd:document.getElementById('mContractEnd').value,photo:photoBase64};if(modalEditId){for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id===modalEditId){BILLBOARDS[i]=data;break;}}showToast('Valla actualizada','success');}else{BILLBOARDS.push(data);showToast('Valla agregada','success');}closeModal();renderMapMarkers();updateStats();renderCatalog();}
+function handleFileInput(e){if(e.target.files&&e.target.files[0])readPhoto(e.target.files[0]);}
+function handleDrop(e){e.preventDefault();document.getElementById('dropzone').classList.remove('drag');var file=e.dataTransfer.files[0];if(file)readPhoto(file);}
+function readPhoto(file){var reader=new FileReader();reader.onload=function(ev){photoBase64=ev.target.result;var prev=document.getElementById('dropzonePreview');prev.src=photoBase64;prev.style.display='block';};reader.readAsDataURL(file);}
+function showToast(msg,type){var ex=document.querySelector('.toast');if(ex)ex.remove();var t=document.createElement('div');t.className='toast '+(type||'info');t.textContent=msg;document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.remove();},3000);}
+function loadAboutContent(){var saved=localStorage.getItem('impresionarte_about_content');if(saved){document.getElementById('aboutContent').innerHTML=saved;}}
+function toggleAboutEdit(){if(aboutEditMode){cancelAboutEdit();}else{enterAboutEditMode();}}
+function enterAboutEditMode(){aboutEditMode=true;aboutOriginalHTML=document.getElementById('aboutContent').innerHTML;var els=document.getElementById('aboutContent').querySelectorAll('p,h2,h3,li');for(var i=0;i<els.length;i++){els[i].contentEditable='true';els[i].style.outline='1.5px dashed #6366F1';els[i].style.borderRadius='4px';}document.getElementById('aboutEditToolbar').style.display='flex';document.getElementById('btnToggleEdit').textContent='Salir Edici\u00f3n';}
+function saveAboutEdit(){var content=document.getElementById('aboutContent');var els=content.querySelectorAll('[contenteditable]');for(var i=0;i<els.length;i++){els[i].removeAttribute('contenteditable');els[i].style.outline='';els[i].style.borderRadius='';}localStorage.setItem('impresionarte_about_content',content.innerHTML);document.getElementById('aboutEditToolbar').style.display='none';document.getElementById('btnToggleEdit').textContent='Editar P\u00e1gina';aboutEditMode=false;showToast('P\u00e1gina guardada','success');}
+function cancelAboutEdit(){document.getElementById('aboutContent').innerHTML=aboutOriginalHTML;document.getElementById('aboutEditToolbar').style.display='none';document.getElementById('btnToggleEdit').textContent='Editar P\u00e1gina';aboutEditMode=false;}
+function addAboutTextBlock(){var section=document.createElement('div');section.className='aboutSection';section.innerHTML='<h3 contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Nueva Secci\u00f3n</h3><p contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Escribe aqu\u00ed el contenido...</p>';document.getElementById('aboutContent').querySelector('.aboutCard').appendChild(section);}
+document.addEventListener('DOMContentLoaded',function(){loadAboutContent();var pi=document.getElementById('inputPass'),ui=document.getElementById('inputUser');if(pi)pi.addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});if(ui)ui.addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('inputPass').focus();});var ov=document.getElementById('modalOverlay');if(ov)ov.addEventListener('click',function(e){if(e.target===ov)closeModal();});});
 </script>
 </body>
 </html>
