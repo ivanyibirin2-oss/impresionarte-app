@@ -15,15 +15,6 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f1f5f9;
 
 /* LOGIN */
 #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0f172a 0%,#1e3a5f 50%,#0f172a 100%);}
-.login-card{background:#fff;border-radius:16px;padding:40px;width:380px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:fadeIn 0.6s ease;}
-.login-card h1{text-align:center;color:#1e293b;margin-bottom:8px;font-size:24px;}
-.login-card p.sub{text-align:center;color:#64748b;margin-bottom:24px;font-size:14px;}
-.login-card label{display:block;font-weight:600;color:#334155;margin-bottom:4px;font-size:14px;}
-.login-card input{width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;margin-bottom:16px;outline:none;transition:border 0.2s;}
-.login-card input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,0.15);}
-.login-card button{width:100%;padding:12px;background:#3b82f6;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s;}
-.login-card button:hover{background:#2563eb;}
-#loginError{color:#ef4444;text-align:center;font-size:13px;margin-top:8px;min-height:20px;}
 
 /* SIDEBAR */
 .sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1e293b;color:#fff;display:flex;flex-direction:column;z-index:100;transition:transform 0.3s;}
@@ -68,8 +59,12 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f1f5f9;
 /* MAP */
 .mapWrap{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,0.08);}
 #mapContainer{position:relative;}
-#map{height:440px;width:100%;z-index:1;}
+#mapWrap{flex:1;display:flex;flex-direction:column;min-height:400px;}#map{flex:1;width:100%;min-height:400px;z-index:1;border-radius:12px;}
 
+/* PAGE AREA */
+.pageArea{display:flex;flex-direction:column;height:calc(100vh - 80px);}
+#page-map{display:none;flex-direction:column;height:100%;}
+#page-map.active{display:flex;}
 /* DETAIL PANEL */
 .detailPanel{background:#fff;border-radius:12px;padding:24px;margin-top:16px;box-shadow:0 1px 3px rgba(0,0,0,0.08);animation:slideInRight 0.3s ease;}
 .detailPanel h3{font-size:18px;margin-bottom:16px;color:#1e293b;}
@@ -168,21 +163,67 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f1f5f9;
 .stats-grid{grid-template-columns:1fr 1fr;}
 .modal-row{grid-template-columns:1fr;}
 }
+.loginTabs{display:flex;gap:4px;background:#f1f5f9;border-radius:10px;padding:4px;margin-bottom:20px}
+.loginTab{flex:1;padding:8px;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;color:#64748b;background:transparent;transition:all .2s}
+.loginTab.active{background:white;color:#6366F1;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.loginCard{background:#fff;border-radius:16px;padding:40px;width:380px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,0.3);animation:fadeIn 0.6s ease;}
+.loginLogo h1{text-align:center;color:#1e293b;margin-bottom:8px;font-size:24px;}
+.loginLogo p{text-align:center;color:#64748b;margin-bottom:24px;font-size:14px;}
+.formGroup{margin-bottom:16px;}
+.formGroup label{display:block;font-weight:600;color:#334155;margin-bottom:4px;font-size:14px;}
+.formGroup input{width:100%;padding:10px 14px;border:1px solid #cbd5e1;border-radius:8px;font-size:14px;outline:none;transition:border 0.2s;}
+.formGroup input:focus{border-color:#3b82f6;box-shadow:0 0 0 3px rgba(59,130,246,0.15);}
+.btnLogin{width:100%;padding:12px;background:#3b82f6;color:#fff;border:none;border-radius:8px;font-size:16px;font-weight:600;cursor:pointer;transition:background 0.2s;}
+.btnLogin:hover{background:#2563eb;}
+.filterBar{display:flex;gap:10px;margin:16px 0;flex-wrap:wrap;}
 </style>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 
 <!-- LOGIN SCREEN -->
 <div id="loginScreen">
-<div class="login-card">
-<h1>Impresionarte</h1>
-<p class="sub">Sistema de Gesti&#243;n de Vallas Publicitarias</p>
-<label for="inputUser">Usuario</label>
-<input type="text" id="inputUser" placeholder="Ingrese su usuario" />
-<label for="inputPass">Contrase&#241;a</label>
-<input type="password" id="inputPass" placeholder="Ingrese su contrase&#241;a" />
-<button onclick="doLogin()">Iniciar Sesi&#243;n</button>
-<p id="loginError"></p>
+<div class="loginCard">
+  <div class="loginLogo">
+    <h1>Impresionarte_ve</h1>
+    <p>Sistema de Gesti&#243;n de Vallas Publicitarias</p>
+  </div>
+  <div class="loginTabs">
+    <button class="loginTab active" id="tabAdmin" onclick="switchTab('admin')">Administrador</button>
+    <button class="loginTab" id="tabGoogle" onclick="switchTab('google')">Acceso con Google</button>
+  </div>
+  <!-- Admin tab -->
+  <div id="panelAdmin">
+    <div class="formGroup">
+      <label for="inputUser">Usuario</label>
+      <input type="text" id="inputUser" placeholder="Ingresa tu usuario" autocomplete="username">
+    </div>
+    <div class="formGroup">
+      <label for="inputPass">Contrase&#241;a</label>
+      <input type="password" id="inputPass" placeholder="Ingresa tu contrase&#241;a" autocomplete="current-password">
+    </div>
+    <button class="btnLogin" onclick="doLogin()">Iniciar Sesi&#243;n</button>
+    <p id="loginError">Credenciales incorrectas. Intenta de nuevo.</p>
+  </div>
+  <!-- Google tab -->
+  <div id="panelGoogle" style="display:none">
+    <p style="text-align:center;color:#64748b;font-size:.9rem;margin-bottom:20px">Inicia sesi&#243;n con tu cuenta de Google como Visualizador</p>
+    <div id="g_id_onload"
+      data-client_id="798496998078-bi3v0olecrn7b86s8oc21phnv2b8l996.apps.googleusercontent.com"
+      data-callback="handleGoogleLogin"
+      data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+      data-type="standard"
+      data-size="large"
+      data-theme="outline"
+      data-text="sign_in_with"
+      data-shape="rectangular"
+      data-logo_alignment="left"
+      data-width="300">
+    </div>
+    <p id="googleError" style="color:#ef4444;font-size:.85rem;margin-top:10px;display:none;text-align:center">Error al iniciar sesi&#243;n. Intenta de nuevo.</p>
+  </div>
 </div>
 </div>
 
@@ -234,7 +275,14 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f1f5f9;
 <div class="stat-card"><div class="label">Disponibles</div><div class="value green" id="statAvail">0</div></div>
 <div class="stat-card"><div class="label">Ocupadas</div><div class="value red" id="statOcc">0</div></div>
 <div class="stat-card"><div class="label">Ciudades</div><div class="value blue" id="statCities">0</div></div>
-<div class="stat-card"><div class="label">Ingresos Mensuales</div><div class="value amber" id="statIncome">$0</div></div>
+</div>
+<div class="filterBar" id="mapFilterBar">
+  <button class="pill active" id="mpill-all" onclick="setMapFilter('all')">Todas</button>
+  <button class="pill" id="mpill-disponible" onclick="setMapFilter('disponible')">Disponibles</button>
+  <button class="pill" id="mpill-ocupada" onclick="setMapFilter('ocupada')">Ocupadas</button>
+  <button class="pill" id="mpill-mantenimiento" onclick="setMapFilter('mantenimiento')">Mantenimiento</button>
+</div>
+
 </div>
 <div id="detailPanel" class="detailPanel" style="display:none;">
 <div style="display:flex;justify-content:space-between;align-items:center;">
@@ -261,7 +309,7 @@ body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f1f5f9;
 </div>
 <div class="mapWrap">
 <div id="mapContainer">
-<div id="map"></div>
+<div id="mapWrap"><div id="map"></div></div>
 </div>
 </div>
 </div>
@@ -784,6 +832,49 @@ document.getElementById('inputPass').addEventListener('keydown',function(e){if(e
 document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 });
 })();
+
+// Google Login Tab Switching
+function switchTab(tab) {
+  document.getElementById('panelAdmin').style.display = tab === 'admin' ? 'block' : 'none';
+  document.getElementById('panelGoogle').style.display = tab === 'google' ? 'block' : 'none';
+  document.getElementById('tabAdmin').classList.toggle('active', tab === 'admin');
+  document.getElementById('tabGoogle').classList.toggle('active', tab === 'google');
+}
+
+function handleGoogleLogin(response) {
+  // Decode the JWT credential
+  var parts = response.credential.split('.');
+  var payload = JSON.parse(atob(parts[1]));
+  var name = payload.name || payload.email;
+  var email = payload.email;
+  // Log in as viewer
+  currentUser = { username: email, role: 'viewer', display: name };
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('userAvatar').textContent = name.charAt(0).toUpperCase();
+  document.getElementById('userName').textContent = name;
+  document.getElementById('userRole').textContent = 'Visualizador';
+  document.getElementById('adminDetailActions').style.display = 'none';
+  document.getElementById('aboutAdminBar').style.display = 'none';
+  initMap();
+  updateStats();
+  renderCatalog();
+  showPage('map');
+  showToast('Bienvenido, ' + name + '!', 'success');
+}
+
+// Map Filter Functions
+var mapFilter = 'all';
+function setMapFilter(f) {
+  mapFilter = f;
+  var keys = ['all','disponible','ocupada','mantenimiento'];
+  for (var i = 0; i < keys.length; i++) {
+    var el = document.getElementById('mpill-' + keys[i]);
+    if (el) el.classList.toggle('active', keys[i] === f);
+  }
+  renderMapMarkers();
+}
+
 </script>
 </body>
 </html>
