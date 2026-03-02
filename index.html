@@ -4,401 +4,890 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impresionarte_ve &mdash; GestiÃ³n de Vallas</title>
+<title>Impresionarte_ve â GestiÃ³n de Vallas</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-@keyframes spin{to{transform:rotate(360deg)}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293b}#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#6366F1,#7C3AED)}.loginCard{background:white;border-radius:16px;padding:40px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2)}.loginLogo{text-align:center;margin-bottom:24px}.loginLogo h1{color:#6366F1;font-size:1.8rem;font-weight:800}.loginLogo p{color:#64748b;font-size:.9rem;margin-top:4px}.formGroup{margin-bottom:16px}.formGroup label{display:block;font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:#64748b;margin-bottom:6px}.formInput{width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:.95rem;font-family:inherit;transition:border-color .2s;outline:none}.formInput:focus{border-color:#6366F1}.btnPrimary{width:100%;padding:14px;background:#6366F1;color:white;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s}.btnPrimary:hover{background:#4f46e5}.btnSecondary{border:2px solid #e2e8f0;background:white;color:#475569;border-radius:10px;padding:10px 20px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s}.btnSecondary:hover{background:#f8fafc}.loginError{color:#ef4444;font-size:.85rem;margin-top:8px;text-align:center}#app{display:none}.sidebar{position:fixed;left:0;top:0;width:260px;height:100vh;background:#1e293b;color:white;padding-top:20px;z-index:100;transition:transform .3s;overflow-y:auto}.sidebarLogo{padding:0 24px 24px;border-bottom:1px solid #334155;margin-bottom:8px}.sidebarLogo h2{color:#a5b4fc;font-size:1.2rem;font-weight:800}.sidebarLogo p{color:#64748b;font-size:.78rem;margin-top:2px}.navItem{display:flex;align-items:center;padding:14px 24px;color:#94a3b8;cursor:pointer;transition:all .2s;border-left:3px solid transparent;font-size:.9rem}.navItem:hover{background:#334155;color:white}.navItem.active{color:white;background:#334155;border-left-color:#6366F1}.navIcon{width:20px;margin-right:14px;text-align:center;font-size:1rem}.topbar{margin-left:260px;height:64px;background:white;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:90}.topTitle{font-size:1.1rem;font-weight:700;color:#1e293b}.topRight{display:flex;align-items:center;gap:12px}.userBadge{background:#eef2ff;color:#6366F1;padding:6px 14px;border-radius:20px;font-size:.82rem;font-weight:600}#adminAddBtn{display:none}.mainContent{margin-left:260px;padding:28px}.page{display:none;animation:fadeIn .3s}.page.active{display:block}.statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}.statCard{background:white;border-radius:12px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.statLabel{font-size:.78rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}.statValue{font-size:1.8rem;font-weight:800;color:#1e293b;margin-top:4px}#mapContainer{height:500px;border-radius:12px;overflow:hidden;border:1px solid #e2e8f0}#detailPanel{display:none;background:white;border-radius:12px;padding:24px;margin-top:20px;box-shadow:0 2px 8px rgba(0,0,0,.06)}.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detailLabel{font-size:.75rem;color:#64748b;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px}.detailValue{font-size:.95rem;font-weight:600;color:#1e293b}.detailPhoto{max-width:100%;border-radius:8px;margin-top:12px}.searchInput{width:100%;padding:12px 16px 12px 42px;border:2px solid #e2e8f0;border-radius:10px;font-size:.9rem;font-family:inherit;outline:none;transition:border-color .2s;margin-bottom:16px}.searchInput:focus{border-color:#6366F1}.searchWrapper{position:relative;margin-bottom:16px}.searchWrapper .searchIcon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#94a3b8;font-size:.95rem}.filterBar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}.filterPill{padding:8px 18px;border-radius:20px;border:2px solid #e2e8f0;background:white;cursor:pointer;font-size:.85rem;font-weight:500;transition:all .2s}.filterPill.active{background:#6366F1;color:white;border-color:#6366F1}.catalogGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06);transition:transform .2s,box-shadow .2s}.card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.1)}.cardImg{width:100%;height:180px;object-fit:cover;background:#f1f5f9;display:block}.cardBody{padding:16px}.cardTitle{font-weight:700;font-size:1rem;margin-bottom:4px;color:#1e293b}.cardLocation{color:#64748b;font-size:.85rem;margin-bottom:8px}.cardMeta{display:flex;justify-content:space-between;align-items:center}.statusBadge{padding:4px 12px;border-radius:12px;font-size:.75rem;font-weight:600}.statusBadge.available{background:#dcfce7;color:#16a34a}.statusBadge.occupied{background:#fee2e2;color:#dc2626}.statusBadge.maintenance{background:#fef3c7;color:#d97706}.cardActions{display:flex;gap:6px;margin-top:12px}.cardBtn{padding:6px 12px;border-radius:6px;font-size:.78rem;cursor:pointer;border:1px solid #e2e8f0;background:white;transition:background .15s;font-family:inherit}.cardBtn:hover{background:#f8fafc}.cardBtn.delete{color:#dc2626;border-color:#fecaca}#modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;display:none;align-items:center;justify-content:center;animation:fadeIn .2s}.modalBox{background:white;border-radius:16px;padding:32px;width:90%;max-width:520px;max-height:90vh;overflow-y:auto}.modalTitle{font-size:1.2rem;font-weight:700;margin-bottom:20px;color:#1e293b}.modalActions{display:flex;gap:12px;justify-content:flex-end;margin-top:24px}.dropzone{border:2px dashed #cbd5e1;border-radius:10px;padding:32px;text-align:center;color:#64748b;cursor:pointer;transition:all .2s}.dropzone:hover,.dropzone.dragover{border-color:#6366F1;background:#eef2ff}.dropzone img{max-height:120px;border-radius:8px;margin-top:8px}.toast-container{position:fixed;bottom:24px;right:24px;z-index:999;display:flex;flex-direction:column;gap:8px}.toast{padding:14px 20px;border-radius:10px;color:white;font-size:.9rem;animation:slideIn .3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}.toast.success{background:#16a34a}.toast.error{background:#dc2626}.toast.info{background:#6366F1}.iaContainer{display:grid;grid-template-columns:1fr 1fr;gap:24px;min-height:500px}.iaForm{background:white;border-radius:12px;padding:24px;box-shadow:0 1px 3px rgba(0,0,0,.06)}.iaPreview{background:white;border-radius:12px;padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 1px 3px rgba(0,0,0,.06);min-height:400px}.iaLabel{font-size:.82rem;font-weight:600;color:#475569;margin-bottom:8px;display:block}#iaPrompt{width:100%;min-height:100px;padding:12px;border:2px solid #e2e8f0;border-radius:10px;font-family:inherit;font-size:.9rem;resize:vertical;outline:none;transition:border-color .2s}#iaPrompt:focus{border-color:#6366F1}.iaChips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.iaChip{padding:6px 14px;background:#f1f5f9;border-radius:20px;font-size:.8rem;cursor:pointer;border:1px solid #e2e8f0;color:#475569;transition:all .2s}.iaChip:hover{background:#eef2ff;border-color:#6366F1;color:#4f46e5}.iaStyleGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}.iaStyleOpt{padding:14px 8px;border:2px solid #e2e8f0;border-radius:10px;text-align:center;cursor:pointer;transition:all .2s;background:#fff;color:#64748b}.iaStyleOpt:hover{border-color:#a5b4fc;background:#f5f3ff}.iaStyleOpt.selected{border-color:#6366F1;background:#eef2ff;color:#4f46e5}.iaStyleIcon{font-size:1.5rem;margin-bottom:4px;display:block}.iaStyleName{font-size:.78rem;font-weight:600}#iaFormat{width:100%;padding:12px 16px;border:2px solid #e2e8f0;border-radius:10px;font-size:.95rem;font-family:inherit;transition:border-color .2s;outline:none}#iaFormat:focus{border-color:#6366F1}#iaGenBtn{padding:14px 32px;background:#6366F1;color:white;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:background .2s;margin-top:8px}#iaGenBtn:hover{background:#4f46e5}#iaPlaceholder{color:#cbd5e1;text-align:center}#iaPlaceholder svg{width:80px;height:80px}#iaLoading{display:none;text-align:center;color:#6366F1}.iaSpinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#6366F1;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 12px}#iaResult{display:none;text-align:center;width:100%}#iaResultImg{max-width:100%;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,.1)}.iaResultActions{margin-top:16px;display:flex;gap:10px;justify-content:center}#iaError{display:none;text-align:center;color:#dc2626}#iaErrorMsg{font-size:.82rem;margin-top:8px;color:#64748b;word-break:break-all}.aboutCard{background:white;border-radius:12px;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,.06);max-width:900px}.aboutSection{margin-bottom:24px}.aboutSection h2{font-size:1.1rem;font-weight:700;color:#6366F1;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #eef2ff}.aboutSection h3{font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:6px}.aboutSection p{color:#475569;line-height:1.7;font-size:.92rem}.aboutSection ul{list-style:none;padding:0}.aboutSection li{padding:8px 0;border-bottom:1px solid #f1f5f9;color:#475569;font-size:.92rem}.aboutSection li::before{content:'â ';color:#6366F1;font-weight:700}.aboutContact{display:grid;grid-template-columns:1fr 1fr;gap:12px}.aboutContactItem{padding:12px;background:#f8fafc;border-radius:8px}.aboutContactItem .label{font-size:.75rem;color:#64748b;text-transform:uppercase;margin-bottom:2px}.aboutContactItem .value{font-size:.9rem;font-weight:600;color:#1e293b}.hamburger{display:none;position:fixed;top:16px;left:16px;z-index:200;background:#1e293b;color:white;width:40px;height:40px;border-radius:10px;border:none;font-size:1.2rem;cursor:pointer;align-items:center;justify-content:center}@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.hamburger{display:flex}.topbar{margin-left:0;padding-left:64px}.mainContent{margin-left:0}.iaContainer{grid-template-columns:1fr}.detailGrid{grid-template-columns:1fr}.aboutContact{grid-template-columns:1fr}.statsGrid{grid-template-columns:1fr 1fr}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#F0F4FF;color:#1e293b}
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#6366F1,#7C3AED)}
+.loginCard{background:white;border-radius:16px;padding:40px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.loginLogo{text-align:center;margin-bottom:24px}
+.loginLogo h1{color:#6366F1;font-size:1.8rem;font-weight:800}
+.loginLogo p{color:#64748b;font-size:.9rem;margin-top:4px}
+.formGroup{margin-bottom:16px}
+.formGroup label{display:block;font-size:.85rem;font-weight:600;color:#374151;margin-bottom:6px}
+.formGroup input{width:100%;padding:10px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.95rem;transition:border .2s}
+.formGroup input:focus{outline:none;border-color:#6366F1}
+.btnLogin{width:100%;padding:12px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;margin-top:8px;transition:opacity .2s}
+.btnLogin:hover{opacity:.9}
+#loginError{color:#ef4444;font-size:.85rem;margin-top:10px;display:none;text-align:center}
+#app{display:none;height:100vh;overflow:hidden}
+.layout{display:flex;height:100vh}
+.sidebar{width:260px;background:#1e293b;color:white;display:flex;flex-direction:column;transition:transform .3s;z-index:100}
+.sidebar.collapsed{transform:translateX(-260px)}
+.sidebarHeader{padding:24px 20px 16px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebarHeader h2{font-size:1.1rem;font-weight:800;color:#6366F1}
+.sidebarHeader p{font-size:.75rem;color:#94a3b8;margin-top:2px}
+.sidebarNav{flex:1;padding:12px 0;overflow-y:auto}
+.navItem{display:flex;align-items:center;gap:12px;padding:11px 20px;cursor:pointer;transition:background .2s;font-size:.9rem;color:#94a3b8;border:none;background:none;width:100%;text-align:left}
+.navItem:hover{background:rgba(255,255,255,.07);color:white}
+.navItem.active{background:rgba(99,102,241,.2);color:#818cf8;border-right:3px solid #6366F1}
+.navItem .navIcon{font-size:1.1rem;width:20px;text-align:center}
+.sidebarFooter{padding:16px 20px;border-top:1px solid rgba(255,255,255,.1)}
+.userInfo{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.userAvatar{width:36px;height:36px;background:linear-gradient(135deg,#6366F1,#7C3AED);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;color:white;font-weight:700;flex-shrink:0}
+.userName{font-size:.9rem;font-weight:600;color:white}
+.userRole{font-size:.75rem;color:#94a3b8;margin-top:1px}
+.btnLogout{width:100%;padding:9px;background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3);border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:background .2s}
+.btnLogout:hover{background:rgba(239,68,68,.25)}
+.mainArea{flex:1;display:flex;flex-direction:column;overflow:hidden}
+.topbar{height:60px;background:white;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;padding:0 20px;gap:16px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hamburger{background:none;border:none;cursor:pointer;padding:6px;border-radius:6px;font-size:1.2rem;color:#64748b;display:flex;align-items:center;justify-content:center}
+.hamburger:hover{background:#f1f5f9}
+.topbarTitle{font-size:1rem;font-weight:700;color:#1e293b;flex:1}
+#adminAddBtn{display:none}
+.btnAdd{padding:9px 18px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:white;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:700;transition:opacity .2s}
+.btnAdd:hover{opacity:.9}
+.pageArea{flex:1;overflow-y:auto;padding:24px}
+.page{display:none;animation:fadeIn .3s ease}
+.page.active{display:block}
+.statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-bottom:24px}
+.statCard{background:white;border-radius:12px;padding:18px;box-shadow:0 2px 8px rgba(0,0,0,.06);border-left:4px solid #6366F1}
+.statCard .statLabel{font-size:.75rem;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.statCard .statValue{font-size:1.8rem;font-weight:800;color:#1e293b;margin-top:4px}
+.statCard .statSub{font-size:.75rem;color:#64748b;margin-top:2px}
+#mapWrap{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden}
+#mapContainer{position:relative}
+#map{height:420px;width:100%;z-index:1}
+#detailPanel{background:white;border-radius:12px;padding:20px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.06);animation:fadeIn .2s ease}
+.detailHeader{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.btnBack{background:none;border:none;cursor:pointer;padding:6px;border-radius:6px;font-size:1.1rem;color:#64748b;transition:background .2s}
+.btnBack:hover{background:#f1f5f9}
+.detailTitle{font-size:1.1rem;font-weight:700;color:#1e293b}
+.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.detailField label{font-size:.75rem;color:#64748b;font-weight:600;text-transform:uppercase;display:block;margin-bottom:2px}
+.detailField span{font-size:.9rem;color:#1e293b;font-weight:500}
+.detailActions{display:flex;gap:10px;margin-top:16px;padding-top:16px;border-top:1px solid #e2e8f0}
+.btnEdit{padding:9px 20px;background:#6366F1;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:opacity .2s}
+.btnEdit:hover{opacity:.85}
+.btnDel{padding:9px 20px;background:#ef4444;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:opacity .2s}
+.btnDel:hover{opacity:.85}
+.filterBar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.searchBox{padding:9px 14px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;width:260px;outline:none;transition:border .2s}
+.searchBox:focus{border-color:#6366F1}
+.pill{padding:7px 16px;border-radius:20px;border:1.5px solid #e2e8f0;background:white;cursor:pointer;font-size:.82rem;font-weight:600;color:#64748b;transition:all .2s}
+.pill.active,.pill:hover{background:#6366F1;color:white;border-color:#6366F1}
+.cardsGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}
+.billCard{background:white;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.06);overflow:hidden;transition:transform .2s,box-shadow .2s;cursor:pointer}
+.billCard:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.cardPhoto{height:140px;background:linear-gradient(135deg,#6366F1,#7C3AED);position:relative;overflow:hidden}
+.cardPhoto img{width:100%;height:100%;object-fit:cover}
+.cardStatusBadge{position:absolute;top:10px;right:10px;padding:4px 10px;border-radius:12px;font-size:.75rem;font-weight:700;color:white}
+.badge-disponible{background:#10b981}
+.badge-ocupada{background:#ef4444}
+.badge-mantenimiento{background:#f59e0b}
+.cardBody{padding:16px}
+.cardName{font-size:.95rem;font-weight:700;color:#1e293b;margin-bottom:4px}
+.cardCity{font-size:.82rem;color:#64748b;margin-bottom:8px}
+.cardMeta{display:flex;justify-content:space-between;align-items:center}
+.cardPrice{font-size:.95rem;font-weight:700;color:#6366F1}
+.cardDims{font-size:.78rem;color:#94a3b8}
+.cardFooter{padding:10px 16px;border-top:1px solid #f1f5f9;display:flex;gap:8px}
+.btnCardView{flex:1;padding:7px;background:#f1f5f9;color:#374151;border:none;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600;transition:background .2s}
+.btnCardView:hover{background:#e2e8f0}
+.btnCardDel{padding:7px 12px;background:#fef2f2;color:#ef4444;border:none;border-radius:6px;cursor:pointer;font-size:.8rem;font-weight:600;transition:background .2s}
+.btnCardDel:hover{background:#fee2e2}
+.modalOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center;animation:fadeIn .2s ease}
+.modalOverlay.open{display:flex}
+.modalBox{background:white;border-radius:16px;padding:28px;max-width:520px;width:95%;max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.modalHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid #e2e8f0}
+.modalHeader h3{font-size:1.1rem;font-weight:700;color:#1e293b}
+.btnCloseModal{background:none;border:none;cursor:pointer;font-size:1.3rem;color:#64748b;padding:4px;border-radius:6px;line-height:1}
+.btnCloseModal:hover{background:#f1f5f9}
+.modalGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.modalGrid .fullWidth{grid-column:1/-1}
+.mLabel{font-size:.8rem;font-weight:600;color:#374151;margin-bottom:5px;display:block}
+.mInput{width:100%;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;transition:border .2s}
+.mInput:focus{border-color:#6366F1}
+select.mInput{cursor:pointer}
+.dropzone{border:2px dashed #c7d2fe;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#fafbff;margin-top:4px}
+.dropzone:hover,.dropzone.drag{border-color:#6366F1;background:#eef2ff}
+.dropzone p{color:#64748b;font-size:.85rem;margin-top:6px}
+.dropzonePreview{max-width:100%;max-height:120px;border-radius:8px;margin-top:10px}
+.modalFooter{display:flex;justify-content:flex-end;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid #e2e8f0}
+.btnCancel{padding:10px 22px;background:#f1f5f9;color:#374151;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:600;transition:background .2s}
+.btnCancel:hover{background:#e2e8f0}
+.btnSave{padding:10px 22px;background:linear-gradient(135deg,#6366F1,#7C3AED);color:white;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:700;transition:opacity .2s}
+.btnSave:hover{opacity:.9}
+.toast{position:fixed;bottom:24px;right:24px;padding:14px 22px;border-radius:10px;color:white;font-size:.9rem;font-weight:600;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:2000;animation:slideIn .3s ease;max-width:320px}
+.toast.success{background:#10b981}
+.toast.error{background:#ef4444}
+.toast.info{background:#6366F1}
+/* IA PAGE */
+.iaPage{display:flex;flex-direction:column;gap:24px}
+.iaHero{background:linear-gradient(135deg,#4c1d95,#6d28d9,#7c3aed);border-radius:16px;padding:40px 32px;text-align:center;color:white}
+.iaHero h1{font-size:2rem;font-weight:800;margin-bottom:8px}
+.iaHero p{font-size:1rem;opacity:.85;max-width:500px;margin:0 auto}
+.iaGrid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.iaFormPanel,.iaResultPanel{background:white;border-radius:16px;padding:24px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.iaFormPanel h3,.iaResultPanel h3{font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:16px}
+.iaLabel{font-size:.85rem;font-weight:600;color:#374151;margin-bottom:6px;display:block}
+.iaTextarea{width:100%;padding:12px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:.9rem;min-height:100px;resize:vertical;outline:none;transition:border .2s;font-family:inherit}
+.iaTextarea:focus{border-color:#6366F1}
+.iaChips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.iaChip{padding:6px 14px;background:#f1f5f9;border:1.5px solid #e2e8f0;border-radius:20px;font-size:.78rem;cursor:pointer;transition:all .2s;color:#374151}
+.iaChip:hover{background:#eef2ff;border-color:#6366F1;color:#6366F1}
+.iaSectionLabel{font-size:.85rem;font-weight:600;color:#374151;margin-bottom:8px}
+.iaStyleGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.iaStyleOpt{border:2px solid #e2e8f0;border-radius:10px;padding:12px;text-align:center;cursor:pointer;transition:all .2s}
+.iaStyleOpt:hover{border-color:#6366F1;background:#fafbff}
+.iaStyleOpt.selected{border-color:#6366F1;background:#eef2ff}
+.iaStyleOpt .iaStyleIcon{font-size:1.5rem;margin-bottom:4px}
+.iaStyleOpt .iaStyleName{font-size:.82rem;font-weight:600;color:#374151}
+.iaFormatSelect{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;margin-bottom:16px;outline:none;cursor:pointer}
+.iaFormatSelect:focus{border-color:#6366F1}
+.btnGenerate{width:100%;padding:14px;background:linear-gradient(135deg,#4c1d95,#6d28d9);color:white;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity .2s}
+.btnGenerate:hover{opacity:.9}
+.iaPlaceholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:300px;color:#94a3b8;text-align:center;gap:12px}
+.iaPlaceholder span{font-size:3rem}
+.iaPlaceholder p{font-size:.9rem}
+.iaLoading{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:300px;gap:16px;color:#6366F1;text-align:center}
+.iaSpinner{width:48px;height:48px;border:4px solid #e2e8f0;border-top-color:#6366F1;border-radius:50%;animation:spin 1s linear infinite}
+.iaLoading p{font-size:.9rem;font-weight:600;color:#374151}
+.iaResult{display:none;flex-direction:column;gap:12px}
+.iaResultImg{width:100%;border-radius:10px;object-fit:cover;max-height:360px}
+.iaResultActions{display:flex;gap:10px}
+.btnDownload,.btnRegen{flex:1;padding:10px;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:opacity .2s}
+.btnDownload{background:#10b981;color:white}
+.btnRegen{background:#6366F1;color:white}
+.btnDownload:hover,.btnRegen:hover{opacity:.85}
+.iaError{display:none;flex-direction:column;align-items:center;justify-content:center;min-height:200px;gap:12px;text-align:center}
+.iaError p{font-size:.9rem;color:#ef4444;font-weight:500}
+.btnRetry{padding:10px 24px;background:#ef4444;color:white;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600}
+/* ABOUT PAGE */
+.aboutPage{max-width:900px;margin:0 auto}
+.aboutAdminBar{display:none;justify-content:flex-end;margin-bottom:12px}
+.btnToggleEdit{padding:9px 18px;background:white;border:1.5px solid #6366F1;color:#6366F1;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600;transition:all .2s}
+.btnToggleEdit:hover{background:#6366F1;color:white}
+.aboutEditToolbar{display:none;gap:10px;margin-bottom:16px;padding:12px;background:white;border-radius:10px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.aboutEditToolbar button{padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;transition:opacity .2s}
+.btnAddText{background:#6366F1;color:white}
+.btnAddImg{background:#7C3AED;color:white}
+.btnSaveAbout{background:#10b981;color:white}
+.btnCancelAbout{background:#f1f5f9;color:#374151;border:1.5px solid #e2e8f0}
+.aboutCard{background:white;border-radius:16px;padding:32px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.aboutCard h2{font-size:1.8rem;font-weight:800;color:#6366F1;margin-bottom:4px}
+.aboutTagline{font-size:1rem;color:#64748b;margin-bottom:24px;font-style:italic}
+.aboutSection{margin-bottom:20px}
+.aboutSection h3{font-size:1.05rem;font-weight:700;color:#1e293b;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #e2e8f0}
+.aboutSection p{font-size:.9rem;color:#374151;line-height:1.6}
+.aboutSection ul{padding-left:20px;margin-top:6px}
+.aboutSection ul li{font-size:.9rem;color:#374151;line-height:1.8}
+.contactInfo{font-size:.9rem;color:#374151;line-height:2}
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sidebar{position:fixed;height:100vh}
+  .sidebar.collapsed{transform:translateX(-260px)}
+  .iaGrid{grid-template-columns:1fr}
+  .detailGrid{grid-template-columns:1fr}
+  .modalGrid{grid-template-columns:1fr}
+  .statsGrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .statsGrid{grid-template-columns:1fr}
+  .pageArea{padding:16px}
+}
 </style>
 </head>
 <body>
-<div id="loginScreen"><div class="loginCard"><div class="loginLogo"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#6C63FF"/><rect x="8" y="14" width="32" height="20" rx="3" fill="white" fill-opacity="0.9"/><rect x="22" y="34" width="4" height="6" fill="white" fill-opacity="0.7"/><rect x="16" y="39" width="16" height="2" rx="1" fill="white" fill-opacity="0.5"/><rect x="12" y="18" width="24" height="12" rx="2" fill="#6C63FF"/><circle cx="24" cy="24" r="4" fill="white" fill-opacity="0.8"/></svg></div><h1 class="loginTitle">Impresionarte_ve</h1><p class="loginSubtitle">GestiÃ³n de Vallas</p><form id="loginForm" class="loginForm"><div class="formGroup"><label for="username">Usuario</label><div class="inputWrapper"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><input type="text" id="username" placeholder="Ingresa tu usuario" autocomplete="username" /></div></div><div class="formGroup"><label for="password">ContraseÃ±a</label><div class="inputWrapper"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><input type="password" id="password" placeholder="Ingresa tu contraseÃ±a" autocomplete="current-password" /></div></div><div id="loginError" class="loginError" style="display:none;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="loginErrorMsg">Usuario o contraseÃ±a incorrectos</span></div><button type="submit" class="loginBtn" id="loginBtn"><span>Iniciar SesiÃ³n</span><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button></form></div></div><div id="app" style="display:none;"><button class="hamburgerBtn" id="hamburgerBtn" aria-label="Toggle sidebar"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button><aside class="sidebar" id="sidebar"><div class="sidebarHeader"><div class="sidebarLogo"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#6C63FF"/><rect x="8" y="14" width="32" height="20" rx="3" fill="white" fill-opacity="0.9"/><rect x="22" y="34" width="4" height="6" fill="white" fill-opacity="0.7"/><rect x="16" y="39" width="16" height="2" rx="1" fill="white" fill-opacity="0.5"/><rect x="12" y="18" width="24" height="12" rx="2" fill="#6C63FF"/><circle cx="24" cy="24" r="4" fill="white" fill-opacity="0.8"/></svg><span class="sidebarLogoText">Impresionarte</span></div></div><nav class="sidebarNav"><ul class="navList"><li class="navItem active" id="nav-map" data-page="page-map"><a class="navLink" href="#"><span class="navIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span><span class="navLabel">Mapa de Vallas</span></a></li><li class="navItem" id="nav-catalog" data-page="page-catalog"><a class="navLink" href="#"><span class="navIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span><span class="navLabel">CatÃ¡logo de Vallas</span></a></li><li class="navItem" id="nav-ia" data-page="page-ia"><a class="navLink" href="#"><span class="navIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span><span class="navLabel">ImpresIAnarte IA</span></a></li><li class="navItem" id="nav-about" data-page="page-about"><a class="navLink" href="#"><span class="navIcon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span><span class="navLabel">Sobre Nosotros</span></a></li></ul></nav><div class="sidebarFooter"><div class="sidebarVersion">v1.0.0</div></div></aside><div class="mainWrapper"><header class="topbar" id="topbar"><div class="topbarLeft"><h2 class="topbarTitle" id="topbarTitle">Mapa de Vallas</h2></div><div class="topbarRight"><div class="userBadge" id="userBadge"><span class="userAvatar" id="userAvatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span><span class="userName" id="topbarUser">Usuario</span><span class="userRole" id="topbarRole">Viewer</span></div><button class="adminAddBtn" id="adminAddBtn" style="display:none;" title="Agregar nueva valla"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg><span>Agregar Valla</span></button><button class="logoutBtn" id="logoutBtn" title="Cerrar sesiÃ³n"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg><span>Salir</span></button></div></header><main class="mainContent" id="mainContent"><div class="page active" id="page-map"><div class="statsGrid" id="statsGrid"><div class="statCard" id="stat-total"><div class="statIcon statIcon--total"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg></div><div class="statInfo"><span class="statValue" id="statTotal">0</span><span class="statLabel">Total de Vallas</span></div></div><div class="statCard" id="stat-available"><div class="statIcon statIcon--available"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="statInfo"><span class="statValue" id="statAvailable">0</span><span class="statLabel">Disponibles</span></div></div><div class="statCard" id="stat-occupied"><div class="statIcon statIcon--occupied"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg></div><div class="statInfo"><span class="statValue" id="statOccupied">0</span><span class="statLabel">Ocupadas</span></div></div><div class="statCard" id="stat-maintenance"><div class="statIcon statIcon--maintenance"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="statInfo"><span class="statValue" id="statMaintenance">0</span><span class="statLabel">En Mantenimiento</span></div></div></div><div class="mapDetailPanel" id="mapDetailPanel" style="display:none;"><div class="detailPanelHeader"><h3 class="detailPanelTitle" id="detailPanelTitle">Detalle de Valla</h3><button class="detailPanelClose" id="detailPanelClose" aria-label="Cerrar panel"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="detailPanelBody" id="detailPanelBody"></div><div class="detailPanelActions" id="detailPanelActions"></div></div><div class="mapContainer" id="mapContainer"><div id="map"></div></div></div><div class="page" id="page-catalog"><div class="catalogToolbar"><div class="searchWrapper"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" id="catalogSearch" class="catalogSearch" placeholder="Buscar valla por nombre, ubicaciÃ³n..." /></div><div class="filterPills" id="filterPills"><button class="filterPill active" data-filter="all">Todos</button><button class="filterPill" data-filter="disponible">Disponible</button><button class="filterPill" data-filter="ocupada">Ocupada</button><button class="filterPill" data-filter="mantenimiento">Mantenimiento</button></div></div><div class="catalogGrid" id="catalogGrid"></div></div><div class="page" id="page-ia"><div class="iaContainer"><div class="iaLeft"><div class="iaSection"><h3 class="iaSectionTitle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Describe tu campaÃ±a</h3><div class="formGroup"><label for="iaPrompt">Prompt de diseÃ±o</label><textarea id="iaPrompt" class="iaPrompt" rows="5" placeholder="Ej: DiseÃ±o para campaÃ±a de temporada navideÃ±a para tienda de ropa, colores cÃ¡lidos, elegante y festivo..."></textarea></div><div class="suggestionChips" id="suggestionChips"><span class="chipLabel">Sugerencias:</span><button class="chip" data-prompt="CampaÃ±a navideÃ±a con colores rojos y dorados, atmÃ³sfera festiva y elegante">ð Navidad</button><button class="chip" data-prompt="PromociÃ³n de verano con colores vibrantes, playa y diversiÃ³n">âï¸ Verano</button><button class="chip" data-prompt="Lanzamiento de producto tecnolÃ³gico, moderno y minimalista en azul y blanco">ð» Tech</button><button class="chip" data-prompt="CampaÃ±a de salud y bienestar, verde natural, fresco y saludable">ð¿ Salud</button><button class="chip" data-prompt="Oferta especial con descuentos agresivos, colores llamativos rojo y amarillo">ð¥ Oferta</button></div></div><div class="iaSection"><h3 class="iaSectionTitle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>Estilo Visual</h3><div class="styleGrid" id="styleGrid"><label class="styleOption"><input type="radio" name="iaStyle" value="moderno" checked /><div class="styleCard"><div class="styleIcon">ð¨</div><div class="styleName">Moderno</div></div></label><label class="styleOption"><input type="radio" name="iaStyle" value="minimalista" /><div class="styleCard"><div class="styleIcon">â»ï¸</div><div class="styleName">Minimalista</div></div></label><label class="styleOption"><input type="radio" name="iaStyle" value="retro" /><div class="styleCard"><div class="styleIcon">ð»</div><div class="styleName">Retro</div></div></label><label class="styleOption"><input type="radio" name="iaStyle" value="impactante" /><div class="styleCard"><div class="styleIcon">â¡</div><div class="styleName">Impactante</div></div></label></div></div><div class="iaSection"><h3 class="iaSectionTitle"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Formato de Valla</h3><div class="formGroup"><label for="iaFormat">Seleccionar formato</label><select id="iaFormat" class="iaSelect"><option value="panoramica">PanorÃ¡mica (14x4m)</option><option value="estandar">EstÃ¡ndar (8x3m)</option><option value="vertical">Vertical (3x8m)</option><option value="gigante">Gigante (20x6m)</option><option value="digital">Digital LED</option></select></div></div><button class="iaGenerateBtn" id="iaGenerateBtn"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><span>Generar con IA</span></button></div><div class="iaRight"><div class="iaPlaceholder" id="iaPlaceholder"><div class="iaPlaceholderIcon"><svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>DiseÃ±o IA listo para crear</h3><p>Completa el formulario a la izquierda y haz clic en <strong>Generar con IA</strong> para obtener ideas creativas para tu valla publicitaria.</p></div><div class="iaLoading" id="iaLoading" style="display:none;"><div class="iaSpinner"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg></div><p>Generando concepto creativo...</p></div><div class="iaResult" id="iaResult" style="display:none;"><div class="iaResultHeader"><h3 class="iaResultTitle">Concepto Generado</h3><div class="iaResultActions"><button class="iaActionBtn" id="iaCopyBtn" title="Copiar resultado"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button><button class="iaActionBtn" id="iaRegenerateBtn" title="Regenerar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Regenerar</span></button></div></div><div class="iaResultContent" id="iaResultContent"></div></div><div class="iaError" id="iaError" style="display:none;"><div class="iaErrorIcon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><p id="iaErrorMsg">OcurriÃ³ un error al generar el concepto.</p><button class="iaActionBtn" id="iaRetryBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg><span>Reintentar</span></button></div></div></div></div><div class="page" id="page-about"><div class="aboutAdminBar" id="aboutAdminBar" style="display:none;"><div class="aboutAdminBarInner"><span class="aboutAdminLabel"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Modo Administrador</span><div class="aboutAdminActions"><button class="aboutAdminBtn" id="aboutEditBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Editar Contenido</button></div></div></div><div class="aboutEditToolbar" id="aboutEditToolbar" style="display:none;"><button class="editToolbarBtn" id="aboutSaveBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Guardar Cambios</button><button class="editToolbarBtn editToolbarBtn--cancel" id="aboutCancelBtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Cancelar</button></div><div class="aboutContent" id="aboutContent"><div class="aboutHero"><div class="aboutLogoLarge"><svg width="80" height="80" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="48" height="48" rx="12" fill="#6C63FF"/><rect x="8" y="14" width="32" height="20" rx="3" fill="white" fill-opacity="0.9"/><rect x="22" y="34" width="4" height="6" fill="white" fill-opacity="0.7"/><rect x="16" y="39" width="16" height="2" rx="1" fill="white" fill-opacity="0.5"/><rect x="12" y="18" width="24" height="12" rx="2" fill="#6C63FF"/><circle cx="24" cy="24" r="4" fill="white" fill-opacity="0.8"/></svg></div><h1 class="aboutTitle">Impresionarte_ve</h1><p class="aboutTagline">Soluciones creativas en publicidad exterior</p></div><div class="aboutGrid"><div class="aboutCard"><div class="aboutCardIcon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Nuestra MisiÃ³n</h3><p>Proveer soluciones publicitarias de alto impacto visual a travÃ©s de una red estratÃ©gica de vallas en Venezuela, conectando marcas con audiencias relevantes de forma efectiva y creativa.</p></div><div class="aboutCard"><div class="aboutCardIcon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><h3>Cobertura Nacional</h3><p>Contamos con vallas estratÃ©gicamente ubicadas en las principales ciudades y vÃ­as del paÃ­s, garantizando mÃ¡xima visibilidad para tu marca en los puntos de mayor trÃ¡fico.</p></div><div class="aboutCard"><div class="aboutCardIcon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3>TecnologÃ­a e InnovaciÃ³n</h3><p>Integramos inteligencia artificial para el diseÃ±o conceptual de campaÃ±as, ofreciendo a nuestros clientes herramientas de vanguardia para potenciar su publicidad exterior.</p></div><div class="aboutCard"><div class="aboutCardIcon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h3>Nuestro Equipo</h3><p>Un equipo apasionado de profesionales en publicidad, diseÃ±o y tecnologÃ­a comprometidos con ofrecer el mejor servicio y los resultados mÃ¡s impactantes para cada cliente.</p></div></div><div class="aboutContact"><h2>ContÃ¡ctanos</h2><div class="aboutContactGrid"><div class="aboutContactItem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.67a16 16 0 0 0 8.07 8.07l.75-.75a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 23.12 18l-.2-.88-.2-.88z"/></svg><span>+58 (212) 555-0100</span></div><div class="aboutContactItem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span>info@impresionarte.ve</span></div><div class="aboutContactItem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Caracas, Venezuela</span></div><div class="aboutContactItem"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><span>www.impresionarte.ve</span></div></div></div></div></div></main></div><div class="modalOverlay" id="modalOverlay" style="display:none;"><div class="modalBox" id="modalBox"><div class="modalHeader"><h3 class="modalTitle" id="modalTitle">Agregar Nueva Valla</h3><button class="modalClose" id="modalClose" aria-label="Cerrar modal"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="modalBody"><form id="billboardForm" class="billboardForm"><input type="hidden" id="formBillboardId" /><div class="formRow"><div class="formGroup"><label for="formName">Nombre de la Valla <span class="required">*</span></label><input type="text" id="formName" placeholder="Ej: Valla Autopista Francisco Fajardo" required /></div><div class="formGroup"><label for="formStatus">Estado <span class="required">*</span></label><select id="formStatus" required><option value="disponible">Disponible</option><option value="ocupada">Ocupada</option><option value="mantenimiento">Mantenimiento</option></select></div></div><div class="formRow"><div class="formGroup"><label for="formLat">Latitud <span class="required">*</span></label><input type="number" id="formLat" step="any" placeholder="Ej: 10.4806" required /></div><div class="formGroup"><label for="formLng">Longitud <span class="required">*</span></label><input type="number" id="formLng" step="any" placeholder="Ej: -66.9036" required /></div></div><div class="formRow"><div class="formGroup"><label for="formSize">Medidas</label><input type="text" id="formSize" placeholder="Ej: 8x3 metros" /></div><div class="formGroup"><label for="formPrice">Precio Mensual (USD)</label><input type="number" id="formPrice" step="0.01" placeholder="Ej: 500" /></div></div><div class="formGroup"><label for="formLocation">UbicaciÃ³n / DirecciÃ³n <span class="required">*</span></label><input type="text" id="formLocation" placeholder="Ej: Autopista Francisco Fajardo, Caracas" required /></div><div class="formGroup"><label for="formDescription">DescripciÃ³n</label><textarea id="formDescription" rows="3" placeholder="DescripciÃ³n adicional de la valla, caracterÃ­sticas especiales..."></textarea></div><div class="formGroup"><label for="formImage">URL de Imagen</label><input type="url" id="formImage" placeholder="https://ejemplo.com/imagen.jpg" /></div><div id="formError" class="formError" style="display:none;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><span id="formErrorMsg">Por favor completa todos los campos requeridos.</span></div></form></div><div class="modalFooter"><button class="modalCancelBtn" id="modalCancelBtn">Cancelar</button><button class="modalSubmitBtn" id="modalSubmitBtn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span id="modalSubmitText">Guardar Valla</span></button></div></div></div><div class="toastContainer" id="toastContainer"></div></div>
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="loginCard">
+    <div class="loginLogo">
+      <h1>Impresionarte_ve</h1>
+      <p>Sistema de GestiÃ³n de Vallas Publicitarias</p>
+    </div>
+    <div class="formGroup">
+      <label for="inputUser">Usuario</label>
+      <input type="text" id="inputUser" placeholder="Ingresa tu usuario" autocomplete="username">
+    </div>
+    <div class="formGroup">
+      <label for="inputPass">ContraseÃ±a</label>
+      <input type="password" id="inputPass" placeholder="Ingresa tu contraseÃ±a" autocomplete="current-password">
+    </div>
+    <button class="btnLogin" onclick="doLogin()">Iniciar SesiÃ³n</button>
+    <p id="loginError">Credenciales incorrectas. Intenta de nuevo.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebarHeader">
+        <h2>Impresionarte_ve</h2>
+        <p>GestiÃ³n de Vallas</p>
+      </div>
+      <nav class="sidebarNav">
+        <button class="navItem active" id="nav-map" onclick="showPage('map')">
+          <span class="navIcon">ðºï¸</span> Mapa de Vallas
+        </button>
+        <button class="navItem" id="nav-catalog" onclick="showPage('catalog')">
+          <span class="navIcon">ð</span> CatÃ¡logo de Vallas
+        </button>
+        <button class="navItem" id="nav-ia" onclick="showPage('ia')">
+          <span class="navIcon">â¨</span> ImpresIAnarte IA
+        </button>
+        <button class="navItem" id="nav-about" onclick="showPage('about')">
+          <span class="navIcon">â¹ï¸</span> Sobre Nosotros
+        </button>
+      </nav>
+      <div class="sidebarFooter">
+        <div class="userInfo">
+          <div class="userAvatar" id="userAvatar">A</div>
+          <div>
+            <div class="userName" id="userName">Administrador</div>
+            <div class="userRole" id="userRole">Admin</div>
+          </div>
+        </div>
+        <button class="btnLogout" onclick="doLogout()">Cerrar SesiÃ³n</button>
+      </div>
+    </aside>
+
+    <!-- MAIN AREA -->
+    <div class="mainArea">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <button class="hamburger" onclick="toggleSidebar()">â°</button>
+        <span class="topbarTitle" id="topbarTitle">Mapa de Vallas</span>
+        <div id="adminAddBtn">
+          <button class="btnAdd" onclick="openModal()">+ Agregar Valla</button>
+        </div>
+      </div>
+
+      <!-- PAGES -->
+      <div class="pageArea">
+
+        <!-- MAP PAGE -->
+        <div id="page-map" class="page active">
+          <div class="statsGrid">
+            <div class="statCard">
+              <div class="statLabel">Total Vallas</div>
+              <div class="statValue" id="statTotal">0</div>
+              <div class="statSub">en el sistema</div>
+            </div>
+            <div class="statCard" style="border-left-color:#10b981">
+              <div class="statLabel">Disponibles</div>
+              <div class="statValue" id="statAvail" style="color:#10b981">0</div>
+              <div class="statSub">listas para arrendar</div>
+            </div>
+            <div class="statCard" style="border-left-color:#ef4444">
+              <div class="statLabel">Ocupadas</div>
+              <div class="statValue" id="statOcc" style="color:#ef4444">0</div>
+              <div class="statSub">con cliente activo</div>
+            </div>
+            <div class="statCard" style="border-left-color:#f59e0b">
+              <div class="statLabel">Ciudades</div>
+              <div class="statValue" id="statCities" style="color:#f59e0b">0</div>
+              <div class="statSub">con presencia</div>
+            </div>
+            <div class="statCard" style="border-left-color:#8b5cf6">
+              <div class="statLabel">Ingresos/Mes</div>
+              <div class="statValue" id="statIncome" style="color:#8b5cf6;font-size:1.2rem">$0</div>
+              <div class="statSub">estimado</div>
+            </div>
+          </div>
+          <div id="detailPanel" style="display:none">
+            <div class="detailHeader">
+              <button class="btnBack" onclick="hideDetail()">â</button>
+              <span class="detailTitle" id="detailName">Valla</span>
+            </div>
+            <div class="detailGrid">
+              <div class="detailField"><label>Ciudad</label><span id="dCity">â</span></div>
+              <div class="detailField"><label>DirecciÃ³n</label><span id="dAddr">â</span></div>
+              <div class="detailField"><label>Estado</label><span id="dStatus">â</span></div>
+              <div class="detailField"><label>Dimensiones</label><span id="dDims">â</span></div>
+              <div class="detailField"><label>Caras</label><span id="dFaces">â</span></div>
+              <div class="detailField"><label>IluminaciÃ³n</label><span id="dIllum">â</span></div>
+              <div class="detailField"><label>Precio/Mes</label><span id="dPrice">â</span></div>
+              <div class="detailField"><label>Cliente</label><span id="dClient">â</span></div>
+              <div class="detailField"><label>Contrato</label><span id="dContract">â</span></div>
+              <div class="detailField"><label>Coordenadas</label><span id="dCoords">â</span></div>
+            </div>
+            <div class="detailActions" id="adminDetailActions" style="display:none">
+              <button class="btnEdit" onclick="editCurrentDetail()">âï¸ Editar</button>
+              <button class="btnDel" onclick="deleteCurrentDetail()">ðï¸ Eliminar</button>
+            </div>
+          </div>
+          <div id="mapWrap">
+            <div id="mapContainer">
+              <div id="map"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CATALOG PAGE -->
+        <div id="page-catalog" class="page">
+          <div class="filterBar">
+            <input class="searchBox" id="searchInput" type="text" placeholder="Buscar vallas..." oninput="renderCatalog()">
+            <button class="pill active" id="pill-all" onclick="setFilter('all')">Todas</button>
+            <button class="pill" id="pill-disponible" onclick="setFilter('disponible')">Disponibles</button>
+            <button class="pill" id="pill-ocupada" onclick="setFilter('ocupada')">Ocupadas</button>
+            <button class="pill" id="pill-mantenimiento" onclick="setFilter('mantenimiento')">Mantenimiento</button>
+          </div>
+          <div class="cardsGrid" id="cardsGrid"></div>
+        </div>
+
+        <!-- IA PAGE -->
+        <div id="page-ia" class="page">
+          <div class="iaPage">
+            <div class="iaHero">
+              <h1>â¨ ImpresIAnarte IA</h1>
+              <p>Genera diseÃ±os profesionales de vallas publicitarias con inteligencia artificial. Describe tu idea y nuestra IA la convertirÃ¡ en una imagen lista para producciÃ³n.</p>
+            </div>
+            <div class="iaGrid">
+              <!-- FORM PANEL -->
+              <div class="iaFormPanel">
+                <h3>ð¨ Configura tu DiseÃ±o</h3>
+                <label class="iaLabel" for="iaPrompt">Describe tu valla</label>
+                <textarea class="iaTextarea" id="iaPrompt" placeholder="Ej: Valla publicitaria para restaurante de comida venezolana con colores cÃ¡lidos, imagen de hallacas y texto 'El Sabor de Venezuela'..."></textarea>
+                <div class="iaChips">
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para restaurant de comida criolla venezolana con colores rojo, amarillo y azul, imagen apetitosa y texto elegante'">ð½ï¸ Restaurante</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla inmobiliaria de lujo para apartamentos en Caracas, fondo azul marino, arquitectura moderna y texto exclusivo'">ð¢ Inmobiliaria</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla publicitaria para marca de ropa venezolana, fondo blanco limpio, modelo fashion y logo prominente'">ð Moda</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para campaÃ±a de turismo en Los Roques, colores turquesa y arena, paisaje caribeÃ±o y texto invitador'">ðï¸ Turismo</span>
+                </div>
+                <div class="iaSectionLabel">Estilo Visual</div>
+                <div class="iaStyleGrid">
+                  <div class="iaStyleOpt selected" data-style="fotorrealista" onclick="selectIAStyle(this,'fotorrealista')">
+                    <div class="iaStyleIcon">ð·</div>
+                    <div class="iaStyleName">Fotorrealista</div>
+                  </div>
+                  <div class="iaStyleOpt" data-style="grafico" onclick="selectIAStyle(this,'grafico')">
+                    <div class="iaStyleIcon">ð¨</div>
+                    <div class="iaStyleName">GrÃ¡fico</div>
+                  </div>
+                  <div class="iaStyleOpt" data-style="digital" onclick="selectIAStyle(this,'digital')">
+                    <div class="iaStyleIcon">ð»</div>
+                    <div class="iaStyleName">Digital</div>
+                  </div>
+                  <div class="iaStyleOpt" data-style="minimalista" onclick="selectIAStyle(this,'minimalista')">
+                    <div class="iaStyleIcon">â¬</div>
+                    <div class="iaStyleName">Minimalista</div>
+                  </div>
+                </div>
+                <label class="iaLabel" for="iaFormat">Formato de Valla</label>
+                <select class="iaFormatSelect" id="iaFormat">
+                  <option value="14x5m">14Ã5 m (Gran Formato)</option>
+                  <option value="12x4m">12Ã4 m (EstÃ¡ndar)</option>
+                  <option value="10x3.5m">10Ã3.5 m (Mediana)</option>
+                  <option value="8x3m">8Ã3 m (PequeÃ±a)</option>
+                </select>
+                <button class="btnGenerate" onclick="generateAIBillboard()">â¨ Generar DiseÃ±o</button>
+              </div>
+              <!-- RESULT PANEL -->
+              <div class="iaResultPanel" id="iaResultPanel">
+                <h3>ð¼ï¸ Resultado</h3>
+                <div id="iaPlaceholder" class="iaPlaceholder">
+                  <span>ð¨</span>
+                  <p>Tu diseÃ±o aparecerÃ¡ aquÃ­</p>
+                  <p style="font-size:.8rem;color:#c4ccd6">Configura los parÃ¡metros y pulsa Generar</p>
+                </div>
+                <div id="iaLoading" class="iaLoading">
+                  <div class="iaSpinner"></div>
+                  <p>Generando tu diseÃ±o con IA...</p>
+                  <p style="font-size:.8rem;color:#94a3b8">Esto puede tomar unos segundos</p>
+                </div>
+                <div id="iaResult" class="iaResult">
+                  <img id="iaResultImg" class="iaResultImg" src="" alt="DiseÃ±o generado">
+                  <div class="iaResultActions">
+                    <button class="btnDownload" onclick="downloadAIImage()">â¬ï¸ Descargar</button>
+                    <button class="btnRegen" onclick="generateAIBillboard()">ð Regenerar</button>
+                  </div>
+                </div>
+                <div id="iaError" class="iaError">
+                  <span style="font-size:2rem">â ï¸</span>
+                  <p id="iaErrorMsg">Error al generar la imagen</p>
+                  <button class="btnRetry" onclick="generateAIBillboard()">Reintentar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="page-about" class="page">
+          <div class="aboutPage">
+            <div class="aboutAdminBar" id="aboutAdminBar">
+              <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">âï¸ Editar PÃ¡gina</button>
+            </div>
+            <div class="aboutEditToolbar" id="aboutEditToolbar">
+              <button class="aboutEditToolbar btnAddText" onclick="addAboutTextBlock()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#6366F1;color:white">â Agregar Texto</button>
+              <button class="aboutEditToolbar btnAddImg" onclick="addAboutImage()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#7C3AED;color:white">ð¼ï¸ Agregar Imagen</button>
+              <button class="aboutEditToolbar btnSaveAbout" onclick="saveAboutEdit()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#10b981;color:white">ð¾ Guardar</button>
+              <button class="aboutEditToolbar btnCancelAbout" onclick="cancelAboutEdit()" style="padding:8px 16px;border:1.5px solid #e2e8f0;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#f1f5f9;color:#374151">â Cancelar</button>
+            </div>
+            <div id="aboutContent">
+              <div class="aboutCard">
+                <h2>Impresionarte_ve</h2>
+                <p class="aboutTagline">LÃ­der en publicidad exterior en Venezuela</p>
+                <div class="aboutSection">
+                  <h3>Â¿QuiÃ©nes Somos?</h3>
+                  <p>Somos una empresa venezolana especializada en publicidad exterior de alto impacto. Con mÃ¡s de 15 aÃ±os de experiencia en el mercado nacional, ofrecemos soluciones integrales en vallas publicitarias, mupis y medios alternativos para conectar marcas con su audiencia de forma efectiva y memorable.</p>
+                </div>
+                <div class="aboutSection">
+                  <h3>Nuestra MisiÃ³n</h3>
+                  <p>Brindar a nuestros clientes los mejores espacios publicitarios exteriores de Venezuela, con ubicaciones estratÃ©gicas de alto trÃ¡fico, estructuras de calidad y servicio personalizado que garantice el Ã©xito de cada campaÃ±a.</p>
+                </div>
+                <div class="aboutSection">
+                  <h3>Servicios</h3>
+                  <ul>
+                    <li>Arrendamiento de vallas publicitarias en ubicaciones premium</li>
+                    <li>DiseÃ±o e impresiÃ³n de material para vallas</li>
+                    <li>InstalaciÃ³n y mantenimiento de estructuras</li>
+                    <li>AuditorÃ­a y monitoreo de campaÃ±as</li>
+                    <li>ConsultorÃ­a en planificaciÃ³n de medios exteriores</li>
+                    <li>Vallas LED y pantallas digitales</li>
+                  </ul>
+                </div>
+                <div class="aboutSection">
+                  <h3>Contacto</h3>
+                  <div class="contactInfo">
+                    ð +58 212-555-0100<br>
+                    ð§ info@impresionarte.com.ve<br>
+                    ð Av. Francisco de Miranda, Caracas, Venezuela
+                  </div>
+                </div>
+                <div class="aboutSection">
+                  <h3>Presencia Nacional</h3>
+                  <p>Operamos en las principales ciudades de Venezuela: Caracas, Maracaibo, Valencia, Barquisimeto, Maracay, Ciudad Guayana, MaturÃ­n, Barcelona y mÃ¡s de 20 ciudades adicionales en todo el territorio nacional.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /pageArea -->
+    </div><!-- /mainArea -->
+  </div><!-- /layout -->
+</div><!-- /app -->
+
+<!-- MODAL -->
+<div class="modalOverlay" id="modalOverlay">
+  <div class="modalBox" onclick="event.stopPropagation()">
+    <div class="modalHeader">
+      <h3 id="modalTitle">Agregar Valla</h3>
+      <button class="btnCloseModal" onclick="closeModal()">â</button>
+    </div>
+    <div class="modalGrid">
+      <div class="fullWidth">
+        <label class="mLabel">Nombre / CÃ³digo</label>
+        <input class="mInput" id="mName" type="text" placeholder="Ej: VL-009">
+      </div>
+      <div>
+        <label class="mLabel">Ciudad</label>
+        <input class="mInput" id="mCity" type="text" placeholder="Ej: Caracas">
+      </div>
+      <div>
+        <label class="mLabel">Estado</label>
+        <select class="mInput" id="mStatus">
+          <option value="disponible">Disponible</option>
+          <option value="ocupada">Ocupada</option>
+          <option value="mantenimiento">Mantenimiento</option>
+        </select>
+      </div>
+      <div class="fullWidth">
+        <label class="mLabel">DirecciÃ³n</label>
+        <input class="mInput" id="mAddr" type="text" placeholder="Ej: Av. Libertador, frente al CCCT">
+      </div>
+      <div>
+        <label class="mLabel">Latitud</label>
+        <input class="mInput" id="mLat" type="number" step="0.0001" placeholder="Ej: 10.4806">
+      </div>
+      <div>
+        <label class="mLabel">Longitud</label>
+        <input class="mInput" id="mLng" type="number" step="0.0001" placeholder="Ej: -66.9036">
+      </div>
+      <div>
+        <label class="mLabel">Dimensiones</label>
+        <input class="mInput" id="mDims" type="text" placeholder="Ej: 14x5 m">
+      </div>
+      <div>
+        <label class="mLabel">Precio/Mes (USD)</label>
+        <input class="mInput" id="mPrice" type="number" placeholder="Ej: 1500">
+      </div>
+      <div>
+        <label class="mLabel">Caras</label>
+        <select class="mInput" id="mFaces">
+          <option value="1">1 cara</option>
+          <option value="2">2 caras</option>
+        </select>
+      </div>
+      <div>
+        <label class="mLabel">IluminaciÃ³n</label>
+        <select class="mInput" id="mIllum">
+          <option value="SÃ­">SÃ­</option>
+          <option value="No">No</option>
+        </select>
+      </div>
+      <div>
+        <label class="mLabel">Cliente</label>
+        <input class="mInput" id="mClient" type="text" placeholder="Ej: Movistar Venezuela">
+      </div>
+      <div>
+        <label class="mLabel">Fin de Contrato</label>
+        <input class="mInput" id="mContractEnd" type="date">
+      </div>
+      <div class="fullWidth">
+        <label class="mLabel">Foto de la Valla</label>
+        <div class="dropzone" id="dropzone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)" onclick="document.getElementById('fileInput').click()">
+          <div style="font-size:2rem">ð¤</div>
+          <p>Arrastra una imagen aquÃ­ o haz clic para seleccionar</p>
+          <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileInput(event)">
+          <img id="dropzonePreview" class="dropzonePreview" style="display:none">
+        </div>
+      </div>
+    </div>
+    <div class="modalFooter">
+      <button class="btnCancel" onclick="closeModal()">Cancelar</button>
+      <button class="btnSave" onclick="saveModal()">Guardar Valla</button>
+    </div>
+  </div>
+</div>
 <script>
-var USERS = [
-  {username:'admin',password:'Impresionarte2024!',role:'admin'},
-  {username:'viewer',password:'viewer123',role:'viewer'}
-];
-var BILLBOARDS = [
-  {id:1,lat:10.65,lng:-71.6333,location:'Av. 5 de Julio, Maracaibo',status:'available',type:'14x5m',price:'$850/mes',client:'',photo:'',notes:'Alta visibilidad, trÃ¡fico intenso'},
-  {id:2,lat:10.64,lng:-71.62,location:'CircunvalaciÃ³n 2, Maracaibo',status:'occupied',type:'12x4m',price:'$720/mes',client:'Coca-Cola',photo:'',notes:'Contrato hasta dic 2024'},
-  {id:3,lat:10.66,lng:-71.61,location:'Av. Bella Vista, Maracaibo',status:'maintenance',type:'10x3.5m',price:'$580/mes',client:'',photo:'',notes:'Mantenimiento programado'},
-  {id:4,lat:10.68,lng:-71.64,location:'Puente Sobre el Lago, Entrada',status:'available',type:'14x5m',price:'$950/mes',client:'',photo:'',notes:'Vista panorÃ¡mica al lago'},
-  {id:5,lat:10.63,lng:-71.635,location:'Av. El Milagro, Maracaibo',status:'available',type:'12x4m',price:'$680/mes',client:'',photo:'',notes:'Zona residencial premium'},
-  {id:6,lat:10.655,lng:-71.625,location:'Av. Padilla, Centro',status:'occupied',type:'10x3.5m',price:'$550/mes',client:'Movistar',photo:'',notes:'Centro comercial cercano'},
-  {id:7,lat:10.645,lng:-71.615,location:'Av. Libertador, Maracaibo',status:'available',type:'8x3m',price:'$420/mes',client:'',photo:'',notes:'Excelente para campaÃ±as locales'},
-  {id:8,lat:10.675,lng:-71.63,location:'Redoma de la Chinita',status:'maintenance',type:'14x5m',price:'$880/mes',client:'',photo:'',notes:'Mantenimiento estructural'}
+// ==================== DATA ====================
+const USERS = [
+  { username: 'admin', password: 'Impresionarte2024!', role: 'admin', display: 'Administrador' },
+  { username: 'viewer', password: 'viewer123', role: 'viewer', display: 'Visualizador' }
 ];
 
-var currentUser = null;
-var currentPage = 'map';
-var currentFilter = 'all';
-var currentSearch = '';
-var map = null;
-var markers = [];
-var editingId = null;
+let BILLBOARDS = [
+  { id:'VL-001', name:'VL-001 Av. Libertador', city:'Caracas', status:'ocupada', addr:'Av. Libertador, frente al CCCT, Chacao', lat:10.4944, lng:-66.8548, dims:'14x5 m', price:2500, faces:2, illum:'SÃ­', client:'Digitel', contractEnd:'2025-12-31', photo:'' },
+  { id:'VL-002', name:'VL-002 Autopista Valencia', city:'Valencia', status:'disponible', addr:'Autopista Valencia-Caracas km 12', lat:10.1621, lng:-67.9990, dims:'12x4 m', price:1800, faces:1, illum:'SÃ­', client:'', contractEnd:'', photo:'' },
+  { id:'VL-003', name:'VL-003 Av. 5 de Julio', city:'Maracaibo', status:'ocupada', addr:'Av. 5 de Julio, sector La Lago', lat:10.6483, lng:-71.6124, dims:'14x5 m', price:2200, faces:2, illum:'SÃ­', client:'Movistar', contractEnd:'2025-06-30', photo:'' },
+  { id:'VL-004', name:'VL-004 Av. Lara', city:'Barquisimeto', status:'mantenimiento', addr:'Av. Lara, centro comercial Las Trinitarias', lat:10.0678, lng:-69.3467, dims:'10x3.5 m', price:1200, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
+  { id:'VL-005', name:'VL-005 Av. Las Delicias', city:'Maracay', status:'disponible', addr:'Av. Las Delicias, frente al Sambil Maracay', lat:10.2399, lng:-67.5956, dims:'12x4 m', price:1500, faces:1, illum:'SÃ­', client:'', contractEnd:'', photo:'' },
+  { id:'VL-006', name:'VL-006 Av. Upata', city:'Ciudad Guayana', status:'ocupada', addr:'Av. Upata, Puerto Ordaz', lat:8.3023, lng:-62.7070, dims:'14x5 m', price:1900, faces:2, illum:'SÃ­', client:'PDVSA', contractEnd:'2026-03-31', photo:'' },
+  { id:'VL-007', name:'VL-007 Av. RaÃºl Leoni', city:'MaturÃ­n', status:'disponible', addr:'Av. RaÃºl Leoni, sector Los Guaritos', lat:9.7458, lng:-63.1841, dims:'10x3.5 m', price:1100, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
+  { id:'VL-008', name:'VL-008 Av. Intercomunal', city:'Barcelona', status:'mantenimiento', addr:'Av. Intercomunal, frente al IUTBA', lat:10.1339, lng:-64.6930, dims:'12x4 m', price:1400, faces:1, illum:'SÃ­', client:'', contractEnd:'', photo:'' }
+];
+
+let currentUser = null;
+let leafletMap = null;
+let mapMarkers = [];
+let currentDetailId = null;
+let currentFilter = 'all';
+let modalEditId = null;
+let photoBase64 = '';
+var iaSelectedStyle = 'fotorrealista';
 var aboutEditMode = false;
 var aboutOriginalHTML = '';
-var iaSelectedStyle = 'fotorrealista';
-var _tempPhoto = '';
 
+// ==================== AUTH ====================
 function doLogin() {
-  var username = document.getElementById('loginUsername').value.trim();
-  var password = document.getElementById('loginPassword').value;
-  var errorEl = document.getElementById('loginError');
-  errorEl.style.display = 'none';
-  var found = null;
-  for (var i = 0; i < USERS.length; i++) {
-    if (USERS[i].username === username && USERS[i].password === password) {
-      found = USERS[i];
-      break;
-    }
-  }
+  var u = document.getElementById('inputUser').value.trim();
+  var p = document.getElementById('inputPass').value;
+  var err = document.getElementById('loginError');
+  var found = USERS.find(function(x){ return x.username === u && x.password === p; });
   if (!found) {
-    errorEl.textContent = 'Usuario o contraseÃ±a incorrectos.';
-    errorEl.style.display = 'block';
+    err.style.display = 'block';
     return;
   }
+  err.style.display = 'none';
   currentUser = found;
-  try { localStorage.setItem('impresionarte_user', JSON.stringify({username: found.username, role: found.role})); } catch(e) {}
   document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('appScreen').style.display = 'flex';
-  document.getElementById('userRoleBadge').textContent = currentUser.role === 'admin' ? 'Admin' : 'Viewer';
-  document.getElementById('userNameDisplay').textContent = currentUser.username;
-  loadAboutContent();
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('userAvatar').textContent = found.display.charAt(0).toUpperCase();
+  document.getElementById('userName').textContent = found.display;
+  document.getElementById('userRole').textContent = found.role === 'admin' ? 'Administrador' : 'Visualizador';
+  if (found.role === 'admin') {
+    document.getElementById('adminDetailActions').style.display = 'flex';
+    document.getElementById('aboutAdminBar').style.display = 'flex';
+  } else {
+    document.getElementById('adminDetailActions').style.display = 'none';
+    document.getElementById('aboutAdminBar').style.display = 'none';
+  }
+  initMap();
   updateStats();
+  renderCatalog();
   showPage('map');
-  showToast('Bienvenido, ' + currentUser.username + '!', 'success');
+  showToast('Bienvenido, ' + found.display + '!', 'success');
 }
 
 function doLogout() {
   currentUser = null;
-  try { localStorage.removeItem('impresionarte_user'); } catch(e) {}
-  document.getElementById('appScreen').style.display = 'none';
+  leafletMap = null;
+  mapMarkers = [];
+  currentDetailId = null;
+  document.getElementById('app').style.display = 'none';
   document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('loginUsername').value = '';
-  document.getElementById('loginPassword').value = '';
+  document.getElementById('inputUser').value = '';
+  document.getElementById('inputPass').value = '';
   document.getElementById('loginError').style.display = 'none';
-  if (map) {
-    map.remove();
-    map = null;
-    markers = [];
-  }
 }
 
+// ==================== NAVIGATION ====================
 function showPage(page) {
-  currentPage = page;
-  var pages = ['map', 'catalog', 'ia', 'about'];
-  for (var i = 0; i < pages.length; i++) {
-    var pageEl = document.getElementById('page-' + pages[i]);
-    if (pageEl) pageEl.style.display = 'none';
+  var pages = ['map','catalog','ia','about'];
+  var titles = { map:'Mapa de Vallas', catalog:'CatÃ¡logo de Vallas', ia:'ImpresIAnarte IA', about:'Sobre Nosotros' };
+  pages.forEach(function(pg) {
+    var el = document.getElementById('page-' + pg);
+    var nav = document.getElementById('nav-' + pg);
+    if (el) el.classList.toggle('active', pg === page);
+    if (nav) nav.classList.toggle('active', pg === page);
+  });
+  document.getElementById('topbarTitle').textContent = titles[page] || '';
+  var addBtn = document.getElementById('adminAddBtn');
+  if (page === 'catalog' && currentUser && currentUser.role === 'admin') {
+    addBtn.style.display = 'block';
+  } else {
+    addBtn.style.display = 'none';
   }
-  var navItems = document.querySelectorAll('.nav-item');
-  for (var j = 0; j < navItems.length; j++) {
-    navItems[j].classList.remove('active');
-    if (navItems[j].getAttribute('data-page') === page) {
-      navItems[j].classList.add('active');
-    }
-  }
-  var titles = {map: 'Mapa de Vallas', catalog: 'CatÃ¡logo de Vallas', ia: 'Generador IA', about: 'Acerca de Impresionarte'};
-  var titleEl = document.getElementById('pageTitle');
-  if (titleEl) titleEl.textContent = titles[page] || '';
-  var adminAddBtn = document.getElementById('adminAddBtn');
-  if (adminAddBtn) {
-    adminAddBtn.style.display = (page === 'catalog' && currentUser && currentUser.role === 'admin') ? 'inline-flex' : 'none';
-  }
-  var targetPage = document.getElementById('page-' + page);
-  if (targetPage) targetPage.style.display = 'block';
-  if (page === 'map') {
-    if (!map) {
-      initMap();
-    } else {
-      setTimeout(function() { map.invalidateSize(); }, 100);
-    }
-    hideDetail();
-  }
-  if (page === 'catalog') {
-    renderCatalog();
+  if (page === 'map' && leafletMap) {
+    setTimeout(function(){ leafletMap.invalidateSize(); }, 100);
   }
 }
 
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  if (leafletMap) setTimeout(function(){ leafletMap.invalidateSize(); }, 350);
+}
+
+// ==================== MAP ====================
 function initMap() {
-  if (map) return;
-  var mapEl = document.getElementById('map');
-  if (!mapEl) return;
-  map = L.map('map').setView([10.655, -71.625], 13);
+  if (leafletMap) { leafletMap.remove(); leafletMap = null; }
+  leafletMap = L.map('map').setView([9.5, -68.0], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Â© OpenStreetMap contributors',
     maxZoom: 19
-  }).addTo(map);
+  }).addTo(leafletMap);
   renderMapMarkers();
-  setTimeout(function() { map.invalidateSize(); }, 200);
 }
 
 function getMarkerColor(status) {
-  if (status === 'available') return '#22c55e';
-  if (status === 'occupied') return '#ef4444';
-  if (status === 'maintenance') return '#f59e0b';
-  return '#6b7280';
+  if (status === 'disponible') return '#10b981';
+  if (status === 'ocupada') return '#ef4444';
+  return '#f59e0b';
 }
 
 function makeIcon(color) {
   return L.divIcon({
-    className: '',
-    html: '<div style="width:18px;height:18px;border-radius:50%;background:' + color + ';border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.4);"></div>',
-    iconSize: [18, 18],
-    iconAnchor: [9, 9]
+    html: '<div style="width:18px;height:18px;background:' + color + ';border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,.4)"></div>',
+    iconSize: [18,18],
+    iconAnchor: [9,9],
+    className: ''
   });
 }
 
 function renderMapMarkers() {
-  for (var i = 0; i < markers.length; i++) {
-    markers[i].remove();
-  }
-  markers = [];
-  for (var j = 0; j < BILLBOARDS.length; j++) {
-    (function(bb) {
-      var color = getMarkerColor(bb.status);
-      var icon = makeIcon(color);
-      var marker = L.marker([bb.lat, bb.lng], {icon: icon}).addTo(map);
-      marker.on('click', function() { showDetail(bb.id); });
-      markers.push(marker);
-    })(BILLBOARDS[j]);
-  }
+  if (!leafletMap) return;
+  mapMarkers.forEach(function(m){ leafletMap.removeLayer(m); });
+  mapMarkers = [];
+  BILLBOARDS.forEach(function(b) {
+    var color = getMarkerColor(b.status);
+    var icon = makeIcon(color);
+    var marker = L.marker([b.lat, b.lng], { icon: icon })
+      .addTo(leafletMap)
+      .bindPopup('<strong>' + b.name + '</strong><br>' + b.city + '<br><em>' + b.status + '</em>');
+    marker.on('click', function(){ showDetail(b.id); });
+    mapMarkers.push(marker);
+  });
 }
 
+// ==================== STATS ====================
 function updateStats() {
-  var available = 0, occupied = 0, maintenance = 0;
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    if (BILLBOARDS[i].status === 'available') available++;
-    else if (BILLBOARDS[i].status === 'occupied') occupied++;
-    else if (BILLBOARDS[i].status === 'maintenance') maintenance++;
-  }
-  var totalEl = document.getElementById('statTotal');
-  var availEl = document.getElementById('statAvailable');
-  var occEl = document.getElementById('statOccupied');
-  var maintEl = document.getElementById('statMaintenance');
-  if (totalEl) totalEl.textContent = BILLBOARDS.length;
-  if (availEl) availEl.textContent = available;
-  if (occEl) occEl.textContent = occupied;
-  if (maintEl) maintEl.textContent = maintenance;
+  var total = BILLBOARDS.length;
+  var avail = BILLBOARDS.filter(function(b){ return b.status==='disponible'; }).length;
+  var occ = BILLBOARDS.filter(function(b){ return b.status==='ocupada'; }).length;
+  var cities = new Set(BILLBOARDS.map(function(b){ return b.city; })).size;
+  var income = BILLBOARDS.filter(function(b){ return b.status==='ocupada'; }).reduce(function(s,b){ return s+b.price; },0);
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statAvail').textContent = avail;
+  document.getElementById('statOcc').textContent = occ;
+  document.getElementById('statCities').textContent = cities;
+  document.getElementById('statIncome').textContent = '$' + income.toLocaleString();
 }
 
+// ==================== DETAIL ====================
 function showDetail(id) {
-  var bb = null;
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    if (BILLBOARDS[i].id === id) { bb = BILLBOARDS[i]; break; }
-  }
-  if (!bb) return;
-  editingId = id;
-  var panel = document.getElementById('detailPanel');
-  if (!panel) return;
-  var statusLabels = {available: 'Disponible', occupied: 'Ocupada', maintenance: 'Mantenimiento'};
-  var statusColors = {available: '#22c55e', occupied: '#ef4444', maintenance: '#f59e0b'};
-  var photoHTML = bb.photo ? '<img src="' + bb.photo + '" style="width:100%;border-radius:8px;margin-bottom:12px;" />' : '<div style="width:100%;height:120px;background:#1e293b;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#64748b;margin-bottom:12px;">Sin foto</div>';
-  var adminBtns = '';
-  if (currentUser && currentUser.role === 'admin') {
-    adminBtns = '<button onclick="editCurrentDetail()" style="flex:1;padding:8px;background:#3b82f6;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;">Editar</button>' +
-      '<button onclick="deleteCurrentDetail()" style="flex:1;padding:8px;background:#ef4444;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;">Eliminar</button>';
-  }
-  panel.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">' +
-    '<h3 style="margin:0;font-size:15px;color:#f1f5f9;">Detalle de Valla</h3>' +
-    '<button onclick="hideDetail()" style="background:none;border:none;color:#94a3b8;font-size:20px;cursor:pointer;line-height:1;">&times;</button>' +
-    '</div>' +
-    photoHTML +
-    '<p style="color:#f1f5f9;font-weight:600;margin:0 0 6px;font-size:14px;">' + bb.location + '</p>' +
-    '<span style="display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;background:' + (statusColors[bb.status] || '#6b7280') + '33;color:' + (statusColors[bb.status] || '#6b7280') + ';margin-bottom:10px;">' + (statusLabels[bb.status] || bb.status) + '</span>' +
-    '<div style="color:#94a3b8;font-size:13px;line-height:1.8;">' +
-    '<div><b style="color:#cbd5e1;">Tipo:</b> ' + bb.type + '</div>' +
-    '<div><b style="color:#cbd5e1;">Precio:</b> ' + bb.price + '</div>' +
-    (bb.client ? '<div><b style="color:#cbd5e1;">Cliente:</b> ' + bb.client + '</div>' : '') +
-    (bb.notes ? '<div><b style="color:#cbd5e1;">Notas:</b> ' + bb.notes + '</div>' : '') +
-    '</div>' +
-    (adminBtns ? '<div style="display:flex;gap:8px;margin-top:14px;">' + adminBtns + '</div>' : '');
-  panel.style.display = 'block';
+  var b = BILLBOARDS.find(function(x){ return x.id === id; });
+  if (!b) return;
+  currentDetailId = id;
+  document.getElementById('detailName').textContent = b.name;
+  document.getElementById('dCity').textContent = b.city;
+  document.getElementById('dAddr').textContent = b.addr;
+  document.getElementById('dStatus').textContent = b.status.charAt(0).toUpperCase() + b.status.slice(1);
+  document.getElementById('dDims').textContent = b.dims;
+  document.getElementById('dFaces').textContent = b.faces + ' cara(s)';
+  document.getElementById('dIllum').textContent = b.illum;
+  document.getElementById('dPrice').textContent = '$' + b.price.toLocaleString() + '/mes';
+  document.getElementById('dClient').textContent = b.client || 'â';
+  document.getElementById('dContract').textContent = b.contractEnd || 'â';
+  document.getElementById('dCoords').textContent = b.lat + ', ' + b.lng;
+  document.getElementById('detailPanel').style.display = 'block';
+  document.getElementById('page-map').scrollTop = 0;
 }
 
 function hideDetail() {
-  var panel = document.getElementById('detailPanel');
-  if (panel) panel.style.display = 'none';
+  document.getElementById('detailPanel').style.display = 'none';
+  currentDetailId = null;
 }
 
 function editCurrentDetail() {
-  openModal('edit', editingId);
+  if (currentDetailId) openModal(currentDetailId);
 }
 
 function deleteCurrentDetail() {
-  if (!confirm('Â¿Eliminar esta valla?')) return;
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    if (BILLBOARDS[i].id === editingId) { BILLBOARDS.splice(i, 1); break; }
+  if (!currentDetailId) return;
+  if (confirm('Â¿Eliminar esta valla?')) {
+    deleteBillboard(currentDetailId);
+    hideDetail();
   }
-  hideDetail();
-  updateStats();
-  renderMapMarkers();
-  showToast('Valla eliminada.', 'info');
 }
 
-function setFilter(filter) {
-  currentFilter = filter;
-  var pills = document.querySelectorAll('.filter-pill');
-  for (var i = 0; i < pills.length; i++) {
-    pills[i].classList.remove('active');
-    if (pills[i].getAttribute('data-filter') === filter) pills[i].classList.add('active');
-  }
+// ==================== CATALOG ====================
+function setFilter(f) {
+  currentFilter = f;
+  ['all','disponible','ocupada','mantenimiento'].forEach(function(k) {
+    var el = document.getElementById('pill-' + k);
+    if (el) el.classList.toggle('active', k === f);
+  });
   renderCatalog();
 }
 
 function renderCatalog() {
-  var container = document.getElementById('catalogGrid');
-  if (!container) return;
-  var statusLabels = {available: 'Disponible', occupied: 'Ocupada', maintenance: 'Mantenimiento'};
-  var statusColors = {available: '#22c55e', occupied: '#ef4444', maintenance: '#f59e0b'};
-  var filtered = [];
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    var bb = BILLBOARDS[i];
-    if (currentFilter !== 'all' && bb.status !== currentFilter) continue;
-    if (currentSearch) {
-      var s = currentSearch.toLowerCase();
-      if (bb.location.toLowerCase().indexOf(s) === -1 && bb.type.toLowerCase().indexOf(s) === -1 && (bb.client || '').toLowerCase().indexOf(s) === -1) continue;
-    }
-    filtered.push(bb);
-  }
-  if (filtered.length === 0) {
-    container.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:#64748b;padding:40px;">No se encontraron vallas.</div>';
+  var q = (document.getElementById('searchInput').value || '').toLowerCase();
+  var list = BILLBOARDS.filter(function(b) {
+    var matchFilter = currentFilter === 'all' || b.status === currentFilter;
+    var matchSearch = !q || b.name.toLowerCase().includes(q) || b.city.toLowerCase().includes(q) || b.addr.toLowerCase().includes(q);
+    return matchFilter && matchSearch;
+  });
+  var grid = document.getElementById('cardsGrid');
+  if (list.length === 0) {
+    grid.innerHTML = '<p style="color:#94a3b8;grid-column:1/-1;text-align:center;padding:40px">No se encontraron vallas</p>';
     return;
   }
-  var html = '';
-  for (var j = 0; j < filtered.length; j++) {
-    var b = filtered[j];
-    var photoHTML = b.photo ? '<img src="' + b.photo + '" style="width:100%;height:140px;object-fit:cover;border-radius:8px 8px 0 0;" />' : '<div style="width:100%;height:140px;background:#1e293b;border-radius:8px 8px 0 0;display:flex;align-items:center;justify-content:center;color:#475569;font-size:13px;">Sin foto</div>';
-    var adminButtons = '';
-    if (currentUser && currentUser.role === 'admin') {
-      adminButtons = '<button onclick="openModal(\'edit\',' + b.id + ')" style="padding:5px 12px;background:#3b82f6;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:12px;">Editar</button>' +
-        '<button onclick="deleteBillboard(' + b.id + ')" style="padding:5px 12px;background:#ef4444;color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:12px;">Eliminar</button>';
-    }
-    html += '<div style="background:#1e293b;border-radius:10px;overflow:hidden;border:1px solid #334155;">' +
-      photoHTML +
-      '<div style="padding:14px;">' +
-      '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">' +
-      '<p style="margin:0;color:#f1f5f9;font-weight:600;font-size:13px;flex:1;padding-right:8px;">' + b.location + '</p>' +
-      '<span style="display:inline-block;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap;background:' + (statusColors[b.status] || '#6b7280') + '33;color:' + (statusColors[b.status] || '#6b7280') + ';">' + (statusLabels[b.status] || b.status) + '</span>' +
-      '</div>' +
-      '<div style="color:#94a3b8;font-size:12px;margin-bottom:4px;"><b style="color:#cbd5e1;">Tipo:</b> ' + b.type + '</div>' +
-      '<div style="color:#94a3b8;font-size:12px;margin-bottom:4px;"><b style="color:#cbd5e1;">Precio:</b> ' + b.price + '</div>' +
-      (b.client ? '<div style="color:#94a3b8;font-size:12px;margin-bottom:4px;"><b style="color:#cbd5e1;">Cliente:</b> ' + b.client + '</div>' : '') +
-      '<div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;">' +
-      '<button onclick="showPage(\'map\');showDetail(' + b.id + ')" style="padding:5px 12px;background:#0f172a;color:#94a3b8;border:1px solid #334155;border-radius:5px;cursor:pointer;font-size:12px;">Ver en mapa</button>' +
-      adminButtons +
-      '</div>' +
-      '</div>' +
-      '</div>';
-  }
-  container.innerHTML = html;
+  var isAdmin = currentUser && currentUser.role === 'admin';
+  grid.innerHTML = list.map(function(b) {
+    var badgeCls = 'badge-' + b.status;
+    var statusLabel = b.status === 'disponible' ? 'Disponible' : b.status === 'ocupada' ? 'Ocupada' : 'Mantenimiento';
+    var photoHtml = b.photo ? '<img src="' + b.photo + '" alt="foto">' : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">ðï¸</div>';
+    var delBtn = isAdmin ? '<button class="btnCardDel" onclick="event.stopPropagation();deleteBillboard(\'' + b.id + '\')">ðï¸</button>' : '';
+    return '<div class="billCard" onclick="showPage('map');showDetail('' + b.id + '')">'
+      + '<div class="cardPhoto">' + photoHtml + '<span class="cardStatusBadge ' + badgeCls + '">' + statusLabel + '</span></div>'
+      + '<div class="cardBody"><div class="cardName">' + b.name + '</div><div class="cardCity">ð ' + b.city + '</div>'
+      + '<div class="cardMeta"><span class="cardPrice">$' + b.price.toLocaleString() + '/mes</span><span class="cardDims">' + b.dims + '</span></div></div>'
+      + '<div class="cardFooter"><button class="btnCardView" onclick="event.stopPropagation();showPage('map');showDetail('' + b.id + '')">Ver en Mapa</button>' + delBtn + '</div>'
+      + '</div>';
+  }).join('');
 }
 
 function deleteBillboard(id) {
   if (!confirm('Â¿Eliminar esta valla?')) return;
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    if (BILLBOARDS[i].id === id) { BILLBOARDS.splice(i, 1); break; }
-  }
+  BILLBOARDS = BILLBOARDS.filter(function(b){ return b.id !== id; });
+  renderMapMarkers();
   updateStats();
   renderCatalog();
-  if (map) renderMapMarkers();
-  showToast('Valla eliminada.', 'info');
+  showToast('Valla eliminada', 'info');
 }
 
-function openModal(mode, id) {
-  _tempPhoto = '';
-  editingId = id || null;
-  var modal = document.getElementById('billboardModal');
-  var title = document.getElementById('modalTitle');
-  if (!modal) return;
-  if (mode === 'edit' && id) {
-    var bb = null;
-    for (var i = 0; i < BILLBOARDS.length; i++) { if (BILLBOARDS[i].id === id) { bb = BILLBOARDS[i]; break; } }
-    if (!bb) return;
-    if (title) title.textContent = 'Editar Valla';
-    document.getElementById('fieldLocation').value = bb.location;
-    document.getElementById('fieldStatus').value = bb.status;
-    document.getElementById('fieldType').value = bb.type;
-    document.getElementById('fieldPrice').value = bb.price;
-    document.getElementById('fieldClient').value = bb.client || '';
-    document.getElementById('fieldLat').value = bb.lat;
-    document.getElementById('fieldLng').value = bb.lng;
-    document.getElementById('fieldNotes').value = bb.notes || '';
-    _tempPhoto = bb.photo || '';
-    var prev = document.getElementById('photoPreview');
-    if (prev) { prev.src = bb.photo || ''; prev.style.display = bb.photo ? 'block' : 'none'; }
+// ==================== MODAL ====================
+function openModal(id) {
+  modalEditId = id || null;
+  photoBase64 = '';
+  document.getElementById('dropzonePreview').style.display = 'none';
+  document.getElementById('dropzone').classList.remove('drag');
+  if (id) {
+    var b = BILLBOARDS.find(function(x){ return x.id === id; });
+    if (!b) return;
+    document.getElementById('modalTitle').textContent = 'Editar Valla';
+    document.getElementById('mName').value = b.name;
+    document.getElementById('mCity').value = b.city;
+    document.getElementById('mStatus').value = b.status;
+    document.getElementById('mAddr').value = b.addr;
+    document.getElementById('mLat').value = b.lat;
+    document.getElementById('mLng').value = b.lng;
+    document.getElementById('mDims').value = b.dims;
+    document.getElementById('mPrice').value = b.price;
+    document.getElementById('mFaces').value = b.faces;
+    document.getElementById('mIllum').value = b.illum;
+    document.getElementById('mClient').value = b.client;
+    document.getElementById('mContractEnd').value = b.contractEnd;
+    if (b.photo) {
+      var prev = document.getElementById('dropzonePreview');
+      prev.src = b.photo;
+      prev.style.display = 'block';
+      photoBase64 = b.photo;
+    }
   } else {
-    if (title) title.textContent = 'Nueva Valla';
-    document.getElementById('fieldLocation').value = '';
-    document.getElementById('fieldStatus').value = 'available';
-    document.getElementById('fieldType').value = '';
-    document.getElementById('fieldPrice').value = '';
-    document.getElementById('fieldClient').value = '';
-    document.getElementById('fieldLat').value = '10.655';
-    document.getElementById('fieldLng').value = '-71.625';
-    document.getElementById('fieldNotes').value = '';
-    var prev2 = document.getElementById('photoPreview');
-    if (prev2) { prev2.src = ''; prev2.style.display = 'none'; }
+    document.getElementById('modalTitle').textContent = 'Agregar Valla';
+    ['mName','mCity','mAddr','mDims','mClient','mContractEnd'].forEach(function(id){ document.getElementById(id).value=''; });
+    document.getElementById('mStatus').value = 'disponible';
+    document.getElementById('mLat').value = '';
+    document.getElementById('mLng').value = '';
+    document.getElementById('mPrice').value = '';
+    document.getElementById('mFaces').value = '1';
+    document.getElementById('mIllum').value = 'SÃ­';
   }
-  modal.style.display = 'flex';
+  document.getElementById('modalOverlay').classList.add('open');
 }
 
 function closeModal() {
-  var modal = document.getElementById('billboardModal');
-  if (modal) modal.style.display = 'none';
-  editingId = null;
-  _tempPhoto = '';
+  document.getElementById('modalOverlay').classList.remove('open');
+  modalEditId = null;
 }
 
 function saveModal() {
-  var location = document.getElementById('fieldLocation').value.trim();
-  var status = document.getElementById('fieldStatus').value;
-  var type = document.getElementById('fieldType').value.trim();
-  var price = document.getElementById('fieldPrice').value.trim();
-  var client = document.getElementById('fieldClient').value.trim();
-  var lat = parseFloat(document.getElementById('fieldLat').value);
-  var lng = parseFloat(document.getElementById('fieldLng').value);
-  var notes = document.getElementById('fieldNotes').value.trim();
-  if (!location || !type || !price || isNaN(lat) || isNaN(lng)) {
-    showToast('Por favor completa todos los campos requeridos.', 'error');
-    return;
-  }
-  if (editingId) {
-    for (var i = 0; i < BILLBOARDS.length; i++) {
-      if (BILLBOARDS[i].id === editingId) {
-        BILLBOARDS[i].location = location;
-        BILLBOARDS[i].status = status;
-        BILLBOARDS[i].type = type;
-        BILLBOARDS[i].price = price;
-        BILLBOARDS[i].client = client;
-        BILLBOARDS[i].lat = lat;
-        BILLBOARDS[i].lng = lng;
-        BILLBOARDS[i].notes = notes;
-        BILLBOARDS[i].photo = _tempPhoto || BILLBOARDS[i].photo;
-        break;
-      }
-    }
-    showToast('Valla actualizada.', 'success');
+  var name = document.getElementById('mName').value.trim();
+  var city = document.getElementById('mCity').value.trim();
+  var addr = document.getElementById('mAddr').value.trim();
+  var lat = parseFloat(document.getElementById('mLat').value);
+  var lng = parseFloat(document.getElementById('mLng').value);
+  if (!name || !city) { showToast('Nombre y ciudad son requeridos', 'error'); return; }
+  if (isNaN(lat) || isNaN(lng)) { showToast('Coordenadas invÃ¡lidas', 'error'); return; }
+  var data = {
+    id: modalEditId || name.replace(/s+/g,'-'),
+    name: name,
+    city: city,
+    status: document.getElementById('mStatus').value,
+    addr: addr,
+    lat: lat,
+    lng: lng,
+    dims: document.getElementById('mDims').value.trim(),
+    price: parseFloat(document.getElementById('mPrice').value) || 0,
+    faces: parseInt(document.getElementById('mFaces').value) || 1,
+    illum: document.getElementById('mIllum').value,
+    client: document.getElementById('mClient').value.trim(),
+    contractEnd: document.getElementById('mContractEnd').value,
+    photo: photoBase64
+  };
+  if (modalEditId) {
+    var idx = BILLBOARDS.findIndex(function(b){ return b.id === modalEditId; });
+    if (idx !== -1) BILLBOARDS[idx] = data;
+    showToast('Valla actualizada', 'success');
   } else {
-    var newId = 1;
-    for (var j = 0; j < BILLBOARDS.length; j++) { if (BILLBOARDS[j].id >= newId) newId = BILLBOARDS[j].id + 1; }
-    BILLBOARDS.push({id: newId, lat: lat, lng: lng, location: location, status: status, type: type, price: price, client: client, photo: _tempPhoto || '', notes: notes});
-    showToast('Valla creada.', 'success');
+    BILLBOARDS.push(data);
+    showToast('Valla agregada', 'success');
   }
+  closeModal();
+  renderMapMarkers();
   updateStats();
   renderCatalog();
-  if (map) renderMapMarkers();
-  closeModal();
 }
 
+// ==================== FILE UPLOAD ====================
 function handleFileInput(e) {
-  var file = e.target.files[0];
-  if (file) readPhoto(file);
+  if (e.target.files && e.target.files[0]) readPhoto(e.target.files[0]);
 }
 
 function handleDrop(e) {
   e.preventDefault();
+  document.getElementById('dropzone').classList.remove('drag');
   var file = e.dataTransfer.files[0];
   if (file) readPhoto(file);
 }
@@ -406,188 +895,141 @@ function handleDrop(e) {
 function readPhoto(file) {
   var reader = new FileReader();
   reader.onload = function(ev) {
-    _tempPhoto = ev.target.result;
-    var prev = document.getElementById('photoPreview');
-    if (prev) { prev.src = _tempPhoto; prev.style.display = 'block'; }
+    photoBase64 = ev.target.result;
+    var prev = document.getElementById('dropzonePreview');
+    prev.src = photoBase64;
+    prev.style.display = 'block';
   };
   reader.readAsDataURL(file);
 }
 
-function showToast(message, type) {
-  type = type || 'info';
-  var colors = {success: '#22c55e', error: '#ef4444', info: '#3b82f6', warning: '#f59e0b'};
-  var container = document.getElementById('toastContainer');
-  if (!container) {
-    container = document.createElement('div');
-    container.id = 'toastContainer';
-    container.style.cssText = 'position:fixed;top:20px;right:20px;z-index:99999;display:flex;flex-direction:column;gap:8px;';
-    document.body.appendChild(container);
-  }
-  var toast = document.createElement('div');
-  toast.style.cssText = 'background:#1e293b;color:#f1f5f9;padding:12px 18px;border-radius:8px;border-left:4px solid ' + (colors[type] || '#3b82f6') + ';box-shadow:0 4px 12px rgba(0,0,0,0.4);font-size:14px;max-width:300px;opacity:0;transform:translateX(20px);transition:all 0.3s ease;';
-  toast.textContent = message;
-  container.appendChild(toast);
-  setTimeout(function() { toast.style.opacity = '1'; toast.style.transform = 'translateX(0)'; }, 10);
-  setTimeout(function() {
-    toast.style.opacity = '0';
-    toast.style.transform = 'translateX(20px)';
-    setTimeout(function() { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
-  }, 3000);
+// ==================== TOAST ====================
+function showToast(msg, type) {
+  var existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  var t = document.createElement('div');
+  t.className = 'toast ' + (type || 'info');
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ if (t.parentNode) t.remove(); }, 3000);
 }
 
+// ==================== IA ====================
 function selectIAStyle(el, style) {
   iaSelectedStyle = style;
-  var btns = document.querySelectorAll('.ia-style-btn');
-  for (var i = 0; i < btns.length; i++) {
-    btns[i].style.background = '#0f172a';
-    btns[i].style.borderColor = '#334155';
-    btns[i].style.color = '#94a3b8';
-  }
-  if (el) {
-    el.style.background = '#3b82f633';
-    el.style.borderColor = '#3b82f6';
-    el.style.color = '#60a5fa';
-  }
+  document.querySelectorAll('.iaStyleOpt').forEach(function(opt){
+    opt.classList.toggle('selected', opt === el);
+  });
 }
 
 function generateAIBillboard() {
-  var promptEl = document.getElementById('iaPrompt');
-  var formatEl = document.getElementById('iaFormat');
-  var resultEl = document.getElementById('iaResult');
-  var loadingEl = document.getElementById('iaLoading');
-  var downloadBtn = document.getElementById('iaDownloadBtn');
-  if (!promptEl || !promptEl.value.trim()) {
-    showToast('Por favor escribe un prompt para generar la imagen.', 'warning');
-    return;
-  }
-  var prompt = promptEl.value.trim();
-  var format = formatEl ? formatEl.value : '14x5m';
-  if (resultEl) resultEl.innerHTML = '';
-  if (downloadBtn) downloadBtn.style.display = 'none';
-  if (loadingEl) loadingEl.style.display = 'flex';
-  var body = JSON.stringify({prompt: prompt, style: iaSelectedStyle, format: format});
+  var prompt = document.getElementById('iaPrompt').value.trim();
+  var format = document.getElementById('iaFormat').value;
+  if (!prompt) { showToast('Por favor describe tu valla primero', 'error'); return; }
+  document.getElementById('iaPlaceholder').style.display = 'none';
+  document.getElementById('iaLoading').style.display = 'flex';
+  document.getElementById('iaResult').style.display = 'none';
+  document.getElementById('iaError').style.display = 'none';
   fetch('https://api.twin.so/agents/019ca4a9-db22-7f60-85f4-39b479bbfddc/tools/ai_generate', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: body
-  }).then(function(response) {
-    return response.json();
-  }).then(function(data) {
-    if (loadingEl) loadingEl.style.display = 'none';
-    var imageUrl = '';
-    if (data && data.image_url) imageUrl = data.image_url;
-    else if (data && data.url) imageUrl = data.url;
-    else if (data && data.result) imageUrl = data.result;
-    else if (data && data.output) imageUrl = data.output;
-    if (imageUrl) {
-      if (resultEl) resultEl.innerHTML = '<img src="' + imageUrl + '" style="width:100%;border-radius:10px;margin-top:12px;" alt="IA Billboard" />';
-      if (downloadBtn) { downloadBtn.style.display = 'inline-flex'; downloadBtn.setAttribute('data-url', imageUrl); }
-      showToast('Imagen generada exitosamente.', 'success');
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: prompt, style: iaSelectedStyle, format: format })
+  })
+  .then(function(res){ return res.json(); })
+  .then(function(data) {
+    document.getElementById('iaLoading').style.display = 'none';
+    if (data && (data.image_url || data.url)) {
+      var url = data.image_url || data.url;
+      document.getElementById('iaResultImg').src = url;
+      document.getElementById('iaResult').style.display = 'flex';
+      showToast('DiseÃ±o generado con Ã©xito', 'success');
     } else {
-      var msg = (data && data.message) ? data.message : (data && data.error) ? data.error : 'No se pudo generar la imagen.';
-      if (resultEl) resultEl.innerHTML = '<div style="color:#ef4444;padding:16px;text-align:center;">' + msg + '</div>';
-      showToast(msg, 'error');
+      console.error('AI response:', JSON.stringify(data));
+      document.getElementById('iaErrorMsg').textContent = (data && data.error) ? data.error : 'No se pudo generar la imagen. Intenta de nuevo.';
+      document.getElementById('iaError').style.display = 'flex';
     }
-  }).catch(function(err) {
-    if (loadingEl) loadingEl.style.display = 'none';
-    var errMsg = 'Error al conectar con el generador IA.';
-    if (resultEl) resultEl.innerHTML = '<div style="color:#ef4444;padding:16px;text-align:center;">' + errMsg + '</div>';
-    showToast(errMsg, 'error');
+  })
+  .catch(function(err) {
+    console.error('AI error:', err);
+    document.getElementById('iaLoading').style.display = 'none';
+    document.getElementById('iaErrorMsg').textContent = 'Error de conexiÃ³n: ' + err.message;
+    document.getElementById('iaError').style.display = 'flex';
   });
 }
 
 function downloadAIImage() {
-  var downloadBtn = document.getElementById('iaDownloadBtn');
-  var url = downloadBtn ? downloadBtn.getAttribute('data-url') : '';
-  if (!url) { showToast('No hay imagen para descargar.', 'warning'); return; }
-  fetch(url).then(function(r) { return r.blob(); }).then(function(blob) {
-    var a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = 'impresionarte-ia-' + Date.now() + '.png';
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(function() { document.body.removeChild(a); URL.revokeObjectURL(a.href); }, 1000);
-  }).catch(function() { showToast('No se pudo descargar la imagen.', 'error'); });
+  var img = document.getElementById('iaResultImg');
+  if (!img.src) return;
+  fetch(img.src)
+    .then(function(r){ return r.blob(); })
+    .then(function(blob) {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'impresionarte-ia-' + Date.now() + '.jpg';
+      a.click();
+      URL.revokeObjectURL(url);
+    })
+    .catch(function(){ showToast('No se pudo descargar', 'error'); });
 }
 
+// ==================== ABOUT EDIT ====================
 function loadAboutContent() {
-  try {
-    var saved = localStorage.getItem('impresionarte_about');
-    if (saved) {
-      var aboutContent = document.getElementById('aboutContent');
-      if (aboutContent) aboutContent.innerHTML = saved;
-    }
-  } catch(e) {}
+  var saved = localStorage.getItem('impresionarte_about_content');
+  if (saved) {
+    document.getElementById('aboutContent').innerHTML = saved;
+  }
 }
 
 function toggleAboutEdit() {
-  if (!aboutEditMode) {
-    enterAboutEditMode();
-  } else {
+  if (aboutEditMode) {
     cancelAboutEdit();
+  } else {
+    enterAboutEditMode();
   }
 }
 
 function enterAboutEditMode() {
-  var aboutContent = document.getElementById('aboutContent');
-  if (!aboutContent) return;
-  aboutOriginalHTML = aboutContent.innerHTML;
   aboutEditMode = true;
-  var textEls = aboutContent.querySelectorAll('p, h1, h2, h3, h4, li, span');
-  for (var i = 0; i < textEls.length; i++) {
-    textEls[i].setAttribute('contenteditable', 'true');
-    textEls[i].style.outline = '1px dashed #3b82f6';
-    textEls[i].style.minHeight = '20px';
-  }
-  var toolbar = document.getElementById('aboutEditToolbar');
-  if (toolbar) toolbar.style.display = 'flex';
-  var toggleBtn = document.getElementById('aboutToggleEditBtn');
-  if (toggleBtn) toggleBtn.textContent = 'Cancelar ediciÃ³n';
-  showToast('Modo ediciÃ³n activado. Haz clic en el texto para editar.', 'info');
+  aboutOriginalHTML = document.getElementById('aboutContent').innerHTML;
+  var content = document.getElementById('aboutContent');
+  content.querySelectorAll('p,h2,h3,li').forEach(function(el){
+    el.contentEditable = 'true';
+    el.style.outline = '1.5px dashed #6366F1';
+    el.style.borderRadius = '4px';
+    el.style.minWidth = '20px';
+  });
+  document.getElementById('aboutEditToolbar').style.display = 'flex';
+  document.getElementById('btnToggleEdit').textContent = 'ð Salir EdiciÃ³n';
 }
 
 function saveAboutEdit() {
-  var aboutContent = document.getElementById('aboutContent');
-  if (!aboutContent) return;
-  var textEls = aboutContent.querySelectorAll('p, h1, h2, h3, h4, li, span');
-  for (var i = 0; i < textEls.length; i++) {
-    textEls[i].removeAttribute('contenteditable');
-    textEls[i].style.outline = '';
-    textEls[i].style.minHeight = '';
-  }
-  try { localStorage.setItem('impresionarte_about', aboutContent.innerHTML); } catch(e) {}
+  var content = document.getElementById('aboutContent');
+  content.querySelectorAll('[contenteditable]').forEach(function(el){
+    el.removeAttribute('contenteditable');
+    el.style.outline = '';
+    el.style.borderRadius = '';
+    el.style.minWidth = '';
+  });
+  localStorage.setItem('impresionarte_about_content', content.innerHTML);
+  document.getElementById('aboutEditToolbar').style.display = 'none';
+  document.getElementById('btnToggleEdit').textContent = 'âï¸ Editar PÃ¡gina';
   aboutEditMode = false;
-  var toolbar = document.getElementById('aboutEditToolbar');
-  if (toolbar) toolbar.style.display = 'none';
-  var toggleBtn = document.getElementById('aboutToggleEditBtn');
-  if (toggleBtn) toggleBtn.textContent = 'Editar contenido';
-  showToast('Contenido guardado.', 'success');
+  showToast('PÃ¡gina guardada', 'success');
 }
 
 function cancelAboutEdit() {
-  var aboutContent = document.getElementById('aboutContent');
-  if (!aboutContent) return;
-  aboutContent.innerHTML = aboutOriginalHTML;
+  document.getElementById('aboutContent').innerHTML = aboutOriginalHTML;
+  document.getElementById('aboutEditToolbar').style.display = 'none';
+  document.getElementById('btnToggleEdit').textContent = 'âï¸ Editar PÃ¡gina';
   aboutEditMode = false;
-  var toolbar = document.getElementById('aboutEditToolbar');
-  if (toolbar) toolbar.style.display = 'none';
-  var toggleBtn = document.getElementById('aboutToggleEditBtn');
-  if (toggleBtn) toggleBtn.textContent = 'Editar contenido';
-  showToast('EdiciÃ³n cancelada.', 'info');
 }
 
 function addAboutTextBlock() {
-  var aboutContent = document.getElementById('aboutContent');
-  if (!aboutContent) return;
   var section = document.createElement('div');
-  section.style.cssText = 'margin-top:20px;padding:16px;background:#1e293b;border-radius:8px;border:1px dashed #3b82f6;';
-  var p = document.createElement('p');
-  p.setAttribute('contenteditable', 'true');
-  p.style.cssText = 'color:#94a3b8;font-size:14px;margin:0;outline:1px dashed #3b82f6;min-height:20px;';
-  p.textContent = 'Escribe aquÃ­ tu nuevo bloque de texto...';
-  section.appendChild(p);
-  aboutContent.appendChild(section);
-  p.focus();
+  section.className = 'aboutSection';
+  section.innerHTML = '<h3 contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Nueva SecciÃ³n</h3><p contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Escribe aquÃ­ el contenido de esta secciÃ³n...</p>';
+  document.getElementById('aboutContent').querySelector('.aboutCard').appendChild(section);
 }
 
 function addAboutImage() {
@@ -599,121 +1041,39 @@ function addAboutImage() {
     if (!file) return;
     var reader = new FileReader();
     reader.onload = function(ev) {
-      var aboutContent = document.getElementById('aboutContent');
-      if (!aboutContent) return;
       var img = document.createElement('img');
       img.src = ev.target.result;
-      img.style.cssText = 'max-width:100%;border-radius:8px;margin-top:16px;display:block;';
-      aboutContent.appendChild(img);
+      img.style.maxWidth = '100%';
+      img.style.borderRadius = '8px';
+      img.style.marginTop = '12px';
+      document.getElementById('aboutContent').querySelector('.aboutCard').appendChild(img);
     };
     reader.readAsDataURL(file);
   };
   input.click();
 }
 
+// ==================== EVENT LISTENERS ====================
 document.addEventListener('DOMContentLoaded', function() {
-  var loginForm = document.getElementById('loginForm');
-  if (loginForm) {
-    loginForm.addEventListener('submit', function(e) { e.preventDefault(); doLogin(); });
-  }
-  var loginBtn = document.getElementById('loginBtn');
-  if (loginBtn) loginBtn.addEventListener('click', doLogin);
-  var logoutBtn = document.getElementById('logoutBtn');
-  if (logoutBtn) logoutBtn.addEventListener('click', doLogout);
-  var adminAddBtn = document.getElementById('adminAddBtn');
-  if (adminAddBtn) adminAddBtn.addEventListener('click', function() { openModal('add'); });
-  var modalCloseBtn = document.getElementById('modalCloseBtn');
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-  var modalSaveBtn = document.getElementById('modalSaveBtn');
-  if (modalSaveBtn) modalSaveBtn.addEventListener('click', saveModal);
-  var modalCancelBtn = document.getElementById('modalCancelBtn');
-  if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeModal);
-  var billboardModal = document.getElementById('billboardModal');
-  if (billboardModal) {
-    billboardModal.addEventListener('click', function(e) { if (e.target === billboardModal) closeModal(); });
-  }
-  var fileInput = document.getElementById('photoInput');
-  if (fileInput) fileInput.addEventListener('change', handleFileInput);
-  var dropZone = document.getElementById('photoDropZone');
-  if (dropZone) {
-    dropZone.addEventListener('dragover', function(e) { e.preventDefault(); dropZone.style.borderColor = '#3b82f6'; });
-    dropZone.addEventListener('dragleave', function() { dropZone.style.borderColor = '#334155'; });
-    dropZone.addEventListener('drop', function(e) { dropZone.style.borderColor = '#334155'; handleDrop(e); });
-    dropZone.addEventListener('click', function() { var fi = document.getElementById('photoInput'); if (fi) fi.click(); });
-  }
-  var navItems = document.querySelectorAll('.nav-item');
-  for (var i = 0; i < navItems.length; i++) {
-    (function(item) {
-      item.addEventListener('click', function() {
-        var pg = item.getAttribute('data-page');
-        if (pg) showPage(pg);
-      });
-    })(navItems[i]);
-  }
-  var filterPills = document.querySelectorAll('.filter-pill');
-  for (var j = 0; j < filterPills.length; j++) {
-    (function(pill) {
-      pill.addEventListener('click', function() {
-        var f = pill.getAttribute('data-filter');
-        if (f) setFilter(f);
-      });
-    })(filterPills[j]);
-  }
-  var searchInput = document.getElementById('catalogSearch');
-  if (searchInput) {
-    searchInput.addEventListener('input', function() {
-      currentSearch = searchInput.value;
-      renderCatalog();
+  loadAboutContent();
+  var passInput = document.getElementById('inputPass');
+  var userInput = document.getElementById('inputUser');
+  if (passInput) {
+    passInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doLogin();
     });
   }
-  var iaGenerateBtn = document.getElementById('iaGenerateBtn');
-  if (iaGenerateBtn) iaGenerateBtn.addEventListener('click', generateAIBillboard);
-  var iaDownloadBtn = document.getElementById('iaDownloadBtn');
-  if (iaDownloadBtn) iaDownloadBtn.addEventListener('click', downloadAIImage);
-  var iaStyleBtns = document.querySelectorAll('.ia-style-btn');
-  for (var k = 0; k < iaStyleBtns.length; k++) {
-    (function(btn) {
-      btn.addEventListener('click', function() {
-        var style = btn.getAttribute('data-style');
-        selectIAStyle(btn, style);
-      });
-    })(iaStyleBtns[k]);
+  if (userInput) {
+    userInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') { document.getElementById('inputPass').focus(); }
+    });
   }
-  var aboutToggleBtn = document.getElementById('aboutToggleEditBtn');
-  if (aboutToggleBtn) aboutToggleBtn.addEventListener('click', toggleAboutEdit);
-  var aboutSaveBtn = document.getElementById('aboutSaveBtn');
-  if (aboutSaveBtn) aboutSaveBtn.addEventListener('click', saveAboutEdit);
-  var aboutCancelBtn = document.getElementById('aboutCancelBtn');
-  if (aboutCancelBtn) aboutCancelBtn.addEventListener('click', cancelAboutEdit);
-  var aboutAddTextBtn = document.getElementById('aboutAddTextBtn');
-  if (aboutAddTextBtn) aboutAddTextBtn.addEventListener('click', addAboutTextBlock);
-  var aboutAddImgBtn = document.getElementById('aboutAddImageBtn');
-  if (aboutAddImgBtn) aboutAddImgBtn.addEventListener('click', addAboutImage);
-  var loginPasswordEl = document.getElementById('loginPassword');
-  if (loginPasswordEl) {
-    loginPasswordEl.addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
+  var overlay = document.getElementById('modalOverlay');
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeModal();
+    });
   }
-  try {
-    var savedUser = localStorage.getItem('impresionarte_user');
-    if (savedUser) {
-      var parsedUser = JSON.parse(savedUser);
-      for (var u = 0; u < USERS.length; u++) {
-        if (USERS[u].username === parsedUser.username && USERS[u].role === parsedUser.role) {
-          currentUser = USERS[u];
-          break;
-        }
-      }
-      if (currentUser) {
-        document.getElementById('loginScreen').style.display = 'none';
-        document.getElementById('appScreen').style.display = 'flex';
-        document.getElementById('userRoleBadge').textContent = currentUser.role === 'admin' ? 'Admin' : 'Viewer';
-        document.getElementById('userNameDisplay').textContent = currentUser.username;
-        loadAboutContent();
-        updateStats();
-        showPage('map');
-      }
-    }
-  } catch(e) {}
 });
 </script>
 </body>
