@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Impresionarte_ve â GestiÃ³n de Vallas</title>
+<title>Impresionarte_ve — Gestión de Vallas</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
@@ -209,17 +209,17 @@ select.mInput{cursor:pointer}
   <div class="loginCard">
     <div class="loginLogo">
       <h1>Impresionarte_ve</h1>
-      <p>Sistema de GestiÃ³n de Vallas Publicitarias</p>
+      <p>Sistema de Gestión de Vallas Publicitarias</p>
     </div>
     <div class="formGroup">
       <label for="inputUser">Usuario</label>
       <input type="text" id="inputUser" placeholder="Ingresa tu usuario" autocomplete="username">
     </div>
     <div class="formGroup">
-      <label for="inputPass">ContraseÃ±a</label>
-      <input type="password" id="inputPass" placeholder="Ingresa tu contraseÃ±a" autocomplete="current-password">
+      <label for="inputPass">Contraseña</label>
+      <input type="password" id="inputPass" placeholder="Ingresa tu contraseña" autocomplete="current-password">
     </div>
-    <button class="btnLogin" onclick="doLogin()">Iniciar SesiÃ³n</button>
+    <button class="btnLogin" onclick="doLogin()">Iniciar Sesión</button>
     <p id="loginError">Credenciales incorrectas. Intenta de nuevo.</p>
   </div>
 </div>
@@ -231,20 +231,20 @@ select.mInput{cursor:pointer}
     <aside class="sidebar" id="sidebar">
       <div class="sidebarHeader">
         <h2>Impresionarte_ve</h2>
-        <p>GestiÃ³n de Vallas</p>
+        <p>Gestión de Vallas</p>
       </div>
       <nav class="sidebarNav">
         <button class="navItem active" id="nav-map" onclick="showPage('map')">
-          <span class="navIcon">ðºï¸</span> Mapa de Vallas
+          <span class="navIcon">🗺️</span> Mapa de Vallas
         </button>
         <button class="navItem" id="nav-catalog" onclick="showPage('catalog')">
-          <span class="navIcon">ð</span> CatÃ¡logo de Vallas
+          <span class="navIcon">📋</span> Catálogo de Vallas
         </button>
         <button class="navItem" id="nav-ia" onclick="showPage('ia')">
-          <span class="navIcon">â¨</span> ImpresIAnarte IA
+          <span class="navIcon">✨</span> ImpresIAnarte IA
         </button>
         <button class="navItem" id="nav-about" onclick="showPage('about')">
-          <span class="navIcon">â¹ï¸</span> Sobre Nosotros
+          <span class="navIcon">ℹ️</span> Sobre Nosotros
         </button>
       </nav>
       <div class="sidebarFooter">
@@ -255,7 +255,7 @@ select.mInput{cursor:pointer}
             <div class="userRole" id="userRole">Admin</div>
           </div>
         </div>
-        <button class="btnLogout" onclick="doLogout()">Cerrar SesiÃ³n</button>
+        <button class="btnLogout" onclick="doLogout()">Cerrar Sesión</button>
       </div>
     </aside>
 
@@ -263,7 +263,7 @@ select.mInput{cursor:pointer}
     <div class="mainArea">
       <!-- TOPBAR -->
       <div class="topbar">
-        <button class="hamburger" onclick="toggleSidebar()">â°</button>
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
         <span class="topbarTitle" id="topbarTitle">Mapa de Vallas</span>
         <div id="adminAddBtn">
           <button class="btnAdd" onclick="openModal()">+ Agregar Valla</button>
@@ -304,24 +304,24 @@ select.mInput{cursor:pointer}
           </div>
           <div id="detailPanel" style="display:none">
             <div class="detailHeader">
-              <button class="btnBack" onclick="hideDetail()">â</button>
+              <button class="btnBack" onclick="hideDetail()">◀</button>
               <span class="detailTitle" id="detailName">Valla</span>
             </div>
             <div class="detailGrid">
-              <div class="detailField"><label>Ciudad</label><span id="dCity">â</span></div>
-              <div class="detailField"><label>DirecciÃ³n</label><span id="dAddr">â</span></div>
-              <div class="detailField"><label>Estado</label><span id="dStatus">â</span></div>
-              <div class="detailField"><label>Dimensiones</label><span id="dDims">â</span></div>
-              <div class="detailField"><label>Caras</label><span id="dFaces">â</span></div>
-              <div class="detailField"><label>IluminaciÃ³n</label><span id="dIllum">â</span></div>
-              <div class="detailField"><label>Precio/Mes</label><span id="dPrice">â</span></div>
-              <div class="detailField"><label>Cliente</label><span id="dClient">â</span></div>
-              <div class="detailField"><label>Contrato</label><span id="dContract">â</span></div>
-              <div class="detailField"><label>Coordenadas</label><span id="dCoords">â</span></div>
+              <div class="detailField"><label>Ciudad</label><span id="dCity">—</span></div>
+              <div class="detailField"><label>Dirección</label><span id="dAddr">—</span></div>
+              <div class="detailField"><label>Estado</label><span id="dStatus">—</span></div>
+              <div class="detailField"><label>Dimensiones</label><span id="dDims">—</span></div>
+              <div class="detailField"><label>Caras</label><span id="dFaces">—</span></div>
+              <div class="detailField"><label>Iluminación</label><span id="dIllum">—</span></div>
+              <div class="detailField"><label>Precio/Mes</label><span id="dPrice">—</span></div>
+              <div class="detailField"><label>Cliente</label><span id="dClient">—</span></div>
+              <div class="detailField"><label>Contrato</label><span id="dContract">—</span></div>
+              <div class="detailField"><label>Coordenadas</label><span id="dCoords">—</span></div>
             </div>
             <div class="detailActions" id="adminDetailActions" style="display:none">
-              <button class="btnEdit" onclick="editCurrentDetail()">âï¸ Editar</button>
-              <button class="btnDel" onclick="deleteCurrentDetail()">ðï¸ Eliminar</button>
+              <button class="btnEdit" onclick="editCurrentDetail()">✏️ Editar</button>
+              <button class="btnDel" onclick="deleteCurrentDetail()">🗑️ Eliminar</button>
             </div>
           </div>
           <div id="mapWrap">
@@ -347,71 +347,71 @@ select.mInput{cursor:pointer}
         <div id="page-ia" class="page">
           <div class="iaPage">
             <div class="iaHero">
-              <h1>â¨ ImpresIAnarte IA</h1>
-              <p>Genera diseÃ±os profesionales de vallas publicitarias con inteligencia artificial. Describe tu idea y nuestra IA la convertirÃ¡ en una imagen lista para producciÃ³n.</p>
+              <h1>✨ ImpresIAnarte IA</h1>
+              <p>Genera diseños profesionales de vallas publicitarias con inteligencia artificial. Describe tu idea y nuestra IA la convertirá en una imagen lista para producción.</p>
             </div>
             <div class="iaGrid">
               <!-- FORM PANEL -->
               <div class="iaFormPanel">
-                <h3>ð¨ Configura tu DiseÃ±o</h3>
+                <h3>🎨 Configura tu Diseño</h3>
                 <label class="iaLabel" for="iaPrompt">Describe tu valla</label>
-                <textarea class="iaTextarea" id="iaPrompt" placeholder="Ej: Valla publicitaria para restaurante de comida venezolana con colores cÃ¡lidos, imagen de hallacas y texto 'El Sabor de Venezuela'..."></textarea>
+                <textarea class="iaTextarea" id="iaPrompt" placeholder="Ej: Valla publicitaria para restaurante de comida venezolana con colores cálidos, imagen de hallacas y texto 'El Sabor de Venezuela'..."></textarea>
                 <div class="iaChips">
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para restaurant de comida criolla venezolana con colores rojo, amarillo y azul, imagen apetitosa y texto elegante'">ð½ï¸ Restaurante</span>
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla inmobiliaria de lujo para apartamentos en Caracas, fondo azul marino, arquitectura moderna y texto exclusivo'">ð¢ Inmobiliaria</span>
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla publicitaria para marca de ropa venezolana, fondo blanco limpio, modelo fashion y logo prominente'">ð Moda</span>
-                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para campaÃ±a de turismo en Los Roques, colores turquesa y arena, paisaje caribeÃ±o y texto invitador'">ðï¸ Turismo</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para restaurant de comida criolla venezolana con colores rojo, amarillo y azul, imagen apetitosa y texto elegante'">🍽️ Restaurante</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla inmobiliaria de lujo para apartamentos en Caracas, fondo azul marino, arquitectura moderna y texto exclusivo'">🏢 Inmobiliaria</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla publicitaria para marca de ropa venezolana, fondo blanco limpio, modelo fashion y logo prominente'">👗 Moda</span>
+                  <span class="iaChip" onclick="document.getElementById('iaPrompt').value='Valla para campaña de turismo en Los Roques, colores turquesa y arena, paisaje caribeño y texto invitador'">🏝️ Turismo</span>
                 </div>
                 <div class="iaSectionLabel">Estilo Visual</div>
                 <div class="iaStyleGrid">
                   <div class="iaStyleOpt selected" data-style="fotorrealista" onclick="selectIAStyle(this,'fotorrealista')">
-                    <div class="iaStyleIcon">ð·</div>
+                    <div class="iaStyleIcon">📷</div>
                     <div class="iaStyleName">Fotorrealista</div>
                   </div>
                   <div class="iaStyleOpt" data-style="grafico" onclick="selectIAStyle(this,'grafico')">
-                    <div class="iaStyleIcon">ð¨</div>
-                    <div class="iaStyleName">GrÃ¡fico</div>
+                    <div class="iaStyleIcon">🎨</div>
+                    <div class="iaStyleName">Gráfico</div>
                   </div>
                   <div class="iaStyleOpt" data-style="digital" onclick="selectIAStyle(this,'digital')">
-                    <div class="iaStyleIcon">ð»</div>
+                    <div class="iaStyleIcon">💻</div>
                     <div class="iaStyleName">Digital</div>
                   </div>
                   <div class="iaStyleOpt" data-style="minimalista" onclick="selectIAStyle(this,'minimalista')">
-                    <div class="iaStyleIcon">â¬</div>
+                    <div class="iaStyleIcon">⬜</div>
                     <div class="iaStyleName">Minimalista</div>
                   </div>
                 </div>
                 <label class="iaLabel" for="iaFormat">Formato de Valla</label>
                 <select class="iaFormatSelect" id="iaFormat">
-                  <option value="14x5m">14Ã5 m (Gran Formato)</option>
-                  <option value="12x4m">12Ã4 m (EstÃ¡ndar)</option>
-                  <option value="10x3.5m">10Ã3.5 m (Mediana)</option>
-                  <option value="8x3m">8Ã3 m (PequeÃ±a)</option>
+                  <option value="14x5m">14×5 m (Gran Formato)</option>
+                  <option value="12x4m">12×4 m (Estándar)</option>
+                  <option value="10x3.5m">10×3.5 m (Mediana)</option>
+                  <option value="8x3m">8×3 m (Pequeña)</option>
                 </select>
-                <button class="btnGenerate" onclick="generateAIBillboard()">â¨ Generar DiseÃ±o</button>
+                <button class="btnGenerate" onclick="generateAIBillboard()">✨ Generar Diseño</button>
               </div>
               <!-- RESULT PANEL -->
               <div class="iaResultPanel" id="iaResultPanel">
-                <h3>ð¼ï¸ Resultado</h3>
+                <h3>🖼️ Resultado</h3>
                 <div id="iaPlaceholder" class="iaPlaceholder">
-                  <span>ð¨</span>
-                  <p>Tu diseÃ±o aparecerÃ¡ aquÃ­</p>
-                  <p style="font-size:.8rem;color:#c4ccd6">Configura los parÃ¡metros y pulsa Generar</p>
+                  <span>🎨</span>
+                  <p>Tu diseño aparecerá aquí</p>
+                  <p style="font-size:.8rem;color:#c4ccd6">Configura los parámetros y pulsa Generar</p>
                 </div>
                 <div id="iaLoading" class="iaLoading">
                   <div class="iaSpinner"></div>
-                  <p>Generando tu diseÃ±o con IA...</p>
+                  <p>Generando tu diseño con IA...</p>
                   <p style="font-size:.8rem;color:#94a3b8">Esto puede tomar unos segundos</p>
                 </div>
                 <div id="iaResult" class="iaResult">
-                  <img id="iaResultImg" class="iaResultImg" src="" alt="DiseÃ±o generado">
+                  <img id="iaResultImg" class="iaResultImg" src="" alt="Diseño generado">
                   <div class="iaResultActions">
-                    <button class="btnDownload" onclick="downloadAIImage()">â¬ï¸ Descargar</button>
-                    <button class="btnRegen" onclick="generateAIBillboard()">ð Regenerar</button>
+                    <button class="btnDownload" onclick="downloadAIImage()">⬇️ Descargar</button>
+                    <button class="btnRegen" onclick="generateAIBillboard()">🔄 Regenerar</button>
                   </div>
                 </div>
                 <div id="iaError" class="iaError">
-                  <span style="font-size:2rem">â ï¸</span>
+                  <span style="font-size:2rem">⚠️</span>
                   <p id="iaErrorMsg">Error al generar la imagen</p>
                   <button class="btnRetry" onclick="generateAIBillboard()">Reintentar</button>
                 </div>
@@ -424,48 +424,48 @@ select.mInput{cursor:pointer}
         <div id="page-about" class="page">
           <div class="aboutPage">
             <div class="aboutAdminBar" id="aboutAdminBar">
-              <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">âï¸ Editar PÃ¡gina</button>
+              <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">✏️ Editar Página</button>
             </div>
             <div class="aboutEditToolbar" id="aboutEditToolbar">
-              <button class="aboutEditToolbar btnAddText" onclick="addAboutTextBlock()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#6366F1;color:white">â Agregar Texto</button>
-              <button class="aboutEditToolbar btnAddImg" onclick="addAboutImage()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#7C3AED;color:white">ð¼ï¸ Agregar Imagen</button>
-              <button class="aboutEditToolbar btnSaveAbout" onclick="saveAboutEdit()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#10b981;color:white">ð¾ Guardar</button>
-              <button class="aboutEditToolbar btnCancelAbout" onclick="cancelAboutEdit()" style="padding:8px 16px;border:1.5px solid #e2e8f0;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#f1f5f9;color:#374151">â Cancelar</button>
+              <button class="aboutEditToolbar btnAddText" onclick="addAboutTextBlock()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#6366F1;color:white">➕ Agregar Texto</button>
+              <button class="aboutEditToolbar btnAddImg" onclick="addAboutImage()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#7C3AED;color:white">🖼️ Agregar Imagen</button>
+              <button class="aboutEditToolbar btnSaveAbout" onclick="saveAboutEdit()" style="padding:8px 16px;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#10b981;color:white">💾 Guardar</button>
+              <button class="aboutEditToolbar btnCancelAbout" onclick="cancelAboutEdit()" style="padding:8px 16px;border:1.5px solid #e2e8f0;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600;background:#f1f5f9;color:#374151">✖ Cancelar</button>
             </div>
             <div id="aboutContent">
               <div class="aboutCard">
                 <h2>Impresionarte_ve</h2>
-                <p class="aboutTagline">LÃ­der en publicidad exterior en Venezuela</p>
+                <p class="aboutTagline">Líder en publicidad exterior en Venezuela</p>
                 <div class="aboutSection">
-                  <h3>Â¿QuiÃ©nes Somos?</h3>
-                  <p>Somos una empresa venezolana especializada en publicidad exterior de alto impacto. Con mÃ¡s de 15 aÃ±os de experiencia en el mercado nacional, ofrecemos soluciones integrales en vallas publicitarias, mupis y medios alternativos para conectar marcas con su audiencia de forma efectiva y memorable.</p>
+                  <h3>¿Quiénes Somos?</h3>
+                  <p>Somos una empresa venezolana especializada en publicidad exterior de alto impacto. Con más de 15 años de experiencia en el mercado nacional, ofrecemos soluciones integrales en vallas publicitarias, mupis y medios alternativos para conectar marcas con su audiencia de forma efectiva y memorable.</p>
                 </div>
                 <div class="aboutSection">
-                  <h3>Nuestra MisiÃ³n</h3>
-                  <p>Brindar a nuestros clientes los mejores espacios publicitarios exteriores de Venezuela, con ubicaciones estratÃ©gicas de alto trÃ¡fico, estructuras de calidad y servicio personalizado que garantice el Ã©xito de cada campaÃ±a.</p>
+                  <h3>Nuestra Misión</h3>
+                  <p>Brindar a nuestros clientes los mejores espacios publicitarios exteriores de Venezuela, con ubicaciones estratégicas de alto tráfico, estructuras de calidad y servicio personalizado que garantice el éxito de cada campaña.</p>
                 </div>
                 <div class="aboutSection">
                   <h3>Servicios</h3>
                   <ul>
                     <li>Arrendamiento de vallas publicitarias en ubicaciones premium</li>
-                    <li>DiseÃ±o e impresiÃ³n de material para vallas</li>
-                    <li>InstalaciÃ³n y mantenimiento de estructuras</li>
-                    <li>AuditorÃ­a y monitoreo de campaÃ±as</li>
-                    <li>ConsultorÃ­a en planificaciÃ³n de medios exteriores</li>
+                    <li>Diseño e impresión de material para vallas</li>
+                    <li>Instalación y mantenimiento de estructuras</li>
+                    <li>Auditoría y monitoreo de campañas</li>
+                    <li>Consultoría en planificación de medios exteriores</li>
                     <li>Vallas LED y pantallas digitales</li>
                   </ul>
                 </div>
                 <div class="aboutSection">
                   <h3>Contacto</h3>
                   <div class="contactInfo">
-                    ð +58 212-555-0100<br>
-                    ð§ info@impresionarte.com.ve<br>
-                    ð Av. Francisco de Miranda, Caracas, Venezuela
+                    📞 +58 212-555-0100<br>
+                    📧 info@impresionarte.com.ve<br>
+                    📍 Av. Francisco de Miranda, Caracas, Venezuela
                   </div>
                 </div>
                 <div class="aboutSection">
                   <h3>Presencia Nacional</h3>
-                  <p>Operamos en las principales ciudades de Venezuela: Caracas, Maracaibo, Valencia, Barquisimeto, Maracay, Ciudad Guayana, MaturÃ­n, Barcelona y mÃ¡s de 20 ciudades adicionales en todo el territorio nacional.</p>
+                  <p>Operamos en las principales ciudades de Venezuela: Caracas, Maracaibo, Valencia, Barquisimeto, Maracay, Ciudad Guayana, Maturín, Barcelona y más de 20 ciudades adicionales en todo el territorio nacional.</p>
                 </div>
               </div>
             </div>
@@ -482,11 +482,11 @@ select.mInput{cursor:pointer}
   <div class="modalBox" onclick="event.stopPropagation()">
     <div class="modalHeader">
       <h3 id="modalTitle">Agregar Valla</h3>
-      <button class="btnCloseModal" onclick="closeModal()">â</button>
+      <button class="btnCloseModal" onclick="closeModal()">✕</button>
     </div>
     <div class="modalGrid">
       <div class="fullWidth">
-        <label class="mLabel">Nombre / CÃ³digo</label>
+        <label class="mLabel">Nombre / Código</label>
         <input class="mInput" id="mName" type="text" placeholder="Ej: VL-009">
       </div>
       <div>
@@ -502,7 +502,7 @@ select.mInput{cursor:pointer}
         </select>
       </div>
       <div class="fullWidth">
-        <label class="mLabel">DirecciÃ³n</label>
+        <label class="mLabel">Dirección</label>
         <input class="mInput" id="mAddr" type="text" placeholder="Ej: Av. Libertador, frente al CCCT">
       </div>
       <div>
@@ -529,9 +529,9 @@ select.mInput{cursor:pointer}
         </select>
       </div>
       <div>
-        <label class="mLabel">IluminaciÃ³n</label>
+        <label class="mLabel">Iluminación</label>
         <select class="mInput" id="mIllum">
-          <option value="SÃ­">SÃ­</option>
+          <option value="Sí">Sí</option>
           <option value="No">No</option>
         </select>
       </div>
@@ -546,8 +546,8 @@ select.mInput{cursor:pointer}
       <div class="fullWidth">
         <label class="mLabel">Foto de la Valla</label>
         <div class="dropzone" id="dropzone" ondragover="event.preventDefault();this.classList.add('drag')" ondragleave="this.classList.remove('drag')" ondrop="handleDrop(event)" onclick="document.getElementById('fileInput').click()">
-          <div style="font-size:2rem">ð¤</div>
-          <p>Arrastra una imagen aquÃ­ o haz clic para seleccionar</p>
+          <div style="font-size:2rem">📤</div>
+          <p>Arrastra una imagen aquí o haz clic para seleccionar</p>
           <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileInput(event)">
           <img id="dropzonePreview" class="dropzonePreview" style="display:none">
         </div>
@@ -567,14 +567,14 @@ const USERS = [
 ];
 
 let BILLBOARDS = [
-  { id:'VL-001', name:'VL-001 Av. Libertador', city:'Caracas', status:'ocupada', addr:'Av. Libertador, frente al CCCT, Chacao', lat:10.4944, lng:-66.8548, dims:'14x5 m', price:2500, faces:2, illum:'SÃ­', client:'Digitel', contractEnd:'2025-12-31', photo:'' },
-  { id:'VL-002', name:'VL-002 Autopista Valencia', city:'Valencia', status:'disponible', addr:'Autopista Valencia-Caracas km 12', lat:10.1621, lng:-67.9990, dims:'12x4 m', price:1800, faces:1, illum:'SÃ­', client:'', contractEnd:'', photo:'' },
-  { id:'VL-003', name:'VL-003 Av. 5 de Julio', city:'Maracaibo', status:'ocupada', addr:'Av. 5 de Julio, sector La Lago', lat:10.6483, lng:-71.6124, dims:'14x5 m', price:2200, faces:2, illum:'SÃ­', client:'Movistar', contractEnd:'2025-06-30', photo:'' },
+  { id:'VL-001', name:'VL-001 Av. Libertador', city:'Caracas', status:'ocupada', addr:'Av. Libertador, frente al CCCT, Chacao', lat:10.4944, lng:-66.8548, dims:'14x5 m', price:2500, faces:2, illum:'Sí', client:'Digitel', contractEnd:'2025-12-31', photo:'' },
+  { id:'VL-002', name:'VL-002 Autopista Valencia', city:'Valencia', status:'disponible', addr:'Autopista Valencia-Caracas km 12', lat:10.1621, lng:-67.9990, dims:'12x4 m', price:1800, faces:1, illum:'Sí', client:'', contractEnd:'', photo:'' },
+  { id:'VL-003', name:'VL-003 Av. 5 de Julio', city:'Maracaibo', status:'ocupada', addr:'Av. 5 de Julio, sector La Lago', lat:10.6483, lng:-71.6124, dims:'14x5 m', price:2200, faces:2, illum:'Sí', client:'Movistar', contractEnd:'2025-06-30', photo:'' },
   { id:'VL-004', name:'VL-004 Av. Lara', city:'Barquisimeto', status:'mantenimiento', addr:'Av. Lara, centro comercial Las Trinitarias', lat:10.0678, lng:-69.3467, dims:'10x3.5 m', price:1200, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
-  { id:'VL-005', name:'VL-005 Av. Las Delicias', city:'Maracay', status:'disponible', addr:'Av. Las Delicias, frente al Sambil Maracay', lat:10.2399, lng:-67.5956, dims:'12x4 m', price:1500, faces:1, illum:'SÃ­', client:'', contractEnd:'', photo:'' },
-  { id:'VL-006', name:'VL-006 Av. Upata', city:'Ciudad Guayana', status:'ocupada', addr:'Av. Upata, Puerto Ordaz', lat:8.3023, lng:-62.7070, dims:'14x5 m', price:1900, faces:2, illum:'SÃ­', client:'PDVSA', contractEnd:'2026-03-31', photo:'' },
-  { id:'VL-007', name:'VL-007 Av. RaÃºl Leoni', city:'MaturÃ­n', status:'disponible', addr:'Av. RaÃºl Leoni, sector Los Guaritos', lat:9.7458, lng:-63.1841, dims:'10x3.5 m', price:1100, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
-  { id:'VL-008', name:'VL-008 Av. Intercomunal', city:'Barcelona', status:'mantenimiento', addr:'Av. Intercomunal, frente al IUTBA', lat:10.1339, lng:-64.6930, dims:'12x4 m', price:1400, faces:1, illum:'SÃ­', client:'', contractEnd:'', photo:'' }
+  { id:'VL-005', name:'VL-005 Av. Las Delicias', city:'Maracay', status:'disponible', addr:'Av. Las Delicias, frente al Sambil Maracay', lat:10.2399, lng:-67.5956, dims:'12x4 m', price:1500, faces:1, illum:'Sí', client:'', contractEnd:'', photo:'' },
+  { id:'VL-006', name:'VL-006 Av. Upata', city:'Ciudad Guayana', status:'ocupada', addr:'Av. Upata, Puerto Ordaz', lat:8.3023, lng:-62.7070, dims:'14x5 m', price:1900, faces:2, illum:'Sí', client:'PDVSA', contractEnd:'2026-03-31', photo:'' },
+  { id:'VL-007', name:'VL-007 Av. Raúl Leoni', city:'Maturín', status:'disponible', addr:'Av. Raúl Leoni, sector Los Guaritos', lat:9.7458, lng:-63.1841, dims:'10x3.5 m', price:1100, faces:1, illum:'No', client:'', contractEnd:'', photo:'' },
+  { id:'VL-008', name:'VL-008 Av. Intercomunal', city:'Barcelona', status:'mantenimiento', addr:'Av. Intercomunal, frente al IUTBA', lat:10.1339, lng:-64.6930, dims:'12x4 m', price:1400, faces:1, illum:'Sí', client:'', contractEnd:'', photo:'' }
 ];
 
 let currentUser = null;
@@ -634,7 +634,7 @@ function doLogout() {
 // ==================== NAVIGATION ====================
 function showPage(page) {
   var pages = ['map','catalog','ia','about'];
-  var titles = { map:'Mapa de Vallas', catalog:'CatÃ¡logo de Vallas', ia:'ImpresIAnarte IA', about:'Sobre Nosotros' };
+  var titles = { map:'Mapa de Vallas', catalog:'Catálogo de Vallas', ia:'ImpresIAnarte IA', about:'Sobre Nosotros' };
   pages.forEach(function(pg) {
     var el = document.getElementById('page-' + pg);
     var nav = document.getElementById('nav-' + pg);
@@ -663,7 +663,7 @@ function initMap() {
   if (leafletMap) { leafletMap.remove(); leafletMap = null; }
   leafletMap = L.map('map').setView([9.5, -68.0], 6);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Â© OpenStreetMap contributors',
+    attribution: '© OpenStreetMap contributors',
     maxZoom: 19
   }).addTo(leafletMap);
   renderMapMarkers();
@@ -726,8 +726,8 @@ function showDetail(id) {
   document.getElementById('dFaces').textContent = b.faces + ' cara(s)';
   document.getElementById('dIllum').textContent = b.illum;
   document.getElementById('dPrice').textContent = '$' + b.price.toLocaleString() + '/mes';
-  document.getElementById('dClient').textContent = b.client || 'â';
-  document.getElementById('dContract').textContent = b.contractEnd || 'â';
+  document.getElementById('dClient').textContent = b.client || '—';
+  document.getElementById('dContract').textContent = b.contractEnd || '—';
   document.getElementById('dCoords').textContent = b.lat + ', ' + b.lng;
   document.getElementById('detailPanel').style.display = 'block';
   document.getElementById('page-map').scrollTop = 0;
@@ -744,7 +744,7 @@ function editCurrentDetail() {
 
 function deleteCurrentDetail() {
   if (!currentDetailId) return;
-  if (confirm('Â¿Eliminar esta valla?')) {
+  if (confirm('¿Eliminar esta valla?')) {
     deleteBillboard(currentDetailId);
     hideDetail();
   }
@@ -776,11 +776,11 @@ function renderCatalog() {
   grid.innerHTML = list.map(function(b) {
     var badgeCls = 'badge-' + b.status;
     var statusLabel = b.status === 'disponible' ? 'Disponible' : b.status === 'ocupada' ? 'Ocupada' : 'Mantenimiento';
-    var photoHtml = b.photo ? '<img src="' + b.photo + '" alt="foto">' : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">ðï¸</div>';
-    var delBtn = isAdmin ? '<button class="btnCardDel" onclick="event.stopPropagation();deleteBillboard(\'' + b.id + '\')">ðï¸</button>' : '';
+    var photoHtml = b.photo ? '<img src="' + b.photo + '" alt="foto">' : '<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem">🏙️</div>';
+    var delBtn = isAdmin ? '<button class="btnCardDel" onclick="event.stopPropagation();deleteBillboard(\'' + b.id + '\')">🗑️</button>' : '';
     return '<div class="billCard" onclick="showPage('map');showDetail('' + b.id + '')">'
       + '<div class="cardPhoto">' + photoHtml + '<span class="cardStatusBadge ' + badgeCls + '">' + statusLabel + '</span></div>'
-      + '<div class="cardBody"><div class="cardName">' + b.name + '</div><div class="cardCity">ð ' + b.city + '</div>'
+      + '<div class="cardBody"><div class="cardName">' + b.name + '</div><div class="cardCity">📍 ' + b.city + '</div>'
       + '<div class="cardMeta"><span class="cardPrice">$' + b.price.toLocaleString() + '/mes</span><span class="cardDims">' + b.dims + '</span></div></div>'
       + '<div class="cardFooter"><button class="btnCardView" onclick="event.stopPropagation();showPage('map');showDetail('' + b.id + '')">Ver en Mapa</button>' + delBtn + '</div>'
       + '</div>';
@@ -788,7 +788,7 @@ function renderCatalog() {
 }
 
 function deleteBillboard(id) {
-  if (!confirm('Â¿Eliminar esta valla?')) return;
+  if (!confirm('¿Eliminar esta valla?')) return;
   BILLBOARDS = BILLBOARDS.filter(function(b){ return b.id !== id; });
   renderMapMarkers();
   updateStats();
@@ -832,7 +832,7 @@ function openModal(id) {
     document.getElementById('mLng').value = '';
     document.getElementById('mPrice').value = '';
     document.getElementById('mFaces').value = '1';
-    document.getElementById('mIllum').value = 'SÃ­';
+    document.getElementById('mIllum').value = 'Sí';
   }
   document.getElementById('modalOverlay').classList.add('open');
 }
@@ -849,7 +849,7 @@ function saveModal() {
   var lat = parseFloat(document.getElementById('mLat').value);
   var lng = parseFloat(document.getElementById('mLng').value);
   if (!name || !city) { showToast('Nombre y ciudad son requeridos', 'error'); return; }
-  if (isNaN(lat) || isNaN(lng)) { showToast('Coordenadas invÃ¡lidas', 'error'); return; }
+  if (isNaN(lat) || isNaN(lng)) { showToast('Coordenadas inválidas', 'error'); return; }
   var data = {
     id: modalEditId || name.replace(/s+/g,'-'),
     name: name,
@@ -942,7 +942,7 @@ function generateAIBillboard() {
       var url = data.image_url || data.url;
       document.getElementById('iaResultImg').src = url;
       document.getElementById('iaResult').style.display = 'flex';
-      showToast('DiseÃ±o generado con Ã©xito', 'success');
+      showToast('Diseño generado con éxito', 'success');
     } else {
       console.error('AI response:', JSON.stringify(data));
       document.getElementById('iaErrorMsg').textContent = (data && data.error) ? data.error : 'No se pudo generar la imagen. Intenta de nuevo.';
@@ -952,7 +952,7 @@ function generateAIBillboard() {
   .catch(function(err) {
     console.error('AI error:', err);
     document.getElementById('iaLoading').style.display = 'none';
-    document.getElementById('iaErrorMsg').textContent = 'Error de conexiÃ³n: ' + err.message;
+    document.getElementById('iaErrorMsg').textContent = 'Error de conexión: ' + err.message;
     document.getElementById('iaError').style.display = 'flex';
   });
 }
@@ -1000,7 +1000,7 @@ function enterAboutEditMode() {
     el.style.minWidth = '20px';
   });
   document.getElementById('aboutEditToolbar').style.display = 'flex';
-  document.getElementById('btnToggleEdit').textContent = 'ð Salir EdiciÃ³n';
+  document.getElementById('btnToggleEdit').textContent = '🔒 Salir Edición';
 }
 
 function saveAboutEdit() {
@@ -1013,22 +1013,22 @@ function saveAboutEdit() {
   });
   localStorage.setItem('impresionarte_about_content', content.innerHTML);
   document.getElementById('aboutEditToolbar').style.display = 'none';
-  document.getElementById('btnToggleEdit').textContent = 'âï¸ Editar PÃ¡gina';
+  document.getElementById('btnToggleEdit').textContent = '✏️ Editar Página';
   aboutEditMode = false;
-  showToast('PÃ¡gina guardada', 'success');
+  showToast('Página guardada', 'success');
 }
 
 function cancelAboutEdit() {
   document.getElementById('aboutContent').innerHTML = aboutOriginalHTML;
   document.getElementById('aboutEditToolbar').style.display = 'none';
-  document.getElementById('btnToggleEdit').textContent = 'âï¸ Editar PÃ¡gina';
+  document.getElementById('btnToggleEdit').textContent = '✏️ Editar Página';
   aboutEditMode = false;
 }
 
 function addAboutTextBlock() {
   var section = document.createElement('div');
   section.className = 'aboutSection';
-  section.innerHTML = '<h3 contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Nueva SecciÃ³n</h3><p contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Escribe aquÃ­ el contenido de esta secciÃ³n...</p>';
+  section.innerHTML = '<h3 contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Nueva Sección</h3><p contenteditable="true" style="outline:1.5px dashed #6366F1;border-radius:4px">Escribe aquí el contenido de esta sección...</p>';
   document.getElementById('aboutContent').querySelector('.aboutCard').appendChild(section);
 }
 
