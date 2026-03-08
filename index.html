@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Impresionarte_ve &#8212; Gesti&#243;n de Vallas</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
   <style>
     /* ============================================================
        RESET
@@ -2181,19 +2181,11 @@ function navigate(page){
     }
   }
   if(page==='map'){
-    setTimeout(function(){initMap();},50);
-  }
-  if(page==='stats'){
     renderStats();
+    setTimeout(function(){initMap();},50);
   }
   if(page==='catalog'){
     if(typeof renderCatalog==='function') renderCatalog();
-  }
-  if(page==='contracts'){
-    if(typeof renderContracts==='function') renderContracts();
-  }
-  if(page==='simulator'){
-    if(typeof renderSimulator==='function') renderSimulator();
   }
   window.location.hash=page;
 }
@@ -2310,10 +2302,14 @@ function renderStats(){
   var dispEl=document.getElementById('statDisp');
   var ocupEl=document.getElementById('statOcup');
   var citiesEl=document.getElementById('statCities');
-  if(totalEl) totalEl.textContent=total;
-  if(dispEl) dispEl.textContent=disp;
-  if(ocupEl) ocupEl.textContent=ocup;
-  if(citiesEl) citiesEl.textContent=cities.length;
+  var tv=totalEl?totalEl.querySelector('.stat-value'):null;
+  var dv=dispEl?dispEl.querySelector('.stat-value'):null;
+  var ov=ocupEl?ocupEl.querySelector('.stat-value'):null;
+  var cv=citiesEl?citiesEl.querySelector('.stat-value'):null;
+  if(tv) tv.textContent=total;
+  if(dv) dv.textContent=disp;
+  if(ov) ov.textContent=ocup;
+  if(cv) cv.textContent=cities.length;
 }
 
 function setFilter(f){
@@ -2369,7 +2365,7 @@ window.addEventListener('DOMContentLoaded',function(){
   var addBtnTop=document.getElementById('addBtnTop');
   if(addBtnTop){
     addBtnTop.addEventListener('click',function(){
-      if(typeof openAddModal==='function') openAddModal();
+      openModal();
     });
   }
 });
@@ -2392,7 +2388,8 @@ function renderCatalog() {
   var si = document.getElementById('searchCat');
   if (si) search = si.value.toLowerCase();
   var filtered = BILLBOARDS.filter(function(b) {
-    var matchFilter = (currentFilter === 'all' || b.status === currentFilter);
+    var cf = (typeof currentCatFilter !== 'undefined') ? currentCatFilter : currentFilter;
+    var matchFilter = (cf === 'todas' || cf === 'all' || b.status === cf);
     var matchSearch = !search ||
       (b.name && b.name.toLowerCase().indexOf(search) > -1) ||
       (b.city && b.city.toLowerCase().indexOf(search) > -1) ||
@@ -2452,9 +2449,9 @@ function goToMap(id) {
   setTimeout(function() {
     showDetail(id);
     var b = BILLBOARDS.find(function(x) { return x.id === id; });
-    if (b && map) {
-      map.panTo([b.lat, b.lng]);
-      map.setZoom(15);
+    if (b && leafletMap) {
+      leafletMap.panTo([b.lat, b.lng]);
+      leafletMap.setZoom(15);
     }
   }, 200);
 }
