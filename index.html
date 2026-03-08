@@ -12,8 +12,6 @@
 body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293b}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes slideIn{from{transform:translateX(30px);opacity:0}to{transform:translateX(0);opacity:1}}
-
-/* LOGIN */
 #loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,#0f172a,#1e3a5f,#0f172a)}
 .loginCard{background:#fff;border-radius:16px;padding:40px;width:380px;max-width:90vw;box-shadow:0 20px 60px rgba(0,0,0,.3);animation:fadeIn .6s ease}
 .loginLogo h1{text-align:center;color:#6366f1;font-size:1.8rem;font-weight:800;margin-bottom:4px}
@@ -32,16 +30,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
 .googlePanel p{color:#64748b;font-size:.9rem;margin-bottom:20px}
 .googlePanel .g_id_signin{display:flex;justify-content:center}
 #googleError{color:#ef4444;font-size:.85rem;margin-top:10px;display:none;text-align:center}
-
-/* LAYOUT */
-#app{display:none}
-.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1e293b;color:#fff;display:flex;flex-direction:column;z-index:100;transition:transform .3s}
+#app{display:none;height:100vh;overflow:hidden}
+.sidebar{position:fixed;top:0;left:0;width:240px;height:100vh;background:#1e293b;color:#fff;display:flex;flex-direction:column;z-index:200;transition:transform .3s}
 .sidebar.collapsed{transform:translateX(-240px)}
 .sidebarHeader{padding:20px;border-bottom:1px solid #334155}
 .sidebarHeader h2{font-size:1.1rem;font-weight:800;color:#6366f1}
 .sidebarHeader span{font-size:.75rem;color:#94a3b8}
-.sidebarNav{flex:1;padding:12px 0}
-.navItem{display:flex;align-items:center;gap:12px;padding:12px 20px;color:#94a3b8;cursor:pointer;transition:all .2s;font-size:.9rem;border-left:3px solid transparent;border:none;background:none;width:100%;text-align:left}
+.sidebarNav{flex:1;padding:12px 0;overflow-y:auto}
+.navItem{display:flex;align-items:center;gap:12px;padding:12px 20px;color:#94a3b8;cursor:pointer;transition:all .2s;font-size:.9rem;border:none;background:none;width:100%;text-align:left;border-left:3px solid transparent}
 .navItem:hover{background:#334155;color:#fff}
 .navItem.active{background:#334155;color:#6366f1;border-left:3px solid #6366f1}
 .sidebarFooter{padding:16px 20px;border-top:1px solid #334155;display:flex;align-items:center;gap:10px}
@@ -49,67 +45,56 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
 .userInfo{flex:1}
 .userName{font-size:.85rem;font-weight:600;color:#fff}
 .userRole{font-size:.75rem;color:#94a3b8}
-.logoutBtn{background:none;border:none;color:#94a3b8;cursor:pointer;font-size:.85rem;padding:6px 10px;border-radius:6px;transition:all .2s}
+.logoutBtn{background:none;border:none;color:#94a3b8;cursor:pointer;font-size:.82rem;padding:6px 10px;border-radius:6px;transition:all .2s}
 .logoutBtn:hover{color:#ef4444;background:rgba(239,68,68,.1)}
-
-/* TOPBAR */
-.topbar{position:fixed;top:0;left:240px;right:0;height:56px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;padding:0 20px;z-index:90;gap:16px;transition:left .3s}
-.topbar.full{left:0}
+.topbar{position:fixed;top:0;left:240px;right:0;height:56px;background:#fff;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;padding:0 20px;z-index:100;gap:16px;transition:left .3s}
+.topbar.expanded{left:0}
 .hamburger{background:none;border:none;font-size:1.3rem;cursor:pointer;color:#64748b;padding:4px 8px;border-radius:6px}
 .hamburger:hover{background:#f1f5f9}
 .topbarTitle{font-size:1rem;font-weight:700;color:#1e293b;flex:1}
-.adminAddBtn{display:none;padding:8px 16px;background:#6366f1;color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer}
-.adminAddBtn:hover{background:#4f46e5}
-
-/* MAIN CONTENT */
-.main{margin-left:240px;margin-top:56px;height:calc(100vh - 56px);display:flex;flex-direction:column;transition:margin-left .3s}
-.main.full{margin-left:0}
-
-/* PAGES */
-.page{display:none}
-.page.active{display:flex;flex-direction:column;height:100%}
-#page-catalog.active,#page-about.active{display:block;height:100%;overflow-y:auto;padding:24px}
-
-/* MAP PAGE */
-.statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;padding:16px 16px 0;flex-shrink:0}
-.statCard{background:#fff;border-radius:10px;padding:14px 18px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.statCard .slabel{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
-.statCard .svalue{font-size:1.8rem;font-weight:800;color:#1e293b;margin-top:2px}
-.svalue.green{color:#22c55e}
-.svalue.red{color:#ef4444}
-.svalue.blue{color:#3b82f6}
-.filterBar{display:flex;gap:8px;padding:12px 16px;flex-wrap:wrap;flex-shrink:0}
-.pill{padding:6px 16px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;font-size:.82rem;font-weight:600;color:#64748b;transition:all .2s}
+#adminAddBtn{display:none;padding:8px 16px;background:#6366f1;color:#fff;border:none;border-radius:8px;font-size:.85rem;font-weight:600;cursor:pointer}
+#adminAddBtn:hover{background:#4f46e5}
+.mainWrap{position:fixed;top:56px;left:240px;right:0;bottom:0;transition:left .3s;overflow:hidden}
+.mainWrap.expanded{left:0}
+.page{display:none;position:absolute;inset:0;overflow:hidden}
+.page.active{display:block}
+#page-map{display:none}
+#page-map.active{display:flex;flex-direction:column}
+.statsGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;padding:14px 14px 0;flex-shrink:0}
+.statCard{background:#fff;border-radius:10px;padding:12px 16px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.statCard .slabel{font-size:.7rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
+.statCard .svalue{font-size:1.7rem;font-weight:800;color:#1e293b;margin-top:2px}
+.svalue.green{color:#22c55e}.svalue.red{color:#ef4444}.svalue.blue{color:#3b82f6}
+.mapFilterBar{display:flex;gap:8px;padding:10px 14px;flex-wrap:wrap;flex-shrink:0}
+.pill{padding:5px 14px;border-radius:20px;border:1.5px solid #e2e8f0;background:#fff;cursor:pointer;font-size:.8rem;font-weight:600;color:#64748b;transition:all .2s}
 .pill.active,.pill:hover{background:#6366f1;color:#fff;border-color:#6366f1}
-#detailPanel{margin:0 16px 12px;background:#fff;border-radius:10px;padding:20px;box-shadow:0 1px 3px rgba(0,0,0,.08);flex-shrink:0;animation:slideIn .3s}
-.detailHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.detailTitle{font-size:1rem;font-weight:700;color:#1e293b}
-.btnClose{background:#f1f5f9;border:none;border-radius:6px;padding:6px 12px;cursor:pointer;font-size:.82rem;color:#64748b;font-weight:600}
+#detailPanel{margin:0 14px 10px;background:#fff;border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.08);flex-shrink:0;animation:slideIn .3s}
+.detailHeader{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.detailTitle{font-size:.95rem;font-weight:700;color:#1e293b}
+.btnClose{background:#f1f5f9;border:none;border-radius:6px;padding:5px 12px;cursor:pointer;font-size:.8rem;color:#64748b;font-weight:600}
 .btnClose:hover{background:#e2e8f0}
-.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.detailItem .dlabel{font-size:.7rem;color:#64748b;text-transform:uppercase;letter-spacing:.5px}
-.detailItem .dvalue{font-size:.9rem;font-weight:600;color:#1e293b;margin-top:1px}
-.adminDetailActions{display:flex;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid #f1f5f9}
-.btnEdit{padding:8px 18px;background:#f59e0b;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600}
+.detailGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.detailItem .dlabel{font-size:.68rem;color:#64748b;text-transform:uppercase;letter-spacing:.4px}
+.detailItem .dvalue{font-size:.88rem;font-weight:600;color:#1e293b;margin-top:1px}
+.adminDetailActions{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid #f1f5f9}
+.btnEdit{padding:7px 16px;background:#f59e0b;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600}
 .btnEdit:hover{background:#d97706}
-.btnDelete{padding:8px 18px;background:#ef4444;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.82rem;font-weight:600}
+.btnDelete{padding:7px 16px;background:#ef4444;color:#fff;border:none;border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:600}
 .btnDelete:hover{background:#dc2626}
-#mapWrap{flex:1;min-height:0;margin:0 16px 16px;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+#mapWrap{flex:1;min-height:0;margin:0 14px 14px;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.1)}
 #map{width:100%;height:100%}
-
-/* CATALOG */
+#page-catalog{display:none}
+#page-catalog.active{display:block;overflow-y:auto;padding:20px}
 .searchBar{margin-bottom:12px}
-.searchBar input{width:100%;max-width:400px;padding:10px 16px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none}
+.searchBar input{width:100%;max-width:420px;padding:10px 16px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;transition:border .2s}
 .searchBar input:focus{border-color:#6366f1}
 .catalogPills{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
 .cardsGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
-.billCard{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s;cursor:pointer}
-.billCard:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.billCard{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08);transition:transform .2s,box-shadow .2s}
+.billCard:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,.12)}
 .cardPhoto{height:150px;background:linear-gradient(135deg,#6366f1,#7c3aed);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:.9rem;background-size:cover;background-position:center;position:relative}
-.cardBadge{position:absolute;top:10px;right:10px;padding:3px 10px;border-radius:12px;font-size:.72rem;font-weight:700;color:#fff}
-.badge-disponible{background:#22c55e}
-.badge-ocupada{background:#ef4444}
-.badge-mantenimiento{background:#f59e0b}
+.cardBadge{position:absolute;top:10px;right:10px;padding:3px 10px;border-radius:12px;font-size:.7rem;font-weight:700;color:#fff}
+.badge-disponible{background:#22c55e}.badge-ocupada{background:#ef4444}.badge-mantenimiento{background:#f59e0b}
 .cardBody{padding:14px}
 .cardName{font-size:.9rem;font-weight:700;color:#1e293b;margin-bottom:2px}
 .cardCity{font-size:.8rem;color:#64748b;margin-bottom:8px}
@@ -123,13 +108,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
 .btnCardEdit:hover{background:#fef3c7}
 .btnCardDel{padding:6px 12px;background:#fef2f2;color:#dc2626;border:none;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:600}
 .btnCardDel:hover{background:#fee2e2}
-
-/* ABOUT */
+#page-about{display:none}
+#page-about.active{display:block;overflow-y:auto;padding:20px}
 .aboutWrap{max-width:800px}
 .aboutAdminBar{display:none;margin-bottom:14px}
 .btnToggleEdit{padding:8px 16px;background:#6366f1;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.85rem;font-weight:600}
 .aboutEditToolbar{display:none;gap:8px;flex-wrap:wrap;margin-bottom:14px}
-.aboutEditToolbar button{padding:6px 14px;border-radius:6px;border:1px solid #e2e8f0;background:#fff;font-size:.82rem;cursor:pointer}
+.aboutEditToolbar button{padding:6px 14px;border-radius:6px;border:1px solid #e2e8f0;background:#fff;font-size:.82rem;cursor:pointer;font-weight:600}
 .btnSaveAbout{background:#22c55e!important;color:#fff!important;border-color:#22c55e!important}
 .btnCancelAbout{background:#ef4444!important;color:#fff!important;border-color:#ef4444!important}
 .aboutCard{background:#fff;border-radius:12px;padding:32px;box-shadow:0 1px 3px rgba(0,0,0,.08);line-height:1.7;font-size:.9rem;color:#334155}
@@ -139,14 +124,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
 .aboutCard ul{margin-left:20px;margin-bottom:10px}
 .aboutCard ul li{margin-bottom:4px}
 .contactInfo{line-height:2}
-
-/* MODAL */
-.modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:200;animation:fadeIn .2s}
+.modalOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:500;animation:fadeIn .2s}
 .modalOverlay.open{display:flex}
 .modal{background:#fff;border-radius:14px;padding:28px;width:520px;max-width:92vw;max-height:90vh;overflow-y:auto;animation:slideIn .3s}
 .modal h3{font-size:1.1rem;font-weight:700;color:#1e293b;margin-bottom:18px}
 .modal label{display:block;font-size:.78rem;font-weight:600;color:#64748b;margin-bottom:4px;margin-top:12px;text-transform:uppercase;letter-spacing:.4px}
-.modal input,.modal select{width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none}
+.modal input,.modal select{width:100%;padding:8px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:.9rem;outline:none;transition:border .2s}
 .modal input:focus,.modal select:focus{border-color:#6366f1}
 .modalRow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .dropzone{border:2px dashed #c7d2fe;border-radius:10px;padding:20px;text-align:center;cursor:pointer;margin-top:10px;transition:border-color .2s}
@@ -158,16 +141,12 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
 .btnCancel:hover{background:#e2e8f0}
 .btnSave{padding:9px 20px;background:#6366f1;color:#fff;border:none;border-radius:8px;cursor:pointer;font-size:.9rem;font-weight:700}
 .btnSave:hover{background:#4f46e5}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;right:24px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:10px;font-size:.875rem;z-index:300;animation:slideIn .3s;box-shadow:0 4px 12px rgba(0,0,0,.15)}
-
-/* RESPONSIVE */
+.toast{position:fixed;bottom:24px;right:24px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:10px;font-size:.875rem;z-index:600;animation:slideIn .3s;box-shadow:0 4px 12px rgba(0,0,0,.2)}
+.toast.ok{background:#22c55e}.toast.err{background:#ef4444}
 @media(max-width:768px){
   .sidebar{transform:translateX(-240px)}
   .sidebar.open{transform:translateX(0)}
-  .topbar{left:0!important}
-  .main{margin-left:0!important}
+  .topbar,.mainWrap{left:0!important}
   .detailGrid{grid-template-columns:1fr}
   .statsGrid{grid-template-columns:1fr 1fr}
   .modalRow{grid-template-columns:1fr}
@@ -184,7 +163,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
   </div>
   <div class="loginTabs">
     <button class="loginTab active" id="tabAdmin" onclick="switchTab('admin')">Administrador</button>
-    <button class="loginTab" id="tabGoogle" onclick="switchTab('google')">Acceso con Google</button>
+    <button class="loginTab" id="tabGoogle" onclick="switchTab('google')">Acceso Google</button>
   </div>
   <div id="panelAdmin">
     <div class="formGroup">
@@ -214,7 +193,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
       data-logo_alignment="left"
       data-width="300">
     </div>
-    <p id="googleError" style="display:none">Error al iniciar sesi&#243;n.</p>
+    <p id="googleError" style="display:none">Error al iniciar sesi&#243;n con Google.</p>
   </div>
 </div>
 </div>
@@ -226,9 +205,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
       <span>Gesti&#243;n de Vallas</span>
     </div>
     <nav class="sidebarNav">
-      <button class="navItem active" id="nav-map" onclick="showPage('map')">Mapa de Vallas</button>
-      <button class="navItem" id="nav-catalog" onclick="showPage('catalog')">Cat&#225;logo de Vallas</button>
-      <button class="navItem" id="nav-about" onclick="showPage('about')">Sobre Nosotros</button>
+      <button class="navItem active" id="nav-map" onclick="showPage('map')">&#128506; Mapa de Vallas</button>
+      <button class="navItem" id="nav-catalog" onclick="showPage('catalog')">&#128247; Cat&#225;logo</button>
+      <button class="navItem" id="nav-about" onclick="showPage('about')">&#8505; Sobre Nosotros</button>
     </nav>
     <div class="sidebarFooter">
       <div class="userAvatar" id="userAvatar">A</div>
@@ -243,12 +222,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
   <div class="topbar" id="topbar">
     <button class="hamburger" onclick="toggleSidebar()">&#9776;</button>
     <span class="topbarTitle" id="topbarTitle">Mapa de Vallas</span>
-    <button class="adminAddBtn" id="adminAddBtn" onclick="openModal()">+ Agregar Valla</button>
+    <button id="adminAddBtn" onclick="openModal()">+ Agregar Valla</button>
   </div>
 
-  <div class="main" id="main">
+  <div class="mainWrap" id="mainWrap">
 
-    <!-- MAP PAGE â detailPanel and mapWrap are INSIDE this div -->
     <div class="page active" id="page-map">
       <div class="statsGrid">
         <div class="statCard"><div class="slabel">Total Vallas</div><div class="svalue" id="statTotal">0</div></div>
@@ -256,7 +234,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
         <div class="statCard"><div class="slabel">Ocupadas</div><div class="svalue red" id="statOcc">0</div></div>
         <div class="statCard"><div class="slabel">Ciudades</div><div class="svalue blue" id="statCities">0</div></div>
       </div>
-      <div class="filterBar">
+      <div class="mapFilterBar">
         <button class="pill active" id="mpill-all" onclick="setMapFilter('all')">Todas</button>
         <button class="pill" id="mpill-disponible" onclick="setMapFilter('disponible')">Disponibles</button>
         <button class="pill" id="mpill-ocupada" onclick="setMapFilter('ocupada')">Ocupadas</button>
@@ -265,7 +243,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
       <div id="detailPanel" style="display:none">
         <div class="detailHeader">
           <span class="detailTitle" id="detailTitle">Valla</span>
-          <button class="btnClose" onclick="hideDetail()">Cerrar</button>
+          <button class="btnClose" onclick="hideDetail()">Cerrar &#10005;</button>
         </div>
         <div class="detailGrid">
           <div class="detailItem"><div class="dlabel">ID</div><div class="dvalue" id="dId">-</div></div>
@@ -280,17 +258,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
           <div class="detailItem"><div class="dlabel">Fin Contrato</div><div class="dvalue" id="dContract">-</div></div>
         </div>
         <div class="adminDetailActions" id="adminDetailActions" style="display:none">
-          <button class="btnEdit" onclick="editCurrentDetail()">Editar</button>
-          <button class="btnDelete" onclick="deleteCurrentDetail()">Eliminar</button>
+          <button class="btnEdit" onclick="editCurrentDetail()">&#9998; Editar</button>
+          <button class="btnDelete" onclick="deleteCurrentDetail()">&#128465; Eliminar</button>
         </div>
       </div>
       <div id="mapWrap"><div id="map"></div></div>
     </div>
 
-    <!-- CATALOG PAGE -->
     <div class="page" id="page-catalog">
       <div class="searchBar">
-        <input type="text" id="searchInput" placeholder="Buscar vallas..." oninput="renderCatalog()">
+        <input type="text" id="searchInput" placeholder="Buscar por nombre, ciudad..." oninput="renderCatalog()">
       </div>
       <div class="catalogPills">
         <button class="pill active" id="pill-all" onclick="setFilter('all')">Todas</button>
@@ -301,16 +278,15 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
       <div class="cardsGrid" id="cardsGrid"></div>
     </div>
 
-    <!-- ABOUT PAGE -->
     <div class="page" id="page-about">
       <div class="aboutWrap">
         <div class="aboutAdminBar" id="aboutAdminBar">
-          <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">Editar P&#225;gina</button>
+          <button class="btnToggleEdit" id="btnToggleEdit" onclick="toggleAboutEdit()">&#9998; Editar P&#225;gina</button>
         </div>
         <div class="aboutEditToolbar" id="aboutEditToolbar">
-          <button onclick="addAboutBlock()">+ Agregar Texto</button>
-          <button class="btnSaveAbout" onclick="saveAboutEdit()">Guardar</button>
-          <button class="btnCancelAbout" onclick="cancelAboutEdit()">Cancelar</button>
+          <button onclick="addAboutBlock()">+ Agregar p&#225;rrafo</button>
+          <button class="btnSaveAbout" onclick="saveAboutEdit()">&#10003; Guardar</button>
+          <button class="btnCancelAbout" onclick="cancelAboutEdit()">&#10005; Cancelar</button>
         </div>
         <div id="aboutContent">
           <div class="aboutCard" id="aboutCard">
@@ -339,10 +315,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
       </div>
     </div>
 
-  </div><!-- /main -->
-</div><!-- /app -->
+  </div>
+</div>
 
-<!-- MODAL -->
 <div class="modalOverlay" id="modalOverlay">
   <div class="modal" onclick="event.stopPropagation()">
     <h3 id="modalTitle">Agregar Valla</h3>
@@ -350,7 +325,13 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
     <input type="text" id="mName" placeholder="Ej: VL-009">
     <div class="modalRow">
       <div><label>Ciudad</label><input type="text" id="mCity" placeholder="Ej: Caracas"></div>
-      <div><label>Estado</label><select id="mStatus"><option value="disponible">Disponible</option><option value="ocupada">Ocupada</option><option value="mantenimiento">Mantenimiento</option></select></div>
+      <div><label>Estado</label>
+        <select id="mStatus">
+          <option value="disponible">Disponible</option>
+          <option value="ocupada">Ocupada</option>
+          <option value="mantenimiento">Mantenimiento</option>
+        </select>
+      </div>
     </div>
     <label>Direcci&#243;n</label>
     <input type="text" id="mAddr" placeholder="Ej: Av. Libertador">
@@ -363,16 +344,23 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
       <div><label>Precio/Mes (USD)</label><input type="number" id="mPrice" placeholder="1500"></div>
     </div>
     <div class="modalRow">
-      <div><label>Caras</label><select id="mFaces"><option value="1">1 cara</option><option value="2">2 caras</option></select></div>
-      <div><label>Iluminaci&#243;n</label><select id="mIllum"><option value="Si">Si</option><option value="No">No</option></select></div>
+      <div><label>Caras</label>
+        <select id="mFaces"><option value="1">1 cara</option><option value="2">2 caras</option></select>
+      </div>
+      <div><label>Iluminaci&#243;n</label>
+        <select id="mIllum"><option value="Si">S&#237;</option><option value="No">No</option></select>
+      </div>
     </div>
     <div class="modalRow">
       <div><label>Cliente</label><input type="text" id="mClient"></div>
       <div><label>Fin de Contrato</label><input type="date" id="mContractEnd"></div>
     </div>
     <label>Foto</label>
-    <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()" ondrop="handleDrop(event)" ondragover="event.preventDefault()">
-      <p>Arrastra una imagen aqu&#237; o haz clic</p>
+    <div class="dropzone" id="dropzone"
+      onclick="document.getElementById('fileInput').click()"
+      ondrop="handleDrop(event)"
+      ondragover="event.preventDefault()">
+      <p>Arrastra una imagen aqu&#237; o haz clic para seleccionar</p>
       <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileInput(event)">
       <img id="dropzonePreview" class="dropzonePreview">
     </div>
@@ -385,11 +373,10 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:#f1f5f9;color:#1e293
 
 <script>
 var USERS = {
-  admin: { pass: 'Impresionarte2024!', role: 'admin', label: 'Administrador' },
-  viewer: { pass: 'viewer123', role: 'viewer', label: 'Visualizador' }
+  admin:  { pass: 'Impresionarte2024!', role: 'admin',  label: 'Administrador' },
+  viewer: { pass: 'viewer123',           role: 'viewer', label: 'Visualizador'  }
 };
-
-var BILLBOARDS = [
+var DEFAULT_BB = [
   {id:'VL-001',name:'VL-001 Av. Libertador',city:'Caracas',status:'ocupada',addr:'Av. Libertador, frente al CCCT, Chacao',lat:10.4944,lng:-66.8548,dims:'14x5 m',price:2500,faces:2,illum:'Si',client:'Digitel',contractEnd:'2025-12-31',photo:''},
   {id:'VL-002',name:'VL-002 Autopista Valencia',city:'Valencia',status:'disponible',addr:'Autopista Valencia-Caracas km 12',lat:10.1621,lng:-67.9990,dims:'12x4 m',price:1800,faces:1,illum:'Si',client:'',contractEnd:'',photo:''},
   {id:'VL-003',name:'VL-003 Av. 5 de Julio',city:'Maracaibo',status:'ocupada',addr:'Av. 5 de Julio, sector La Lago',lat:10.6483,lng:-71.6124,dims:'14x5 m',price:2200,faces:2,illum:'Si',client:'Movistar',contractEnd:'2025-06-30',photo:''},
@@ -399,404 +386,257 @@ var BILLBOARDS = [
   {id:'VL-007',name:'VL-007 Av. Raul Leoni',city:'Maturin',status:'disponible',addr:'Av. Raul Leoni, sector Los Guaritos',lat:9.7458,lng:-63.1841,dims:'10x3.5 m',price:1100,faces:1,illum:'No',client:'',contractEnd:'',photo:''},
   {id:'VL-008',name:'VL-008 Av. Intercomunal',city:'Barcelona',status:'mantenimiento',addr:'Av. Intercomunal, frente al IUTBA',lat:10.1339,lng:-64.6930,dims:'12x4 m',price:1400,faces:1,illum:'Si',client:'',contractEnd:'',photo:''}
 ];
-
-var savedBB = localStorage.getItem('impresionarte_bb');
-if (savedBB) { try { BILLBOARDS = JSON.parse(savedBB); } catch(e){} }
-
-var currentRole = null;
-var leafletMap = null;
-var mapMarkers = [];
-var mapFilter = 'all';
-var catFilter = 'all';
-var currentDetailId = null;
-var editingId = null;
-var modalPhoto = '';
-var aboutEditMode = false;
-var aboutBackup = '';
-
-function saveBB() { localStorage.setItem('impresionarte_bb', JSON.stringify(BILLBOARDS)); }
-
-// AUTH
-function doLogin() {
-  var u = document.getElementById('inputUser').value.trim();
-  var p = document.getElementById('inputPass').value;
-  var err = document.getElementById('loginError');
-  var user = USERS[u];
-  if (!user || user.pass !== p) { err.style.display = 'block'; return; }
-  err.style.display = 'none';
-  loginAs(u, user.role, user.label);
+var BILLBOARDS = DEFAULT_BB;
+try { var _s = localStorage.getItem('impresionarte_bb'); if (_s) BILLBOARDS = JSON.parse(_s); } catch(e){}
+function saveBB() { try { localStorage.setItem('impresionarte_bb', JSON.stringify(BILLBOARDS)); } catch(e){} }
+var currentRole=null,leafletMap=null,mapMarkers=[],mapFilter='all',catFilter='all',currentDetailId=null,editingId=null,modalPhoto='',aboutEditMode=false,aboutBackup='';
+function doLogin(){
+  var u=document.getElementById('inputUser').value.trim();
+  var p=document.getElementById('inputPass').value;
+  var err=document.getElementById('loginError');
+  var user=USERS[u];
+  if(!user||user.pass!==p){err.style.display='block';return;}
+  err.style.display='none';
+  loginAs(u,user.role,user.label);
 }
-
-function handleGoogleLogin(response) {
-  try {
-    var parts = response.credential.split('.');
-    var payload = JSON.parse(atob(parts[1]));
-    var name = payload.name || payload.email;
-    loginAs(payload.email, 'viewer', name);
-  } catch(e) {
-    document.getElementById('googleError').style.display = 'block';
+function handleGoogleLogin(response){
+  try{
+    var parts=response.credential.split('.');
+    var payload=JSON.parse(atob(parts[1].replace(/-/g,'+').replace(/_/g,'/')));
+    loginAs(payload.email,'viewer',payload.name||payload.email);
+  }catch(e){document.getElementById('googleError').style.display='block';}
+}
+function loginAs(username,role,label){
+  currentRole=role;
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('app').style.display='block';
+  document.getElementById('userAvatar').textContent=label.charAt(0).toUpperCase();
+  document.getElementById('userName').textContent=label;
+  document.getElementById('userRole').textContent=role==='admin'?'Administrador':'Visualizador';
+  document.getElementById('adminDetailActions').style.display=role==='admin'?'flex':'none';
+  document.getElementById('aboutAdminBar').style.display=role==='admin'?'block':'none';
+  initMap();updateStats();renderCatalog();showPage('map');
+  showToast('Bienvenido, '+label+'!','ok');
+}
+function doLogout(){
+  currentRole=null;
+  if(leafletMap){leafletMap.remove();leafletMap=null;}
+  mapMarkers=[];
+  document.getElementById('app').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+  document.getElementById('inputUser').value='';
+  document.getElementById('inputPass').value='';
+  document.getElementById('loginError').style.display='none';
+}
+function switchTab(tab){
+  document.getElementById('panelAdmin').style.display=tab==='admin'?'block':'none';
+  document.getElementById('panelGoogle').style.display=tab==='google'?'block':'none';
+  document.getElementById('tabAdmin').classList.toggle('active',tab==='admin');
+  document.getElementById('tabGoogle').classList.toggle('active',tab==='google');
+}
+function showPage(page){
+  var pages=['map','catalog','about'];
+  var titles={map:'Mapa de Vallas',catalog:'Cat\u00e1logo de Vallas',about:'Sobre Nosotros'};
+  for(var i=0;i<pages.length;i++){
+    var pg=pages[i];
+    document.getElementById('page-'+pg).classList.toggle('active',pg===page);
+    document.getElementById('nav-'+pg).classList.toggle('active',pg===page);
   }
+  document.getElementById('topbarTitle').textContent=titles[page]||'';
+  document.getElementById('adminAddBtn').style.display=(page==='catalog'&&currentRole==='admin')?'block':'none';
+  if(page==='map'&&leafletMap){setTimeout(function(){leafletMap.invalidateSize();},150);}
 }
-
-function loginAs(username, role, label) {
-  currentRole = role;
-  document.getElementById('loginScreen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  document.getElementById('userAvatar').textContent = label.charAt(0).toUpperCase();
-  document.getElementById('userName').textContent = label;
-  document.getElementById('userRole').textContent = role === 'admin' ? 'Administrador' : 'Visualizador';
-  if (role === 'admin') {
-    document.getElementById('adminDetailActions').style.display = 'flex';
-    document.getElementById('aboutAdminBar').style.display = 'block';
-  } else {
-    document.getElementById('adminDetailActions').style.display = 'none';
-    document.getElementById('aboutAdminBar').style.display = 'none';
-  }
-  initMap();
-  updateStats();
-  renderCatalog();
-  showPage('map');
-  showToast('Bienvenido, ' + label + '!');
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('collapsed');
+  var c=document.getElementById('sidebar').classList.contains('collapsed');
+  document.getElementById('topbar').classList.toggle('expanded',c);
+  document.getElementById('mainWrap').classList.toggle('expanded',c);
+  if(leafletMap)setTimeout(function(){leafletMap.invalidateSize();},350);
 }
-
-function doLogout() {
-  currentRole = null;
-  if (leafletMap) { leafletMap.remove(); leafletMap = null; }
-  mapMarkers = [];
-  document.getElementById('app').style.display = 'none';
-  document.getElementById('loginScreen').style.display = 'flex';
-  document.getElementById('inputUser').value = '';
-  document.getElementById('inputPass').value = '';
-}
-
-function switchTab(tab) {
-  document.getElementById('panelAdmin').style.display = tab === 'admin' ? 'block' : 'none';
-  document.getElementById('panelGoogle').style.display = tab === 'google' ? 'block' : 'none';
-  document.getElementById('tabAdmin').classList.toggle('active', tab === 'admin');
-  document.getElementById('tabGoogle').classList.toggle('active', tab === 'google');
-}
-
-// NAVIGATION
-function showPage(page) {
-  var pages = ['map', 'catalog', 'about'];
-  var titles = { map: 'Mapa de Vallas', catalog: 'CatÃ¡logo de Vallas', about: 'Sobre Nosotros' };
-  for (var i = 0; i < pages.length; i++) {
-    var pg = pages[i];
-    document.getElementById('page-' + pg).classList.toggle('active', pg === page);
-    document.getElementById('nav-' + pg).classList.toggle('active', pg === page);
-  }
-  document.getElementById('topbarTitle').textContent = titles[page] || '';
-  var addBtn = document.getElementById('adminAddBtn');
-  addBtn.style.display = (page === 'catalog' && currentRole === 'admin') ? 'block' : 'none';
-  if (page === 'map' && leafletMap) {
-    setTimeout(function() { leafletMap.invalidateSize(); }, 200);
-  }
-}
-
-function toggleSidebar() {
-  var sidebar = document.getElementById('sidebar');
-  var topbar = document.getElementById('topbar');
-  var main = document.getElementById('main');
-  sidebar.classList.toggle('collapsed');
-  var collapsed = sidebar.classList.contains('collapsed');
-  topbar.classList.toggle('full', collapsed);
-  main.classList.toggle('full', collapsed);
-  if (leafletMap) setTimeout(function() { leafletMap.invalidateSize(); }, 350);
-}
-
-// MAP
-function initMap() {
-  if (leafletMap) return;
-  leafletMap = L.map('map').setView([9.5, -68.0], 6);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Â© OpenStreetMap contributors', maxZoom: 19
-  }).addTo(leafletMap);
+function initMap(){
+  if(leafletMap){leafletMap.remove();leafletMap=null;mapMarkers=[];}
+  leafletMap=L.map('map',{zoomControl:true}).setView([9.5,-68.0],6);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'&copy; OpenStreetMap contributors',maxZoom:19}).addTo(leafletMap);
   renderMapMarkers();
-  setTimeout(function() { leafletMap.invalidateSize(); }, 300);
+  setTimeout(function(){leafletMap.invalidateSize();},100);
+  setTimeout(function(){leafletMap.invalidateSize();},400);
+  setTimeout(function(){leafletMap.invalidateSize();},900);
 }
-
-function getMarkerColor(s) {
-  return s === 'disponible' ? '#22c55e' : s === 'ocupada' ? '#ef4444' : '#f59e0b';
+function getMarkerColor(s){return s==='disponible'?'#22c55e':s==='ocupada'?'#ef4444':'#f59e0b';}
+function makeIcon(color){
+  return L.divIcon({className:'',html:'<div style="width:22px;height:22px;background:'+color+';border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.4)"><\/div>',iconSize:[22,22],iconAnchor:[11,11]});
 }
-
-function makeIcon(color) {
-  return L.divIcon({
-    className: '',
-    html: '<div style="width:22px;height:22px;background:' + color + ';border:3px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.35)"></div>',
-    iconSize: [22, 22], iconAnchor: [11, 11]
-  });
-}
-
-function renderMapMarkers() {
-  if (!leafletMap) return;
-  for (var i = 0; i < mapMarkers.length; i++) { leafletMap.removeLayer(mapMarkers[i]); }
-  mapMarkers = [];
-  for (var j = 0; j < BILLBOARDS.length; j++) {
-    var b = BILLBOARDS[j];
-    if (mapFilter !== 'all' && b.status !== mapFilter) continue;
-    (function(bb) {
-      var color = getMarkerColor(bb.status);
-      var statusLabel = bb.status === 'disponible' ? 'DISPONIBLE' : bb.status === 'ocupada' ? 'OCUPADA' : 'MANTENIMIENTO';
-      var m = L.marker([bb.lat, bb.lng], { icon: makeIcon(color) })
-        .addTo(leafletMap)
-        .bindPopup('<b>' + bb.name + '</b><br>' + bb.city + '<br><span style="color:' + color + ';font-weight:700">' + statusLabel + '</span>');
-      m.on('click', function() { showDetail(bb.id); });
+function renderMapMarkers(){
+  if(!leafletMap)return;
+  for(var i=0;i<mapMarkers.length;i++){leafletMap.removeLayer(mapMarkers[i]);}
+  mapMarkers=[];
+  for(var j=0;j<BILLBOARDS.length;j++){
+    var b=BILLBOARDS[j];
+    if(mapFilter!=='all'&&b.status!==mapFilter)continue;
+    (function(bb){
+      var color=getMarkerColor(bb.status);
+      var sl=bb.status==='disponible'?'DISPONIBLE':bb.status==='ocupada'?'OCUPADA':'MANTENIMIENTO';
+      var m=L.marker([bb.lat,bb.lng],{icon:makeIcon(color)}).addTo(leafletMap).bindPopup('<b>'+bb.name+'<\/b><br>'+bb.city+'<br><span style="color:'+color+';font-weight:700">'+sl+'<\/span>');
+      m.on('click',function(){showDetail(bb.id);});
       mapMarkers.push(m);
     })(b);
   }
 }
-
-function setMapFilter(f) {
-  mapFilter = f;
-  var keys = ['all', 'disponible', 'ocupada', 'mantenimiento'];
-  for (var i = 0; i < keys.length; i++) {
-    var el = document.getElementById('mpill-' + keys[i]);
-    if (el) el.classList.toggle('active', keys[i] === f);
-  }
+function setMapFilter(f){
+  mapFilter=f;
+  var keys=['all','disponible','ocupada','mantenimiento'];
+  for(var i=0;i<keys.length;i++){var el=document.getElementById('mpill-'+keys[i]);if(el)el.classList.toggle('active',keys[i]===f);}
   renderMapMarkers();
 }
-
-// STATS
-function updateStats() {
-  var total = BILLBOARDS.length, avail = 0, occ = 0, citiesSet = {};
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    var b = BILLBOARDS[i];
-    if (b.status === 'disponible') avail++;
-    if (b.status === 'ocupada') occ++;
-    citiesSet[b.city] = 1;
-  }
-  document.getElementById('statTotal').textContent = total;
-  document.getElementById('statAvail').textContent = avail;
-  document.getElementById('statOcc').textContent = occ;
-  document.getElementById('statCities').textContent = Object.keys(citiesSet).length;
+function updateStats(){
+  var total=BILLBOARDS.length,avail=0,occ=0,cities={};
+  for(var i=0;i<BILLBOARDS.length;i++){var b=BILLBOARDS[i];if(b.status==='disponible')avail++;if(b.status==='ocupada')occ++;cities[b.city]=1;}
+  document.getElementById('statTotal').textContent=total;
+  document.getElementById('statAvail').textContent=avail;
+  document.getElementById('statOcc').textContent=occ;
+  document.getElementById('statCities').textContent=Object.keys(cities).length;
 }
-
-// DETAIL
-function showDetail(id) {
-  var b = null;
-  for (var i = 0; i < BILLBOARDS.length; i++) { if (BILLBOARDS[i].id === id) { b = BILLBOARDS[i]; break; } }
-  if (!b) return;
-  currentDetailId = id;
-  document.getElementById('detailTitle').textContent = b.name;
-  document.getElementById('dId').textContent = b.id;
-  document.getElementById('dCity').textContent = b.city;
-  document.getElementById('dStatus').textContent = b.status === 'disponible' ? 'Disponible' : b.status === 'ocupada' ? 'Ocupada' : 'Mantenimiento';
-  document.getElementById('dAddr').textContent = b.addr;
-  document.getElementById('dDims').textContent = b.dims;
-  document.getElementById('dPrice').textContent = '$' + b.price.toLocaleString() + '/mes';
-  document.getElementById('dFaces').textContent = b.faces + ' cara(s)';
-  document.getElementById('dIllum').textContent = b.illum;
-  document.getElementById('dClient').textContent = b.client || '-';
-  document.getElementById('dContract').textContent = b.contractEnd || '-';
-  document.getElementById('detailPanel').style.display = 'block';
+function showDetail(id){
+  var b=null;
+  for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id===id){b=BILLBOARDS[i];break;}}
+  if(!b)return;
+  currentDetailId=id;
+  document.getElementById('detailTitle').textContent=b.name;
+  document.getElementById('dId').textContent=b.id;
+  document.getElementById('dCity').textContent=b.city;
+  document.getElementById('dStatus').textContent=b.status==='disponible'?'Disponible':b.status==='ocupada'?'Ocupada':'Mantenimiento';
+  document.getElementById('dAddr').textContent=b.addr;
+  document.getElementById('dDims').textContent=b.dims;
+  document.getElementById('dPrice').textContent='$'+b.price.toLocaleString()+'/mes';
+  document.getElementById('dFaces').textContent=b.faces+' cara(s)';
+  document.getElementById('dIllum').textContent=b.illum;
+  document.getElementById('dClient').textContent=b.client||'-';
+  document.getElementById('dContract').textContent=b.contractEnd||'-';
+  document.getElementById('detailPanel').style.display='block';
 }
-
-function hideDetail() {
-  document.getElementById('detailPanel').style.display = 'none';
-  currentDetailId = null;
-}
-
-function editCurrentDetail() { if (currentDetailId) openModal(currentDetailId); }
-
-function deleteCurrentDetail() {
-  if (!currentDetailId) return;
-  if (!confirm('Â¿Eliminar esta valla?')) return;
-  BILLBOARDS = BILLBOARDS.filter(function(b) { return b.id !== currentDetailId; });
-  saveBB(); hideDetail(); renderMapMarkers(); updateStats(); renderCatalog();
+function hideDetail(){document.getElementById('detailPanel').style.display='none';currentDetailId=null;}
+function editCurrentDetail(){if(currentDetailId)openModal(currentDetailId);}
+function deleteCurrentDetail(){
+  if(!currentDetailId)return;
+  if(!confirm('\u00bfEliminar esta valla?'))return;
+  BILLBOARDS=BILLBOARDS.filter(function(b){return b.id!==currentDetailId;});
+  saveBB();hideDetail();renderMapMarkers();updateStats();renderCatalog();
   showToast('Valla eliminada');
 }
-
-// CATALOG
-function setFilter(f) {
-  catFilter = f;
-  var keys = ['all', 'disponible', 'ocupada', 'mantenimiento'];
-  for (var i = 0; i < keys.length; i++) {
-    var el = document.getElementById('pill-' + keys[i]);
-    if (el) el.classList.toggle('active', keys[i] === f);
-  }
+function setFilter(f){
+  catFilter=f;
+  var keys=['all','disponible','ocupada','mantenimiento'];
+  for(var i=0;i<keys.length;i++){var el=document.getElementById('pill-'+keys[i]);if(el)el.classList.toggle('active',keys[i]===f);}
   renderCatalog();
 }
-
-function renderCatalog() {
-  var q = (document.getElementById('searchInput').value || '').toLowerCase();
-  var list = [];
-  for (var i = 0; i < BILLBOARDS.length; i++) {
-    var b = BILLBOARDS[i];
-    if (catFilter !== 'all' && b.status !== catFilter) continue;
-    if (q && b.name.toLowerCase().indexOf(q) === -1 && b.city.toLowerCase().indexOf(q) === -1) continue;
+function renderCatalog(){
+  var q=(document.getElementById('searchInput').value||'').toLowerCase();
+  var list=[];
+  for(var i=0;i<BILLBOARDS.length;i++){
+    var b=BILLBOARDS[i];
+    if(catFilter!=='all'&&b.status!==catFilter)continue;
+    if(q&&b.name.toLowerCase().indexOf(q)===-1&&b.city.toLowerCase().indexOf(q)===-1)continue;
     list.push(b);
   }
-  var grid = document.getElementById('cardsGrid');
-  if (list.length === 0) { grid.innerHTML = '<p style="color:#94a3b8;padding:40px;text-align:center">No se encontraron vallas</p>'; return; }
-  var html = '';
-  var isAdmin = currentRole === 'admin';
-  for (var j = 0; j < list.length; j++) {
-    var b = list[j];
-    var sl = b.status === 'disponible' ? 'Disponible' : b.status === 'ocupada' ? 'Ocupada' : 'Mantenimiento';
-    var photoStyle = b.photo ? 'background-image:url(' + b.photo + ')' : '';
-    var photoText = b.photo ? '' : 'Sin foto';
-    html += '<div class="billCard">';
-    html += '<div class="cardPhoto" style="' + photoStyle + '">' + photoText + '<span class="cardBadge badge-' + b.status + '">' + sl + '</span></div>';
-    html += '<div class="cardBody"><div class="cardName">' + b.name + '</div><div class="cardCity">' + b.city + '</div>';
-    html += '<div class="cardMeta"><span class="cardPrice">$' + b.price.toLocaleString() + '/mes</span><span class="cardDims">' + b.dims + '</span></div></div>';
-    html += '<div class="cardFooter"><button class="btnView" onclick="showPage('map');showDetail('' + b.id + '')">Ver en mapa</button>';
-    if (isAdmin) {
-      html += '<button class="btnCardEdit" onclick="openModal('' + b.id + '')">Editar</button>';
-      html += '<button class="btnCardDel" onclick="deleteBillboard('' + b.id + '')">Eliminar</button>';
-    }
-    html += '</div></div>';
+  var grid=document.getElementById('cardsGrid');
+  var isAdmin=currentRole==='admin';
+  if(list.length===0){grid.innerHTML='<p style="color:#94a3b8;padding:40px;text-align:center">No se encontraron vallas<\/p>';return;}
+  var html='';
+  for(var j=0;j<list.length;j++){
+    var b=list[j];
+    var sl=b.status==='disponible'?'Disponible':b.status==='ocupada'?'Ocupada':'Mantenimiento';
+    var ps=b.photo?'background-image:url('+b.photo+');background-size:cover;background-position:center':'';
+    var pt=b.photo?'':'Sin foto';
+    var bid=b.id;
+    html+='<div class="billCard">';
+    html+='<div class="cardPhoto" style="'+ps+'">'+pt+'<span class="cardBadge badge-'+b.status+'">'+sl+'<\/span><\/div>';
+    html+='<div class="cardBody"><div class="cardName">'+b.name+'<\/div><div class="cardCity">'+b.city+'<\/div>';
+    html+='<div class="cardMeta"><span class="cardPrice">$'+b.price.toLocaleString()+'/mes<\/span><span class="cardDims">'+b.dims+'<\/span><\/div><\/div>';
+    html+='<div class="cardFooter"><button class="btnView" onclick="goToMap(\''+bid+'\')">Ver en mapa<\/button>';
+    if(isAdmin){html+='<button class="btnCardEdit" onclick="openModal(\''+bid+'\')">Editar<\/button><button class="btnCardDel" onclick="deleteBillboard(\''+bid+'\')">Eliminar<\/button>';}
+    html+='<\/div><\/div>';
   }
-  grid.innerHTML = html;
+  grid.innerHTML=html;
 }
-
-function deleteBillboard(id) {
-  if (!confirm('Â¿Eliminar esta valla?')) return;
-  BILLBOARDS = BILLBOARDS.filter(function(b) { return b.id !== id; });
-  saveBB(); renderMapMarkers(); updateStats(); renderCatalog();
-  showToast('Valla eliminada');
+function goToMap(id){showPage('map');setTimeout(function(){showDetail(id);},100);}
+function deleteBillboard(id){
+  if(!confirm('\u00bfEliminar esta valla?'))return;
+  BILLBOARDS=BILLBOARDS.filter(function(b){return b.id!==id;});
+  saveBB();renderMapMarkers();updateStats();renderCatalog();showToast('Valla eliminada');
 }
-
-// MODAL
-function openModal(id) {
-  editingId = id || null;
-  modalPhoto = '';
-  document.getElementById('dropzonePreview').style.display = 'none';
-  if (id) {
-    var b = null;
-    for (var i = 0; i < BILLBOARDS.length; i++) { if (BILLBOARDS[i].id === id) { b = BILLBOARDS[i]; break; } }
-    if (!b) return;
-    document.getElementById('modalTitle').textContent = 'Editar Valla';
-    document.getElementById('mName').value = b.name;
-    document.getElementById('mCity').value = b.city;
-    document.getElementById('mStatus').value = b.status;
-    document.getElementById('mAddr').value = b.addr;
-    document.getElementById('mLat').value = b.lat;
-    document.getElementById('mLng').value = b.lng;
-    document.getElementById('mDims').value = b.dims;
-    document.getElementById('mPrice').value = b.price;
-    document.getElementById('mFaces').value = b.faces;
-    document.getElementById('mIllum').value = b.illum;
-    document.getElementById('mClient').value = b.client;
-    document.getElementById('mContractEnd').value = b.contractEnd;
-    if (b.photo) { modalPhoto = b.photo; document.getElementById('dropzonePreview').src = b.photo; document.getElementById('dropzonePreview').style.display = 'block'; }
-  } else {
-    document.getElementById('modalTitle').textContent = 'Agregar Valla';
-    var flds = ['mName','mCity','mAddr','mDims','mClient','mContractEnd'];
-    for (var k = 0; k < flds.length; k++) { document.getElementById(flds[k]).value = ''; }
-    document.getElementById('mStatus').value = 'disponible';
-    document.getElementById('mLat').value = '';
-    document.getElementById('mLng').value = '';
-    document.getElementById('mPrice').value = '';
-    document.getElementById('mFaces').value = '1';
-    document.getElementById('mIllum').value = 'Si';
+function openModal(id){
+  editingId=id||null;modalPhoto='';
+  var prev=document.getElementById('dropzonePreview');prev.style.display='none';prev.src='';
+  if(id){
+    var b=null;for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id===id){b=BILLBOARDS[i];break;}}
+    if(!b)return;
+    document.getElementById('modalTitle').textContent='Editar Valla';
+    document.getElementById('mName').value=b.name;document.getElementById('mCity').value=b.city;
+    document.getElementById('mStatus').value=b.status;document.getElementById('mAddr').value=b.addr;
+    document.getElementById('mLat').value=b.lat;document.getElementById('mLng').value=b.lng;
+    document.getElementById('mDims').value=b.dims;document.getElementById('mPrice').value=b.price;
+    document.getElementById('mFaces').value=b.faces;document.getElementById('mIllum').value=b.illum;
+    document.getElementById('mClient').value=b.client;document.getElementById('mContractEnd').value=b.contractEnd;
+    if(b.photo){modalPhoto=b.photo;prev.src=b.photo;prev.style.display='block';}
+  }else{
+    document.getElementById('modalTitle').textContent='Agregar Valla';
+    var flds=['mName','mCity','mAddr','mDims','mClient','mContractEnd'];
+    for(var k=0;k<flds.length;k++){document.getElementById(flds[k]).value='';}
+    document.getElementById('mStatus').value='disponible';document.getElementById('mLat').value='';
+    document.getElementById('mLng').value='';document.getElementById('mPrice').value='';
+    document.getElementById('mFaces').value='1';document.getElementById('mIllum').value='Si';
   }
   document.getElementById('modalOverlay').classList.add('open');
 }
-
-function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); editingId = null; modalPhoto = ''; }
-
-function saveModal() {
-  var name = document.getElementById('mName').value.trim();
-  var city = document.getElementById('mCity').value.trim();
-  if (!name || !city) { showToast('Nombre y ciudad son requeridos'); return; }
-  var lat = parseFloat(document.getElementById('mLat').value);
-  var lng = parseFloat(document.getElementById('mLng').value);
-  if (isNaN(lat) || isNaN(lng)) { showToast('Coordenadas invÃ¡lidas'); return; }
-  var data = {
-    id: editingId || ('VL-' + Date.now()),
-    name: name, city: city,
-    status: document.getElementById('mStatus').value,
-    addr: document.getElementById('mAddr').value.trim(),
-    lat: lat, lng: lng,
-    dims: document.getElementById('mDims').value.trim(),
-    price: parseFloat(document.getElementById('mPrice').value) || 0,
-    faces: parseInt(document.getElementById('mFaces').value) || 1,
-    illum: document.getElementById('mIllum').value,
-    client: document.getElementById('mClient').value.trim(),
-    contractEnd: document.getElementById('mContractEnd').value,
-    photo: modalPhoto
-  };
-  if (editingId) {
-    for (var i = 0; i < BILLBOARDS.length; i++) { if (BILLBOARDS[i].id === editingId) { BILLBOARDS[i] = data; break; } }
-    showToast('Valla actualizada');
-  } else {
-    BILLBOARDS.push(data);
-    showToast('Valla agregada');
-  }
-  saveBB(); closeModal(); renderMapMarkers(); updateStats(); renderCatalog();
+function closeModal(){document.getElementById('modalOverlay').classList.remove('open');editingId=null;modalPhoto='';}
+function saveModal(){
+  var name=document.getElementById('mName').value.trim();
+  var city=document.getElementById('mCity').value.trim();
+  if(!name||!city){showToast('Nombre y ciudad son requeridos','err');return;}
+  var lat=parseFloat(document.getElementById('mLat').value);
+  var lng=parseFloat(document.getElementById('mLng').value);
+  if(isNaN(lat)||isNaN(lng)){showToast('Coordenadas inv\u00e1lidas','err');return;}
+  var data={id:editingId||('VL-'+Date.now()),name:name,city:city,status:document.getElementById('mStatus').value,addr:document.getElementById('mAddr').value.trim(),lat:lat,lng:lng,dims:document.getElementById('mDims').value.trim(),price:parseFloat(document.getElementById('mPrice').value)||0,faces:parseInt(document.getElementById('mFaces').value)||1,illum:document.getElementById('mIllum').value,client:document.getElementById('mClient').value.trim(),contractEnd:document.getElementById('mContractEnd').value,photo:modalPhoto};
+  if(editingId){for(var i=0;i<BILLBOARDS.length;i++){if(BILLBOARDS[i].id===editingId){BILLBOARDS[i]=data;break;}}showToast('Valla actualizada','ok');}
+  else{BILLBOARDS.push(data);showToast('Valla agregada','ok');}
+  saveBB();closeModal();renderMapMarkers();updateStats();renderCatalog();
 }
-
-function handleFileInput(e) { if (e.target.files && e.target.files[0]) readPhoto(e.target.files[0]); }
-function handleDrop(e) { e.preventDefault(); if (e.dataTransfer.files && e.dataTransfer.files[0]) readPhoto(e.dataTransfer.files[0]); }
-function readPhoto(file) {
-  var reader = new FileReader();
-  reader.onload = function(ev) {
-    modalPhoto = ev.target.result;
-    document.getElementById('dropzonePreview').src = modalPhoto;
-    document.getElementById('dropzonePreview').style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+function handleFileInput(e){if(e.target.files&&e.target.files[0])readPhoto(e.target.files[0]);}
+function handleDrop(e){e.preventDefault();if(e.dataTransfer.files&&e.dataTransfer.files[0])readPhoto(e.dataTransfer.files[0]);}
+function readPhoto(file){var reader=new FileReader();reader.onload=function(ev){modalPhoto=ev.target.result;var prev=document.getElementById('dropzonePreview');prev.src=modalPhoto;prev.style.display='block';};reader.readAsDataURL(file);}
+function loadAboutContent(){try{var s=localStorage.getItem('impresionarte_about');if(s)document.getElementById('aboutContent').innerHTML=s;}catch(e){}}
+function toggleAboutEdit(){if(aboutEditMode){cancelAboutEdit();}else{enterAboutEditMode();}}
+function enterAboutEditMode(){
+  aboutEditMode=true;aboutBackup=document.getElementById('aboutContent').innerHTML;
+  document.getElementById('aboutCard').contentEditable='true';
+  document.getElementById('aboutCard').style.outline='2px dashed #6366f1';
+  document.getElementById('aboutEditToolbar').style.display='flex';
+  document.getElementById('btnToggleEdit').textContent='Salir Edici\u00f3n';
 }
-
-// ABOUT
-function loadAboutContent() {
-  var saved = localStorage.getItem('impresionarte_about');
-  if (saved) { document.getElementById('aboutContent').innerHTML = saved; }
+function saveAboutEdit(){
+  aboutEditMode=false;
+  document.getElementById('aboutCard').contentEditable='false';
+  document.getElementById('aboutCard').style.outline='none';
+  document.getElementById('aboutEditToolbar').style.display='none';
+  document.getElementById('btnToggleEdit').textContent='\u2712 Editar P\u00e1gina';
+  try{localStorage.setItem('impresionarte_about',document.getElementById('aboutContent').innerHTML);}catch(e){}
+  showToast('P\u00e1gina guardada','ok');
 }
-
-function toggleAboutEdit() { if (aboutEditMode) { cancelAboutEdit(); } else { enterAboutEditMode(); } }
-
-function enterAboutEditMode() {
-  aboutEditMode = true;
-  aboutBackup = document.getElementById('aboutContent').innerHTML;
-  document.getElementById('aboutCard').contentEditable = 'true';
-  document.getElementById('aboutCard').style.outline = '2px dashed #6366f1';
-  document.getElementById('aboutEditToolbar').style.display = 'flex';
-  document.getElementById('btnToggleEdit').textContent = 'Salir EdiciÃ³n';
+function cancelAboutEdit(){
+  aboutEditMode=false;
+  document.getElementById('aboutContent').innerHTML=aboutBackup;
+  document.getElementById('aboutCard').contentEditable='false';
+  document.getElementById('aboutCard').style.outline='none';
+  document.getElementById('aboutEditToolbar').style.display='none';
+  document.getElementById('btnToggleEdit').textContent='\u2712 Editar P\u00e1gina';
 }
-
-function saveAboutEdit() {
-  aboutEditMode = false;
-  document.getElementById('aboutCard').contentEditable = 'false';
-  document.getElementById('aboutCard').style.outline = 'none';
-  document.getElementById('aboutEditToolbar').style.display = 'none';
-  document.getElementById('btnToggleEdit').textContent = 'Editar PÃ¡gina';
-  localStorage.setItem('impresionarte_about', document.getElementById('aboutContent').innerHTML);
-  showToast('PÃ¡gina guardada');
-}
-
-function cancelAboutEdit() {
-  aboutEditMode = false;
-  document.getElementById('aboutContent').innerHTML = aboutBackup;
-  document.getElementById('aboutCard').contentEditable = 'false';
-  document.getElementById('aboutCard').style.outline = 'none';
-  document.getElementById('aboutEditToolbar').style.display = 'none';
-  document.getElementById('btnToggleEdit').textContent = 'Editar PÃ¡gina';
-}
-
-function addAboutBlock() {
-  var p = document.createElement('p');
-  p.textContent = 'Nuevo bloque de texto. Haz clic para editar.';
-  document.getElementById('aboutCard').appendChild(p);
-}
-
-// TOAST
-function showToast(msg) {
-  var ex = document.querySelector('.toast');
-  if (ex) ex.remove();
-  var t = document.createElement('div');
-  t.className = 'toast';
-  t.textContent = msg;
-  document.body.appendChild(t);
-  setTimeout(function() { if (t.parentNode) t.remove(); }, 3000);
-}
-
-// INIT
-document.addEventListener('DOMContentLoaded', function() {
+function addAboutBlock(){var p=document.createElement('p');p.textContent='Nuevo p\u00e1rrafo. Haz clic aqu\u00ed para editar.';document.getElementById('aboutCard').appendChild(p);}
+function showToast(msg,type){var ex=document.querySelector('.toast');if(ex)ex.remove();var t=document.createElement('div');t.className='toast'+(type?' '+type:'');t.textContent=msg;document.body.appendChild(t);setTimeout(function(){if(t.parentNode)t.remove();},3000);}
+document.addEventListener('DOMContentLoaded',function(){
   loadAboutContent();
-  document.getElementById('inputPass').addEventListener('keydown', function(e) { if (e.key === 'Enter') doLogin(); });
-  document.getElementById('inputUser').addEventListener('keydown', function(e) { if (e.key === 'Enter') document.getElementById('inputPass').focus(); });
-  document.getElementById('modalOverlay').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+  document.getElementById('inputPass').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+  document.getElementById('inputUser').addEventListener('keydown',function(e){if(e.key==='Enter')document.getElementById('inputPass').focus();});
+  document.getElementById('modalOverlay').addEventListener('click',function(e){if(e.target===this)closeModal();});
 });
 </script>
 </body>
